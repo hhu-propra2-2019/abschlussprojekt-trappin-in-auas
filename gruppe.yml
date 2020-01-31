@@ -12,7 +12,7 @@ names:
   - LanPodder
   - Mimbulus
   - tepri
-notebook: false
+notebook: true
 schicht: vormittags
 projektauswahl:
   - Korrektorinnen Bewerbung
