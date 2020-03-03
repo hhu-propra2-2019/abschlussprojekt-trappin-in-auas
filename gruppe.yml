@@ -1,0 +1,20 @@
+# Bei "schicht" können Sie 'vormittags', 'nachmittags' oder 'egal' eintragen.
+
+gruppe: Trappin In AUAS
+url: https://github.com/hhu-propra2/abschlussprojekt-trappin-in-auas
+names:
+  - MarvinW1
+  - AcnoZed
+  - bayarabd
+  - Bigyiatch
+  - heyoka95
+  - jhandke
+  - LanPodder
+  - Mimbulus
+  - tepri
+notebook: false
+schicht: vormittags
+projektauswahl:
+  - Korrektorinnen Bewerbung
+  - Punkteübersicht
+  - Korrekturschnittstelle
