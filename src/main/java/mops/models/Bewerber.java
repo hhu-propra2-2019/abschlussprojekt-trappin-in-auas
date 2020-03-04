@@ -14,6 +14,11 @@ public class Bewerber{
         this.vorname = vorname;
         this.geburtsdatum = geburtsdatum;
     }
+
+    public Bewerber(){
+
+    }
+
     @Id
     private String kennung;
     private String nachname;
