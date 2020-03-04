@@ -21,6 +21,9 @@ jobs:
 
       - name: Add rights
         run: chmod +x gradlew
+      
+      - name: clean build folder
+        run: ./gradlew clean
 
       - name: Run Gradle Checks
         run: ./gradlew check
