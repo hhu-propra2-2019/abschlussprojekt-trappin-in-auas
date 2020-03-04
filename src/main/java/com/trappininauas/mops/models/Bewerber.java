@@ -1,4 +1,4 @@
-package com.trappininauas.trap.models;
+package com.trappininauas.mops.models;
 
 import lombok.Data;
 import javax.persistence.Entity;
