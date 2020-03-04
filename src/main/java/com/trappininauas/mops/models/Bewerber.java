@@ -7,6 +7,13 @@ import javax.persistence.Id;
 @Data
 @Entity
 public class Bewerber{
+
+    public Bewerber(String kennung, String nachname, String vorname, String geburtsdatum){
+        this.kennung = kennung;
+        this.nachname = nachname;
+        this.vorname = vorname;
+        this.geburtsdatum = geburtsdatum;
+    }
     @Id
     private String kennung;
     private String nachname;
