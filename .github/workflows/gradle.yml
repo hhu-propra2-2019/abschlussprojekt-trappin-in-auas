@@ -19,6 +19,8 @@ jobs:
         with:
           java-version: 13
 
-      - name: Run Gradle Checks
+      - name: Add rights
         run: chmod +x gradlew
+
+      - name: Run Gradle Checks
         run: ./gradlew check
