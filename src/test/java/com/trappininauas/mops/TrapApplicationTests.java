@@ -1,4 +1,4 @@
-package com.trappininauas.trap;
+package com.trappininauas.mops;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -5,7 +5,7 @@ plugins {
 	id 'pmd'
 }
 
-group = 'com.trappin-in-auas.mops'
+group = 'com.trappininauas.mops'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -30,7 +30,7 @@ configurations {
 }
 
 dependencies {
-	implementation 'mops:styleguide:<2.0.0>'
+	implementation 'mops:styleguide:2.0.0'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-integration'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
