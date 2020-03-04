@@ -1,4 +1,4 @@
-package com.trappininauas.trap;
+package com.trappininauas.mops;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
