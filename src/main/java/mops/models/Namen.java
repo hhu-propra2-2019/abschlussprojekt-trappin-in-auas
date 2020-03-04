@@ -1,4 +1,4 @@
-package com.trappininauas.mops.models;
+package mops.models;
 
 public class Namen {
     String vorname;

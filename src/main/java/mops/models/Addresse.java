@@ -1,4 +1,4 @@
-package com.trappininauas.trap.Bewerber;
+package mops.models;
 
 import lombok.Data;
 
