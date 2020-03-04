@@ -5,15 +5,22 @@ plugins {
 	id 'pmd'
 }
 
-group = 'com.trappin-in-auas'
+group = 'com.trappin-in-auas.mops'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+	maven {
+		url="https://s3.cs.hhu.de/public/mops/"
+		metadataSources {
+			artifact()
+		}
+	}
 }
 
 dependencies {
+	implementation 'mops:styleguide:<2.0.0>'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-integration'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
