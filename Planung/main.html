@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{mopslayout :: html(name='name', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+<head>
+<meta charset="utf-8">
+<title>main</title>
+<th:block th:fragment="headcontent">
+
+	<SCRIPT TYPE="text/javascript"
+		SRC="//www.webcalendar.de/js/kalender.js"></SCRIPT>
+
+</th:block>
+</head>
+<body>
+	<header>
+		<nav class="navigation navigation-secondary" is="mops-navigation"
+			th:fragment="navigation">
+			<!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
+		</nav>
+	</header>
+	<main th:fragment="bodycontent">
+		<form>
+			<h1>Bewerbungsformular</h1>
+			<input type="text" name="Vorname" />
+			<br /> 
+			<br> <input type="text" name="Nachname" /><br /> <br> 
+			<input type="text"
+				name="Strasse" /><br /> <br> 
+				<input type="text"
+				name="Postleitzahl" /><br /> <br> <br>` <br> <label
+				for="start">Geburtsdatum</label> <input type="date" id="start"
+				name="trip-start" value="2018-07-22" > 
+				<br /> <select id="cars" name="cars">
+				<option value="volvo">Programmierung</option>
+				<option value="saab">Algorithmen und Datenstrukturen</option>
+				<option value="fiat">Datenbanksysteme</option>
+				<option value="audi">Softwareentwicklung</option>
+			</select> <input type="submit" value="Harder Daddy" />
+		</form>
+
+	</main>
+</body>
+</html>
