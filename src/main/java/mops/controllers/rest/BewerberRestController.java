@@ -1,4 +1,4 @@
-package mops.controllers;
+package mops.controllers.rest;
 
 import mops.domain.models.Bewerber;
 import mops.domain.repositories.BewerberRepository;
@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController()
+@RequestMapping("/api")
 @CrossOrigin
 public class BewerberRestController {
     private BewerberRepository bewerberRepository;
