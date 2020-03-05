@@ -44,12 +44,25 @@ public class BewerbungController {
     Set tokenRole = token.getAccount().getRoles();
 
     if (tokenRole.contains("studentin")) {
-      return "studentMainpage";
+      return "redirect:/bewerbung1/student";
     } else if (tokenRole.contains("orga")) {
-      return "orgaMainpage";
+      return "redirect:/bewerbung1/orga";
     } else {
       return "falscheRolle";
     }
 
+
+  }
+
+  @GetMapping("/student")
+  @Secured("ROLE_studentin")
+  public String getStudentMainpage(Model model, KeycloakAuthenticationToken token) {
+    return "studentMainpage";
+  }
+
+  @GetMapping("/orga")
+  @Secured("ROLE_orga")
+  public String getOrgaMainpage(Model model, KeycloakAuthenticationToken token) {
+    return "orgaMainpage";
   }
 }
