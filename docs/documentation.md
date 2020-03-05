@@ -1,51 +1,47 @@
-**Über arc42**
+# Dokumentation nach arc24
 
-arc42, das Template zur Dokumentation von Software- und
-Systemarchitekturen.
+## Einführung und Ziele
 
-Erstellt von Dr. Gernot Starke, Dr. Peter Hruschka und Mitwirkenden.
 
-Template Revision: 7.0 DE (asciidoc-based), January 2017
+### Aufgabenstellung
 
-© We acknowledge that this document uses material from the arc42
-architecture template, <http://www.arc42.de>. Created by Dr. Peter
-Hruschka & Dr. Gernot Starke.
+Für potentielle Korrektoren soll ein Bewerbungsportal erstellt werden.
+Grundlegende Funktionalitäten sind die Datenspeicherung der Fragebögen sowie
+teilautomatisierte Zuordnung zu den Dozenten.
 
-Einführung und Ziele {#section-introduction-and-goals}
-====================
+### Qualitätsziele
 
-Aufgabenstellung {#_aufgabenstellung}
-----------------
+### Stakeholder
 
-Qualitätsziele {#_qualit_tsziele}
---------------
+- Bewerber (Studenten und nicht-Studenten)
+- Dozenten (Stellenausschreiber)
+- verantwortliche Person zum zuordnen der Bewerbung
 
-Stakeholder {#_stakeholder}
------------
+| Rolle      | Kontakt | Erwartungshaltung |
+|:-----------|-------------:| -----:|
+| Bewerber   |  |  |
+| Dozenten   |  |  |
+| Verwaltung |  |  |
 
-+-----------------+-----------------+-----------------------------------+
-| Rolle           | Kontakt         | Erwartungshaltung                 |
-+=================+=================+===================================+
-| *\<Rolle-1\>*   | *\<Kontakt-1\>* | *\<Erwartung-1\>*                 |
-+-----------------+-----------------+-----------------------------------+
-| *\<Rolle-2\>*   | *\<Kontakt-2\>* | *\<Erwartung-2\>*                 |
-+-----------------+-----------------+-----------------------------------+
+## Randbedingungen
 
-Randbedingungen {#section-architecture-constraints}
-===============
 
-Kontextabgrenzung {#section-system-scope-and-context}
-=================
+## Kontextabgrenzung
 
-Fachlicher Kontext {#_fachlicher_kontext}
-------------------
+
+### Fachlicher Kontext
+
 
 **\<Diagramm und/oder Tabelle\>**
 
 **\<optional: Erläuterung der externen fachlichen Schnittstellen\>**
 
-Technischer Kontext {#_technischer_kontext}
--------------------
+### Technischer Kontext
+
+Das System soll als Self-contained-System in eine Verwaltungsplattform 
+des Instituts für Informatik (MOPS) eingebunden sein. Zur vereinheitlichung
+gibt es einen vorgegebenen [Styleguide](https://mops.style) sowie HTML-Templates.
+
 
 **\<Diagramm oder Tabelle\>**
 
@@ -53,14 +49,14 @@ Technischer Kontext {#_technischer_kontext}
 
 **\<Mapping fachliche auf technische Schnittstellen\>**
 
-Lösungsstrategie {#section-solution-strategy}
-================
+## Lösungsstrategie
 
-Bausteinsicht {#section-building-block-view}
-=============
 
-Whitebox Gesamtsystem {#_whitebox_gesamtsystem}
----------------------
+## Bausteinsicht
+
+
+### Whitebox Gesamtsystem
+
 
 ***\<Übersichtsdiagramm\>***
 
@@ -76,7 +72,7 @@ Wichtige Schnittstellen
 
 :   *\<Beschreibung wichtiger Schnittstellen\>*
 
-### \<Name Blackbox 1\> {#__name_blackbox_1}
+### \<Name Blackbox 1\>
 
 *\<Zweck/Verantwortung\>*
 
@@ -90,78 +86,78 @@ Wichtige Schnittstellen
 
 *\<(optional) Offene Punkte/Probleme/Risiken\>*
 
-### \<Name Blackbox 2\> {#__name_blackbox_2}
+### \<Name Blackbox 2\>
 
 *\<Blackbox-Template\>*
 
-### \<Name Blackbox n\> {#__name_blackbox_n}
+### \<Name Blackbox n\>
 
 *\<Blackbox-Template\>*
 
-### \<Name Schnittstelle 1\> {#__name_schnittstelle_1}
+### \<Name Schnittstelle 1\>
 
 ...
 
-### \<Name Schnittstelle m\> {#__name_schnittstelle_m}
+### \<Name Schnittstelle m\>
 
 Ebene 2 {#_ebene_2}
 -------
 
-### Whitebox *\<Baustein 1\>* {#_whitebox_emphasis_baustein_1_emphasis}
+### Whitebox *\<Baustein 1\>*
 
 *\<Whitebox-Template\>*
 
-### Whitebox *\<Baustein 2\>* {#_whitebox_emphasis_baustein_2_emphasis}
+### Whitebox *\<Baustein 2\>* 
 
 *\<Whitebox-Template\>*
 
 ...
 
-### Whitebox *\<Baustein m\>* {#_whitebox_emphasis_baustein_m_emphasis}
+### Whitebox *\<Baustein m\>* 
 
 *\<Whitebox-Template\>*
 
-Ebene 3 {#_ebene_3}
+Ebene 3
 -------
 
-### Whitebox \<\_Baustein x.1\_\> {#_whitebox_baustein_x_1}
+### Whitebox \<\_Baustein x.1\_\> 
 
 *\<Whitebox-Template\>*
 
-### Whitebox \<\_Baustein x.2\_\> {#_whitebox_baustein_x_2}
+### Whitebox \<\_Baustein x.2\_\>
 
 *\<Whitebox-Template\>*
 
-### Whitebox \<\_Baustein y.1\_\> {#_whitebox_baustein_y_1}
+### Whitebox \<\_Baustein y.1\_\> 
 
 *\<Whitebox-Template\>*
 
-Laufzeitsicht {#section-runtime-view}
-=============
+## Laufzeitsicht
 
-*\<Bezeichnung Laufzeitszenario 1\>* {#__emphasis_bezeichnung_laufzeitszenario_1_emphasis}
-------------------------------------
+
+### *\<Bezeichnung Laufzeitszenario 1\>* 
+
 
 -   \<hier Laufzeitdiagramm oder Ablaufbeschreibung einfügen\>
 
 -   \<hier Besonderheiten bei dem Zusammenspiel der Bausteine in diesem
     Szenario erläutern\>
 
-*\<Bezeichnung Laufzeitszenario 2\>* {#__emphasis_bezeichnung_laufzeitszenario_2_emphasis}
-------------------------------------
+### *\<Bezeichnung Laufzeitszenario 2\>*
+
 
 ...
 
-*\<Bezeichnung Laufzeitszenario n\>* {#__emphasis_bezeichnung_laufzeitszenario_n_emphasis}
-------------------------------------
+### *\<Bezeichnung Laufzeitszenario n\>*
+
 
 ...
 
-Verteilungssicht {#section-deployment-view}
-================
+## Verteilungssicht 
 
-Infrastruktur Ebene 1 {#_infrastruktur_ebene_1}
----------------------
+
+### Infrastruktur Ebene 1 
+
 
 ***\<Übersichtsdiagramm\>***
 
@@ -177,65 +173,71 @@ Zuordnung von Bausteinen zu Infrastruktur
 
 :   *\<Beschreibung der Zuordnung\>*
 
-Infrastruktur Ebene 2 {#_infrastruktur_ebene_2}
----------------------
+### Infrastruktur Ebene 2 
 
-### *\<Infrastrukturelement 1\>* {#__emphasis_infrastrukturelement_1_emphasis}
+
+### *\<Infrastrukturelement 1\>* 
 
 *\<Diagramm + Erläuterungen\>*
 
-### *\<Infrastrukturelement 2\>* {#__emphasis_infrastrukturelement_2_emphasis}
+### *\<Infrastrukturelement 2\>*
 
 *\<Diagramm + Erläuterungen\>*
 
 ...
 
-### *\<Infrastrukturelement n\>* {#__emphasis_infrastrukturelement_n_emphasis}
+### *\<Infrastrukturelement n\>*
 
 *\<Diagramm + Erläuterungen\>*
 
-Querschnittliche Konzepte {#section-concepts}
-=========================
+## Querschnittliche Konzepte
 
-*\<Konzept 1\>* {#__emphasis_konzept_1_emphasis}
----------------
+
+#### *\<Konzept 1\>*
+
 
 *\<Erklärung\>*
 
-*\<Konzept 2\>* {#__emphasis_konzept_2_emphasis}
----------------
+####*\<Konzept 2\>*
+
 
 *\<Erklärung\>*
 
 ...
 
-*\<Konzept n\>* {#__emphasis_konzept_n_emphasis}
----------------
+#### *\<Konzept n\>* 
+
 
 *\<Erklärung\>*
 
-Entwurfsentscheidungen {#section-design-decisions}
-======================
+## Entwurfsentscheidungen
 
-Qualitätsanforderungen {#section-quality-scenarios}
-======================
 
-Qualitätsbaum {#_qualit_tsbaum}
--------------
+- Schichtenarchitektur
 
-Qualitätsszenarien {#_qualit_tsszenarien}
-------------------
+## Qualitätsanforderungen 
 
-Risiken und technische Schulden {#section-technical-risks}
-===============================
 
-Glossar {#section-glossary}
-=======
+- OOP
+- Testbarkeit
+- Modularität von Modulen und Dozenten
 
-+-----------------------+-----------------------------------------------+
-| Begriff               | Definition                                    |
-+=======================+===============================================+
-| *\<Begriff-1\>*       | *\<Definition-1\>*                            |
-+-----------------------+-----------------------------------------------+
-| *\<Begriff-2*         | *\<Definition-2\>*                            |
-+-----------------------+-----------------------------------------------+
+### Qualitätsbaum 
+
+
+### Qualitätsszenarien 
+
+
+## Risiken und technische Schulden
+
+
+- Datenschutz!
+- 
+
+## Glossar
+
+
+| Begriff        | Definition    |
+|:---------------|-------------:|
+| Fragebogen     | Eine Art Einstellungsbogen, in dem persönliche Daten abgefragen werden |
+| Begriff 2      | Erläuterung 2      |
