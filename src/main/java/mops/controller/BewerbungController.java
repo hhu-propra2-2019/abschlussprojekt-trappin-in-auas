@@ -2,9 +2,7 @@ package mops.controller;
 
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
-import javax.annotation.security.RolesAllowed;
-import javax.servlet.http.HttpServletRequest;
-import mops.authentication.Account;
+import java.util.Set;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.security.access.annotation.Secured;
@@ -41,11 +39,17 @@ public class BewerbungController {
   }
 
   @GetMapping("/")
-  public String index(Model model, KeycloakAuthenticationToken token) {
-    if (token != null) {
-      model.addAttribute("account", createAccountFromPrincipal(token));
+  @Secured({"ROLE_studentin", "ROLE_orga"})
+  public String mainpage(Model model, KeycloakAuthenticationToken token) {
+    Set tokenRole = token.getAccount().getRoles();
+
+    if (tokenRole.contains("studentin")) {
+      return "studentMainpage";
+    } else if (tokenRole.contains("orga")) {
+      return "orgaMainpage";
+    } else {
+      return "falscheRolle";
     }
-    publicAccess.increment();
-    return "index";
+
   }
 }
