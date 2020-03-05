@@ -1,9 +1,10 @@
-package com.trappininauas.trap.bewerber1;
+package mops.model;
+
 
 import lombok.Data;
 
 @Data
-public class Präferenzen {
+public class Praeferenzen {
     private long PRAEFID;
     private int wunschStunden;
     private String modulauswahl;

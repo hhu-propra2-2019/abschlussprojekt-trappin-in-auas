@@ -1,4 +1,4 @@
-package com.trappininauas.trap.bewerber1;
+package mops.model;
 
 
 import lombok.Data;
@@ -11,5 +11,4 @@ public class Addresse {
     private String wohnstadt;
     private String straße;
     private String hausnummer;
-    private String bundesland;
 }

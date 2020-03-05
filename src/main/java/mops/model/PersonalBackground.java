@@ -1,8 +1,10 @@
-package com.trappininauas.trap.bewerber1;
+package mops.model;
+
 
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class PersonalBackground {
     private long PID;

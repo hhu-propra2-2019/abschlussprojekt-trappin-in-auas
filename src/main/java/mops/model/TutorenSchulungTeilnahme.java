@@ -1,4 +1,4 @@
-package com.trappininauas.trap.bewerber1;
+package mops.model;
 
 public enum TutorenSchulungTeilnahme {
     TEILNAHME,NICHTTEILNAHME,TEILGENOMMEN

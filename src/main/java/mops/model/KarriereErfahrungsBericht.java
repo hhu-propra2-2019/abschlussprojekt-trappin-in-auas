@@ -1,8 +1,10 @@
-package com.trappininauas.trap.bewerber1;
+package mops.model;
+
 
 import lombok.Data;
 
 import java.util.List;
+
 @Data
 public class KarriereErfahrungsBericht {
     private long KID;
