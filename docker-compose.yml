@@ -8,3 +8,4 @@ services:
       - ./sql/db/entrypoint:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
+    container_name: database
