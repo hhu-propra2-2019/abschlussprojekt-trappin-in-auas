@@ -17,14 +17,14 @@ public class BewerberController {
 
     @GetMapping("/")
     public String index(Model model){
-        model.addAttribute("Bewerber", new Bewerber());
-        return "index";
+        model.addAttribute("bewerber", new Bewerber());
+        return "bewerbungsformular";
     }
 
-    @PostMapping("/")
+    @PostMapping("/postbewerbung")
     public String postBewerber(Model m, Bewerber b){
         bewerberRepository.save(b);
-        return "redirect:/";
+        return "redirect:/example";
     }
 
 }

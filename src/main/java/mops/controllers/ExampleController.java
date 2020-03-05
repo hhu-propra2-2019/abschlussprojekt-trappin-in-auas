@@ -21,6 +21,6 @@ public class ExampleController{
 	List<Bewerber> alleB = bewerberRepository.findAll();
 	System.out.println("printing bewerber");
 	System.out.println(alleB);
-        return "example";
+        return "redirect:/";
     }
 }
