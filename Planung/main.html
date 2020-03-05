@@ -6,9 +6,7 @@
 <title>main</title>
 <th:block th:fragment="headcontent">
 
-	<SCRIPT TYPE="text/javascript"
-		SRC="//www.webcalendar.de/js/kalender.js"></SCRIPT>
-
+	
 </th:block>
 </head>
 <body>
@@ -21,21 +19,35 @@
 	<main th:fragment="bodycontent">
 		<form>
 			<h1>Bewerbungsformular</h1>
-			<input type="text" name="Vorname" />
-			<br /> 
-			<br> <input type="text" name="Nachname" /><br /> <br> 
-			<input type="text"
-				name="Strasse" /><br /> <br> 
-				<input type="text"
-				name="Postleitzahl" /><br /> <br> <br>` <br> <label
+			<div style="display: block">
+			
+			<label for="vname">Vorname:
+			<input type="text" name="Vorname" id="Vorname" maxlength="30"/> 
+			</label>
+			<label for="zname">Nachname: 
+			<input type="text" name="Nachname" id="Nachname" maxlength="40"/>
+			</label>
+			
+			<label for="vname">Straße:
+			<input type="text" name="Straße" />
+			</label>
+			<label for="zname">Postleitzahl: 
+			<input type="text" name="Nachname" id="Postleitzahl" maxlength="40"/>
+			</label>
+			</div>
+			<br></br>
+			<label
 				for="start">Geburtsdatum</label> <input type="date" id="start"
-				name="trip-start" value="2018-07-22" > 
+				name="trip-start" value="DD.MM.YYYY" >
+				<br></br>
 				<br /> <select id="cars" name="cars">
 				<option value="volvo">Programmierung</option>
 				<option value="saab">Algorithmen und Datenstrukturen</option>
 				<option value="fiat">Datenbanksysteme</option>
 				<option value="audi">Softwareentwicklung</option>
-			</select> <input type="submit" value="Harder Daddy" />
+				</select>
+			<br></br>
+			<input type="submit" value="Abschicken!" />
 		</form>
 
 	</main>
