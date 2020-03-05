@@ -1,12 +1,18 @@
-name: Java CI
+name: Docker-Compose & Gradle checks
 
-on: [push, pull_request]
+on: pull_request
 
 jobs:
-  build:
-
+  db:
     runs-on: ubuntu-latest
-
+    steps:
+      - uses: actions/checkout@v2
+      - name: Docker compose (detatched)
+        run: docker-compose up -d
+        
+  build:
+    needs: db
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8
