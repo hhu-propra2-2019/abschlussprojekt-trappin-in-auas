@@ -1,6 +1,8 @@
 
 package mops.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import mops.domain.models.Bewerber;
@@ -24,5 +26,9 @@ public class BewerberService implements IBewerberService {
     @Override
     public Bewerber findBewerberByKennung(String kennung) {
         return bewerberRepository.findById(kennung).get();
+    }
+
+    public List<Bewerber> findAllBewerber(){
+        return bewerberRepository.findAll();
     }
 }
