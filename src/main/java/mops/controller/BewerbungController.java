@@ -1,9 +1,7 @@
 package mops.controller;
 
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.MeterRegistry;
+
 import java.util.Set;
-import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -15,30 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/bewerbung1")
 public class BewerbungController {
 
-  private final Counter authenticatedAccess;
-  private final Counter publicAccess;
 
-  public BewerbungController(MeterRegistry registry) {
-    authenticatedAccess = registry.counter("access.authenticated");
-    publicAccess = registry.counter("access.public");
-  }
-
-  /**
-   * Nimmt das Authentifizierungstoken von Keycloak und erzeugt ein AccountDTO für die Views.
-   *
-   * @param token Token von Keycloak
-   * @return neuen Account der im Template verwendet wird
-   */
-  private Account createAccountFromPrincipal(KeycloakAuthenticationToken token) {
-    KeycloakPrincipal principal = (KeycloakPrincipal) token.getPrincipal();
-    return new Account(
-        principal.getName(),
-        principal.getKeycloakSecurityContext().getIdToken().getEmail(),
-        null,
-        token.getAccount().getRoles());
-  }
-
-  @GetMapping("/")
+  @GetMapping("")
   @Secured({"ROLE_studentin", "ROLE_orga"})
   public String mainpage(Model model, KeycloakAuthenticationToken token) {
     Set tokenRole = token.getAccount().getRoles();
@@ -57,12 +33,14 @@ public class BewerbungController {
   @GetMapping("/student")
   @Secured("ROLE_studentin")
   public String getStudentMainpage(Model model, KeycloakAuthenticationToken token) {
-    return "studentMainpage";
+    return "Student/studentMainpage";
   }
 
   @GetMapping("/orga")
   @Secured("ROLE_orga")
   public String getOrgaMainpage(Model model, KeycloakAuthenticationToken token) {
-    return "orgaMainpage";
+    return "Orga/orgaMainpage";
   }
+
+
 }
