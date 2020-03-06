@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.com">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+</head>
+
+<body>
+    <form method="POST" th:action="@{/postbewerbung}" th:object="${bewerber}">
+        <div class="form-group">
+            <label>Vorname
+                <input type="text" class="form-control" th:field="*{vorname}">
+            </label>
+            <label>Nachname
+                <input type="text" class="form-control" th:field="*{nachname}">
+            </label>
+            <label>Uni Kennung
+                <input type="text" class="form-control" th:field="*{kennung}">
+            </label>
+            <label>Geburtsdatum
+                <input type="date" class="form-control" th:field="*{geburtsdatum}">
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Abschicken</button>
+    </form>
+</body>
+
+</html>

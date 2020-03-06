@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+</head>
+
+<body>
+    <h3>
+        Alle Bewerber
+    </h3>
+    <ul>
+        <li th:each="bewerber : ${bewererbungen}">
+            <div th:text="${bewerber.kennung}"></div>
+        </li>
+    </ul>
+</body>
+</html>
