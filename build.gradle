@@ -12,6 +12,9 @@ sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+
+	maven { url 'https://repo.spring.io/libs-snapshot' }
+
 	maven {
 		url="https://s3.cs.hhu.de/public/mops/"
 		metadataSources {
@@ -28,6 +31,7 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+
 }
 
 dependencies {
@@ -53,6 +57,8 @@ dependencies {
 	}
 	testImplementation 'org.springframework.integration:spring-integration-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	compile 'io.micrometer:micrometer-core:latest.integration'
 }
 
 test {
