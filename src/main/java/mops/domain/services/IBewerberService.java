@@ -10,4 +10,5 @@ public interface IBewerberService {
     Bewerber findBewerberByKennung(String kennung);
     List<Bewerber> findAlleBewerber();
     List<Bewerber> findAlleNichtVerteilteBewerber();
+    void verteile(String kennung, String dozent);
 }

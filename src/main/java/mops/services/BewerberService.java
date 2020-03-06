@@ -37,4 +37,11 @@ public class BewerberService implements IBewerberService {
     public List<Bewerber> findAlleNichtVerteilteBewerber() {
         return bewerberRepository.findAll().stream().filter(x -> x.getVerteiltAn() == null).collect(Collectors.toList());
     }
+
+    @Override
+    public void verteile(String kennung, String dozent) {
+        Bewerber b = bewerberRepository.findById(kennung).get();
+        b.setVerteiltAn(dozent);
+        bewerberRepository.save(b);
+    }
 }
