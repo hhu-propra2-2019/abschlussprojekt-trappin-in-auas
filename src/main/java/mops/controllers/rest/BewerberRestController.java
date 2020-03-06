@@ -27,6 +27,7 @@ public class BewerberRestController {
 
     @RequestMapping(path = "/postbewerbungrest", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code = HttpStatus.OK)
+    @CrossOrigin
     public Bewerber index(Model model, @RequestBody Bewerber b){
         bewerberRepository.save(b);
         System.out.println("added " + b.getKennung() + " to database");

@@ -17,7 +17,7 @@ public class BewerbungController {
   @GetMapping("")
   @Secured({"ROLE_studentin", "ROLE_orga"})
   public String mainpage(Model model, KeycloakAuthenticationToken token) {
-    Set tokenRole = token.getAccount().getRoles();
+    Set<String> tokenRole = token.getAccount().getRoles();
 
     if (tokenRole.contains("studentin")) {
       return "redirect:/bewerbung1/student";

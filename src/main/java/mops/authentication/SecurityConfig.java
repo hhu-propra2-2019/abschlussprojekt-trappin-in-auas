@@ -1,5 +1,7 @@
 package mops.authentication;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;
@@ -24,6 +26,9 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -32,8 +37,7 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) {
-    KeycloakAuthenticationProvider keycloakAuthenticationProvider
-        = keycloakAuthenticationProvider();
+    KeycloakAuthenticationProvider keycloakAuthenticationProvider = keycloakAuthenticationProvider();
     keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(new SimpleAuthorityMapper());
     auth.authenticationProvider(keycloakAuthenticationProvider);
   }
@@ -41,44 +45,43 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
   @Bean
   @Override
   protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
-    return new RegisterSessionAuthenticationStrategy(
-        new SessionRegistryImpl());
+    return new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
   }
 
   @Bean
-  @Scope(scopeName = WebApplicationContext.SCOPE_REQUEST,
-      proxyMode = ScopedProxyMode.TARGET_CLASS)
+  @Scope(scopeName = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
   public AccessToken getAccessToken() {
-    HttpServletRequest request =
-        ((ServletRequestAttributes) RequestContextHolder
-            .currentRequestAttributes()).getRequest();
-    return ((KeycloakPrincipal) request.getUserPrincipal())
-        .getKeycloakSecurityContext().getToken();
+    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+        .getRequest();
+    return ((KeycloakPrincipal) request.getUserPrincipal()).getKeycloakSecurityContext().getToken();
   }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     super.configure(http);
-    http.authorizeRequests()
-        .antMatchers("/actuator/**")
-        .hasRole("monitoring")
-        .anyRequest()
-        .permitAll();
+    http.authorizeRequests().antMatchers("/actuator/**").hasRole("monitoring").anyRequest().permitAll();
+  }
+
+  @Bean
+  CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("*"));
+    configuration.setAllowedMethods(Arrays.asList("*"));
+    configuration.setAllowedHeaders(Arrays.asList("*"));
+    configuration.setAllowCredentials(true);
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/api/**", configuration);
+    return source;
   }
 
   /**
    * Declaring this class enables us to use the Spring specific
-   * {@link org.springframework.security.access.annotation.Secured} annotation
-   * or the JSR-250 Java Standard.
-   * {@link javax.annotation.security.RolesAllowed} annotation
-   * for Role-based authorization
+   * {@link org.springframework.security.access.annotation.Secured} annotation or
+   * the JSR-250 Java Standard. {@link javax.annotation.security.RolesAllowed}
+   * annotation for Role-based authorization
    */
   @Configuration
-  @EnableGlobalMethodSecurity(
-      prePostEnabled = true,
-      securedEnabled = true,
-      jsr250Enabled = true)
-  public static class MethodSecurityConfig
-      extends GlobalMethodSecurityConfiguration {
+  @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+  public static class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
   }
 }
