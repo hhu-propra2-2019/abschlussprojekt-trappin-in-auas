@@ -1,0 +1,62 @@
+@use "sass:color";
+@use "../colors";
+@use "../fonts";
+
+table {
+  border-collapse: collapse;
+  $color: colors.$active;
+  $lighter-color: color.scale($color, $lightness: 20%);
+  background: $color;
+  background: linear-gradient(135deg, $lighter-color, $color);
+  background-attachment:fixed;
+
+  caption {
+    color: colors.$darkgray;
+    font-weight: fonts.$weight-medium;
+  }
+
+  thead, tfoot {
+    tr {
+      th, td {
+        color: colors.$white;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-top: 1px solid colors.$gray;
+      border-bottom: 1px solid colors.$gray;
+
+      &:first-child {
+        border-top: none;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:nth-child(odd) {
+        background: colors.$white;
+      }
+
+      &:nth-child(even) {
+        background: colors.$lightgray;
+      }
+    }
+  }
+
+  th {
+    @extend %td;
+    font-weight: fonts.$weight-regular;
+  }
+
+  td {
+    @extend %td;
+    font-weight: fonts.$weight-light;
+  }
+
+  %td {
+    padding: fonts.$size-small fonts.$size-large;
+  }
+}

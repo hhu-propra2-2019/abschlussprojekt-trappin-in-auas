@@ -1,0 +1,16 @@
+@use "sass:color";
+@use "particles";
+
+ul, ol {
+  padding: particles.$fonts-sizes-small;
+
+  li {
+    padding: particles.$fonts-sizes-xx-small;
+
+    &::before {
+      content: "• ";
+      font-size: particles.$fonts-sizes-medium;
+      color: particles.$colors-active;
+    }
+  }
+}

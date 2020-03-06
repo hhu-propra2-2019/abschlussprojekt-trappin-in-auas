@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="~{mopslayout :: html(name='Styleguide', headcontent=~{:: headcontent}, bodycontent=~{:: bodycontent})}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Styleguide</title>
+  <th:block th:fragment="headcontent">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <style>
+      main > div:first-child {
+        position: relative;
+        margin-bottom: 1rem;
+      }
+
+      main > div:first-child img {
+        border-radius: 1rem;
+        border: 1px solid black;
+      }
+
+      main > div:first-child > h2 {
+        position: absolute;
+        bottom: 0;
+        margin: 1rem;
+        color: white;
+        text-shadow: 0 0 3px black;
+      }
+
+      @media (min-width: 992px) {
+        main > div:first-child > h2 {
+          font-size: 2.4rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        main > div:first-child > h2 {
+          font-size: 1.0rem;
+        }
+      }
+    </style>
+  </th:block>
+</head>
+<body>
+<header>
+  <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
+    <ul>
+      <li class="active">
+        <a href="#welcome" th:href="@{./#welcome}">Willkommen</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<main th:fragment="bodycontent">
+  <div id="welcome">
+    <img alt="Elvis, der Anführer" class="img-fluid" src="../static/img/elvis_young.jpg"
+         th:src="@{img/elvis_young.jpg}">
+    <h2 class="font-weight-bold">
+      Willkommen in der Welt<br>
+      von Elvis, Mampfi, Pudding und co.!
+    </h2>
+  </div>
+  <p>Diese Website dient als Styleguide und Dokumentation für die Entwicklung von Subsystemen der "Modularen Online
+    Plattform für Studierende" (kurz: Mops) der Heinrich-Heine-Universität Düsseldorf und soll Entwicklern die
+    bereitgestellten
+    Komponenten und Templates näherbringen.</p>
+  <p>Wir verwenden unter anderem Spring Boot für die schnelle Programmierung und Thymeleaf als Template Engine.</p>
+
+  <p>Fangen wir am besten direkt an...</p>
+
+  <h2 id="getstarted">Vorbereitung</h2>
+  <p>
+    Sobald ihr euer Spring Boot Projekt in der IDE eurer Wahl geöffnet habt, stellt sicher, dass ihr die von uns
+    bereitgestellten Dateien für Konfiguration, Templating und Styling eingebunden habt. Guckt dafür in eure
+    <code>build.gradle</code> und fügt, wenn noch nicht vorhanden, das entsprechende Repository und die Dependency
+    hinzu.
+    Achtet dabei auf eine passende Versionsangabe für das Styleguide Artefakt. Folgend sind die hinzuzufügenden
+    Einträge
+    aufgelistet, wobei <code>&lt;version&gt;</code> für die Version des Styleguide steht.
+  </p>
+
+  <p>
+    Die aktuelle Version ist der Release im GitHub Repository:
+    <a href="https://github.com/hhu-propra2/styleguide/releases">https://github.com/hhu-propra2/styleguide/releases</a>.
+  </p>
+
+  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/hhu-propra2/styleguide">
+
+  <pre>
+        <code>
+repositories {
+    maven {
+        url="https://s3.cs.hhu.de/public/mops/"
+        metadataSources {
+            artifact()
+        }
+    }
+}
+
+dependencies {
+    implementation "mops:styleguide:&lt;version&gt;"
+}
+        </code>
+    </pre>
+
+  <div class="alert alert-warning" role="alert">
+    <span class="font-weight-bold">Nicht einfach kopieren und ersetzen!</span> Ansonsten löscht ihr vielleicht aus
+    Versehen die anderen Repositories und Dependencies.
+  </div>
+
+  <p>
+    Achtet außerdem darauf, dass die Startklasse im Paket <code>mops</code> liegt, da sonst nicht alle Komponenten
+    gefunden werden.
+  </p>
+
+  <h2 id="structure">Grundaufbau</h2>
+  <p>
+    Jede HTML-Seite, die ihr erstellt, sieht vom Grundaufbau her folgendermaßen aus:
+  </p>
+  <pre>
+        <code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{mopslayout :: html(name='Name des Subsystems', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Name des Subsystems&lt;/title&gt;
+  &lt;th:block th:fragment="headcontent"&gt;
+    &lt;!-- Links, Skripts, Styles hier einfügen! --&gt;
+  &lt;/th:block&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header&gt;
+  &lt;nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation"&gt;
+    &lt;!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! --&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+&lt;main th:fragment="bodycontent"&gt;
+  &lt;!-- Restlichen Inhalt hier einfügen! --&gt;
+&lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </code>
+    </pre>
+  <p>
+    Durch die eingebundene Dependency wird uns die HTML Seite <code>mopslayout.html</code> für das Layout
+    bereitgestellt. Durch <code>th:replace="mopslayout :: html(...)</code> im Tag <code>html</code> wird das gesamte
+    Dokument
+    durch den Inhalt von <code>mopslayout.html</code> ersetzt. Dabei übergeben wir ein paar Argumente, die gewisse
+    Stellen in
+    <code>mopslayout.html</code> ersetzen. Folgend sind die Parameter aufgelistet:
+  </p>
+  <ul>
+    <li><code>name</code> (Name des Subsystems)</li>
+    <li><code>headcontent</code> (Fragment mit Links, Scripts, Styles und ggf. anderen Angaben im <code>head</code> der
+      Seite)
+    </li>
+    <li><code>navigation (Fragment mit Links)</code></li>
+    <li><code>bodycontent (Fragment mit beliebigem Inhalt, der im <code>body</code> vorkommen kann)</code></li>
+  </ul>
+  <p>
+    Sämtliche Parameter sind optional. Es macht aber Sinn, manche (oder alle) zu setzen.
+  </p>
+
+  <h2 id="fragments">Fragmente</h2>
+  <p>
+    Eigentlich ist es kein richtiges Fragment (sondern nur Text), aber es ist dennoch einen Hinweis wert: Haltet den
+    Namen des Subsystems so kurz wie möglich und übergibt diesen nur per <code>name</code> und nicht per <code>headcontent</code>
+    in einem <code>title</code>.
+  </p>
+  <p>
+    Das Fragment <code>headcontent</code> ist eher dazu gedacht CSS oder JS einzubinden. Hier ist ein
+    Beispiel:
+  </p>
+  <pre>
+    <code>
+&lt;th:block th:fragment="headcontent"&gt;
+  &lt;link rel="stylesheet" th:href="@{/css/mystyle.css}"&gt;
+&lt;/th:block&gt;
+    </code>
+  </pre>
+  <p>
+    Natürlich können mehrere <code>link</code>s oder <code>script</code>s in diesem Thymeleaf Fragment aufgelistet
+    werden.
+  </p>
+  <p>
+    Da gutes Design und der damit verbundene Aufwand in CSS nicht gerade vernachlässigbar sind, haben wir für euch schon
+    <a
+      href="https://getbootstrap.com/docs/4.4/getting-started/introduction/">Bootstrap</a>
+    eingebunden. Dies müsst ihr für einen konsistenten Look verwenden.
+  </p>
+  <p>
+    Das Fragment <code>navigation</code> dient dazu, eine flache ungeordnete Liste von einfachen Links in einer
+    Seitenleiste
+    bereitzustellen. Auch dafür seht ihr hier ein Beispiel:
+  </p>
+  <pre>
+        <code>
+&lt;nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation"&gt;
+  &lt;ul&gt;
+    &lt;li class="active"&gt;
+      &lt;a th:href="@{/home}" href="/home"&gt;Home&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a th:href="@{/account}" href="/account"&gt;Account&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+        </code>
+    </pre>
+  <div class="alert alert-warning" role="alert">
+    Es muss sich zwingend an den vorgegebenen Aufbau aller Fragmente (und Komponenten) gehalten werden! <span
+    class="font-weight-bold">Die Vorgabe
+        schließt auch die An- und Abwesenheit von Attributen mit ein.</span>
+  </div>
+  <p>
+    Wie man daran erkennt, ist keine verschachtelte Liste möglich. Folglich existieren zu einem in der Navigation
+    aufgelistetem Link keine untergeordneten Links. Die Klassenangabe <code>class="active"</code> zeichnet die
+    gerade besuchte Seite aus und muss demnach genau in einem <code>li</code> vorkommen.
+  </p>
+  <p>
+    In <code>main</code> wird der restliche Inhalt der Seite eingefügt. Dazu seht ihr hier ein kurzes Beispiel:
+  </p>
+  <pre>
+    <code>
+&lt;main th:fragment="bodycontent"&gt;
+  &lt;p&gt;Hallo Welt!&lt;/p&gt;
+&lt;/main&gt;
+    </code>
+  </pre>
+  <p>
+    Wie gesagt sind alle Parameter optional. Ist beispielsweise keine Navigation erforderlich, so kann das Argument
+    einfach weggelassen werden.
+  </p>
+
+  <h2 id="fragments">Account</h2>
+  <p>
+    Da wir mit Authentifizierung und Autorisierung arbeiten, sollte dem Benutzer die Möglichkeit gegeben werden, ein
+    sich an- und abzumelden,
+    sowie seine Daten einzusehen. Dies geschieht im Template mit einem DTO-Objekt. Alles was ihr tun müsst, ist in eurem
+    Projekt eine
+    Klasse Account anzulegen, die folgendermaßen aussieht:
+  </p>
+  <pre>
+      <code>
+class Account {
+    private final String name; // Name der angemeldeten Person
+    private final String email; // E-Mail-Adresse
+    private final String image; // Bild (kann für jeden null sein)
+    private final Set&lt;String&gt; roles = new HashSet&lt;&gt;(); // Rollen der Person
+
+    // Methoden zwecks Übersichtlichkeit weggelassen
+}
+      </code>
+    </pre>
+  <p>
+    Bei jedem Request muss dann ein entsprechendes Account Objekt erzeugt werden und im Thymeleaf Model per <code>account</code>
+    bereitgestellt werden.
+    Ausnahme: Ist kein Benutzer angemeldet, muss kein Account instanziiert werden.
+  </p>
+
+  <h2 id="mops">Kennzeichnung von Komponenten</h2>
+  <p>
+    Jedem Tag <code>x</code> sollte das Attribut <code>is="mops-x"</code> angehangen werden. Beispiel:
+  </p>
+  <pre>
+    <code>
+&lt;nav ... is="mops-nav"&gt; ... &lt;/nav&gt;
+    </code>
+  </pre>
+</main>
+</body>
+</html>
