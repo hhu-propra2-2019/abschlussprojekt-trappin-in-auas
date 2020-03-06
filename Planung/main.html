@@ -8,6 +8,28 @@
 
 	
 </th:block>
+	<script>
+		function anderesFach(){
+			var anderesf = document.getElementById("anderesF");
+			var anderesFachRadio = document.getElementById("anderesfachradio");
+            var inputfeld = document.getElementById("anderesfach");
+            console.log(anderesf);
+            console.log(anderesFachRadio.checked);
+            console.log(inputfeld);
+			if(!anderesFachRadio.checked){
+			    if(inputfeld){
+			        inputfeld.parentNode.removeChild(inputfeld);
+				}
+			}
+			if(anderesFachRadio.checked){
+                if(!inputfeld) {
+                    var textfeld = document.createElement("input");
+                    textfeld.id = "anderesfach";
+                    anderesf.appendChild(textfeld);
+                }
+			}
+		}
+	</script>
 </head>
 <body>
 	<header>
@@ -19,35 +41,75 @@
 	<main th:fragment="bodycontent">
 		<form>
 			<h1>Bewerbungsformular</h1>
-			<div style="display: block">
 			
+			<div class="persoenliche Daten">
 			<label for="vname">Vorname:
-			<input type="text" name="Vorname" id="Vorname" maxlength="30"/> 
+				<input type="text" name="Vorname" id="Vorname" maxlength="30"/>
 			</label>
+
 			<label for="zname">Nachname: 
-			<input type="text" name="Nachname" id="Nachname" maxlength="40"/>
+				<input type="text" name="Nachname" id="Nachname" maxlength="40"/>
 			</label>
 			
-			<label for="vname">Straße:
-			<input type="text" name="Straße" />
+			<label for="strasse">Straße:
+				<input type="text" name="Straße" id="Straße"/>
 			</label>
-			<label for="zname">Postleitzahl: 
-			<input type="text" name="Nachname" id="Postleitzahl" maxlength="40"/>
+
+			<label for="postleitzahl">Postleitzahl:
+				<input type="text" name="Postleitzahl" id="Postleitzahl" maxlength="40"/>
 			</label>
-			</div>
-			<br></br>
+
+			<label for="postleitzahl">Geburtsort:
+				<input type="text" name="Geburtsort" id="Geburtsort" />
+			</label>
+
+			<label for="postleitzahl">Staatsangehörigkeit:
+				<input type="text" name="Staatsangehörigkeit" id="Staatsangehörigkeit" />
+			</label>
+
 			<label
 				for="start">Geburtsdatum</label> <input type="date" id="start"
 				name="trip-start" value="DD.MM.YYYY" >
 				<br></br>
-				<br /> <select id="cars" name="cars">
+				<br /> <select id="Module" name="Module">
 				<option value="volvo">Programmierung</option>
 				<option value="saab">Algorithmen und Datenstrukturen</option>
 				<option value="fiat">Datenbanksysteme</option>
 				<option value="audi">Softwareentwicklung</option>
 				</select>
-			<br></br>
+				<br></br>
+			</div>
 			<input type="submit" value="Abschicken!" />
+			<br></br>
+			<div class="Uni Fragen">
+				<h3>Sind Sie derzeit an der HHU immatrikuliert?:</h3>
+				<fieldset>
+					<ul>
+						<li>
+							<label>
+								<input type="radio" name="Immatrikulationsstatus" value="Informatik" onchange="anderesFach()">
+								Ja, im Fach Informatik.
+							</label>
+						</li>
+						<li>
+							<label>
+								<input type="radio" id="anderesfachradio" name="Immatrikulationsstatus" value="" onchange="anderesFach()">
+								Ja, anderes Fach
+							</label>
+							<div id="anderesF">
+
+							</div>
+						</li>
+						<li>
+							<label>
+								<input type="radio" name="Immatrikulationsstatus" value="Nicht Matrikuliert" onchange="anderesFach()">
+								Nein
+							</label>
+						</li>
+					</ul>
+				</fieldset>
+			</div>
+
 		</form>
 
 	</main>
