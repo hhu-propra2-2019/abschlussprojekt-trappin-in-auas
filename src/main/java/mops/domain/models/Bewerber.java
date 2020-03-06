@@ -24,4 +24,5 @@ public class Bewerber{
     private String nachname;
     private String vorname;
     private String geburtsdatum;
+    private String verteiltAn;
 }

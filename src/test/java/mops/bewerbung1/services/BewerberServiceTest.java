@@ -10,6 +10,6 @@ public class BewerberServiceTest {
 
     @Before
     void setUp() {
-
+        
     }
 }
