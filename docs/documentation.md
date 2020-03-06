@@ -241,3 +241,7 @@ Zuordnung von Bausteinen zu Infrastruktur
 |:---------------|-------------:|
 | Fragebogen     | Eine Art Einstellungsbogen, in dem persönliche Daten abgefragen werden |
 | Begriff 2      | Erläuterung 2      |
+
+## Frontend
+### MarvinW1:
+- _05.03.20_: Ich bin auf das erste große Problem gestoßen. Bei der Formular-Frage "Sind Sie derzeit an der HHU immatrikuliert?" gab es als Antwort-Möglichkeit "Ja, anderes Fach". Dort musste man eine Checkbox erstellen, die beim Anklicken ein Textfeld öffnet, damit dort der spezifische Studiengang hineingeschrieben werden konnte. HTML bietet zum einen die Methode mit dem type "radio", wo man nur einen Haken unter mehreren Optionen setzen kann, was mich nicht weiter brachte und dann den type "checkbox", das so ziemlich das selbe (kontextbezogen) wie radio ist, nur dass man mehrere Felder ankreuzen kann. Durch viel Googlen und viel Nachfragen kamen wir trotzdem nicht auf eine einfache Lösung, um den gewünschten Effekt zu erzielen. Nach vielem Nachdenken und Alternativen-Suchen, mussten wir den gewünschten Effekt letztendlich mittels Java Script programmieren, was aufgrund mangelnder Erfahrung sich als große Herausforderung herausstellte.
