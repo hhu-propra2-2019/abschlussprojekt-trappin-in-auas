@@ -39,77 +39,126 @@
 		</nav>
 	</header>
 	<main th:fragment="bodycontent">
+		
 		<form>
 			<h1>Bewerbungsformular</h1>
-			
+			<fieldset>
+			<ul>
 			<div class="persoenliche Daten">
-			<label for="vname">Vorname:
-				<input type="text" name="Vorname" id="Vorname" maxlength="30"/>
+			<h3>Persönliche Daten:</h3>
+			<label>
+			Vorname:
+				<input type="text" th:field="*{Vorname}" maxlength="30"/>
 			</label>
-
-			<label for="zname">Nachname: 
-				<input type="text" name="Nachname" id="Nachname" maxlength="40"/>
+			<br></br>
+			<label>
+			Nachname:
+				<input type="text" th:field="*{Nachname}" maxlength="30"/>
 			</label>
-			
-			<label for="strasse">Straße:
-				<input type="text" name="Straße" id="Straße"/>
+			<br></br>
+			<label>
+			Straße:
+				<input type="text" th:field="*{Straße}"/>
 			</label>
-
-			<label for="postleitzahl">Postleitzahl:
-				<input type="text" name="Postleitzahl" id="Postleitzahl" maxlength="40"/>
+			<br></br>
+			<label>
+			Postleitzahl:
+				<input type="text" th:field="*{Postleitzahl}"/>
 			</label>
-
-			<label for="postleitzahl">Geburtsort:
-				<input type="text" name="Geburtsort" id="Geburtsort" />
+			<br></br>
+			<label>
+			Geburtsort:
+				<input type="text" th:field="*{Geburtsort}"/>
 			</label>
-
-			<label for="postleitzahl">Staatsangehörigkeit:
-				<input type="text" name="Staatsangehörigkeit" id="Staatsangehörigkeit" />
+			<br></br>
+			<label>
+			Staatsangehörigkeit:
+				<input type="text" th:field="*{Staatsangehörigkeit}"/>
 			</label>
-
-			<label
-				for="start">Geburtsdatum</label> <input type="date" id="start"
-				name="trip-start" value="DD.MM.YYYY" >
-				<br></br>
-				<br /> <select id="Module" name="Module">
-				<option value="volvo">Programmierung</option>
-				<option value="saab">Algorithmen und Datenstrukturen</option>
-				<option value="fiat">Datenbanksysteme</option>
-				<option value="audi">Softwareentwicklung</option>
-				</select>
-				<br></br>
+			</ul>
+			</fieldset>
+			<label>
+			<br></br>
+			</label>
+			<label>
+			<fieldset>
+			<ul>
+			<h3>Wählen Sie eins oder mehr Fächer aus.</h3>
+			<select th:field="*{Fach}">
+			<option th:value="'Algorithmen und Datenstrukturen'">Algorithmen und Datenstrukturen</option>
+			<option th:value="'Datenbanksysteme'" >Datenbanksysteme</option>
+			<option th:value="'Programmierung'" >Programmierung</option>
+			<option th:value="'Softwareentwicklung'" >Softwareentwicklung</option>
+			</select>
+			</ul>
+			</fieldset>
+			</label>
 			</div>
-			<input type="submit" value="Abschicken!" />
+
+			
 			<br></br>
 			<div class="Uni Fragen">
-				<h3>Sind Sie derzeit an der HHU immatrikuliert?:</h3>
+				
 				<fieldset>
 					<ul>
-						<li>
+					<h3>Sind Sie derzeit an der HHU immatrikuliert?:</h3>
 							<label>
-								<input type="radio" name="Immatrikulationsstatus" value="Informatik" onchange="anderesFach()">
-								Ja, im Fach Informatik.
+								<input type="radio" 
+						        th:field="*{Immatrikulationsstatus}"
+						        th:value="${Informatik}" 
+						        name="Immatrikulationsstatus"/>
+						        Ja, als Informatiker.
 							</label>
-						</li>
-						<li>
+							<br></br>			
 							<label>
-								<input type="radio" id="anderesfachradio" name="Immatrikulationsstatus" value="" onchange="anderesFach()">
-								Ja, anderes Fach
+								<input type="radio" 
+						        th:field="*{Immatrikulationsstatus}"
+						        th:value="${Anderes Fach}" 
+						        name="Immatrikulationsstatus"/>
+						        Ja, anderes Fach.
 							</label>
-							<div id="anderesF">
-
-							</div>
-						</li>
-						<li>
+							<br></br>
 							<label>
-								<input type="radio" name="Immatrikulationsstatus" value="Nicht Matrikuliert" onchange="anderesFach()">
-								Nein
+								<input type="radio" 
+						        th:field="*{Immatrikulationsstatus}"
+						        th:value="${Nicht immatrikuliert}" 
+						        name="Immatrikulationsstatus"/>
+						        Nein.
 							</label>
-						</li>
+				
 					</ul>
 				</fieldset>
-			</div>
+			<br></br>	
+  <div>
+  <fieldset>
+  <ul>
+  <h3>Um welche Art der Beschäftigung handelt es sich?</h3>
+    <input type="radio" 
+        th:field="*{Beschäftigungsart}"
+        th:value="${Neueinstellung}" 
+        name="einstellung"/>
+        Neueinstellung (bisher keine Anstellung an der HHU)
+		<br></br>
+    <input type="radio" 
+        th:field="*{Beschäftigungsart}"
+        th:value="${Weiterbeschäftigung}" 
+        name="einstellung"/>
+        Weiterbeschäftigung (bestehender Vertrag bis zum 31.03.2020)
+		<br></br>
+    <input type="radio" 
+        th:field="*{Beschäftigungsart}"
+        th:value="${Wiedereinstellung}" 
+        name="einstellung"/>
+        Wiedereinstellung (Kein bestehender Vertrag bis zum 31.03.2020)
 
+    </fieldset>
+    </ul>
+
+			<label>
+			<ul>
+			<input type="submit" value="Abschicken!" />
+			</ul>
+			</label>
 		</form>
 
 	</main>
