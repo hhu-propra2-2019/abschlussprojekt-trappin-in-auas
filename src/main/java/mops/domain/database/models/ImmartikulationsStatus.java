@@ -1,4 +1,4 @@
-package mops.database.models;
+package mops.domain.database.models;
 
 
 import lombok.Data;
@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
 @Data
 @Embeddable
 public class ImmartikulationsStatus {
-    boolean status;
-    String studiengang;
+    private boolean status;
+    private String fachrichtung;
 
 }

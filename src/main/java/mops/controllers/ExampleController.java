@@ -1,10 +1,10 @@
 package mops.controllers;
 import java.util.List;
 
+import mops.domain.database.models.Bewerber;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import mops.domain.models.Bewerber;
 import mops.domain.repositories.BewerberRepository;
 
 @Controller
