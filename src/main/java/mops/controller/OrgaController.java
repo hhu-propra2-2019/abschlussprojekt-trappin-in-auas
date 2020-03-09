@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/bewerbung1/orga")
 public class OrgaController {
 
-
   @Autowired
   private ModulService modulService;
 
@@ -28,16 +27,16 @@ public class OrgaController {
 
   @Secured("ROLE_orga")
   @GetMapping("/module")
-  public String getModule(Model m, KeycloakAuthenticationToken token){
+  public String getModule(Model m, KeycloakAuthenticationToken token) {
     m.addAttribute("modules",modulService.findAllModule());
     return "Orga/moduleEinsehen";
   }
 
   @Secured("ROLE_orga")
   @PostMapping("/module")
-  public String addModule(Model m, KeycloakAuthenticationToken token, @RequestParam String modulName){
+  public String addModule(Model m, KeycloakAuthenticationToken token,
+      @RequestParam String modulName) {
     modulService.addModul(new Modul(modulName));
-    return "Orga/moduleEinsehen";
+    return "redirect:/bewerbung1/orga/module";
   }
-
 }
