@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table( schema = "PUBLIC")
 public class BestandeneModule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
