@@ -18,7 +18,7 @@
   <tbody>
   <tr th:each="modul : ${modules}">
     <td><span th:text="${modul.id}">Id</span></td>
-    <td><span th:text="${modul.title}">title</span></td>
+    <td><span th:text="${modul.name}">title</span></td>
 
   </tr>
   </tbody>
@@ -26,9 +26,9 @@
 </table>
 
 
-<form method="post">
-  <label for="modul_name">Modulname:</label><br>
-  <input type="text" id="modul_name" name="modul_name">
+<form method="post" action="/bewerbung1/orga/module">
+  <label for="modulName">Modulname:</label><br>
+  <input type="text" id="modulName" name="modulName">
 
 
   <input type="submit">
