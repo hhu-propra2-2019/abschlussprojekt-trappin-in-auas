@@ -1,5 +1,7 @@
 package mops.services;
 
+import java.util.List;
+import mops.domain.models.lehrstuhl.Modul;
 import mops.domain.repositories.ModulRepository;
 import mops.domain.services.IModulService;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,7 @@ public class ModulService implements IModulService {
   private ModulRepository modulRepository;
 
   public ModulService(ModulRepository modulRepository) {
-    this.modulRepository = modulRepository
+    this.modulRepository = modulRepository;
   }
 
   @Override
@@ -23,6 +25,7 @@ public class ModulService implements IModulService {
     return modulRepository.findModulById(id);
   }
 
+  @Override
   public List<Modul> findAllModule() {
     return modulRepository.findAll();
   }

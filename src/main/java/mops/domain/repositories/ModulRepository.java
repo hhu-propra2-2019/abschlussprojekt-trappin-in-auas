@@ -1,5 +1,7 @@
 package mops.domain.repositories;
 
+import java.util.List;
+import mops.domain.models.lehrstuhl.Modul;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ModulRepository extends CrudRepository<Modul, Long> {
