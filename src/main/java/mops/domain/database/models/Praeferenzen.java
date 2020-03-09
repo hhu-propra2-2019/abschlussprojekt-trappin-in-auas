@@ -11,6 +11,7 @@ import java.util.List;
 public class Praeferenzen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private int maxWunschStunden;
     private int minWunschStunden;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

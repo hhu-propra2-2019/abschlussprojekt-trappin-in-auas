@@ -14,7 +14,4 @@ public class ModulAuswahl {
     @Embedded
     private Modul modul;
     private int prioritaet;
-
-
-
 }
