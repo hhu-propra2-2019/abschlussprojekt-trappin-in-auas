@@ -15,6 +15,14 @@ public class Bewerber{
         this.geburtsdatum = geburtsdatum;
     }
 
+    public Bewerber(String kennung, String nachname, String vorname, String geburtsdatum, String verteiltAn){
+        this.kennung = kennung;
+        this.nachname = nachname;
+        this.vorname = vorname;
+        this.geburtsdatum = geburtsdatum;
+        this.verteiltAn = verteiltAn;
+    }
+
     public Bewerber(){
 
     }

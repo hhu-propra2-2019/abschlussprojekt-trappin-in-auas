@@ -26,8 +26,6 @@ public class BewerbungController {
     } else {
       return "falscheRolle";
     }
-
-
   }
 
   @GetMapping("/student")

@@ -34,8 +34,8 @@ public class BewerberService implements IBewerberService {
     }
 
     @Override
-    public List<Bewerber> findAlleNichtVerteilteBewerber() {
-        return bewerberRepository.findAll().stream().filter(x -> x.getVerteiltAn() == null).collect(Collectors.toList());
+    public List<Bewerber> findAlleNichtVerteilteBewerber(List<Bewerber> alleBewerber) {
+        return alleBewerber.stream().filter(x -> x.getVerteiltAn() == null).collect(Collectors.toList());
     }
 
     @Override
