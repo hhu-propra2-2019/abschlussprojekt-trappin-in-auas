@@ -17,4 +17,6 @@ public interface BewerberRepository extends CrudRepository<Bewerber, String> {
 
     @Override
     <S extends Bewerber> Iterable<S> saveAll(Iterable<S> entities);
+
+    List<Bewerber> findByKennungIsNull();
 }

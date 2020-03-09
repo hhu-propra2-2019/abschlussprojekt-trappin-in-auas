@@ -27,7 +27,8 @@ public class VerteilerController {
     @Secured({"ROLE_orga"})
     @GetMapping("/uebersicht")
     public String verteilen(Model model, KeycloakAuthenticationToken token){
-        List<Bewerber> alleBewerber = bewerberService.findAlleNichtVerteilteBewerber(bewerberService.findAlleBewerber());
+        List<Bewerber> alleBewerber = bewerberService.findNichtVerteilt();
+        
         model.addAttribute("bewererbungen", alleBewerber);
         return "verteiler";
     }

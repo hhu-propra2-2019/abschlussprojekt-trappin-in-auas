@@ -45,4 +45,12 @@ public class BewerberService implements IBewerberService {
         b.setVerteiltAn(dozent);
         bewerberRepository.save(b);
     }
+
+	public List<Bewerber> findAlleVerteilteBewerber(List<Bewerber> alleBewerber) {
+		return alleBewerber.stream().filter(x -> x.getVerteiltAn() != null).collect(Collectors.toList());
+    }
+    
+    public List<Bewerber> findNichtVerteilt(){
+        return bewerberRepository.findByKennungIsNull();
+    }
 }
