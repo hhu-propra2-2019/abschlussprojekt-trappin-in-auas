@@ -1,6 +1,5 @@
 package mops.controller;
 
-
 import java.util.Set;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.security.access.annotation.Secured;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/bewerbung1")
 public class BewerbungController {
-
 
   @GetMapping("")
   @Secured({"ROLE_studentin", "ROLE_orga"})
@@ -26,8 +24,6 @@ public class BewerbungController {
     } else {
       return "falscheRolle";
     }
-
-
   }
 
   @GetMapping("/student")
@@ -41,6 +37,4 @@ public class BewerbungController {
   public String getOrgaMainpage(Model model, KeycloakAuthenticationToken token) {
     return "Orga/orgaMainpage";
   }
-
-
 }
