@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class Modul {
 
-  Modul(String name) {
+  public Modul(String name) {
     this.name = name;
   }
 
