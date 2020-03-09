@@ -1,6 +1,6 @@
 package mops.controllers.rest;
 
-import mops.domain.models.Bewerber;
+import mops.domain.database.models.Bewerber;
 import mops.domain.repositories.BewerberRepository;
 
 import org.keycloak.adapters.spi.KeycloakAccount;

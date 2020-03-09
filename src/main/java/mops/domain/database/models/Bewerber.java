@@ -1,4 +1,4 @@
-package mops.domain.models;
+package mops.domain.database.models;
 
 import lombok.Data;
 import javax.persistence.Entity;

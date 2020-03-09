@@ -4,9 +4,10 @@ package mops.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import mops.domain.database.models.Bewerber;
 import org.springframework.stereotype.Service;
 
-import mops.domain.models.Bewerber;
+
 import mops.domain.repositories.BewerberRepository;
 import mops.domain.services.IBewerberService;
 
