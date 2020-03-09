@@ -15,16 +15,29 @@ public class ModulService implements IModulService {
     this.modulRepository = modulRepository;
   }
 
+  /**
+   * Fuegt Modul in die Datenbank hinzu
+   * @param modul Zu speicherndes Modul
+   */
   @Override
   public void addModul(Modul modul) {
     modulRepository.save(modul);
   }
 
+  /**
+   * Gibt Modul mit gegebener Id zurück
+   * @param id id des Moduls
+   * @return Modul mit id
+   */
   @Override
   public Modul findModulById(Long id) {
     return modulRepository.findModulById(id);
   }
 
+  /**
+   * Listet alle Module in der Datenbank auf
+   * @return Liste mit allen Modulen
+   */
   @Override
   public List<Modul> findAllModule() {
     return modulRepository.findAll();
