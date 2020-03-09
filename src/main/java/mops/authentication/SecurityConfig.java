@@ -1,7 +1,6 @@
 package mops.authentication;
 
 import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;
@@ -60,6 +59,7 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     super.configure(http);
     http.authorizeRequests().antMatchers("/actuator/**").hasRole("monitoring").anyRequest().permitAll();
+    http.cors().and().csrf().disable();
   }
 
   @Bean
