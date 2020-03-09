@@ -6,7 +6,7 @@ import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
-import mops.domain.models.Bewerber;
+import mops.domain.models.fragebogen.Bewerber;
 import mops.services.BewerberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

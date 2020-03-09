@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import mops.domain.models.Bewerber;
+import mops.domain.models.fragebogen.Bewerber;
 import mops.domain.repositories.BewerberRepository;
 
 @Controller

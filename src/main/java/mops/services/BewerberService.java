@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import mops.domain.models.Bewerber;
+import mops.domain.models.fragebogen.Bewerber;
 import mops.domain.repositories.BewerberRepository;
 import mops.domain.services.IBewerberService;
 

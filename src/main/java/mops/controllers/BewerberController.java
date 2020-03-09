@@ -1,6 +1,6 @@
 package mops.controllers;
 
-import mops.domain.models.Bewerber;
+import mops.domain.models.fragebogen.Bewerber;
 import mops.domain.repositories.BewerberRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

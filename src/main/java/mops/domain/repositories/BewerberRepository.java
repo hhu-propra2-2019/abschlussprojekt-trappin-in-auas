@@ -2,7 +2,7 @@ package mops.domain.repositories;
 
 import java.util.List;
 
-import mops.domain.models.Bewerber;
+import mops.domain.models.fragebogen.Bewerber;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
