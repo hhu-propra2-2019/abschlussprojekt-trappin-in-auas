@@ -1,0 +1,68 @@
+@forward "text" as text-*;
+
+@use "sass:color";
+@use "particles";
+
+a {
+  color: particles.$colors-active;
+
+  &::before, &::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: particles.$fonts-sizes-medium / 10;
+    content: "";
+    $color: particles.$colors-active;
+    $lighter-color: color.scale($color, $lightness: 20%);
+    background: $color;
+    background: linear-gradient(135deg, $lighter-color, $color);
+    z-index: 1;
+    transition-property: opacity, transform, left, width;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+    opacity: 0;
+    border-radius: 1em;
+  }
+
+  &::after {
+    $color: particles.$colors-active;
+    $lighter-color: color.scale($color, $lightness: 20%);
+    background: $color;
+    background: linear-gradient(135deg, $color, $lighter-color);
+    transition-property: opacity;
+  }
+
+  &:hover, &:focus {
+    &::before {
+      opacity: 1;
+      transform: scale(1.05);
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  &:active {
+    &::after {
+      opacity: 1;
+      transform: scale(1.05);
+      left: 0;
+      width: 100%;
+    }
+  }
+}
+
+h1 {
+  font-size: particles.$fonts-sizes-xx-large;
+  font-weight: particles.$fonts-weights-bold;
+}
+
+h2 {
+  font-size: particles.$fonts-sizes-x-large;
+  font-weight: particles.$fonts-weights-bold;
+}
+
+h3 {
+  font-size: particles.$fonts-sizes-large;
+  font-weight: particles.$fonts-weights-bold;
+}

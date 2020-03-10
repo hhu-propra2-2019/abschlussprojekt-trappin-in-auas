@@ -12,7 +12,13 @@
     <ul>
         <li th:each="bewerber : ${bewererbungen}">
             <div th:text="${bewerber.kennung}"></div>
+            <form th:action="@{./verteilung}" method="POST">
+                <input type="hidden" th:name="kennung" th:value="${bewerber.kennung}" />
+                <button type="submit">Verteilen</button>
+            </form>
         </li>
+
     </ul>
 </body>
+
 </html>
