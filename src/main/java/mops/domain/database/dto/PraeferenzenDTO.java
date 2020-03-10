@@ -7,15 +7,16 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
+@Table(name = "praeferenzen")
 @Entity
-public class Praeferenzen {
+public class PraeferenzenDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int maxWunschStunden;
     private int minWunschStunden;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<ModulAuswahl> modulAuswahl;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "PraeferenzDTO")
+    private List<ModulAuswahlDTO> modulAuswahl;
     private String kommentar;
     @Enumerated(EnumType.STRING)
     private EinstiegTyp einstiegTyp;
