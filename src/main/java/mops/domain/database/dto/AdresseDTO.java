@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
 
 @Data
 @Embeddable
-public class Adresse {
+public class AdresseDTO {
     private String PLZ;
     private String wohnort;
     private String straße;

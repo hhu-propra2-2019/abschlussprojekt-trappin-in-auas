@@ -13,7 +13,7 @@ public class PersonalienDTO {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Embedded
-    private Adresse adresse;
+    private AdresseDTO adresse;
     private String unikennung;
     private String name;
     private String vorname;

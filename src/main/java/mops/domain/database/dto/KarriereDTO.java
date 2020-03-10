@@ -14,9 +14,9 @@ public class KarriereDTO {
     private long id;
     private String arbeitserfahrung;
     @Embedded
-    private ImmartikulationsStatus immartikulationsStatus;
+    private ImmartikulationsStatusDTO immartikulationsStatus;
     @Embedded
-    private StudiengangAbschluss fachAbschluss;
+    private StudiengangAbschlussDTO fachAbschluss;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "karriere")
     private List<BestandeneModuleDTO> bestandendeModule;
 

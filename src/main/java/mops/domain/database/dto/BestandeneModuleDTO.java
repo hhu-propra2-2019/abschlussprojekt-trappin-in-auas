@@ -12,7 +12,7 @@ public class BestandeneModuleDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Embedded
-    private Modul modul;
+    private ModulDTO modul;
     private double note;
 
     @ManyToOne

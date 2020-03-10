@@ -23,7 +23,7 @@ public class PraeferenzenDTO {
     private EinstiegTyp einstiegTyp;
     private String einschraenkungen;
     @Embedded
-    private BerufModul berufModul;
+    private BerufModulDTO berufModul;
     @Enumerated(EnumType.STRING)
     private TutorenSchulungTeilnahme tutorenSchulungTeilnahme;
 

@@ -6,6 +6,6 @@ import javax.persistence.Embeddable;
 
 @Data
 @Embeddable
-public class Modul {
+public class ModulDTO {
     private String modul;
 }
