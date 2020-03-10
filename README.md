@@ -3,4 +3,18 @@
 ![Docker-Compose & Gradle checks](https://github.com/hhu-propra2/abschlussprojekt-trappin-in-auas/workflows/Docker-Compose%20&%20Gradle%20checks/badge.svg)
 
 ## SCS zur Bewerbung im MOPS-System der HHU-Düsseldorf
-Interessenten für einen Korrektorenjob für eine Vorlesung der Informatik können sich über dieses System bewerben. Bewerbungen werden von einer ausgewählten Person bearbeitet und weitergeleitet an den Lehrstuhl, der die Stelle ausgeschrieben hat. 
+Wir wollen die Zuverlässigkeit und Reproduzierbarkeit des Bewerbungsverfahrens erhöhen. Daher entwickeln wir ein neues System, was sowohl Bewerbung, Verteilung an Ausschreibende als auch den aktuellen Status der Bewerbung beinhaltet.
+Wir haben uns zum Ziel gemacht, das Bewerbungsverfahren grundlegend neu zu durchdenken und es Dozenten, die die Stellen ausschreiben, und Bewerbern einfacher zu machen, denn durch ein umständliches und langsames System können Bewerbungen ausbleiben. 
+
+
+## Features
+- Online-Formular mit allen Fragen an den Bewerber
+- Bewerber müssen keine Dokumente scannen und hochladen
+- Priorisierung von Modulen, auf die sich beworben wird
+- Verteilerfunktion für einen Organisator
+- Dozenten sehen Bewerber, die ihnen vorgeschlagen wurden
+
+
+## Projektdokumentation
+
+[Dokumentation](https://github.com/hhu-propra2/abschlussprojekt-trappin-in-auas/blob/docs/docs/documentation.md) nach [arc42-Vorlage](https://arc42.org/)
