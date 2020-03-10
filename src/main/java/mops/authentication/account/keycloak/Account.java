@@ -1,4 +1,4 @@
-package mops.authentication;
+package mops.authentication.account.keycloak;
 
 import java.util.Set;
 import lombok.AllArgsConstructor;

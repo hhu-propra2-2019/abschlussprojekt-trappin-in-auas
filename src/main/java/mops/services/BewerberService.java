@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import mops.domain.database.dto.Bewerber;
 import org.springframework.stereotype.Service;
 
-
 import mops.domain.repositories.BewerberRepository;
 import mops.domain.services.IBewerberService;
 
