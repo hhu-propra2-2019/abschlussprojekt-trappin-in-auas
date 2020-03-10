@@ -1,7 +1,7 @@
 package mops.controllers;
 import java.util.List;
 
-import mops.domain.database.models.Bewerber;
+import mops.domain.database.dto.Bewerber;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 

@@ -1,5 +1,5 @@
 
-package mops.domain.database.models;
+package mops.domain.database.dto;
 
 import lombok.Data;
 
@@ -7,15 +7,16 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
+@Table(name = "praeferenzen")
 @Entity
-public class Praeferenzen {
+public class PraeferenzenDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int maxWunschStunden;
     private int minWunschStunden;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<ModulAuswahl> modulAuswahl;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "praeferenzen")
+    private List<ModulAuswahlDTO> modulAuswahl;
     private String kommentar;
     @Enumerated(EnumType.STRING)
     private EinstiegTyp einstiegTyp;
