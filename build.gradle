@@ -60,10 +60,15 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 
 	compile 'io.micrometer:micrometer-core:latest.integration'
+
+	testImplementation('org.junit.jupiter:junit-jupiter:5.6.0')
 }
 
 test {
 	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
 }
 
 task fatJar(type: Jar) {

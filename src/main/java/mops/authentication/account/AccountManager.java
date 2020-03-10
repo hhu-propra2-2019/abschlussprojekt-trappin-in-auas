@@ -6,7 +6,7 @@ import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 
 public class AccountManager {
-  Account parseFrom(KeycloakAuthenticationToken token) {
+  public Account parseFrom(KeycloakAuthenticationToken token) {
     String name = token.getName();
 
     KeycloakPrincipal principal = (KeycloakPrincipal) token.getPrincipal();
