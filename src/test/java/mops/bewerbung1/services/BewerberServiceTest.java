@@ -15,59 +15,24 @@ import java.util.List;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import mops.domain.database.models.Bewerber;
+import mops.domain.repositories.BewerberRepository;
 import mops.services.BewerberService;
 
 @SpringBootTest
 public class BewerberServiceTest {
 
     private BewerberService bewerberService;
-    
+    private BewerberRepository bewerberRepository;
+
     @Before
     void setUp() {
         this.bewerberService = mock(BewerberService.class);
+        
     }
 
     @Test
-    void unzugewiesene3Bewerber(){
-        List<Bewerber> bewerber = new ArrayList<>();
-        bewerber.add(generateVerteilterBewerber());
-        bewerber.add(generateNichtVerteilterBewerber());
-        bewerber.add(generateNichtVerteilterBewerber());
-        bewerber.add(generateNichtVerteilterBewerber());
-        bewerber.add(generateVerteilterBewerber());
-        bewerber.add(generateVerteilterBewerber());
-        List<Bewerber> nichtVerteilte = doCallRealMethod().when(bewerberService).findAlleNichtVerteilteBewerber(bewerber);
+    void hinzufuegenVonBewerbern(){
 
-        assertEquals(3, nichtVerteilte.size());
-    }
-
-    @Test
-    void unzugewiesene0Bewerber(){
-        List<Bewerber> bewerber = new ArrayList<>();
-        bewerber.add(generateVerteilterBewerber());
-        bewerber.add(generateVerteilterBewerber());
-        bewerber.add(generateVerteilterBewerber());
-        List<Bewerber> nichtVerteilte = doCallRealMethod().when(bewerberService).findAlleNichtVerteilteBewerber(bewerber);
-
-        assertEquals(0, nichtVerteilte.size());
-    }
-
-    @Test
-    void unzugewiesene10Bewerber(){
-        List<Bewerber> bewerber = new ArrayList<>();
-        bewerber.add(generateNichtVerteilterBewerber());
-        bewerber.add(generateNichtVerteilterBewerber());
-        bewerber.add(generateNichtVerteilterBewerber());
-        bewerber.add(generateNichtVerteilterBewerber());
-        bewerber.add(generateNichtVerteilterBewerber());
-        bewerber.add(generateNichtVerteilterBewerber());
-        bewerber.add(generateNichtVerteilterBewerber());
-        bewerber.add(generateNichtVerteilterBewerber());
-        bewerber.add(generateNichtVerteilterBewerber());
-        bewerber.add(generateNichtVerteilterBewerber());
-        List<Bewerber> nichtVerteilte = doCallRealMethod().when(bewerberService).findAlleNichtVerteilteBewerber(bewerber);
-
-        assertEquals(10, nichtVerteilte.size());
     }
 
     private String[] vornamen = {"Luca", "Kristine", "Rosemarie", "Melanie", "Maximilian"};

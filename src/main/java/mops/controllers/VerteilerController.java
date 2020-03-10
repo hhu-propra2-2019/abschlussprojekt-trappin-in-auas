@@ -28,7 +28,7 @@ public class VerteilerController {
     @GetMapping("/uebersicht")
     public String verteilen(Model model, KeycloakAuthenticationToken token){
         List<Bewerber> alleBewerber = bewerberService.findNichtVerteilt();
-        
+
         model.addAttribute("bewererbungen", alleBewerber);
         return "verteiler";
     }

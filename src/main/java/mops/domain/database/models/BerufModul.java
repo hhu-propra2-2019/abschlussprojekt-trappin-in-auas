@@ -14,6 +14,7 @@ import javax.persistence.Enumerated;
 class BerufModul {
     @Enumerated(EnumType.STRING)
     private EinstiegTyp einstiegsTyp;
+    
     @Embedded
     private Modul modul;
 }

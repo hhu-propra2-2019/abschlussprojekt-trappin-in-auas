@@ -28,11 +28,44 @@ public class DozentController {
     @GetMapping("/uebersicht")
     public String verteilen(Model model, KeycloakAuthenticationToken token){
         List<Bewerber> alleBewerber = bewerberService.findAlleBewerber();
-        List<Bewerber> offeneBewerbungen = bewerberService.findAlleNichtVerteilteBewerber(alleBewerber);
-        List<Bewerber> zugewieseneBewerbungen = bewerberService.findAlleVerteilteBewerber(alleBewerber);
+        List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
+        List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
         List<Bewerber> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
 
-        model.addAttribute("bewererbungen", alleBewerber);
+        model.addAttribute("bewerbungen", alleBewerber);
+        model.addAttribute("offenecount", offeneBewerbungen.size());
+        model.addAttribute("zugewiesenecount", zugewieseneBewerbungen.size());
+        model.addAttribute("preview", offeneBewerbungenPreview);
+
         return "verteiler";
+    }
+
+    @Secured({"ROLE_orga"})
+    @GetMapping("/uebersicht/offene")
+    public String offeneUebersicht(Model model, KeycloakAuthenticationToken token){
+        List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
+
+        model.addAttribute("offene", offeneBewerbungen);
+
+        return "";
+    }
+
+    @Secured({"ROLE_orga"})
+    @GetMapping("/uebersicht/zugewiesene")
+    public String zugewieseneUebersicht(Model model, KeycloakAuthenticationToken token){
+        List<Bewerber> zugewiesene = bewerberService.findVerteilt();
+
+        model.addAttribute(zugewiesene);
+
+        return "";
+    }
+
+    @Secured({"ROLE_orga"})
+    @GetMapping("/uebersicht/detail/{kennung}")
+    public String detailAnsicht(Model model, KeycloakAuthenticationToken token, @PathVariable String kennung){
+        Bewerber bewerber = bewerberService.findBewerberByKennung(kennung);
+
+        model.addAttribute("bewerber", bewerber);
+        return "";
     }
 }

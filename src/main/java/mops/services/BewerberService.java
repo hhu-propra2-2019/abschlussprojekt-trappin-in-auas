@@ -51,6 +51,10 @@ public class BewerberService implements IBewerberService {
     }
     
     public List<Bewerber> findNichtVerteilt(){
-        return bewerberRepository.findByKennungIsNull();
+        return bewerberRepository.findByVerteiltAnIsNull();
+    }
+
+    public List<Bewerber> findVerteilt(){
+        return bewerberRepository.findByVerteiltAnIsNull();
     }
 }
