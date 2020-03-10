@@ -288,118 +288,112 @@
 					<h4>Sollten Sie zusätzlich zu den unten genannten strikten
 					Einschränkungen noch Wünsche haben, so können Sie diese im Freitext Feld angeben, ansonsten tragen sie "nein" ein.
 					Hinweis: Nicht in allen Fächern ist eine Einstellung ausschließlich als Tutor oder als Korrektor möglich. </h4>
-					<div class="container">
-						<br>
-						<h3>Mustertable</h3>
-						<div class="card">
-							<table class="table">
-								<thead>
-								<tr>
-									<th scope="col">Fach</th>
-									<th scope="col">sehr gerne</th>
-									<th scope="col">gerne, aber <br>lieber ein <br>anderes Fach</th>
-									<th scope="col">nicht gerne,<br> kann ich <br>aber machen</th>
-									<th scope="col">auf keinen Fall</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr>
-									<th scope="row">Programierung</th>
-									<td><input type="radio"
-											   th:field="*{PrioProg}"
-											   th:value="${1}"
-											   name="IDProg"/>
-									</td>
-									<td><input type="radio"
-											   th:field="*{PrioProg}"
-											   th:value="${2}"
-											   name="IDProg"/>
-									</td>
-									<td><input type="radio"
-											   th:field="*{PrioProg}"
-											   th:value="${3}"
-											   name="IDProg"/>
-									</td>
-									<td><input type="radio"
-											   th:field="*{PrioProg}"
-											   th:value="${4}"
-											   name="IDProg"/>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">Aldat</th>
-									<td><input type="radio"
-											   th:field="*{PrioAldat}"
-											   th:value="${1}"
-											   name="IDAldat"/>
-									</td>
-									<td><input type="radio"
-											   th:field="*{PrioAldat}"
-											   th:value="${2}"
-											   name="IDAldat"/>
-									</td>
-									<td><input type="radio"
-											   th:field="*{PrioAldat}"
-											   th:value="${3}"
-											   name="IDAldat"/>
-									</td>
-									<td><input type="radio"
-											   th:field="*{PrioAldat}"
-											   th:value="${4}"
-											   name="IDAldat"/>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">Datenbank</th>
-									<td><input type="radio"
-											   th:field="*{PrioDatenbank}"
-											   th:value="${1}"
-											   name="IDDatenbank"/>
-									</td>
-									<td><input type="radio"
-											   th:field="*{PrioDatenbank}"
-											   th:value="${2}"
-											   name="IDDatenbank"/>
-									</td>
-									<td><input type="radio"
-											   th:field="*{PrioDatenbank}"
-											   th:value="${3}"
-											   name="IDDatenbank"/>
-									</td>
-									<td><input type="radio"
-											   th:field="*{PrioDatenbank}"
-											   th:value="${4}"
-											   name="IDDatenbank"/>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">Software</th>
-									<td><input type="radio"
-											   th:field="*{PrioTeam}"
-											   th:value="${1}"
-											   name="IDTeam"/>
-									</td>
-									<td><input type="radio"
-											   th:field="*{PrioTeam}"
-											   th:value="${2}"
-											   name="IDTeam"/>
-									</td>
-									<td><input type="radio"
-											   th:field="*{PrioTeam}"
-											   th:value="${3}"
-											   name="IDTeam"/>
-									</td>
-									<td><input type="radio"
-											   th:field="*{PrioTeam}"
-											   th:value="${4}"
-											   name="IDTeam"/>
-									</td>
-								</tr>
-								</tbody>
-							</table>
-						</div>
+					<table class="table">
+						<thead>
+						<tr>
+							<th scope="col">Fach</th>
+							<th scope="col">sehr gerne</th>
+							<th scope="col">gerne, aber <br>lieber ein <br>anderes Fach</th>
+							<th scope="col">nicht gerne,<br> kann ich <br>aber machen</th>
+							<th scope="col">auf keinen Fall</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<th scope="row">Programierung</th>
+							<td><input type="radio"
+									   th:field="*{PrioProg}"
+									   th:value="${1}"
+									   name="IDProg"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{PrioProg}"
+									   th:value="${2}"
+									   name="IDProg"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{PrioProg}"
+									   th:value="${3}"
+									   name="IDProg"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{PrioProg}"
+									   th:value="${4}"
+									   name="IDProg"/>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Aldat</th>
+							<td><input type="radio"
+									   th:field="*{PrioAldat}"
+									   th:value="${1}"
+									   name="IDAldat"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{PrioAldat}"
+									   th:value="${2}"
+									   name="IDAldat"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{PrioAldat}"
+									   th:value="${3}"
+									   name="IDAldat"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{PrioAldat}"
+									   th:value="${4}"
+									   name="IDAldat"/>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Datenbank</th>
+							<td><input type="radio"
+									   th:field="*{PrioDatenbank}"
+									   th:value="${1}"
+									   name="IDDatenbank"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{PrioDatenbank}"
+									   th:value="${2}"
+									   name="IDDatenbank"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{PrioDatenbank}"
+									   th:value="${3}"
+									   name="IDDatenbank"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{PrioDatenbank}"
+									   th:value="${4}"
+									   name="IDDatenbank"/>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Software</th>
+							<td><input type="radio"
+									   th:field="*{PrioTeam}"
+									   th:value="${1}"
+									   name="IDTeam"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{PrioTeam}"
+									   th:value="${2}"
+									   name="IDTeam"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{PrioTeam}"
+									   th:value="${3}"
+									   name="IDTeam"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{PrioTeam}"
+									   th:value="${4}"
+									   name="IDTeam"/>
+							</td>
+						</tr>
+						</tbody>
+					</table>
 					</div>
-
 				</ul>
 			</fieldset>
 			<br></br>
