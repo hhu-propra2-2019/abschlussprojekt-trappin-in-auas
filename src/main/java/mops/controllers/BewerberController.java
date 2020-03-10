@@ -1,7 +1,5 @@
 package mops.controllers;
 
-
-
 import mops.domain.database.dto.Bewerber;
 import mops.domain.repositories.BewerberRepository;
 import org.springframework.stereotype.Controller;
