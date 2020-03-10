@@ -3,9 +3,9 @@ package mops.services;
 
 import java.util.List;
 
+import mops.domain.database.dto.Bewerber;
 import org.springframework.stereotype.Service;
 
-import mops.domain.models.fragebogen.Bewerber;
 import mops.domain.repositories.BewerberRepository;
 import mops.domain.services.IBewerberService;
 
