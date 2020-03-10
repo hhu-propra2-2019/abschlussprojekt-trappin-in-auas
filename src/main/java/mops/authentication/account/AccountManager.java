@@ -1,6 +1,7 @@
-package mops.authentication;
+package mops.authentication.account;
 
 import java.util.Set;
+import mops.authentication.account.keycloak.Account;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 
