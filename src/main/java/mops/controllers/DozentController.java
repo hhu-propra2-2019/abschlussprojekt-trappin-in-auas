@@ -37,7 +37,7 @@ public class DozentController {
         model.addAttribute("zugewiesenecount", zugewieseneBewerbungen.size());
         model.addAttribute("preview", offeneBewerbungenPreview);
 
-        return "verteiler";
+        return "dozent/uebersicht";
     }
 
     @Secured({"ROLE_orga"})

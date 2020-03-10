@@ -1,6 +1,7 @@
 package mops.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import mops.domain.database.models.Bewerber;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
@@ -27,10 +28,14 @@ public class VerteilerController {
     @Secured({"ROLE_orga"})
     @GetMapping("/uebersicht")
     public String verteilen(Model model, KeycloakAuthenticationToken token){
-        List<Bewerber> alleBewerber = bewerberService.findNichtVerteilt();
+        List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
+        List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
+        List<Bewerber> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
 
-        model.addAttribute("bewererbungen", alleBewerber);
-        return "verteiler";
+        model.addAttribute("offenecount", offeneBewerbungen.size());
+        model.addAttribute("zugewiesenecount", zugewieseneBewerbungen.size());
+        model.addAttribute("preview", offeneBewerbungenPreview);
+        return "orga/verteilung/uebersicht";
     }
 
     @Secured({"ROLE_orga"})
