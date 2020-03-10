@@ -1,4 +1,4 @@
-package mops.domain.database.models;
+package mops.domain.database.dto;
 
 
 public enum TutorenSchulungTeilnahme {

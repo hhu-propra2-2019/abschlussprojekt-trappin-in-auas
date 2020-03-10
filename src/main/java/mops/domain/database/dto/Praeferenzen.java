@@ -1,5 +1,5 @@
 
-package mops.domain.database.models;
+package mops.domain.database.dto;
 
 import lombok.Data;
 

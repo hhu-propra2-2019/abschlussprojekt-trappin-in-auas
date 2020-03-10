@@ -3,7 +3,7 @@ package mops.services;
 
 import java.util.List;
 
-import mops.domain.database.models.Bewerber;
+import mops.domain.database.dto.Bewerber;
 import org.springframework.stereotype.Service;
 
 
