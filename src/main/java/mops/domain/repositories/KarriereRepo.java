@@ -1,24 +1,18 @@
 package mops.domain.repositories;
 
-import mops.domain.database.models.Bewerber;
-import mops.domain.database.models.Karriere;
-import mops.domain.database.models.Personalien;
+import mops.domain.database.dto.KarriereDTO;
 import org.springframework.data.repository.CrudRepository;
 
 
-public interface KarriereRepo  extends CrudRepository<Karriere, Long> {
+public interface KarriereRepo  extends CrudRepository<KarriereDTO, Long> {
 
 
     @Override
-    <S extends Karriere> S save(S entity);
+    <S extends KarriereDTO> S save(S entity);
 
     @Override
-    <S extends Karriere> Iterable<S> saveAll(Iterable<S> entities);
-
-
+    <S extends KarriereDTO> Iterable<S> saveAll(Iterable<S> entities);
 
     @Override
     void deleteById(Long id);
-
-
 }

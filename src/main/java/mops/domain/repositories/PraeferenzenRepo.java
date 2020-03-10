@@ -1,24 +1,23 @@
 package mops.domain.repositories;
 
-import mops.domain.database.models.Praeferenzen;
+import mops.domain.database.dto.PraeferenzenDTO;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface PraeferenzenRepo  extends CrudRepository<Praeferenzen,Long> {
+public interface PraeferenzenRepo  extends CrudRepository<PraeferenzenDTO,Long> {
     @Override
-    <S extends Praeferenzen> S save(S entity);
+    <S extends PraeferenzenDTO> S save(S entity);
 
     @Override
-    <S extends Praeferenzen> Iterable<S> saveAll(Iterable<S> entities);
+    <S extends PraeferenzenDTO> Iterable<S> saveAll(Iterable<S> entities);
 
 
     @Override
     public void deleteAll();
 
     @Override
-    Optional<Praeferenzen> findById(Long id);
+    Optional<PraeferenzenDTO> findById(Long id);
 
 
     @Override

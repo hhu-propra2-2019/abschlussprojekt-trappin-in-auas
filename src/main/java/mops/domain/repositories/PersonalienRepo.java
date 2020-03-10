@@ -1,25 +1,25 @@
 package mops.domain.repositories;
 
-import mops.domain.database.models.Karriere;
-import mops.domain.database.models.Personalien;
-import mops.domain.database.models.Praeferenzen;
+
 import org.springframework.data.repository.CrudRepository;
+
+import mops.domain.database.dto.PersonalienDTO;
 
 import java.util.Optional;
 
 
-public interface PersonalienRepo  extends CrudRepository<Personalien, Long> {
+public interface PersonalienRepo  extends CrudRepository<PersonalienDTO, Long> {
 
 
     @Override
-    <S extends Personalien> S save(S entity);
+    <S extends PersonalienDTO> S save(S entity);
 
     @Override
-    <S extends Personalien> Iterable<S> saveAll(Iterable<S> entities);
+    <S extends PersonalienDTO> Iterable<S> saveAll(Iterable<S> entities);
 
 
     @Override
-    Optional<Personalien> findById(Long id);
+    Optional<PersonalienDTO> findById(Long id);
 
 
 
