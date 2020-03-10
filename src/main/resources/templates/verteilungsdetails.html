@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+</head>
+
+<body>
+    <form th:action="@{'./verteilung/' + ${bewerber.kennung}}" method="POST">
+        <div>
+            <p th:text="${bewerber.kennung}"></p>
+        </div>
+        <label>
+            Dozent
+            <input type="text" th:name="verteiltan" />
+        </label>
+        <button type="submit">Verteilen</button>
+    </form>
+</body>
+
+</html>

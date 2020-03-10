@@ -15,7 +15,7 @@ public class OrgaController {
   @GetMapping("/verwaltung")
   @Secured("ROLE_orga")
   public String getBewerbungsVerwaltung(Model model, KeycloakAuthenticationToken token) {
-    return "Orga/bewerbungenVerwalten";
+    return "orga/bewerbungenVerwalten";
   }
 
 }

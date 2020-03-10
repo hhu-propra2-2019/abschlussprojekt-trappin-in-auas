@@ -2,6 +2,7 @@
 package mops.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import mops.domain.database.dto.Bewerber;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,31 @@ public class BewerberService implements IBewerberService {
         return bewerberRepository.findById(kennung).get();
     }
 
-    public List<Bewerber> findAllBewerber(){
+    public List<Bewerber> findAlleBewerber(){
         return bewerberRepository.findAll();
+    }
+
+    @Override
+    public List<Bewerber> findAlleNichtVerteilteBewerber(List<Bewerber> alleBewerber) {
+        return alleBewerber.stream().filter(x -> x.getVerteiltAn() == null).collect(Collectors.toList());
+    }
+
+    @Override
+    public void verteile(String kennung, String dozent) {
+        Bewerber b = bewerberRepository.findById(kennung).get();
+        b.setVerteiltAn(dozent);
+        bewerberRepository.save(b);
+    }
+
+	public List<Bewerber> findAlleVerteilteBewerber(List<Bewerber> alleBewerber) {
+		return alleBewerber.stream().filter(x -> x.getVerteiltAn() != null).collect(Collectors.toList());
+    }
+    
+    public List<Bewerber> findNichtVerteilt(){
+        return bewerberRepository.findByVerteiltAnIsNull();
+    }
+
+    public List<Bewerber> findVerteilt(){
+        return bewerberRepository.findByVerteiltAnIsNotNull();
     }
 }
