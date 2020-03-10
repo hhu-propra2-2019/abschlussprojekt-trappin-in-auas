@@ -531,10 +531,8 @@
 			<textarea rows="8" cols="50"></textarea>
 			</ul>
 			</fieldset>
-			
-			<ul>
-			<input type="submit" value="Abschicken!" />
-			</ul>
+			<br></b
+
 			
 			<fieldset>
 			<ul>
@@ -543,19 +541,40 @@
         th:field="*{PrioProg}"
         th:value="${3}" 
         name="IDPro"/>
-        Ich würde sowohl als Tutor als auch als Korrektor arbeiten.
+        Ich möchte an der Tutorenschulung teilnehmen. 
 
         <br></br>
     <input type="radio" 
         th:field="*{PrioProg}"
         th:value="${4}" 
         name="IDProg"/>
-        Dieses Fach kommt für mich auf keinen Fall in Frage.
+        Ich habe bereits an der Tutorenschulung teilgenommen und möchte daher nicht erneut teilnehmen. 
+        
+        <br></br>
+    <input type="radio" 
+        th:field="*{PrioProg}"
+        th:value="${4}" 
+        name="IDProg"/>
+        Ich möchte nicht an der Tutorenschulung teilnehmen.
+
 			
 			</ul>
 			</fieldset>
-		
+		<br></br>
+			<fieldset>
+			<ul>
+			<h3>Was reizt Sie an der Anstellung als Tutor oder Korrektor? Wo sehen Sie Herausforderungen?
+			</h3>
+			<h4>Falls Sie uns sonst noch etwas mitteilen möchten, können Sie dies ebenfalls an dieser Stelle machen.
+			</h4>
 			
+			<textarea rows="8" cols="50"></textarea>
+			</ul>
+			</fieldset>
+			
+			<ul>
+			<input type="submit" value="Abschicken!" />
+			</ul>
 		</form>
 
 	</main>
