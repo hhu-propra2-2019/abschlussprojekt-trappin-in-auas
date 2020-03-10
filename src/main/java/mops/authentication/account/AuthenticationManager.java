@@ -1,11 +1,13 @@
-package mops.authentication;
+package mops.authentication.account;
+
+import mops.authentication.account.keycloak.Account;
 
 public class AuthenticationManager {
   private Account account;
 
-  private String ROLE_ORGA = "ROLE_orga";
-  private String ROLE_STUDENT = "ROLE_studentin";
-  private String ROLE_BOSS = "ROLE_";
+  private static final String ROLE_ORGA = "ROLE_orga";
+  private static final String ROLE_STUDENT = "ROLE_studentin";
+  private static final String ROLE_BOSS = "ROLE_verwaltung";
 
   public AuthenticationManager(Account account) {
     this.account = account;
