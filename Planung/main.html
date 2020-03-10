@@ -263,6 +263,9 @@
 			<fieldset>
 			<ul>
 			<h3>Gewünschte Fächer</h3>
+			<h4>Welche Fächer möchten Sie unterstützen? 
+			Wenn Sie ein Fach nicht gehört haben geben Sie ebenfalls "auf keinen Fall" an. 
+			Mehrfachnennungen sind ausdrücklich erwünscht! </h4>
 			Programmierung
 			<br></br>
 			<input type="radio" 
@@ -379,9 +382,178 @@
 			</ul>
 			</fieldset>
 			
+			<br></br>
+			<fieldset>
+			<ul>
+			<h3>Haben Sie Einschränkungen bzgl. der von Ihnen gewünschten Tätigkeiten?</h3>
+			<h4>Sollten Sie zusätzlich zu den unten genannten strikten 
+			Einschränkungen noch Wünsche haben, so können Sie diese im Freitext Feld angeben, ansonsten tragen sie "nein" ein. 
+			Hinweis: Nicht in allen Fächern ist eine Einstellung ausschließlich als Tutor oder als Korrektor möglich. </h4>
+			Programmierung
+			<br></br>
+			<input type="radio" 
+        th:field="*{PrioProg}"
+        th:value="${1}" 
+        name="IDProg"/>
+        Ich möchte ausschließlich als Korrektor und nicht als Tutor arbeiten, auch wenn das bedeutet, dass ich für die Stelle nicht in Betracht komme.
+
+		<br></br>
+    <input type="radio" 
+        th:field="*{PrioProg}"
+        th:value="${2}" 
+        name="IDPro"/>
+        Ich möchte auf jeden Fall auch als Tutor und nicht nur als Korrektor arbeiten, auch wenn das bedeutet, dass ich für die Stelle nicht in Betracht komme.
+
+		<br></br>
+    <input type="radio" 
+        th:field="*{PrioProg}"
+        th:value="${3}" 
+        name="IDPro"/>
+        Ich würde sowohl als Tutor als auch als Korrektor arbeiten.
+
+        <br></br>
+    <input type="radio" 
+        th:field="*{PrioProg}"
+        th:value="${4}" 
+        name="IDProg"/>
+        Dieses Fach kommt für mich auf keinen Fall in Frage.
+
+			<br></br>
+			<br></br>
+			
+		Algorithmen und Datenstrukturen
+			<br></br>
+			<input type="radio" 
+        th:field="*{PrioAldat}"
+        th:value="${1}" 
+        name="IDAldat"/>
+        Ich möchte ausschließlich als Korrektor und nicht als Tutor arbeiten, auch wenn das bedeutet, dass ich für die Stelle nicht in Betracht komme.
+
+		<br></br>
+    <input type="radio" 
+        th:field="*{PrioAldat}"
+        th:value="${2}" 
+        name="IDAldat"/>
+        Ich möchte auf jeden Fall auch als Tutor und nicht nur als Korrektor arbeiten, auch wenn das bedeutet, dass ich für die Stelle nicht in Betracht komme.
+
+		<br></br>
+    <input type="radio" 
+        th:field="*{PrioAldat}"
+        th:value="${3}" 
+        name="IDAldat"/>
+        Ich würde sowohl als Tutor als auch als Korrektor arbeiten.
+
+        <br></br>
+    <input type="radio" 
+        th:field="*{PrioAldat}"
+        th:value="${4}" 
+        name="IDAldat"/>
+        Dieses Fach kommt für mich auf keinen Fall in Frage.
+
+			<br></br>
+			<br></br>
+			
+		Datenbanksysteme (praktische übung)
+			<br></br>
+			<input type="radio" 
+        th:field="*{PrioDatenbank}"
+        th:value="${1}" 
+        name="IDDatenbank"/>
+        Ich möchte ausschließlich als Korrektor und nicht als Tutor arbeiten, auch wenn das bedeutet, dass ich für die Stelle nicht in Betracht komme.
+
+		<br></br>
+    <input type="radio" 
+        th:field="*{PrioDatenbank}"
+        th:value="${2}" 
+        name="IDDatenbank"/>
+        Ich möchte auf jeden Fall auch als Tutor und nicht nur als Korrektor arbeiten, auch wenn das bedeutet, dass ich für die Stelle nicht in Betracht komme.
+
+		<br></br>
+    <input type="radio" 
+        th:field="*{PrioDatenbank}"
+        th:value="${3}"
+        name="IDDatenbank"/>
+        Ich würde sowohl als Tutor als auch als Korrektor arbeiten.
+
+        <br></br>
+    <input type="radio" 
+        th:field="*{PrioDatenbank}"
+        th:value="${4}" 
+        name="IDDatenbank"/>
+        Dieses Fach kommt für mich auf keinen Fall in Frage.
+
+			<br></br>
+			<br></br>
+			
+		Softwareentwicklung im Team
+			<br></br>
+			<input type="radio" 
+        th:field="*{PrioTeam}"
+        th:value="${1}" 
+        name="IDTeam"/>
+        Ich möchte ausschließlich als Korrektor und nicht als Tutor arbeiten, auch wenn das bedeutet, dass ich für die Stelle nicht in Betracht komme.
+
+		<br></br>
+    <input type="radio" 
+        th:field="*{PrioTeam}"
+        th:value="${2}" 
+        name="IDTeam"/>
+        Ich möchte auf jeden Fall auch als Tutor und nicht nur als Korrektor arbeiten, auch wenn das bedeutet, dass ich für die Stelle nicht in Betracht komme.
+
+		<br></br>
+    <input type="radio" 
+        th:field="*{PrioTeam}"
+        th:value="${3}" 
+        name="IDTeam"/>
+        Ich würde sowohl als Tutor als auch als Korrektor arbeiten.
+
+        <br></br>
+    <input type="radio" 
+        th:field="*{PrioTeam}"
+        th:value="${4}" 
+        name="IDTeam"/>
+        Dieses Fach kommt für mich auf keinen Fall in Frage.
+
+			
+			
+			
+			
+			</ul>
+			</fieldset>
+			<br></br>
+			<fieldset>
+			<ul>
+			<h3>Bisherige Erfahrungen, Schulung und Nachricht an uns (sichtbar)
+			</h3>
+			<h4>Beschreiben Sie hier bitte kurz Ihre bisherigen Erfahrungen als Tutor oder Korrektor in der Informatik. 
+			Wenn Sie über keine solchen Erfahrungen verfügen können Sie gerne ähnliche Erfahrungen (Nachhilfe, Korrektur anderer Fächer, ...) angeben. Wenn Sie bereits als Tutor oder Korrektor für uns gearbeitet haben reicht es, wenn Sie die Tätigkeiten der letzten beiden Semester angeben, Sie brauchen keine vollständige Liste zu erstellen. </h4>
+			
+			<textarea rows="8" cols="50"></textarea>
+			</ul>
+			</fieldset>
+			
 			<ul>
 			<input type="submit" value="Abschicken!" />
 			</ul>
+			
+			<fieldset>
+			<ul>
+			<h3>Es steht noch nicht fest, ob es eine Tutorenschulung für das Wintersemester geben wird. Wenn ja, wird diese voraussichtlich kurz vor Semesterbeginn stattﬁnden. </h3>
+			<input type="radio" 
+        th:field="*{PrioProg}"
+        th:value="${3}" 
+        name="IDPro"/>
+        Ich würde sowohl als Tutor als auch als Korrektor arbeiten.
+
+        <br></br>
+    <input type="radio" 
+        th:field="*{PrioProg}"
+        th:value="${4}" 
+        name="IDProg"/>
+        Dieses Fach kommt für mich auf keinen Fall in Frage.
+			
+			</ul>
+			</fieldset>
 		
 			
 		</form>
