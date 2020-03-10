@@ -27,14 +27,14 @@ public class OrgaController {
     String dozentmail = principal.getKeycloakSecurityContext().getIdToken().getEmail();
 
     m.addAttribute("dozentmail", dozentmail);
-    return "Orga/bewerbungenVerwalten";
+    return "orga/bewerbungenVerwalten";
   }
 
   @Secured("ROLE_orga")
   @GetMapping("/module")
   public String getModule(Model m, KeycloakAuthenticationToken token) {
     m.addAttribute("modules", modulService.findAllModule());
-    return "Orga/moduleEinsehen";
+    return "orga/moduleEinsehen";
   }
 
   @Secured("ROLE_orga")
