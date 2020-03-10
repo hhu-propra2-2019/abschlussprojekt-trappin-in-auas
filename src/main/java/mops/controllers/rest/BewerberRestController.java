@@ -34,9 +34,9 @@ public class BewerberRestController {
     @PostMapping(path = "/postbewerbungrest", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @Secured({"ROLE_orga"})
-    public Bewerber index(Model model, @RequestBody Bewerber b){
-        bewerberRepository.save(b);
+    @Secured({"ROLE_orga"}) //andere clientrollen kommen noch
+    public Bewerber index(Model model, @RequestBody Bewerber b, KeycloakAuthenticationToken token){
+        //bewerberRepository.save(b);
         System.out.println("added " + b.getKennung() + " to database");
         return b;
     }
