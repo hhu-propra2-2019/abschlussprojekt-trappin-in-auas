@@ -2,15 +2,19 @@ plugins {
 	id 'org.springframework.boot' version '2.2.5.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
-	id 'pmd'
+	//id 'pmd'
+	id "io.freefair.lombok" version "5.0.0-rc4"
 }
 
-group = 'com.trappininauas.mops'
+group = 'mops.bewerbung1'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+
+	maven { url 'https://repo.spring.io/libs-snapshot' }
+
 	maven {
 		url="https://s3.cs.hhu.de/public/mops/"
 		metadataSources {
@@ -27,6 +31,7 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+
 }
 
 dependencies {
@@ -34,11 +39,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-integration'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-test'
+	implementation 'org.keycloak:keycloak-spring-boot-starter:9.0.0'
+	implementation 'org.keycloak.bom:keycloak-adapter-bom:3.3.0.Final'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.postgresql:postgresql'
+  
 	implementation 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
 	compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -48,8 +58,19 @@ dependencies {
 	}
 	testImplementation 'org.springframework.integration:spring-integration-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	compile 'io.micrometer:micrometer-core:latest.integration'
 }
 
 test {
 	useJUnitPlatform()
+}
+
+task fatJar(type: Jar) {
+	manifest {
+		attributes 'Main-Class': '${mainClassName}'
+	}
+	archivesBaseName = 'MOPS-bewerbung1'
+	from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
 }
