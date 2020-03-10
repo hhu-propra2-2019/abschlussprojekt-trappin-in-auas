@@ -1,7 +1,8 @@
-
 package mops.domain.database.dto;
 
 import lombok.Data;
+import mops.domain.models.EinstiegTyp;
+import mops.domain.models.TutorenSchulungTeilnahme;
 
 import javax.persistence.*;
 import java.util.List;

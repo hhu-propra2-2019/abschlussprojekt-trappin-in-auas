@@ -1,12 +1,9 @@
-package mops.domain.database.dto;
+package mops.domain.models;
 
 
 import lombok.Data;
 
-import javax.persistence.Embeddable;
-
 @Data
-@Embeddable
 public class Adresse {
     private String PLZ;
     private String wohnort;
