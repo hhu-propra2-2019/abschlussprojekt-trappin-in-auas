@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BewerberRestController {
+    //TODO: Crud operations for applications
     private BewerberRepository bewerberRepository;
 
     public BewerberRestController(BewerberRepository bewerberRepository){
