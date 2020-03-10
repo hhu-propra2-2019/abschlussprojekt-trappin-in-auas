@@ -1,4 +1,4 @@
-package mops.authentication;
+package mops.authentication.keycloak;
 
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.springframework.context.annotation.Bean;

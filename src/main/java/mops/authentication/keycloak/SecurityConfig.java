@@ -1,4 +1,4 @@
-package mops.authentication;
+package mops.authentication.keycloak;
 
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;

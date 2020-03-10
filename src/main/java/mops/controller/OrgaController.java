@@ -2,6 +2,7 @@ package mops.controller;
 
 import mops.domain.models.lehrstuhl.Modul;
 import mops.services.ModulService;
+import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -21,7 +22,12 @@ public class OrgaController {
 
   @GetMapping("/verwaltung")
   @Secured("ROLE_orga")
-  public String getBewerbungsVerwaltung(Model model, KeycloakAuthenticationToken token) {
+  public String getBewerbungsVerwaltung(Model m, KeycloakAuthenticationToken token) {
+    KeycloakPrincipal principal = (KeycloakPrincipal) token.getPrincipal();
+    String dozentmail = principal.getKeycloakSecurityContext().getIdToken().getEmail();
+    System.out.println(dozentmail);
+
+    m.addAttribute("dozentmail", dozentmail);
     return "Orga/bewerbungenVerwalten";
   }
 
