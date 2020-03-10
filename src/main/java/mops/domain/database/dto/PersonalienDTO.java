@@ -1,4 +1,4 @@
-package mops.domain.database.models;
+package mops.domain.database.dto;
 
 import lombok.Data;
 
@@ -6,8 +6,9 @@ import javax.persistence.*;
 import java.util.Date;
 @Data
 
+@Table(name = "personalien")
 @Entity
-public class Personalien {
+public class PersonalienDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

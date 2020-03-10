@@ -2,7 +2,7 @@ package mops.controllers;
 
 import java.util.List;
 
-import mops.domain.database.models.Bewerber;
+import mops.domain.database.dto.Bewerber;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
