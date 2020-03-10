@@ -18,7 +18,7 @@ import mops.domain.services.IMappingService;
 public class MappingServiceTest {
     private IMappingService mappingService;
 
-
+/*
     @Test
     public void bestandeneModuleDTOZuBestandeneModuleModel(){
         //TODO: create a generator for this
@@ -67,11 +67,11 @@ public class MappingServiceTest {
 
         assertEquals(modulDTO.getModul(), modul.getModul());
     }
-
+*/
     /**
      * Make sure the mappingservice
      * does not break when passing null
-     */
+     *//*
     @Test
     public void bestandenesModulDTOIsNullMappingReturnsNull(){
         BestandeneModuleDTO bestandeneModuleDTO = null;
@@ -125,5 +125,5 @@ public class MappingServiceTest {
         Personalien personalien = mappingService.load(personalienDTO);
 
         assertNull(personalien);
-    }
+    }*/
 }
