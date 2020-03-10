@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
-import mops.domain.database.models.Bewerber;
+import mops.domain.database.dto.Bewerber;
 import mops.domain.repositories.BewerberRepository;
 import mops.services.BewerberService;
 

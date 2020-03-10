@@ -2,7 +2,8 @@ package mops.domain.services;
 
 import java.util.List;
 
-import mops.domain.database.models.Bewerber;
+import mops.domain.database.dto.Bewerber;
+
 
 public interface IBewerberService {
     void addBewerber(Bewerber b);
