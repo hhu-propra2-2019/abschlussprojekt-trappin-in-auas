@@ -1,0 +1,22 @@
+@forward "families" as family-*;
+@forward "weights" as weight-*;
+@forward "styles" as style-*;
+@forward "sizes" as size-*;
+@forward "line-heights" as line-height-*;
+
+@use "families";
+@use "weights";
+@use "styles";
+@use "sizes";
+@use "line-heights";
+
+$_weights: ("Thin": weights.$thin, "Light": weights.$light, "Regular": weights.$regular, "Medium": weights.$medium, "Bold": weights.$bold, "Black": weights.$black);
+
+@each $_weight-string, $_weight-integer in $_weights {
+  @font-face {
+    font-family: families.$regular;
+    font-style: styles.$normal;
+    font-weight: $_weight-integer;
+    src: url("../fonts/roboto/Roboto-" + $_weight-string + ".ttf") format("truetype");
+  }
+}

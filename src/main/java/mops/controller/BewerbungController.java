@@ -37,7 +37,7 @@ public class BewerbungController {
   @GetMapping("/orga")
   @Secured("ROLE_orga")
   public String getOrgaMainpage(Model model, KeycloakAuthenticationToken token) {
-    return "Orga/orgaMainpage";
+    return "orga/orgaMainpage";
   }
 
 

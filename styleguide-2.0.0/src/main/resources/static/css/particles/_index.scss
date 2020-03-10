@@ -1,0 +1,8 @@
+@forward "fonts" as font-*;
+@forward "colors" as color-*;
+@forward "text" as text-*;
+
+@mixin transition($duration: 0.3s) {
+  transition-duration: $duration;
+  transition-property: color, background, opacity;
+}

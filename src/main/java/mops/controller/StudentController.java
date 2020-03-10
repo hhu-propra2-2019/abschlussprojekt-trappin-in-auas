@@ -16,7 +16,7 @@ public class StudentController {
   @GetMapping("/bewerbung")
   @Secured("ROLE_studentin")
   public String getBewerbungsformular(Model model, KeycloakAuthenticationToken token) {
-    return "Student/Bewerbung";
+    return "student/Bewerbung";
   }
 
 }
