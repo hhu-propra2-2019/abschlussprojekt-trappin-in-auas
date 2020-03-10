@@ -1,7 +1,6 @@
-package mops.authentication;
+package mops.authentication.account.keycloak;
 
 import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;
@@ -38,7 +37,8 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) {
-    KeycloakAuthenticationProvider keycloakAuthenticationProvider = keycloakAuthenticationProvider();
+    KeycloakAuthenticationProvider keycloakAuthenticationProvider =
+        keycloakAuthenticationProvider();
     keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(new SimpleAuthorityMapper());
     auth.authenticationProvider(keycloakAuthenticationProvider);
   }
@@ -52,7 +52,8 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
   @Bean
   @Scope(scopeName = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
   public AccessToken getAccessToken() {
-    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+        .currentRequestAttributes())
         .getRequest();
     return ((KeycloakPrincipal) request.getUserPrincipal()).getKeycloakSecurityContext().getToken();
   }
@@ -60,8 +61,10 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     super.configure(http);
-    http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/api").permitAll();
-    http.authorizeRequests().antMatchers("/actuator/**").hasRole("monitoring").anyRequest().permitAll();
+    http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/api")
+        .permitAll();
+    http.authorizeRequests().antMatchers("/actuator/**").hasRole("monitoring")
+        .anyRequest().permitAll();
     
   }
 
