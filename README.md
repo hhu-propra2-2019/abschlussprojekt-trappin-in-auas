@@ -4,7 +4,8 @@
 
 ## SCS zur Bewerbung im MOPS-System der HHU-Düsseldorf
 Wir wollen die Zuverlässigkeit und Reproduzierbarkeit des Bewerbungsverfahrens erhöhen. Daher entwickeln wir ein neues System, was sowohl Bewerbung, Verteilung an Ausschreibende als auch den aktuellen Status der Bewerbung beinhaltet.
-Wir haben uns zum Ziel gemacht, das Bewerbungsverfahren grundlegend neu zu durchdenken und es Dozenten, die die Stellen ausschreiben, und Bewerbern einfacher zu machen, denn durch ein umständliches und langsames System können Bewerbungen ausbleiben. 
+Wir haben uns zum Ziel gemacht, das Bewerbungsverfahren grundlegend neu zu durchdenken und es Dozenten, die die Stellen ausschreiben, und Bewerbern einfacher zu machen, denn durch ein umständliches und langsames System können Bewerbungen ausbleiben.
+Aktuell wird man von der Webseite des Instituts auf eine Ilias-Umfrage weitergeleitet, um sich zu bewerben. Das ist keine sinnvolle Lösung.
 
 
 ## Features
