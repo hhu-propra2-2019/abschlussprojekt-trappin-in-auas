@@ -29,7 +29,7 @@ public class BewerbungController {
   @GetMapping("/student")
   @Secured("ROLE_studentin")
   public String getStudentMainpage(Model model, KeycloakAuthenticationToken token) {
-    return "Student/studentMainpage";
+    return "student/studentMainpage";
   }
 
   @GetMapping("/orga")
