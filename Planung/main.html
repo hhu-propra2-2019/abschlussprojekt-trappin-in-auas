@@ -2,6 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{mopslayout :: html(name='name', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>dozentseite</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <meta charset="utf-8">
 <title>main</title>
 <th:block th:fragment="headcontent">
@@ -9,28 +15,12 @@
 	
 </th:block>
 	<script>
-		function anderesFach(){
-			var anderesf = document.getElementById("anderesF");
-			var anderesFachRadio = document.getElementById("anderesfachradio");
-            var inputfeld = document.getElementById("anderesfach");
-            console.log(anderesf);
-            console.log(anderesFachRadio.checked);
-            console.log(inputfeld);
-			if(!anderesFachRadio.checked){
-			    if(inputfeld){
-			        inputfeld.parentNode.removeChild(inputfeld);
-				}
-			}
-			if(anderesFachRadio.checked){
-                if(!inputfeld) {
-                    var textfeld = document.createElement("input");
-                    textfeld.id = "anderesfach";
-                    anderesf.appendChild(textfeld);
-                }
-			}
-		}
+
 	</script>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <body>
 	<header>
 		<nav class="navigation navigation-secondary" is="mops-navigation"
@@ -134,6 +124,7 @@
 				</ul>
 			</fieldset>
 			<br></br>
+			<div class="shadow p-3 mb-5 bg-white rounded">
 			<fieldset>
 				<ul>
 					<h3>Bisherige Noten</h3>
@@ -214,6 +205,7 @@
 					</select>
 				</ul>
 			</fieldset>
+			</div>
 			<br></br>
 			<fieldset>
 				<ul>
@@ -282,13 +274,13 @@
 				</ul>
 			</fieldset>
 			<br></br>
-			<fieldset>
+			<div class="card" class="shadow p-3 mb-5 bg-white rounded">
 				<ul>
 					<h3>Haben Sie Einschränkungen bzgl. der von Ihnen gewünschten Tätigkeiten?</h3>
 					<h4>Sollten Sie zusätzlich zu den unten genannten strikten
 					Einschränkungen noch Wünsche haben, so können Sie diese im Freitext Feld angeben, ansonsten tragen sie "nein" ein.
 					Hinweis: Nicht in allen Fächern ist eine Einstellung ausschließlich als Tutor oder als Korrektor möglich. </h4>
-					<table class="table">
+					<table class="table table-striped">
 						<thead>
 						<tr>
 							<th scope="col">Fach</th>
@@ -395,7 +387,7 @@
 					</table>
 					</div>
 				</ul>
-			</fieldset>
+			</div>
 			<br></br>
 			<fieldset>
 				<ul>
