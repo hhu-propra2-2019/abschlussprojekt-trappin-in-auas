@@ -211,66 +211,114 @@
 				<ul>
 					<h3>Gewünschte Fächer</h3>
 					<h4>Welche Fächer möchten Sie unterstützen?
-					Wenn Sie ein Fach nicht gehört haben geben Sie ebenfalls "auf keinen Fall" an.
-					Mehrfachnennungen sind ausdrücklich erwünscht! </h4>
-					Programmierung
-					<br></br>
-					<input type="radio" th:field="*{PrioProg}" th:value="${1}" name="IDProg"/>
-					Sehr gerne.
-					<br></br>
-					<input type="radio" th:field="*{PrioProg}" th:value="${2}" name="IDPro"/>
-					Gerne, aber lieber ein anderes Fach.
-					<br></br>
-					<input type="radio" th:field="*{PrioProg}" th:value="${3}" name="IDPro"/>
-					Nicht gerne, aber kann ich machen.
-					<br></br>
-					<input type="radio" th:field="*{PrioProg}" th:value="${4}" name="IDProg"/>
-					Auf keinen Fall.
-					<br></br>
-					<br></br>
-					Algorithmen und Datenstrukturen
-					<br></br>
-					<input type="radio" th:field="*{PrioAldat}" th:value="${1}" name="IDAldat"/>
-					Sehr gerne.
-					<br></br>
-					<input type="radio" th:field="*{PrioAldat}" th:value="${2}" name="IDAldat"/>
-					Gerne, aber lieber ein anderes Fach.
-					<br></br>
-					<input type="radio" th:field="*{PrioAldat}" th:value="${3}" name="IDAldat"/>
-					Nicht gerne, aber kann ich machen.
-					<br></br>
-					<input type="radio" th:field="*{PrioAldat}" th:value="${4}" name="IDAldat"/>
-					Auf keinen Fall.
-					<br></br>
-					<br></br>
-					Datenbanksysteme (praktische übung)
-					<br></br>
-					<input type="radio" th:field="*{PrioDatenbank}" th:value="${1}" name="IDDatenbank"/>
-					Sehr gerne.
-					<br></br>
-					<input type="radio" th:field="*{PrioDatenbank}" th:value="${2}" name="IDDatenbank"/>
-					Gerne, aber lieber ein anderes Fach.
-					<br></br>
-					<input type="radio" th:field="*{PrioDatenbank}" th:value="${3}" name="IDDatenbank"/>
-					Nicht gerne, aber kann ich machen.
-					<br></br>
-					<input type="radio" th:field="*{PrioDatenbank}" th:value="${4}" name="IDDatenbank"/>
-					Auf keinen Fall.
-					<br></br>
-					<br></br>
-					Softwareentwicklung im Team
-					<br></br>
-					<input type="radio" th:field="*{PrioTeam}" th:value="${1}" name="IDTeam"/>
-					Sehr gerne.
-					<br></br>
-					<input type="radio" th:field="*{PrioTeam}" th:value="${2}" name="IDTeam"/>
-					Gerne, aber lieber ein anderes Fach.
-					<br></br>
-					<input type="radio" th:field="*{PrioTeam}" th:value="${3}" name="IDTeam"/>
-					Nicht gerne, aber kann ich machen.
-					<br></br>
-					<input type="radio" th:field="*{PrioTeam}" th:value="${4}" name="IDTeam"/>
-					Auf keinen Fall.
+						Wenn Sie ein Fach nicht gehört haben geben Sie ebenfalls "auf keinen Fall" an.
+						Mehrfachnennungen sind ausdrücklich erwünscht! </h4>
+					<table class="table">
+						<thead>
+						<tr>
+							<th scope="col">Fach</th>
+							<th scope="col">sehr gerne</th>
+							<th scope="col">gerne, aber <br>lieber ein <br>anderes Fach</th>
+							<th scope="col">nicht gerne,<br> kann ich <br>aber machen</th>
+							<th scope="col">auf keinen Fall</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<th scope="row">Programierung</th>
+							<td><input type="radio"
+									   th:field="*{GewProg}"
+									   th:value="${1}"
+									   name="GewIDProg"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{GewProg}"
+									   th:value="${2}"
+									   name="GewIDProg"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{GewProg}"
+									   th:value="${3}"
+									   name="GewIDProg"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{GewProg}"
+									   th:value="${4}"
+									   name="GewIDProg"/>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Aldat</th>
+							<td><input type="radio"
+									   th:field="*{GewAldat}"
+									   th:value="${1}"
+									   name="GewIDAldat"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{GewAldat}"
+									   th:value="${2}"
+									   name="GewIDAldat"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{GewAldat}"
+									   th:value="${3}"
+									   name="GewIDAldat"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{GewAldat}"
+									   th:value="${4}"
+									   name="GewIDAldat"/>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Datenbank</th>
+							<td><input type="radio"
+									   th:field="*{GewDatenbank}"
+									   th:value="${1}"
+									   name="GewIDDatenbank"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{GewDatenbank}"
+									   th:value="${2}"
+									   name="GewIDDatenbank"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{GewDatenbank}"
+									   th:value="${3}"
+									   name="GewIDDatenbank"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{GewDatenbank}"
+									   th:value="${4}"
+									   name="GewIDDatenbank"/>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Software</th>
+							<td><input type="radio"
+									   th:field="*{GewTeam}"
+									   th:value="${1}"
+									   name="GewIDTeam"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{GewTeam}"
+									   th:value="${2}"
+									   name="GewIDTeam"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{GewTeam}"
+									   th:value="${3}"
+									   name="GewIDTeam"/>
+							</td>
+							<td><input type="radio"
+									   th:field="*{GewTeam}"
+									   th:value="${4}"
+									   name="GewIDTeam"/>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					</div>
 				</ul>
 			</fieldset>
 			<br></br>
