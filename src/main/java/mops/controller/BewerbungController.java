@@ -37,4 +37,10 @@ public class BewerbungController {
   public String getOrgaMainpage(Model model, KeycloakAuthenticationToken token) {
     return "orga/orgaMainpage";
   }
+
+  @GetMapping("/boss")
+  //@Secured("ROLE_Boss")
+  public String getBossMainpage(Model model, KeycloakAuthenticationToken token) {
+    return "boss/bossMainpage";
+  }
 }
