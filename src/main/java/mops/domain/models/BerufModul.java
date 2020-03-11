@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 class BerufModul {
-    private EinstiegTyp einstiegsTyp;
+    private Beruf beruf;
     private Modul modul;
 }

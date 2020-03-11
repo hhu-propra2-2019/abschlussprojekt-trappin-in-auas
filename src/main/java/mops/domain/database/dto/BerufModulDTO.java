@@ -12,9 +12,9 @@ import javax.persistence.Enumerated;
 @Data
 @Embeddable
 class BerufModulDTO {
-    @Enumerated(EnumType.STRING)
-    private Beruf beruf;
-    
-    @Embedded
-    private ModulDTO modul;
+  @Enumerated(EnumType.STRING)
+  private Beruf beruf;
+
+  @Embedded
+  private ModulDTO modul;
 }

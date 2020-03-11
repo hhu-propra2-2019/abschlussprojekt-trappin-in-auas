@@ -8,8 +8,8 @@ import javax.persistence.Embeddable;
 @Data
 @Embeddable
 public class AdresseDTO {
-    private String PLZ;
-    private String wohnort;
-    private String straße;
-    private String hausnummer;
+  private String PLZ;
+  private String wohnort;
+  private String straße;
+  private String hausnummer;
 }
