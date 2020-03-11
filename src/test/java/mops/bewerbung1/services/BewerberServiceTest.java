@@ -1,22 +1,13 @@
 package mops.bewerbung1.services;
 
-
-
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.mock;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.boot.test.context.SpringBootTest;
 
 import mops.domain.database.dto.Bewerber;
 import mops.domain.repositories.BewerberRepository;
 import mops.services.BewerberService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class BewerberServiceTest {
@@ -24,14 +15,14 @@ public class BewerberServiceTest {
     private BewerberService bewerberService;
     private BewerberRepository bewerberRepository;
 
-    @Before
+    @BeforeEach
     void setUp() {
         this.bewerberService = mock(BewerberService.class);
         
     }
 
     @Test
-    void hinzufuegenVonBewerbern(){
+    void hinzufuegenVonBewerbern() {
 
     }
 
