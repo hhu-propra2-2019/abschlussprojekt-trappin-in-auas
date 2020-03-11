@@ -31,7 +31,7 @@ public class BewerberServiceTest {
     }
 
     @Test
-    void hinzufuegenVonBewerbern(){
+    void hinzufuegenVonBewerbern() {
 
     }
 

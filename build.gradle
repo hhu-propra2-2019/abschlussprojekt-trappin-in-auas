@@ -61,7 +61,10 @@ dependencies {
 
 	compile 'io.micrometer:micrometer-core:latest.integration'
 
-	testImplementation('org.junit.jupiter:junit-jupiter:5.6.0')
+	testImplementation'org.junit.jupiter:junit-jupiter:5.6.0'
+
+	testImplementation 'com.tngtech.keycloakmock:mock:0.2.0'
+	implementation 'org.mockito:mockito-junit-jupiter:3.3.0'
 }
 
 test {
