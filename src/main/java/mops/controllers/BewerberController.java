@@ -26,14 +26,16 @@ public class BewerberController {
     public String bewirb(Model model){
         model.addAttribute("personal", new Personalien());
         model.addAttribute("modulauswahl", new ModulAuswahl());
+        model.addAttribute("preference", new Praeferenzen());
         return "student/main_min";
     }
 
     @PostMapping("/bewirbabschicken")
-    public String bewirbabschicken(Model model, Personalien p, ModulAuswahl m){
+    public String bewirbabschicken(Model model, Personalien p, ModulAuswahl m, Praeferenzen pref){
         System.out.println("form abgeschickt. folgende inhalte:");
         System.out.println(p);
         System.out.println(m);
+        System.out.println(pref);
         return "redirect:/bewirb";
     }
 
