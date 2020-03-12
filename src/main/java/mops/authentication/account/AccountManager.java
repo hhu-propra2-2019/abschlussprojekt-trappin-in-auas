@@ -7,9 +7,10 @@ import org.keycloak.KeycloakPrincipal;
 public class AccountManager {
 
   /**
-   * Uebersetzt ein Keycloak Principal Objekt in einen Account
+   * Üebersetzt ein Keycloak Principal Objekt in einen Account.
+   *
    * @param principal Objekt aus Keycloak Token
-   * @param roles Rollen aus Keycloak Token
+   * @param roles     Rollen aus Keycloak Token
    * @return Account mit Daten und Rollen
    */
   public Account parseFrom(KeycloakPrincipal principal, Set<String> roles) {
