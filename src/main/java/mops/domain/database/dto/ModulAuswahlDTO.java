@@ -15,14 +15,10 @@ import lombok.Data;
 @Table(name = "modulAuswahl")
 @Entity
 public class ModulAuswahlDTO {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
-  @Embedded
-  private Modul modul;
-  private int prioritaet;
-  @ManyToOne
-  @JoinColumn(name = "praeferenzen_id")
-  private PraeferenzenDTO praeferenzen;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Embedded
+    private ModulDTO modul;
+    private int prioritaet;
 }

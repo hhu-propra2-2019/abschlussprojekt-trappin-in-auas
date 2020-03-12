@@ -14,16 +14,10 @@ import lombok.Data;
 @Table(name = "bestandeneModule")
 @Entity
 public class BestandeneModuleDTO {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
-  @Embedded
-  private Modul modul;
-  private double note;
-
-  @ManyToOne
-  @JoinColumn(name = "karriere_id")
-  private KarriereDTO karriere;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Embedded
+    private ModulDTO modul;
+    private double note;
 }

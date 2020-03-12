@@ -1,5 +1,7 @@
 package mops.domain.database.dto;
 
+import lombok.Data;
+import mops.domain.models.Beruf;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
@@ -9,11 +11,10 @@ import lombok.Data;
 
 @Data
 @Embeddable
-class BerufModul {
-
+public class BerufModulDTO {
   @Enumerated(EnumType.STRING)
-  private EinstiegTyp einstiegsTyp;
+  private Beruf beruf;
 
   @Embedded
-  private Modul modul;
+  private ModulDTO modul;
 }

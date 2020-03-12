@@ -1,31 +1,27 @@
 package mops.domain.database.dto;
 
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import lombok.Data;
 
 @Data
 @Table(name = "karriere")
 @Entity
 public class KarriereDTO {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String arbeitserfahrung;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
-  private String arbeitserfahrung;
-  @Embedded
-  private ImmartikulationsStatus immartikulationsStatus;
-  @Embedded
-  private StudiengangAbschluss fachAbschluss;
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "karriere")
-  private List<BestandeneModuleDTO> bestandendeModule;
+    @Embedded
+    private ImmartikulationsStatusDTO immartikulationsStatus;
+
+    @Embedded
+    private StudiengangAbschlussDTO fachAbschluss;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "karriere", joinColumns = @JoinColumn(name = "karriere_id"),
+        inverseJoinColumns = @JoinColumn(name = "bestandeneModule_id"))
+    private List<BestandeneModuleDTO> bestandendeModule;
 
 }
