@@ -1,6 +1,6 @@
 package mops.domain.database.dto;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import lombok.Data;
 
 @Data

@@ -24,7 +24,7 @@ public class BewerberController {
        /* model.addAttribute("personal", new Personalien());
         model.addAttribute("modulauswahl", new ModulAuswahl());
         model.addAttribute("preference", new Praeferenzen()); */
-        return "student/main_min";
+        return "bewerbungsformular";
     }
 
     @PostMapping("/bewirbabschicken")
