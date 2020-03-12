@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BewerbungController {
 
   /**
-   * Main page, checks login for roles studentin and orga
+   * Main page, checks login for roles studentin and orga.
    * @param model injected, Model for Thymeleaf interaction
    * @param token injected, present, if user is logged in
    * @return redirect to specific html template or error page
