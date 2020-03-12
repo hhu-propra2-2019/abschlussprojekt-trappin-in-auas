@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+// NO USE FOR THIS CONTROLLER //
+@Deprecated
 @Controller
 @RequestMapping("/bewerbung1/orga")
 public class OrgaController {
-
 
   @GetMapping("/verwaltung")
   @Secured("ROLE_orga")
