@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{mopslayout :: html(name='name', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+
+<head>
+    <meta charset="utf-8">
+    <title>main</title>
+    <th:block th:fragment="headcontent">
+    </th:block>
+</head>
+
+
+<body>
+    <header>
+        <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
+            <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
+        </nav>
+    </header>
+    <main th:fragment="bodycontent">
+        <!-- Restlichen Inhalt hier einfügen! -->
+
+        <div class="container">
+            <h3>Modulsetup</h3>
+            <form>
+                <div class="form-group">
+                    <label>Modulbezeichnung</label>
+                    <input type="text" class="form-control col-sm-10" placeholder="Z.B.: Programmierung" />
+                </div>
+                <div class="form-group">
+                    <label>Dozent</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control col-sm-4" placeholder="Dozentkennung" />
+                        <input type="text" class="form-control col-sm-6" placeholder="Dozentname" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Modul hinzufuegen</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
