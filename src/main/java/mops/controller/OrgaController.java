@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/bewerbung1/orga")
 public class OrgaController {
 
-
   @GetMapping("/verwaltung")
   @Secured("ROLE_orga")
   public String getBewerbungsVerwaltung(Model m, KeycloakAuthenticationToken token) {

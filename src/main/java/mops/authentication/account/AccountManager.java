@@ -5,10 +5,8 @@ import mops.authentication.account.keycloak.Account;
 import org.keycloak.KeycloakPrincipal;
 
 public class AccountManager {
-
   /**
-   * Üebersetzt ein Keycloak Principal Objekt in einen Account.
-   *
+   * Uebersetzt ein Keycloak Principal Objekt in einen Account.
    * @param principal Objekt aus Keycloak Token
    * @param roles     Rollen aus Keycloak Token
    * @return Account mit Daten und Rollen
