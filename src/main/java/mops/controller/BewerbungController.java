@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/bewerbung1")
 public class BewerbungController {
 
+  /**
+   * Main page, checks login for roles studentin and orga
+   * @param model injected, Model for Thymeleaf interaction
+   * @param token injected, present, if user is logged in
+   * @return redirect to specific html template or error page
+   */
   @GetMapping("")
   @Secured({"ROLE_studentin", "ROLE_orga"})
   public String mainpage(Model model, KeycloakAuthenticationToken token) {
@@ -26,24 +32,48 @@ public class BewerbungController {
     }
   }
 
+  /**
+   * Students dashboard. Login as "studentin" required.
+   * @param model injected, Model for Thymeleaf interaction
+   * @param token injected, present, if user is logged in
+   * @return studentMainpage html template
+   */
   @GetMapping("/student")
   @Secured("ROLE_studentin")
   public String getStudentMainpage(Model model, KeycloakAuthenticationToken token) {
     return "student/studentMainpage";
   }
 
+  /**
+   * Orga dashboard. Login as "orga" required.
+   * @param model injected, Model for Thymeleaf interaction
+   * @param token injected, present, if user is logged in
+   * @return orgaMainpage html template
+   */
   @GetMapping("/orga")
   @Secured("ROLE_orga")
   public String getOrgaMainpage(Model model, KeycloakAuthenticationToken token) {
     return "orga/orgaMainpage";
   }
 
+  /**
+   * Boss dashboard. Login as "boss" required.
+   * @param model injected, Model for Thymeleaf interaction
+   * @param token injected, present, if user is logged in
+   * @return bossMainpage html template
+   */
   @GetMapping("/boss")
   //@Secured("ROLE_Boss")
   public String getBossMainpage(Model model, KeycloakAuthenticationToken token) {
     return "boss/bossMainpage";
   }
 
+  /**
+   * verteiler dashboard. Login as "verteiler" required.
+   * @param m injected, Model for Thymeleaf interaction
+   * @param token injected, present, if user is logged in
+   * @return verteilerMainpage html template
+   */
   @GetMapping("/verteiler")
   //@Secured("ROLE_verteiler")
   public String getVerteilerMainpage(Model m, KeycloakAuthenticationToken token) {
