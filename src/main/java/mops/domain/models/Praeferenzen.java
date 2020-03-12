@@ -1,11 +1,13 @@
 
 package mops.domain.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 public class Praeferenzen {
     private int maxWunschStunden;
     private int minWunschStunden;
