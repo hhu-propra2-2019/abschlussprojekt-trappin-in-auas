@@ -16,7 +16,9 @@ public class PraeferenzenDTO {
     private long id;
     private int maxWunschStunden;
     private int minWunschStunden;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "praeferenzen")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "praeferenzen", joinColumns = @JoinColumn(name = "praeferenzen_id"),
+        inverseJoinColumns = @JoinColumn(name = "modulAuswahl_id"))
     private List<ModulAuswahlDTO> modulAuswahl;
     private String kommentar;
     @Enumerated(EnumType.STRING)
