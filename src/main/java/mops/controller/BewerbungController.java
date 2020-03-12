@@ -43,4 +43,10 @@ public class BewerbungController {
   public String getBossMainpage(Model model, KeycloakAuthenticationToken token) {
     return "boss/bossMainpage";
   }
+
+  @GetMapping("/verteiler")
+  //@Secured("ROLE_verteiler")
+  public String getVerteilerMainpage(Model m, KeycloakAuthenticationToken token) {
+    return "verteiler/verteilerMainpage";
+  }
 }
