@@ -1,11 +1,11 @@
 package mops.domain.database.dto;
 
-import lombok.Data;
-
 import javax.persistence.Embeddable;
+import lombok.Data;
 
 @Data
 @Embeddable
 public class Modul {
-    private String modul;
+
+  private String modul;
 }
