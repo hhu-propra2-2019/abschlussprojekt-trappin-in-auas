@@ -8,5 +8,5 @@ public class BestandeneModule {
     private Modul modul;
     private double note;
 
-    private Karriere karriere;
+
 }
