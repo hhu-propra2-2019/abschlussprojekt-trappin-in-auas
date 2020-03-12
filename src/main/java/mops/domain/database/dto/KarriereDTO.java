@@ -17,7 +17,10 @@ public class KarriereDTO {
     private ImmartikulationsStatusDTO immartikulationsStatus;
     @Embedded
     private StudiengangAbschlussDTO fachAbschluss;
+
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "karriere")
+    @JoinTable(name = "karriere", joinColumns = @JoinColumn(name = "karriere_id"),
+        inverseJoinColumns = @JoinColumn(name = "bestandeneModule_id"))
     private List<BestandeneModuleDTO> bestandendeModule;
 
 }

@@ -15,8 +15,5 @@ public class BestandeneModuleDTO {
     private ModulDTO modul;
     private double note;
 
-    @ManyToOne
-    @JoinColumn(name = "karriere_id")
-    private KarriereDTO karriere;
 
 }
