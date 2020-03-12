@@ -3,19 +3,20 @@ package mops.authentication.account;
 import java.util.Set;
 import mops.authentication.account.keycloak.Account;
 import org.keycloak.KeycloakPrincipal;
-import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 
 public class AccountManager {
-  Account parseFrom(KeycloakAuthenticationToken token) {
-    String name = token.getName();
 
-    KeycloakPrincipal principal = (KeycloakPrincipal) token.getPrincipal();
+  /**
+   * Uebersetzt ein Keycloak Principal Objekt in einen Account
+   * @param principal Objekt aus Keycloak Token
+   * @param roles Rollen aus Keycloak Token
+   * @return Account mit Daten und Rollen
+   */
+  public Account parseFrom(KeycloakPrincipal principal, Set<String> roles) {
+    String name = principal.getKeycloakSecurityContext().getIdToken().getFamilyName();
+    name += ", " + principal.getKeycloakSecurityContext().getIdToken().getName();
     String email = principal.getKeycloakSecurityContext().getIdToken().getEmail();
-
     String image = principal.getKeycloakSecurityContext().getIdToken().getPicture();
-
-    Set<String> roles = token.getAccount().getRoles();
-
     return new Account(name, email, image, roles);
   }
 }
