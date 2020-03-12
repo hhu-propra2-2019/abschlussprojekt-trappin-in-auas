@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="Dropdown.css" rel="stylesheet">
+    <link href="Radio.css" rel="stylesheet">
+    <link href="Textfeld.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
@@ -10,8 +12,9 @@
 <h2>Bewerbungsformular</h2>
 <p>Bestandenes Fach ausw&auml;hlen</p>
 
-<div class="select" style="width: 300px">
+<div class="box" style="width: 500px">
     <select name="Fach" id="Noten">
+        <option selected="selected" disabled="disabled">Bitte ausw&auml;hlen...</option>
         <option value="0">Professionelles Softwarepraktikum</option>
         <option value="1">Aldat</option>
 
@@ -21,27 +24,60 @@
 <br>
 </body>
 <body>
-<div class="form-group" style="width: 300px">
+<div class="Textfeld" style="width: 500px">
     <label for="Name und Vorname">Vorname und Nachname
-        <input  type="text" class="form-control" id="Name und Vorname" placeholder="Pflichtfeld">
+        <input  type="text" class="Textfeld" id="Name und Vorname" placeholder="Pflichtfeld">
     </label>
 </div>
 
-<div style="width: 100px">
-<label>
-    <select name="Note" multiple size="7">
-        <optgroup label="Note">
+<div class="box" style="width: 500px">
+    <select name="Note">
+            <option selected="selected" disabled="disabled">Bitte ausw&auml;hlen...</option>
             <option value="Sehr gut">1,0</option>
             <option value="Sehr gut Minus">1,3</option>
             <option value="gut plus">1,7</option>
-        </optgroup>
     </select>
-</label>
+
+</div>
+
+<br>
+
+
+    <h1>Custom Radio Buttons</h1>
+    <br>
+    <div>
+    <label class="radiobutton">One
+        <input type="radio" checked="checked" name="radio">
+        <span class="checkmark"></span>
+    </label>
+
+    <label class="radiobutton">Two
+        <input type="radio" name="radio">
+        <span class="checkmark"></span>
+    </label>
+
+    <label class="radiobutton">Three
+        <input type="radio" name="radio">
+        <span class="checkmark"></span>
+    </label>
+
+    <label class="radiobutton">Four
+        <input type="radio" name="radio">
+        <span class="checkmark"></span>
+    </label>
 </div>
 
 
+<textarea class="form-control" rows="3" style="width: 500px"></textarea>
 
+<div class="input-group">
+    <div class="input-group-prepend">
+        <div class="input-group-text">
+            <input type="radio" aria-label="Radio button for following text input">
+        </div>
+    </div>
+    <input type="text" class="form-control" aria-label="Text input with radio button">
+</div>
 
-
-<body>
-
+</body>
+</html>
