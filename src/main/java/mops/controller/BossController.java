@@ -18,6 +18,12 @@ public class BossController {
   @Autowired
   private ModulService modulService;
 
+  /**
+   * Modul list for boss. Login as "Boss" required.
+   * @param m injected, Model for Thymeleaf interaction
+   * @param token injected, present, if user is logged in
+   * @return moduleEinsehen html template
+   */
   //@Secured("ROLE_boss")
   @GetMapping("/module")
   public String getModule(Model m, KeycloakAuthenticationToken token) {
@@ -25,6 +31,13 @@ public class BossController {
     return "boss/moduleEinsehen";
   }
 
+  /**
+   * add Modul for boss. Login as "Boss" required.
+   * @param m injected, Model for Thymeleaf interaction
+   * @param token injected, present, if user is logged in
+   * @param modulName Name of Modul to add
+   * @return redirect to Modul list
+   */
   //@Secured("ROLE_boss")
   @PostMapping("/module")
   public String addModule(Model m, KeycloakAuthenticationToken token,
