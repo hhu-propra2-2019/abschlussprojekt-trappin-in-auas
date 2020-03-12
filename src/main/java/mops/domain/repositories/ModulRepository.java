@@ -5,7 +5,9 @@ import mops.domain.models.lehrstuhl.Modul;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ModulRepository extends CrudRepository<Modul, Long> {
+
   Modul findModulById(Long id);
+
   List<Modul> findAll();
 
   @Override
