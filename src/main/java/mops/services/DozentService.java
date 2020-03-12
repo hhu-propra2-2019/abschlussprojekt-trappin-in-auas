@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DozentService implements IDozentService {
 
-  private DozentRepository dozentRepository;
+  private transient DozentRepository dozentRepository;
 
   public DozentService(DozentRepository dozentRepository) {
     this.dozentRepository = dozentRepository;

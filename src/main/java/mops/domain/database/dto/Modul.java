@@ -7,5 +7,5 @@ import lombok.Data;
 @Embeddable
 public class Modul {
 
-  private String modul;
+  private String modulName;
 }

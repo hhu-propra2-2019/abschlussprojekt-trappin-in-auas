@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ExampleController {
 
-  BewerberRepository bewerberRepository;
+  transient BewerberRepository bewerberRepository;
 
   public ExampleController(BewerberRepository bewerberRepository) {
     this.bewerberRepository = bewerberRepository;

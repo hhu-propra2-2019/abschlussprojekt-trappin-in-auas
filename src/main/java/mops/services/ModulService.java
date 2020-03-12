@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ModulService implements IModulService {
 
-  private ModulRepository modulRepository;
+  private transient ModulRepository modulRepository;
 
   public ModulService(ModulRepository modulRepository) {
     this.modulRepository = modulRepository;

@@ -15,13 +15,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @TestInstance(Lifecycle.PER_CLASS)
 class AuthenticationManagerTest {
 
-  AuthenticationManager authenticationManager;
+  transient AuthenticationManager authenticationManager;
 
-  Account orga;
-  Account student;
-  Account boss;
-  Account nobody;
-  Account admin;
+  transient Account orga;
+  transient Account student;
+  transient Account boss;
+  transient Account nobody;
+  transient Account admin;
 
   @BeforeAll
   void setUp() {

@@ -17,9 +17,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class AccountManagerTest {
 
-  KeycloakPrincipal principal;
-  KeycloakSecurityContext securityContext;
-  IDToken idToken;
+  transient KeycloakPrincipal principal;
+  transient KeycloakSecurityContext securityContext;
+  transient IDToken idToken;
 
   @Test
   void testAccountCreation() {

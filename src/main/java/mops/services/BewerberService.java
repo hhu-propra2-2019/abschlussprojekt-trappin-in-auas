@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BewerberService implements IBewerberService {
 
-  private BewerberRepository bewerberRepository;
+  private transient BewerberRepository bewerberRepository;
 
   public BewerberService(BewerberRepository bewerberRepository) {
     this.bewerberRepository = bewerberRepository;
