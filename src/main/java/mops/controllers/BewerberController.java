@@ -18,7 +18,7 @@ public class BewerberController {
 
     @GetMapping("/")
     public String index(Model model){
-        model.addAttribute("bewerber", new Bewerber());
+        model.addAttribute("bewerber", new BewerberDTO());
         return "bewerbungsformular";
     }
 

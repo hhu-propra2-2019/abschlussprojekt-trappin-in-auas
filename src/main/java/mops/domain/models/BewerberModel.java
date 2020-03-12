@@ -4,11 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class BewerberModel{
@@ -19,8 +15,7 @@ public class BewerberModel{
         this.vorname = vorname;
         this.geburtsdatum = geburtsdatum;
     }
-
-    @Id
+    
     private String kennung;
     private String nachname;
     private String vorname;
