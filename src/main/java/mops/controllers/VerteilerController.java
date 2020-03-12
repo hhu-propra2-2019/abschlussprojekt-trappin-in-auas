@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class VerteilerController {
 
   @Autowired
-  private BewerberService bewerberService;
+  private transient BewerberService bewerberService;
 
   @Secured({"ROLE_orga"})
   @GetMapping("/uebersicht")

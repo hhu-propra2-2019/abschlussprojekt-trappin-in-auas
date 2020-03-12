@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BewerberRestController {
 
-  private BewerberRepository bewerberRepository;
+  private transient BewerberRepository bewerberRepository;
 
   public BewerberRestController(BewerberRepository bewerberRepository) {
     this.bewerberRepository = bewerberRepository;

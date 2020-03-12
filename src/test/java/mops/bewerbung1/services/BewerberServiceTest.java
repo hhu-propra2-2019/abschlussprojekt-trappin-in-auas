@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class BewerberServiceTest {
 
-    private BewerberService bewerberService;
+    transient private BewerberService bewerberService;
     private BewerberRepository bewerberRepository;
 
     @BeforeEach
@@ -26,10 +26,10 @@ public class BewerberServiceTest {
 
     }
 
-    private String[] vornamen = {"Luca", "Kristine", "Rosemarie", "Melanie", "Maximilian"};
-    private String[] nachnamen = {"Tronke", "Ostermann", "Teubner", "Thoma", "Förstner"};
-    private String[] geburtstage = {"27.03.1998", "14.07.2000", "03.01.1999", "22.08.1999", "01.05.1997"};
-    private String[] verteilungen = {"Jens", "Golov", "Tratusch"};
+    private transient String[] vornamen = {"Luca", "Kristine", "Rosemarie", "Melanie", "Maximilian"};
+    private transient String[] nachnamen = {"Tronke", "Ostermann", "Teubner", "Thoma", "Förstner"};
+    private transient String[] geburtstage = {"27.03.1998", "14.07.2000", "03.01.1999", "22.08.1999", "01.05.1997"};
+    private transient String[] verteilungen = {"Jens", "Golov", "Tratusch"};
 
     private Bewerber generateVerteilterBewerber(){
         String vname = fromRandomPosition(vornamen);

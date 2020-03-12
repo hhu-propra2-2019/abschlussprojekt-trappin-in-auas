@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DozentController {
 
   @Autowired
-  private BewerberService bewerberService;
+  private transient BewerberService bewerberService;
 
-  @Secured({"ROLE_orga"})
+  private static final String ROLE_orga = "ROLE_orga";
+
+  @Secured({ROLE_orga})
   @GetMapping("/uebersicht")
   public String verteilen(Model model, KeycloakAuthenticationToken token) {
     List<mops.domain.database.dto.Bewerber> alleBewerber = bewerberService.findAlleBewerber();
@@ -37,7 +39,7 @@ public class DozentController {
     return "dozent/uebersicht";
   }
 
-  @Secured({"ROLE_orga"})
+  @Secured({ROLE_orga})
   @GetMapping("/uebersicht/offene")
   public String offeneUebersicht(Model model, KeycloakAuthenticationToken token) {
     List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
@@ -47,7 +49,7 @@ public class DozentController {
     return "";
   }
 
-  @Secured({"ROLE_orga"})
+  @Secured({ROLE_orga})
   @GetMapping("/uebersicht/zugewiesene")
   public String zugewieseneUebersicht(Model model, KeycloakAuthenticationToken token) {
     List<Bewerber> zugewiesene = bewerberService.findVerteilt();
@@ -57,7 +59,7 @@ public class DozentController {
     return "";
   }
 
-  @Secured({"ROLE_orga"})
+  @Secured({ROLE_orga})
   @GetMapping("/uebersicht/detail/{kennung}")
   public String detailAnsicht(Model model, KeycloakAuthenticationToken token,
       @PathVariable String kennung) {

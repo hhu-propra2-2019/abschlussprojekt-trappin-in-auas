@@ -3,7 +3,7 @@ package mops.authentication.account;
 import mops.authentication.account.keycloak.Account;
 
 public class AuthenticationManager {
-  private Account account;
+  transient private Account account;
 
   private static final String ROLE_ORGA = "ROLE_orga";
   private static final String ROLE_STUDENT = "ROLE_studentin";

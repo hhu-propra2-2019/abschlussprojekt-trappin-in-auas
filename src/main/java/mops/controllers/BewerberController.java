@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class BewerberController {
 
-  private BewerberRepository bewerberRepository;
+  private transient BewerberRepository bewerberRepository;
 
   public BewerberController(BewerberRepository bewerberRepository) {
     this.bewerberRepository = bewerberRepository;

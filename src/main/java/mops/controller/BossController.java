@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BossController {
 
   @Autowired
-  private ModulService modulService;
+  private transient ModulService modulService;
 
   /**
    * Modul list for boss. Login as "Boss" required.
