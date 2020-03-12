@@ -245,3 +245,12 @@ Zuordnung von Bausteinen zu Infrastruktur
 ## Frontend
 ### MarvinW1:
 - _05.03.20_: Ich bin auf das erste große Problem gestoßen. Bei der Formular-Frage "Sind Sie derzeit an der HHU immatrikuliert?" gab es als Antwort-Möglichkeit "Ja, anderes Fach". Dort musste man eine Checkbox erstellen, die beim Anklicken ein Textfeld öffnet, damit dort der spezifische Studiengang hineingeschrieben werden konnte. HTML bietet zum einen die Methode mit dem type "radio", wo man nur einen Haken unter mehreren Optionen setzen kann, was mich nicht weiter brachte und dann den type "checkbox", das so ziemlich das selbe (kontextbezogen) wie radio ist, nur dass man mehrere Felder ankreuzen kann. Durch viel Googlen und viel Nachfragen kamen wir trotzdem nicht auf eine einfache Lösung, um den gewünschten Effekt zu erzielen. Nach vielem Nachdenken und Alternativen-Suchen, mussten wir den gewünschten Effekt letztendlich mittels Java Script programmieren, was aufgrund mangelnder Erfahrung sich als große Herausforderung herausstellte.
+
+### Tepri:
+- Ich habe mich erstmals erkundigt, wie schöne Styles aussehen könnten und die Mops.style Seite begutachtet. Daran orientiert habe ich versucht schöne Dropdown-Menüs mit css selbst zu erstellen. Es viel mir zuerst nicht leicht eine css ordentlich zu schreiben, so dass das Dropdown-Menü einen gleichen Effekt erzielt beim Hovern wie bei der Mops.Style Seite. Zuerst musste ich mir eine Pseudo HTML-Struktur aufbauen mit Beispiel-Feldern für Eingabefeldern, Textfeldern und Radios. An der erstellten Pseudo-HTML-Datei habe ich dann meine Stylesheets angewandt und getestet. Durch einige Tutorials im Internet habe ich letzten endes ein einheitliches Design für Radios, Eingabefeldern und Textfelder erstellt, dies hat mehr Zeit eingenommen als zuvor erwartet war.
+
+
+
+
+
+
