@@ -1,6 +1,6 @@
 package mops.controllers.rest;
 
-import mops.domain.database.dto.Bewerber;
+import mops.domain.database.dto.BewerberDTO;
 import mops.domain.repositories.BewerberRepository;
 import mops.domain.services.IBewerberService;
 import mops.services.BewerberService;
@@ -37,7 +37,7 @@ public class BewerberRestController {
     @PostMapping(path = "/postbewerbungrest", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code = HttpStatus.OK)
     @Secured({"ROLE_orga"}) //andere clientrollen kommen noch
-    public Bewerber index(Model model, @RequestBody Bewerber b, KeycloakAuthenticationToken token){
+    public BewerberDTO index(Model model, @RequestBody BewerberDTO b, KeycloakAuthenticationToken token){
         //bewerberRepository.save(b);
         System.out.println("added " + b.getKennung() + " to database");
         return b;
@@ -45,7 +45,7 @@ public class BewerberRestController {
 
     @GetMapping(path = "/allebewerbungen", produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured({"ROLE_orga"})
-    public List<Bewerber> allebewerbungen(){
+    public List<BewerberDTO> allebewerbungen(){
         System.out.println("getting all applications");
         return bewerberService.findAlleBewerber();
     }

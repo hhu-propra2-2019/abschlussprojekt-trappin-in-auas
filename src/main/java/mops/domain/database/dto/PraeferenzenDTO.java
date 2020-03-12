@@ -18,6 +18,7 @@ public class PraeferenzenDTO {
     private int minWunschStunden;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "praeferenzen")
     private List<ModulAuswahlDTO> modulAuswahl;
+    
     private String kommentar;
     @Enumerated(EnumType.STRING)
     private EinstiegTyp einstiegTyp;

@@ -1,7 +1,7 @@
 package mops.controllers;
 import java.util.List;
 
-import mops.domain.database.dto.Bewerber;
+import mops.domain.database.dto.BewerberDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -18,7 +18,7 @@ public class ExampleController{
 
     @GetMapping("/example")
     public String alle(){
-	List<Bewerber> alleB = bewerberRepository.findAll();
+	List<BewerberDTO> alleB = bewerberRepository.findAll();
 	System.out.println("printing bewerber");
 	System.out.println(alleB);
         return "redirect:/";

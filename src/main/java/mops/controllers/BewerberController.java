@@ -40,7 +40,7 @@ public class BewerberController {
     }
 
     @PostMapping("/postbewerbung")
-    public String postBewerber(Model m, Bewerber b){
+    public String postBewerber(Model m, BewerberDTO b){
         bewerberRepository.save(b);
         return "redirect:/example";
     }
