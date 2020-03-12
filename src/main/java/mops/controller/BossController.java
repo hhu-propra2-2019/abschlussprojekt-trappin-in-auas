@@ -27,22 +27,21 @@ public class BossController {
   //@Secured("ROLE_boss")
   @GetMapping("/module")
   public String getModule(Model m, KeycloakAuthenticationToken token) {
-    m.addAttribute("modules", modulService.findAllModule());
-    return "boss/moduleEinsehen";
+    m.addAttribute("modul", new Modul());
+    return "boss/modulsetup";
   }
 
   /**
    * add Modul for boss. Login as "Boss" required.
    * @param m injected, Model for Thymeleaf interaction
    * @param token injected, present, if user is logged in
-   * @param modulName Name of Modul to add
+   * @param modul Modul, added to DB
    * @return redirect to Modul list
    */
   //@Secured("ROLE_boss")
-  @PostMapping("/module")
-  public String addModule(Model m, KeycloakAuthenticationToken token,
-      @RequestParam String modulName) {
-    modulService.addModul(new Modul(modulName));
+  @PostMapping("/postmodule")
+  public String addModule(Model m, KeycloakAuthenticationToken token, Modul modul ) {
+    modulService.addModul(modul);
     return "redirect:/bewerbung1/boss/module";
   }
 

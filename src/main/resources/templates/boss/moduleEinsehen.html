@@ -13,12 +13,14 @@
   <tr>
     <th>Id</th>
     <th>Title</th>
+    <th>Mail</th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="modul : ${modules}">
     <td><span th:text="${modul.id}">Id</span></td>
     <td><span th:text="${modul.name}">title</span></td>
+    <td><span th:text="${modul.dozentEmail}">mail</span></td>
 
   </tr>
   </tbody>
