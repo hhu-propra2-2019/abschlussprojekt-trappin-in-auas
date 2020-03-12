@@ -15,7 +15,4 @@ public class ModulAuswahlDTO {
     @Embedded
     private ModulDTO modul;
     private int prioritaet;
-    @ManyToOne
-    @JoinColumn(name = "praeferenzen_id")
-    private PraeferenzenDTO praeferenzen;
 }

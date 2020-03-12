@@ -24,9 +24,9 @@ public class BewerberController {
 
     @GetMapping("/bewirb")
     public String bewirb(Model model){
-        model.addAttribute("personal", new Personalien());
+       /* model.addAttribute("personal", new Personalien());
         model.addAttribute("modulauswahl", new ModulAuswahl());
-        model.addAttribute("preference", new Praeferenzen());
+        model.addAttribute("preference", new Praeferenzen()); */
         return "student/main_min";
     }
 

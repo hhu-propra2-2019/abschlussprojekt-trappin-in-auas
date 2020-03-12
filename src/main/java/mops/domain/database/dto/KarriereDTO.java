@@ -13,14 +13,16 @@ public class KarriereDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String arbeitserfahrung;
-    
+
     @Embedded
     private ImmartikulationsStatusDTO immartikulationsStatus;
 
     @Embedded
     private StudiengangAbschlussDTO fachAbschluss;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "karriere")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(name = "karriere", joinColumns = @JoinColumn(name = "karriere_id"),
+        inverseJoinColumns = @JoinColumn(name = "bestandeneModule_id"))
     private List<BestandeneModuleDTO> bestandendeModule;
 
 }
