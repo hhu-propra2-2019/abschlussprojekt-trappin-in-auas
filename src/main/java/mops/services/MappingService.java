@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
-import mops.domain.repositories.*;
 
 import org.springframework.stereotype.Service;
 
@@ -14,17 +13,19 @@ import mops.domain.services.IMappingService;
 public class MappingService implements IMappingService {
 
     public MappingService() {
-        
+
     }
 
     @Override
     public BestandeneModule load(BestandeneModuleDTO bestandeneModuleDTO) {
-        return new BestandeneModule(loadModul(bestandeneModuleDTO.getModul()), bestandeneModuleDTO.getNote());
+        return (bestandeneModuleDTO == null) ? null
+                : new BestandeneModule(loadModul(bestandeneModuleDTO.getModul()), bestandeneModuleDTO.getNote());
     }
 
     @Override
     public Karriere load(KarriereDTO karriereDTO) {
-        List<BestandeneModule> bestandeneModule = karriereDTO.getBestandendeModule().stream().map(this::load).collect(Collectors.toList());
+        List<BestandeneModule> bestandeneModule = karriereDTO.getBestandendeModule().stream().map(this::load)
+                .collect(Collectors.toList());
         return new Karriere(karriereDTO.getArbeitserfahrung(), load(karriereDTO.getImmartikulationsStatus()),
                 load(karriereDTO.getFachAbschluss()), bestandeneModule);
     }

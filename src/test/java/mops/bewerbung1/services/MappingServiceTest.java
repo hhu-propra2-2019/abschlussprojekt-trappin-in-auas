@@ -7,7 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import java.time.Instant;
 import java.util.Date;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -19,11 +20,11 @@ import mops.services.MappingService;
 @SpringBootTest
 public class MappingServiceTest {
     
-    private IMappingService mappingService;
+    private  IMappingService mappingService;
 
-    @Before
-    void setUp() {
-        this.mappingService = new MappingService();
+    @BeforeEach
+     void setUp() {
+        mappingService = new MappingService();
         
     }
 
