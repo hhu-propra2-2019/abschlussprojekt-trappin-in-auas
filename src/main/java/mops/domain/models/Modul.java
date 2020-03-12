@@ -1,6 +1,5 @@
 package mops.domain.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data

@@ -3,7 +3,7 @@ package mops.bewerbung1.services;
 
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doCallRealMethod;
