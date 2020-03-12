@@ -4,8 +4,10 @@ import lombok.Data;
 import mops.domain.models.EinstiegTyp;
 import mops.domain.models.TutorenSchulungTeilnahme;
 
-import javax.persistence.*;
 import java.util.List;
+import javax.persistence.*;
+import lombok.Data;
+
 
 @Data
 @Table(name = "praeferenzen")

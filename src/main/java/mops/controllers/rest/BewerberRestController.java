@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BewerberRestController {
     //TODO: Crud operations for applications
-    private BewerberRepository bewerberRepository;
+    private transient BewerberRepository bewerberRepository;
 
-    private IBewerberService bewerberService;
+    private transient IBewerberService bewerberService;
 
     public BewerberRestController(BewerberRepository bewerberRepository, BewerberService bewerberService){
         this.bewerberRepository = bewerberRepository;

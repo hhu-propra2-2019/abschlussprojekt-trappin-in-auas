@@ -2,7 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.2.5.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
-	//id 'pmd'
+	id 'pmd'
 	id 'jacoco'
 	id "io.freefair.lombok" version "5.0.0-rc4"
 }
@@ -61,10 +61,19 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 
 	compile 'io.micrometer:micrometer-core:latest.integration'
+
+	testImplementation 'com.tngtech.keycloakmock:mock:0.2.0'
+	implementation 'org.mockito:mockito-junit-jupiter:3.3.0'
+
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
 }
 
 test {
 	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
 }
 
 task fatJar(type: Jar) {

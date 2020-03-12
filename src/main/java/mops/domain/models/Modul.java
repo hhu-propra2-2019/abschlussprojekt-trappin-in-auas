@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 
 public class Modul {
-    private String modul;
+    private String modulName;
 
-    public Modul(String modul) {
-        this.modul = modul;
+    public Modul(String modulName) {
+        this.modulName = modulName;
     }
 }

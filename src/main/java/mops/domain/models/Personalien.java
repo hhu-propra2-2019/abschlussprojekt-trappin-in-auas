@@ -15,7 +15,9 @@ public class Personalien {
     private String unikennung;
     private String name;
     private String vorname;
+    
     private Date geburtsdatum;
+
     private int alter;
     private String geburtsort;
     private String nationalitaet;

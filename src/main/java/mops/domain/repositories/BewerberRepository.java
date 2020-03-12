@@ -2,7 +2,6 @@ package mops.domain.repositories;
 
 import java.util.List;
 
-
 import mops.domain.database.dto.BewerberDTO;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

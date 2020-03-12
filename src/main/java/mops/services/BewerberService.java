@@ -1,4 +1,3 @@
-
 package mops.services;
 
 import java.util.List;
@@ -11,10 +10,11 @@ import org.springframework.stereotype.Service;
 import mops.domain.repositories.BewerberRepository;
 import mops.domain.services.IBewerberService;
 
+
 @Service
 public class BewerberService implements IBewerberService {
 
-    private BewerberRepository bewerberRepository;
+    private transient BewerberRepository bewerberRepository;
 
     public BewerberService(BewerberRepository bewerberRepository) {
         this.bewerberRepository = bewerberRepository;

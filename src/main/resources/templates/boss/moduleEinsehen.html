@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Module</title>
+</head>
+<body>
+
+<h1>Module:</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="modul : ${modules}">
+    <td><span th:text="${modul.id}">Id</span></td>
+    <td><span th:text="${modul.name}">title</span></td>
+
+  </tr>
+  </tbody>
+
+</table>
+
+
+<form method="post" action="/bewerbung1/orga/module">
+  <label for="modulName">Modulname:</label><br>
+  <input type="text" id="modulName" name="modulName">
+
+
+  <input type="submit">
+
+</form>
+
+</body>
+</html>

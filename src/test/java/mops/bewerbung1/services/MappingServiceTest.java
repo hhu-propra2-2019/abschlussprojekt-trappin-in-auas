@@ -4,10 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
+import java.util.Locale;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +21,7 @@ import mops.services.MappingService;
 @SpringBootTest
 public class MappingServiceTest {
     
-    private  IMappingService mappingService;
+    private transient IMappingService mappingService;
 
     @BeforeEach
      void setUp() {
@@ -47,7 +48,7 @@ public class MappingServiceTest {
 
         //are those checks below actually nessecary? not sure
         assertEquals(bestandeneModule.getNote(), 1.3);
-        assertEquals(modulDTO.getModul(), modul.getModul());
+        assertEquals(modulDTO.getModul(), modul.getModulName());
     }
 
     /**
@@ -73,7 +74,11 @@ public class MappingServiceTest {
         PersonalienDTO personalienDTO = new PersonalienDTO();
         personalienDTO.setAdresse(adresseDTO);
         personalienDTO.setAlter(20);
-        personalienDTO.setGeburtsdatum(Date.from(Instant.parse("22.02.1999")));
+        try{
+            personalienDTO.setGeburtsdatum(Date.from(new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).parse("15.07.1999").toInstant()));
+        }catch(Exception e){
+            personalienDTO.setGeburtsdatum(null);
+        }
         personalienDTO.setGeburtsort("Swetlana");
         personalienDTO.setName("Wick");
         personalienDTO.setNationalitaet("Terminator");

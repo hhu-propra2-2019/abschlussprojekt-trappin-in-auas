@@ -10,11 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BewerberController {
-    private BewerberRepository bewerberRepository;
 
-    public BewerberController(BewerberRepository bewerberRepository){
-        this.bewerberRepository = bewerberRepository;
-    }
+  private transient BewerberRepository bewerberRepository;
 
     @GetMapping("/")
     public String index(Model model){
