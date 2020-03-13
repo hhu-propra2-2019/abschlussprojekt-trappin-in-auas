@@ -25,7 +25,7 @@ public class BossController {
    * @return moduleEinsehen html template
    */
   //@Secured("ROLE_boss")
-  @GetMapping("/module")
+  @GetMapping("/modules")
   public String getModule(Model m, KeycloakAuthenticationToken token) {
     m.addAttribute("modules", modulService.findAllModule());
     return "boss/moduleEinsehen";

@@ -45,6 +45,9 @@ public class MappingService implements IMappingService {
 
     @Override
     public Personalien load(PersonalienDTO pDTO) {
+        if(pDTO == null){
+            return null;
+        }
         Adresse adresse = loadAdresse(pDTO);
         return new Personalien(adresse, pDTO.getUnikennung(), pDTO.getName(), pDTO.getVorname(), pDTO.getGeburtsdatum(),
                 pDTO.getAlter(), pDTO.getGeburtsort(), pDTO.getNationalitaet());
