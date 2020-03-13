@@ -13,8 +13,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <body>
 
-    <div class="container">
-        <br>
+    <div class="container-fluid" style="margin-top:1rem">
         <h3>Übersicht</h3>
         <div class="card">
             <table class="table">
@@ -32,92 +31,35 @@
                 </tbody>
             </table>
         </div>
-        <br>
-        <h3>Preview</h3>
-        <div class="card">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Vorname</th>
-                    <th scope="col">Semester</th>
-                    <th scope="col">Fach</th>
-                    <th scope="col">Dozent Priorität</th>
-                    <th scope="col">Fach zuordnen</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mueller</td>
-                    <td>Thomas</td>
-                    <td>4</td>
-                    <td>Informatik</td>
-                    <td>Prof. Strauss</td>
-                    <td>Abgelehnt</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Miller</td>
-                    <td>Joseph</td>
-                    <td>4</td>
-                    <td>Informatik</td>
-                    <td>Prof. Strauss</td>
-                    <td>Akzeptiert</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Peters</td>
-                    <td>Sophie</td>
-                    <td>3</td>
-                    <td>Informatik</td>
-                    <td>Prof. Strauss</td>
-                    <td>Abgelehnt</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Peterson</td>
-                    <td>John</td>
-                    <td>4</td>
-                    <td>Informatik</td>
-                    <td>Prof. Miller</td>
-                    <td>Abgelehnt</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>Johnson</td>
-                    <td>Jack</td>
-                    <td>5</td>
-                    <td>Informatik</td>
-                    <td>Prof. Wagner</td>
-                    <td>Akzeptiert</td>
-                </tr>
-                </tbody>
-            </table>
+
+        <div class="card" style="width: 18rem; margin-top:1rem">
+            <div class="card-body">
+                <h5 class="card-title">Student</h5>
+                <p class="card-text">- ProPra Prio = 3</p>
+                <p class="card-text">- Aldat Prio = 1</p>
+                <p class="card-text">- Datenbank Prio = 2</p>
+                <p class="card-text">- ProPra2 Prio = 1</p>
+                <p>
+                    <button type="button" class="btn btn-outline-dark">Bewerbungsansicht</button>
+                </p>
+                Fach zuteilen:
+                <p>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>Softwareentwicklung im Team</option>
+                        <option>Datenbanksysteme</option>
+                        <option>Algorithmen und Datenstrukturen</option>
+                        <option>Programierung</option>
+                    </select>
+                </p>
+                <p>
+                <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-outline-dark">Modul hinzufügen</button>
+                    <button type="button" class="btn btn-outline-dark">Akzeptieren</button>
+                </div>
+                </p>
+            </div>
         </div>
     </div>
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Student</h5>
-            <p class="card-text">- ProPra Prio = 3</p>
-            <p class="card-text">- Aldat Prio = 1</p>
-            <p class="card-text">- Datenbank Prio = 2</p>
-            <p class="card-text">- ProPra2 Prio = 1</p>
-            <p>
-            <a href="#" class="btn btn-primary">Bewerbungsansicht</a>
-            </p>
-            Fach zuteilen:
-            <p>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>Softwareentwicklung</option>
-                <option>Datenbanksysteme</option>
-                <option>Aldat</option>
-                <option>Progra</option>
-            </select>
-        </p>
-          <a href="#" class="btn btn">Akzeptieren</a>
-        </div>
-      </div>
+
 </body>
 </html>
