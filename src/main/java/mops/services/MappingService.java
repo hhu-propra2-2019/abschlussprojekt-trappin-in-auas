@@ -75,7 +75,11 @@ public class MappingService implements IMappingService {
     }
 
     private Modul loadModul(ModulDTO modulDTO) {
-        return new Modul(modulDTO.getModul());
+        return new Modul(modulDTO.getModul(), new Dozent(modulDTO.getDozentMail(), modulDTO.getDozentName()));
+    }
+
+    private ModulDTO loadModulDTO(Modul modul) {
+        return new ModulDTO(modul.getModulName(), modul.getDozent().getDozentMail(), modul.getDozent().getDozentName());
     }
 
 }
