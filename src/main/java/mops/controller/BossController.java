@@ -42,7 +42,7 @@ public class BossController {
   @PostMapping("/postmodule")
   public String addModule(Model m, KeycloakAuthenticationToken token, Modul modul ) {
     modulService.addModul(modul);
-    return "redirect:/bewerbung1/boss/module";
+    return "redirect:/bewerbung1/boss/modules";
   }
 
 }
