@@ -1,6 +1,5 @@
 package mops.controller;
 
-import mops.domain.models.lehrstuhl.Modul;
 import mops.services.ModulService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/bewerbung1/boss")
 public class BossController {
 
-  @Autowired
-  private transient ModulService modulService;
+  //@Autowired
+  //private transient ModulService modulService;
 
   /**
    * Modul list for boss. Login as "Boss" required.
@@ -27,8 +26,8 @@ public class BossController {
   //@Secured("ROLE_boss")
   @GetMapping("/modules")
   public String getModule(Model m, KeycloakAuthenticationToken token) {
-    m.addAttribute("modul", new Modul());
-    return "boss/modulsetup";
+    //m.addAttribute("modules", modulService.findAllModule());
+    return "boss/moduleEinsehen";
   }
 
   /**
@@ -39,10 +38,11 @@ public class BossController {
    * @return redirect to Modul list
    */
   //@Secured("ROLE_boss")
-  @PostMapping("/postmodule")
-  public String addModule(Model m, KeycloakAuthenticationToken token, Modul modul ) {
-    modulService.addModul(modul);
-    return "redirect:/bewerbung1/boss/modules";
+  @PostMapping("/module")
+  public String addModule(Model m, KeycloakAuthenticationToken token,
+      @RequestParam String modulName) {
+    //modulService.addModul(new Modul(modulName));
+    return "redirect:/bewerbung1/boss/module";
   }
 
 }

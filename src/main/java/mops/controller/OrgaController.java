@@ -1,6 +1,5 @@
 package mops.controller;
 
-import mops.domain.models.lehrstuhl.Modul;
 import mops.services.ModulService;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;

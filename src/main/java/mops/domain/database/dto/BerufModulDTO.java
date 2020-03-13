@@ -7,6 +7,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
+
 import lombok.Data;
 
 @Data
@@ -15,6 +17,6 @@ public class BerufModulDTO {
   @Enumerated(EnumType.STRING)
   private Beruf beruf;
 
-  @Embedded
+  @OneToOne
   private ModulDTO modul;
 }
