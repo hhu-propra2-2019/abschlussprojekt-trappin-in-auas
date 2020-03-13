@@ -1,6 +1,5 @@
 package mops.controller;
 
-import mops.domain.models.lehrstuhl.Modul;
 import mops.services.ModulService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ public class BossController {
    * add Modul for boss. Login as "Boss" required.
    * @param m injected, Model for Thymeleaf interaction
    * @param token injected, present, if user is logged in
-   * @param modulName Name of Modul to add
+   * @param modul Modul, added to DB
    * @return redirect to Modul list
    */
   //@Secured("ROLE_boss")
