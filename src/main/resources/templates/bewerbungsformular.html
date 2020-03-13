@@ -5,19 +5,19 @@
 </head>
 
 <body>
-    <form method="POST" th:action="@{/postbewerbung}" th:object="${bewerber}">
+    <form method="POST" th:action="@{/postbewerbung}">
         <div class="form-group">
             <label>Vorname
-                <input type="text" class="form-control" th:field="*{vorname}">
+                <input type="text" class="form-control">
             </label>
             <label>Nachname
-                <input type="text" class="form-control" th:field="*{nachname}">
+                <input type="text" class="form-control" >
             </label>
             <label>Uni Kennung
-                <input type="text" class="form-control" th:field="*{kennung}">
+                <input type="text" class="form-control" >
             </label>
             <label>Geburtsdatum
-                <input type="date" class="form-control" th:field="*{geburtsdatum}">
+                <input type="date" class="form-control" >
             </label>
         </div>
         <button type="submit" class="btn btn-primary">Abschicken</button>

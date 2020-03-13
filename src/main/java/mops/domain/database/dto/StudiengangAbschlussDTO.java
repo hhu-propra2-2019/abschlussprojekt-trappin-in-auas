@@ -5,8 +5,7 @@ import lombok.Data;
 
 @Data
 @Embeddable
-public class StudiengangAbschluss {
-
-  private String studiengang;
-  private String abschluss;
+public class StudiengangAbschlussDTO {
+    private String studiengang;
+    private String abschluss;
 }

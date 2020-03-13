@@ -1,15 +1,15 @@
 package mops.domain.database.dto;
 
-import javax.persistence.Embeddable;
+
 import lombok.Data;
+
+import javax.persistence.Embeddable;
 
 @Data
 @Embeddable
-public class Adresse {
-
+public class AdresseDTO {
   private String PLZ;
   private String wohnort;
-  private String wohnstadt;
   private String straße;
   private String hausnummer;
 }

@@ -1,18 +1,15 @@
 package mops.domain.services;
 
 import java.util.List;
-import mops.domain.database.dto.Bewerber;
+
+import mops.domain.database.dto.BewerberDTO;
 
 
 public interface IBewerberService {
+    void addBewerber(BewerberDTO b);
 
-  void addBewerber(Bewerber b);
-
-  Bewerber findBewerberByKennung(String kennung);
-
-  List<Bewerber> findAlleBewerber();
-
-  List<Bewerber> findAlleNichtVerteilteBewerber(List<Bewerber> alleBewerber);
-
-  void verteile(String kennung, String dozent);
+    BewerberDTO findBewerberByKennung(String kennung);
+    List<BewerberDTO> findAlleBewerber();
+    List<BewerberDTO> findAlleNichtVerteilteBewerber(List<BewerberDTO> alleBewerber);
+    void verteile(String kennung, String dozent);
 }

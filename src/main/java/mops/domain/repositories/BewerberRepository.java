@@ -1,24 +1,22 @@
 package mops.domain.repositories;
 
 import java.util.List;
-import mops.domain.database.dto.Bewerber;
+
+import mops.domain.database.dto.BewerberDTO;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BewerberRepository extends CrudRepository<Bewerber, String> {
+public interface BewerberRepository extends CrudRepository<BewerberDTO, String> {
+    BewerberDTO findBewerberByKennung(String kennung);
+    List<BewerberDTO> findAll();
 
-  Bewerber findBewerberByKennung(String kennung);
+    @Override
+    <S extends BewerberDTO> S save(S entity);
 
-  List<Bewerber> findAll();
+    @Override
+    <S extends BewerberDTO> Iterable<S> saveAll(Iterable<S> entities);
 
-  @Override
-  <S extends Bewerber> S save(S entity);
-
-  @Override
-  <S extends Bewerber> Iterable<S> saveAll(Iterable<S> entities);
-
-  List<Bewerber> findByVerteiltAnIsNull();
-
-  List<Bewerber> findByVerteiltAnIsNotNull();
+    List<BewerberDTO> findByVerteiltAnIsNull();
+    List<BewerberDTO> findByVerteiltAnIsNotNull();
 }

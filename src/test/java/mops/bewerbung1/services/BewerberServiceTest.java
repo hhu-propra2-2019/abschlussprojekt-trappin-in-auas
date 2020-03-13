@@ -2,7 +2,8 @@ package mops.bewerbung1.services;
 
 import static org.mockito.Mockito.mock;
 
-import mops.domain.database.dto.Bewerber;
+import mops.domain.database.dto.*;
+import mops.domain.models.*;
 import mops.domain.repositories.BewerberRepository;
 import mops.services.BewerberService;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,18 +32,18 @@ public class BewerberServiceTest {
     private transient String[] geburtstage = {"27.03.1998", "14.07.2000", "03.01.1999", "22.08.1999", "01.05.1997"};
     private transient String[] verteilungen = {"Jens", "Golov", "Tratusch"};
 
-    private Bewerber generateVerteilterBewerber(){
+    private BewerberModel generateVerteilterBewerber(){
         String vname = fromRandomPosition(vornamen);
         String nname = fromRandomPosition(nachnamen);
         String kennung = vname.substring(0, 3) + nname.substring(0, 3) + (int) Math.random()*999;
-        return new Bewerber(kennung, nname, vname, fromRandomPosition(geburtstage), fromRandomPosition(verteilungen));
+        return new BewerberModel(kennung, nname, vname, fromRandomPosition(geburtstage), fromRandomPosition(verteilungen));
     }
 
-    private Bewerber generateNichtVerteilterBewerber(){
+    private BewerberModel generateNichtVerteilterBewerber(){
         String vname = fromRandomPosition(vornamen);
         String nname = fromRandomPosition(nachnamen);
         String kennung = vname.substring(0, 3) + nname.substring(0, 3) + (int) Math.random()*999;
-        return new Bewerber(kennung, nname, vname, fromRandomPosition(geburtstage));
+        return new BewerberModel(kennung, nname, vname, fromRandomPosition(geburtstage));
     }
 
     private String fromRandomPosition(String[] array){

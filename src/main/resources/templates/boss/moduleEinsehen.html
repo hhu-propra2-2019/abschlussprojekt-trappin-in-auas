@@ -1,41 +1,86 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{mopslayout :: html(name='Modulübersicht', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Module</title>
+  <meta charset="utf-8">
+  <title>main</title>
+  <th:block th:fragment="headcontent">
+  </th:block>
 </head>
+
 <body>
+  <header>
+    <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
+      <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
+    </nav>
+  </header>
+  <main th:fragment="bodycontent">
+    <div class="d-flex p-2">
+      <h3 class="p-2 w-100">Modulübersicht</h3>
+      <div class="p-2 flex-shrink-1">
+        <button class="btn btn-success">Hinzufügen</button>
+      </div>
+    </div>
+    <div class="container">
 
-<h1>Module:</h1>
+      <div class="jumbotron" th:each="modul : ${module}">
+        <div class="col-sm-3" th:text="${modul.modulName}">Programmierung</div>
+        <div class="col-sm-3">Conrad213</div>
+        <div class="col-sm-3"><button class="btn btn-danger">Entfernen</button></div>
+      </div>
+      
+      <!--
+        <th:block th:with="noEl = 4,totalSize = ${#lists.size(module)} - 1">
+          <th:block th:each=" listIndex: ${#numbers.sequence(0, totalSize, noEl)}">
+              <div th:class="'row'"
+                  th:with="maxValue = ${ totalSize lt (listIndex + noEl -1) ? totalSize : listIndex + noEl -1}">
+                  <div class="card col-sm" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title" th:text="${module[index].modulName}">Programmierung</h5>
+                      <p class="card-text" th:text="${module[index].dozent}>Conrad213</p>
+                      <button class="btn btn-danger">Entfernen</button>
+                    </div>
+                  </div>
+              </div>
+          </th:block>
+      </th:block>
+      -->
 
-<table>
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>Title</th>
-    <th>Mail</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="modul : ${modules}">
-    <td><span th:text="${modul.id}">Id</span></td>
-    <td><span th:text="${modul.name}">title</span></td>
-    <td><span th:text="${modul.dozentEmail}">mail</span></td>
+      <!--Dummies:-->
+      <div class="row">
+        <div class="card col-sm" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Programmierung</h5>
+            <p class="card-text">Conrad213</p>
+            <button class="btn btn-danger">Entfernen</button>
+          </div>
+        </div>
+        <div class="card col-sm" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Programmierung</h5>
+            <p class="card-text">Conrad213</p>
+            <button class="btn btn-danger">Entfernen</button>
+          </div>
+        </div>
+        <div class="card col-sm" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Programmierung</h5>
+            <p class="card-text">Conrad213</p>
+            <button class="btn btn-danger">Entfernen</button>
+          </div>
+        </div>
+        <div class="card col-sm" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Programmierung</h5>
+            <p class="card-text">Conrad213</p>
+            <button class="btn btn-danger">Entfernen</button>
+          </div>
+        </div>
+      </div>
 
-  </tr>
-  </tbody>
-
-</table>
-
-
-<form method="post" action="/bewerbung1/orga/module">
-  <label for="modulName">Modulname:</label><br>
-  <input type="text" id="modulName" name="modulName">
-
-
-  <input type="submit">
-
-</form>
-
+    </div>
+  </main>
 </body>
+
 </html>
