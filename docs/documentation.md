@@ -255,3 +255,5 @@ Zuordnung von Bausteinen zu Infrastruktur
 
 
 >>>>>>> c311cf1db8411cef4808b15c735e5b6747027967
+### bayarabd:
+- Ich habe mich die zweite Woche mit Frontend beschäftigt und an ein paar Seiten gearbeitet. Eine Endseite, wohin man nach der Bewerbung weitergeleitet wird, eine Dozentseite, wo der Dozent die Anzahl der Bewerbungen und die Infos der BewerberInnen ansehen könnte. Ich habe zusätzlich eine Seite für Verteiler geschrieben, wo der Verteiler die Studentendaten und Prioritäten ansehen könnten und dann entscheiden welcher Student zu welchem fach gehört. Außerdem habe ich etwas an Formular gearbeitet; besonders ein paar Felder habe ich umstruktuiert, früher haben wir die Prioritäten in verschiedenen Zeilen geschrieben, aber ich die Radiobuttons in eine Tabelle zusammengebracht. Es wäre so meiner Meinung nach "benutzerfreundlicher". Außerdem habe ich mich für Bootstrap entschieden, statt eigene css zu schreiben, da mehr Möglichkeiten angeboten sind.
