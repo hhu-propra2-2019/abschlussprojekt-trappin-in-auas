@@ -33,8 +33,7 @@ public class MappingServiceTest {
     public void bestandeneModuleDTOZuBestandeneModuleModel(){
         //TODO: create a generator for this
         //TODO: differentiate DTO embeddables from models
-        ModulDTO modulDTO = new ModulDTO();
-        modulDTO.setModul("RA");
+        ModulDTO modulDTO = new ModulDTO("RA", "golov@hhu.de", "janine golov");
 
         BestandeneModuleDTO bestandeneModuleDTO = new BestandeneModuleDTO();
         bestandeneModuleDTO.setNote(1.3);

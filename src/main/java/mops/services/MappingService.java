@@ -30,11 +30,11 @@ public class MappingService implements IMappingService {
                 load(karriereDTO.getFachAbschluss()), bestandeneModule);
     }
 
-    private StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss) {
+    public StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss) {
         return new StudiengangAbschluss(fachAbschluss.getStudiengang(), fachAbschluss.getAbschluss());
     }
 
-    private ImmartikulationsStatus load(ImmartikulationsStatusDTO statusDTO) {
+    public ImmartikulationsStatus load(ImmartikulationsStatusDTO statusDTO) {
         return new ImmartikulationsStatus(statusDTO.isStatus(), statusDTO.getFachrichtung());
     }
 
@@ -61,21 +61,25 @@ public class MappingService implements IMappingService {
                 loadBerufModul(pDTO.getBerufModul()), pDTO.getTutorenSchulungTeilnahme());
     }
 
-    private ModulAuswahl loadModulAuswahl(ModulAuswahlDTO modulAuswahlDTO) {
+    public ModulAuswahl loadModulAuswahl(ModulAuswahlDTO modulAuswahlDTO) {
         return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet());
     }
 
-    private Adresse loadAdresse(PersonalienDTO personalienDTO) {
+    public Adresse loadAdresse(PersonalienDTO personalienDTO) {
         return new Adresse(personalienDTO.getAdresse().getPLZ(), personalienDTO.getAdresse().getWohnort(),
                 personalienDTO.getAdresse().getStraße(), personalienDTO.getAdresse().getHausnummer());
     }
 
-    private BerufModul loadBerufModul(BerufModulDTO berufModulDTO) {
+    public BerufModul loadBerufModul(BerufModulDTO berufModulDTO) {
         return new BerufModul(berufModulDTO.getBeruf(), loadModul(berufModulDTO.getModul()));
     }
 
-    private Modul loadModul(ModulDTO modulDTO) {
-        return new Modul(modulDTO.getModul());
+    public Modul loadModul(ModulDTO modulDTO) {
+        return new Modul(modulDTO.getModul(), new Dozent(modulDTO.getDozentMail(), modulDTO.getDozentName()));
+    }
+
+    public ModulDTO loadModulDTO(Modul modul) {
+        return new ModulDTO(modul.getModulName(), modul.getDozent().getDozentMail(), modul.getDozent().getDozentName());
     }
 
 }

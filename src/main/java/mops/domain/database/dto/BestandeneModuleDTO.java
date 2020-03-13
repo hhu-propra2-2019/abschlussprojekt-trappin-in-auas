@@ -21,5 +21,6 @@ public class BestandeneModuleDTO {
 
     @OneToOne
     private ModulDTO modul;
+    
     private double note;
 }
