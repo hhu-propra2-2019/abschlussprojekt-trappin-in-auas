@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/bewerbung1/boss")
 public class BossController {
 
-  @Autowired
-  private transient ModulService modulService;
+  //@Autowired
+  //private transient ModulService modulService;
 
   /**
    * Modul list for boss. Login as "Boss" required.
@@ -27,7 +27,7 @@ public class BossController {
   //@Secured("ROLE_boss")
   @GetMapping("/modules")
   public String getModule(Model m, KeycloakAuthenticationToken token) {
-    m.addAttribute("modules", modulService.findAllModule());
+    //m.addAttribute("modules", modulService.findAllModule());
     return "boss/moduleEinsehen";
   }
 
@@ -42,7 +42,7 @@ public class BossController {
   @PostMapping("/module")
   public String addModule(Model m, KeycloakAuthenticationToken token,
       @RequestParam String modulName) {
-    modulService.addModul(new Modul(modulName));
+    //modulService.addModul(new Modul(modulName));
     return "redirect:/bewerbung1/boss/module";
   }
 

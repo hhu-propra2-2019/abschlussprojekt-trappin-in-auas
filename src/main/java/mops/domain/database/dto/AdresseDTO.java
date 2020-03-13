@@ -1,6 +1,5 @@
 package mops.domain.database.dto;
 
-
 import lombok.Data;
 
 import javax.persistence.Embeddable;

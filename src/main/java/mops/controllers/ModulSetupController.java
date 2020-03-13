@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import mops.services.ModulService;
 
 @Controller
-//@RequestMapping("/bewerbung1/boss")
+@RequestMapping("/bewerbung1/boss")
 public class ModulSetupController {
 
     @Autowired
