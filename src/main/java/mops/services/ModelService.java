@@ -10,24 +10,22 @@ import org.springframework.stereotype.Service;
 import mops.domain.services.IMappingService;
 
 @Service
-public class MappingService implements IMappingService {
+public class ModelService implements IMappingService {
 
-    public MappingService() {
+    public ModelService() {
 
     }
-
-    @Override
+    //bestandenModule entfernt
+  /*  @Override
     public BestandeneModule load(BestandeneModuleDTO bestandeneModuleDTO) {
         return (bestandeneModuleDTO == null) ? null
                 : new BestandeneModule(loadModul(bestandeneModuleDTO.getModul()), bestandeneModuleDTO.getNote());
     }
-
+    */
     @Override
     public Karriere load(KarriereDTO karriereDTO) {
-        List<BestandeneModule> bestandeneModule = karriereDTO.getBestandendeModule().stream().map(this::load)
-                .collect(Collectors.toList());
         return new Karriere(karriereDTO.getArbeitserfahrung(), load(karriereDTO.getImmartikulationsStatus()),
-                load(karriereDTO.getFachAbschluss()), bestandeneModule);
+                load(karriereDTO.getFachAbschluss()));
     }
 
     public StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss) {

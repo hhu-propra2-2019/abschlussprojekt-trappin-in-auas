@@ -14,6 +14,6 @@ public class Karriere {
     private String arbeitserfahrung;
     private ImmartikulationsStatus immartikulationsStatus;
     private StudiengangAbschluss fachAbschluss;
-    private List<BestandeneModule> bestandendeModule;
+
     
 }

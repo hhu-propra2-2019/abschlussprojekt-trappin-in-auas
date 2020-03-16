@@ -7,7 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BestandeneModule {
-    private Modul modul;
-    private double note;
+public class Bewerber {
+
+  private Personalien personalien;
+  private Karriere karriere;
+  private Praeferenzen praeferenzen;
+  private String verteiltAn;
+
+
+
 }

@@ -39,7 +39,7 @@ public class BewerberRestController {
     @Secured({"ROLE_orga"}) //andere clientrollen kommen noch
     public BewerberDTO index(Model model, @RequestBody BewerberDTO b, KeycloakAuthenticationToken token){
         //bewerberRepository.save(b);
-        System.out.println("added " + b.getKennung() + " to database");
+        //System.out.println("added " + b.getKennung() + " to database");
         return b;
     }
 

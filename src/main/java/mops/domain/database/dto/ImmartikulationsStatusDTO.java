@@ -13,4 +13,9 @@ import lombok.Setter;
 public class ImmartikulationsStatusDTO {
     private boolean status;
     private String fachrichtung;
+
+    public ImmartikulationsStatusDTO(boolean status, String fachrichtung) {
+        this.status = status;
+        this.fachrichtung = fachrichtung;
+    }
 }
