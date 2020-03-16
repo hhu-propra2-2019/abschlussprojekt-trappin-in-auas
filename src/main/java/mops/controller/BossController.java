@@ -3,6 +3,7 @@ package mops.controller;
 import mops.services.ModulService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,7 @@ public class BossController {
    * @param token injected, present, if user is logged in
    * @return moduleEinsehen html template
    */
-  //@Secured("ROLE_boss")
+  @Secured("ROLE_boss")
   @GetMapping("/modules")
   public String getModule(Model m, KeycloakAuthenticationToken token) {
     //m.addAttribute("modules", modulService.findAllModule());
@@ -37,12 +38,12 @@ public class BossController {
    * @param modul Modul, added to DB
    * @return redirect to Modul list
    */
-  //@Secured("ROLE_boss")
-  @PostMapping("/module")
+  @Secured("ROLE_boss")
+  @PostMapping("/addModul")
   public String addModule(Model m, KeycloakAuthenticationToken token,
-      @RequestParam String modulName) {
+      @RequestParam String modulName, @RequestParam String dozentMail, @RequestParam String dozentName) {
     //modulService.addModul(new Modul(modulName));
-    return "redirect:/bewerbung1/boss/module";
+    return "boss/moduleEinsehen";
   }
 
 }
