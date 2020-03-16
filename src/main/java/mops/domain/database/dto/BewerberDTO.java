@@ -24,7 +24,7 @@ public class BewerberDTO{
     @JoinColumn(name="prefs")
     private PraeferenzenDTO praeferenzen;
 
-    //private String kennung;  //TODO Kennung in Personalien
+    private String kennung;
     private String verteiltAn;
 
     public BewerberDTO(PersonalienDTO personalien, KarriereDTO karriere,

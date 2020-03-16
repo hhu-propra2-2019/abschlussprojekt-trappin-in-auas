@@ -12,6 +12,7 @@ public class Bewerber {
   private Personalien personalien;
   private Karriere karriere;
   private Praeferenzen praeferenzen;
+  private String kennung;
   private String verteiltAn;
 
 
