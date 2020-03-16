@@ -11,11 +11,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Table(name = "personalien")
 @Entity
-
+@NoArgsConstructor
 public class PersonalienDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

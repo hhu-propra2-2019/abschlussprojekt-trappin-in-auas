@@ -3,9 +3,11 @@ package mops.domain.database.dto;
 import lombok.Data;
 
 import javax.persistence.Embeddable;
+import lombok.NoArgsConstructor;
 
 @Data
 @Embeddable
+@NoArgsConstructor
 public class AdresseDTO {
   private String PLZ;
   private String wohnort;

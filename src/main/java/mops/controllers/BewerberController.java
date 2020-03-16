@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class BewerberController {
 
   private transient BewerberRepository bewerberRepository;
-    /*
+
     @GetMapping("/")
     public String index(Model model){
-        model.addAttribute("bewerber", new BewerberDTO());
+        model.addAttribute("bewerber", new Bewerber());
         return "bewerbungsformular";
     }
 
     @GetMapping("/bewirb")
     public String bewirb(Model model){
-       /* model.addAttribute("personal", new Personalien());
+        model.addAttribute("personal", new Personalien());
         model.addAttribute("modulauswahl", new ModulAuswahl());
         model.addAttribute("preference", new Praeferenzen());
         return "bewerbungsformular";
@@ -41,5 +41,5 @@ public class BewerberController {
         bewerberRepository.save(b);
         return "redirect:/example";
     }
-    */
+
 }
