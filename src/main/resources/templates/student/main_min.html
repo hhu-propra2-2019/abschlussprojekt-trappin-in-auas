@@ -9,6 +9,23 @@
 	<th:block th:fragment="headcontent">
 
 		<script>
+			window.onload = function () {
+				let modulAuswahlListe= document.getElementById("modulAuswahlListe");
+				console.log(modulAuswahlListe.childElementCount)
+				for(let i = 0; i < modulAuswahlListe.childElementCount; i++){
+					let aktuellerBlock = document.querySelectorAll((".bewerbemodulitemMaster"+i));
+					aktuellerBlock.forEach(block => {
+						console.log(block);
+						block.onchange = function() {
+							let small = document.getElementsByClassName("bewerbemodulitem"+i);
+							for (let index = 0; index < small.length; index++) {
+								small[index].selectedIndex = this.selectedIndex;
+							}
+						}
+					});
+				}
+			}
+
 			function disableInput(inputid, txt) {
 				var txtIn = document.getElementById(inputid);
 				txtIn.value = txt;
@@ -112,21 +129,40 @@
 						an.
 						Mehrfachnennungen sind ausdrücklich erwünscht! </h4>
 					<div id="modulAuswahlListe">
-						<div class="form-group bewerbemodulitem">
+						<div class="form-group bewerbemodulitemList" th:each="auswahl, itemStat : *{modulAuswahl}">
 							<div class="input-group">
-								<select class="form-control" aria-placeholder="Gewünnschtes Modul">
+
+								<select class="form-control" aria-placeholder="Gewünnschtes Modul"
+									th:classappend="'bewerbemodulitemMaster'+__${itemStat.index}__"
+									th:field="*{modulAuswahl[__${itemStat.index}__].modul.modulName}">
 									<option th:value="'Programmierung'">Programmierung</option>
+									<option th:value="'ProPra'">ProPra</option>
 								</select>
-								<select class="form-control col-sm-4" aria-placeholder="Priorität">
+								<select class="form-control hiddenSelct"
+									th:classappend="'bewerbemodulitem'+__${itemStat.index}__"
+									th:field="*{modulAuswahl[__${itemStat.index}__].modul.dozent.dozentName}" hidden>
+									<option th:value="'Conrad'">Conrad</option>
+									<option th:value="'Jens'">Jens</option>
+								</select>
+								<select class="form-control hiddenSelct"
+									th:classappend="'bewerbemodulitem'+__${itemStat.index}__"
+									th:field="*{modulAuswahl[__${itemStat.index}__].modul.dozent.dozentMail}" hidden>
+									<option th:value="'conrad@hhu.de'">conrad@hhu.de</option>
+									<option th:value="'jens@hhu.de'">jens@hhu.de</option>
+								</select>
+
+								<select class="form-control col-sm-4" aria-placeholder="Priorität"
+									th:field="*{modulAuswahl[__${itemStat.index}__].prioritaet}">
 									<option th:value="${1}">Priorität 1</option>
 									<option th:value="${2}">Priorität 2</option>
 									<option th:value="${3}">Priorität 3</option>
 									<option th:value="${4}">Priorität 4</option>
 								</select>
+								<input type="number" class="form-control col-sm-4" placeholder="Bestanden mit...">
 							</div>
 						</div>
 					</div>
-					<button class="btn btn-success" type="button" onclick="addZuBewerbendesModul();">+</button>
+					<button class="btn btn-success" type="submit" formaction="/addModul">+</button>
 				</div>
 
 				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">

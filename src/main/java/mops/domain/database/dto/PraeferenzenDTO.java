@@ -6,7 +6,6 @@ import mops.domain.models.TutorenSchulungTeilnahme;
 
 import java.util.List;
 import javax.persistence.*;
-import lombok.Data;
 
 
 @Data
