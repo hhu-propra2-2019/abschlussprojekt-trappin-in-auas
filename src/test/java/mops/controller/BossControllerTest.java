@@ -35,8 +35,8 @@ class BossControllerTest {
   @MockBean
   private transient ModulService modulService;
 
-  private final static String getModulesURL = "/bewerbung1/boss/modules";
-  private final static String postModuleURL = "/bewerbung1/boss/addModul";
+  private final static String GET_MODULES_URL = "/bewerbung1/boss/modules";
+  private final static String POST_MODULE_URL = "/bewerbung1/boss/postmodule";
 
 // GET REQUESTS //
 
@@ -49,7 +49,7 @@ class BossControllerTest {
 
     when(modulService.findAllModule()).thenReturn(module);
 
-    mockMvc.perform(get(getModulesURL)
+    mockMvc.perform(get(GET_MODULES_URL)
         .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
   }
 
@@ -62,41 +62,41 @@ class BossControllerTest {
 
     when(modulService.findAllModule()).thenReturn(module);
 
-    mockMvc.perform(get(getModulesURL)
+    mockMvc.perform(get(GET_MODULES_URL)
             .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
   }
 
   @Test
   @WithMockKeycloackAuth("orga")
   void testGetWithOrgaRole() throws Exception {
-    mockMvc.perform(get(getModulesURL)
+    mockMvc.perform(get(GET_MODULES_URL)
         .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isForbidden());
   }
 
   @Test
   @WithMockKeycloackAuth("studentin")
   void testWithStudentRole() throws Exception {
-    mockMvc.perform(get(getModulesURL)
+    mockMvc.perform(get(GET_MODULES_URL)
         .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isForbidden());
   }
 
   @Test
   @WithMockKeycloackAuth("")
   void testGetWithoutRole() throws Exception {
-    mockMvc.perform(get(getModulesURL)
+    mockMvc.perform(get(GET_MODULES_URL)
         .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isForbidden());
   }
 
   @Test
   void testGetWithoutLogin() throws Exception {
-    mockMvc.perform(get(getModulesURL)
+    mockMvc.perform(get(GET_MODULES_URL)
         .contentType(MediaType.APPLICATION_JSON)).andExpect(status().is(302));
   }
 
 // POST REQUEST //
   @Test
   void testPostWithoutLogin() throws Exception {
-    mockMvc.perform(post(postModuleURL)
+    mockMvc.perform(post(POST_MODULE_URL)
             .param("modulName", "RDB")
             .param("dozentMail", "rdb@cs.hhu.de")
             .param("dozentName", "Conrad")
@@ -106,7 +106,7 @@ class BossControllerTest {
   @Test
   @WithMockKeycloackAuth("boss")
   void testPostWithLogin() throws Exception {
-    mockMvc.perform(post(postModuleURL)
+    mockMvc.perform(post(POST_MODULE_URL)
         .param("modulName", "RDB")
             .param("dozentMail", "rdb@cs.hhu.de")
             .param("dozentName", "Conrad")
