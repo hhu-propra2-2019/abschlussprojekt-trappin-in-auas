@@ -1,5 +1,7 @@
 package mops.controller;
 
+import mops.domain.models.Modul;
+import mops.services.MappingService;
 import mops.services.ModulService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +17,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/bewerbung1/boss")
 public class BossController {
 
-  //@Autowired
-  //private transient ModulService modulService;
+  @Autowired
+  private transient ModulService modulService;
+
+  @Autowired
+  private MappingService mappingService;
 
   /**
    * Modul list for boss. Login as "Boss" required.
    * @param m injected, Model for Thymeleaf interaction
    * @param token injected, present, if user is logged in
-   * @return moduleEinsehen html template
+   * @return modulesetup html template
    */
   @Secured("ROLE_boss")
   @GetMapping("/modules")
   public String getModule(Model m, KeycloakAuthenticationToken token) {
-    //m.addAttribute("modules", modulService.findAllModule());
-    return "boss/moduleEinsehen";
+    m.addAttribute("modul", new Modul());
+    m.addAttribute("modulListe", mappingService.loadModulList(modulService.findAllModule()));
+    return "boss/modulsetup";
   }
 
   /**
@@ -36,14 +42,13 @@ public class BossController {
    * @param m injected, Model for Thymeleaf interaction
    * @param token injected, present, if user is logged in
    * @param modul Modul, added to DB
-   * @return redirect to Modul list
+   * @return redirect to modules
    */
   @Secured("ROLE_boss")
-  @PostMapping("/addModul")
-  public String addModule(Model m, KeycloakAuthenticationToken token,
-      @RequestParam String modulName, @RequestParam String dozentMail, @RequestParam String dozentName) {
-    //modulService.addModul(new Modul(modulName));
-    return "boss/moduleEinsehen";
+  @PostMapping("/postmodule")
+  public String addModule(Model m, KeycloakAuthenticationToken token, Modul modul) {
+    modulService.addModul(mappingService.loadModulDTO(modul));
+    return "redirect:/bewerbung1/boss/modules";
   }
 
 }

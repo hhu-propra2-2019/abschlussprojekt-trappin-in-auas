@@ -3,10 +3,12 @@ package mops.domain.database.dto;
 import javax.persistence.*;
 import lombok.Data;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "module")
+@NoArgsConstructor
 public class ModulDTO {
 
     public ModulDTO(String modul, String dozentMail, String dozentName){
