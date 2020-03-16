@@ -1,9 +1,16 @@
 package mops.domain.database.dto;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.Data;
 
-
-import javax.persistence.*;
 
 @Data
 @Table(name = "modulAuswahl")
@@ -12,10 +19,8 @@ public class ModulAuswahlDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Embedded
-    private Modul modul;
+    
+    @OneToOne
+    private ModulDTO modul;
     private int prioritaet;
-    @ManyToOne
-    @JoinColumn(name = "praeferenzen_id")
-    private PraeferenzenDTO praeferenzen;
 }

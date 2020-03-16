@@ -1,9 +1,8 @@
 package mops.domain.database.dto;
 
-import lombok.Data;
-
-import javax.persistence.*;
 import java.util.List;
+import javax.persistence.*;
+import lombok.Data;
 
 @Data
 @Table(name = "karriere")
@@ -13,11 +12,16 @@ public class KarriereDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String arbeitserfahrung;
+
     @Embedded
-    private ImmartikulationsStatus immartikulationsStatus;
+    private ImmartikulationsStatusDTO immartikulationsStatus;
+
     @Embedded
-    private StudiengangAbschluss fachAbschluss;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "karriere")
+    private StudiengangAbschlussDTO fachAbschluss;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "karriere", joinColumns = @JoinColumn(name = "karriere_id"),
+        inverseJoinColumns = @JoinColumn(name = "bestandeneModule_id"))
     private List<BestandeneModuleDTO> bestandendeModule;
 
 }
