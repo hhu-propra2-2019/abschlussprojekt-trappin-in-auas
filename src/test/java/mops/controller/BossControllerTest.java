@@ -26,13 +26,14 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = Bewerbung1Application.class)
 @SpringBootTest
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 class BossControllerTest {
 
   @Autowired
-  private MockMvc mockMvc;
+  private transient MockMvc mockMvc;
 
   @MockBean
-  private ModulService modulService;
+  private transient ModulService modulService;
 
   private final static String getModulesURL = "/bewerbung1/boss/modules";
   private final static String postModuleURL = "/bewerbung1/boss/addModul";
