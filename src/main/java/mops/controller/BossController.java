@@ -20,7 +20,7 @@ public class BossController {
   private transient ModulService modulService;
 
   @Autowired
-  private MappingService mappingService;
+  private transient MappingService mappingService;
 
   /**
    * Modul list for boss. Login as "Boss" required.
