@@ -9,22 +9,6 @@
 	<th:block th:fragment="headcontent">
 
 		<script>
-			window.onload = function () {
-				let modulAuswahlListe= document.getElementById("modulAuswahlListe");
-				console.log(modulAuswahlListe.childElementCount)
-				for(let i = 0; i < modulAuswahlListe.childElementCount; i++){
-					let aktuellerBlock = document.querySelectorAll((".bewerbemodulitemMaster"+i));
-					aktuellerBlock.forEach(block => {
-						console.log(block);
-						block.onchange = function() {
-							let small = document.getElementsByClassName("bewerbemodulitem"+i);
-							for (let index = 0; index < small.length; index++) {
-								small[index].selectedIndex = this.selectedIndex;
-							}
-						}
-					});
-				}
-			}
 
 			function disableInput(inputid, txt) {
 				var txtIn = document.getElementById(inputid);
@@ -33,14 +17,29 @@
 			}
 
 			function addZuBewerbendesModul() {
-				let listName = 'modulAuswahl';
-				let allBlocks = document.querySelectorAll('.bewerbemodulitem');
-				let rowIndex = allBlocks.length; //we can add mock class to each movie-row
+				let allBlocks = document.querySelectorAll('#modulAuswahlListe .bewerbemodulitemList .input-group');
+				let rowIndex = allBlocks.length;
 
-				let toAppend = allBlocks[0].cloneNode(true);
-
-				document.getElementById('modulAuswahlListe').appendChild(toAppend);
+				let toAppend = allBlocks[0].cloneNode(true); //clone to preserve options
+				toAppend.querySelectorAll("select").forEach(selectItem => {
+					selectItem.id = selectItem.id.replace('0', ""+rowIndex);
+					selectItem.name = selectItem.name.replace('0', ""+rowIndex);
+					selectItem.className = selectItem.className.replace('0', ""+rowIndex);
+				});
+				
+				let outer = document.createElement('div');
+				outer.className = "form-group bewerbemodulitemList";
+				outer.appendChild(toAppend);
+				document.getElementById('modulAuswahlListe').appendChild(outer);
 			}
+
+			function handleSyncSelect(current, classnames){
+				let toSync = document.querySelectorAll("."+classnames);
+				toSync.forEach(x => {
+					x.selectedIndex = current.selectedIndex;
+				});
+			}
+
 		</script>
 	</th:block>
 </head>
@@ -134,13 +133,15 @@
 
 								<select class="form-control" aria-placeholder="Gewünnschtes Modul"
 									th:classappend="'bewerbemodulitemMaster'+__${itemStat.index}__"
+									onchange="handleSyncSelect(this, 'bewerbemodulitem'+this.className.slice(-1))"
 									th:field="*{modulAuswahl[__${itemStat.index}__].modul.modulName}">
 									<option th:value="'Programmierung'">Programmierung</option>
 									<option th:value="'ProPra'">ProPra</option>
 								</select>
 								<select class="form-control hiddenSelct"
 									th:classappend="'bewerbemodulitem'+__${itemStat.index}__"
-									th:field="*{modulAuswahl[__${itemStat.index}__].modul.dozent.dozentName}" hidden>
+									th:field="*{modulAuswahl[__${itemStat.index}__].modul.dozent.dozentName}"
+									hidden>
 									<option th:value="'Conrad'">Conrad</option>
 									<option th:value="'Jens'">Jens</option>
 								</select>
@@ -162,7 +163,7 @@
 							</div>
 						</div>
 					</div>
-					<button class="btn btn-success" type="submit" formaction="/addModul">+</button>
+					<button class="btn btn-success" type="button" onclick="addZuBewerbendesModul()">+</button>
 				</div>
 
 				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
