@@ -278,31 +278,29 @@
         </div>
       </div>
       <div class="container-fluid">
-        <div class="col-12 bg-secondary">
-          <ul>
-            <ul>
-              <h3>Um welche Art der Beschäftigung handelt es sich?</h3>
-              <input type="radio" th:field="*{Beschäftigungsart}" th:value="${Neueinstellung}" name="einstellung"/>
-              Neueinstellung (bisher keine Anstellung an der HHU).
-              <br></br>
-              <input type="radio" th:field="*{Beschäftigungsart}" th:value="${Weiterbeschäftigung}" name="einstellung"/>
-              Weiterbeschäftigung (bestehender Vertrag bis zum 31.03.2020).
-              <br></br>
-              <input type="radio" th:field="*{Beschäftigungsart}" th:value="${Wiedereinstellung}" name="einstellung"/>
-              Wiedereinstellung (Kein bestehender Vertrag bis zum 31.03.2020).
-            </ul>
-            <ul>
-              <h3>Stunden</h3>
-              <h4>Alle Tutoren- und Korrektorenjobs starten am 01.10.2020. Die Dauer der Anstellung richtet sich nach dem Fach (3-6 Monate).</h4>
-              <h4>Die Minijobgrenze liegt aktuell bei 9h/Woche für SHKs und bei 7h/Woche für WHBs. Sie können insgesamt nicht mehr als 17h/Woche
-              als Hilfskraft an der Universität angestellt sein, das schließt auch mehrere parallele Anstellungen ein. Einstellungen erfolgen in
-              der Regel für zwischen 9 und 17h/Woche, Einzelheiten können im Bewerbungsgespräch geklärt werden.</h4>
-              Wie viele Stunden möchten Sie mindestens und maximal pro Woche arbeiten?
-              <br></br>
-              <input type="number" th:field="*{Stunden}" placeholder="1-17 Minimum" pattern="^(?:[1-9]|1[0-7])$"/>
-              -
-              <input type="number" th:field="*{Stunden}" placeholder="1-17 Maximum" pattern="^(?:[1-9]|1[0-7])$"/>
-            </ul>
+            <div class="col-12 shadow p-3 mb-5 bg-light rounded">
+
+                <h3>Um welche Art der Beschäftigung handelt es sich?</h3>
+                <input type="radio" th:field="*{Beschäftigungsart}" th:value="${Neueinstellung}" name="einstellung"/>
+                Neueinstellung (bisher keine Anstellung an der HHU).
+                <br></br>
+                <input type="radio" th:field="*{Beschäftigungsart}" th:value="${Weiterbeschäftigung}" name="einstellung"/>
+                Weiterbeschäftigung (bestehender Vertrag bis zum 31.03.2020).
+                <br></br>
+                <input type="radio" th:field="*{Beschäftigungsart}" th:value="${Wiedereinstellung}" name="einstellung"/>
+                Wiedereinstellung (Kein bestehender Vertrag bis zum 31.03.2020).
+
+                    <h3>Stunden</h3>
+                <h4>Alle Tutoren- und Korrektorenjobs starten am 01.10.2020. Die Dauer der Anstellung richtet sich nach dem Fach (3-6 Monate).</h4>
+                <h4>Die Minijobgrenze liegt aktuell bei 9h/Woche für SHKs und bei 7h/Woche für WHBs. Sie können insgesamt nicht mehr als 17h/Woche
+                als Hilfskraft an der Universität angestellt sein, das schließt auch mehrere parallele Anstellungen ein. Einstellungen erfolgen in
+                der Regel für zwischen 9 und 17h/Woche, Einzelheiten können im Bewerbungsgespräch geklärt werden.</h4>
+                Wie viele Stunden möchten Sie mindestens und maximal pro Woche arbeiten?
+                <br></br>
+                <input type="number" th:field="*{Stunden}" placeholder="1-17 Minimum" pattern="^(?:[1-9]|1[0-7])$"/>
+                    -
+                <input type="number" th:field="*{Stunden}" placeholder="1-17 Maximum" pattern="^(?:[1-9]|1[0-7])$"/>
+                </ul>
 
             <h3>Wählen Sie eins oder mehr Fächer aus.</h3>
             <select th:field="*{Fach}">
@@ -559,5 +557,3 @@
     </div>
 </body>
 </html>
-
-TODO: Block mit Noten korrigieren!
