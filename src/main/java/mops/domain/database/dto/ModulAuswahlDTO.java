@@ -23,4 +23,5 @@ public class ModulAuswahlDTO {
     @OneToOne
     private ModulDTO modul;
     private int prioritaet;
+    private double note;
 }

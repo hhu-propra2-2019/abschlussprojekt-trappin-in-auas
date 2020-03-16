@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 public class ModulAuswahl {
     private Modul modul;
     private int prioritaet;
-
+    private double note;
 }

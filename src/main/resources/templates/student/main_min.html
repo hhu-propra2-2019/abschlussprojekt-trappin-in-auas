@@ -14,6 +14,16 @@
 				txtIn.value = txt;
 				txtIn.disabled = !txtIn.disabled;
 			}
+
+			function addZuBewerbendesModul() {
+				let listName = 'modulAuswahl';
+				let allBlocks = document.querySelectorAll('.bewerbemodulitem');
+				let rowIndex = allBlocks.length; //we can add mock class to each movie-row
+
+				let toAppend = allBlocks[0].cloneNode(true);
+
+				document.getElementById('modulAuswahlListe').appendChild(toAppend);
+			}
 		</script>
 	</th:block>
 </head>
@@ -46,75 +56,80 @@
 			</div>
 
 			<div class="container" th:object="${bewerber.personalien}">
-				<div class="form-group">
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
 					<h3>Persönliche Daten:</h3>
 					<label for="vornameinput">Vorname:</label>
-					<input type="text" class="form-control col-sm-10" required th:field="*{vorname}" maxlength="30" />
+					<input type="text" class="form-control" required th:field="*{vorname}" maxlength="30" />
 
 					<label for="nachnameinput">
 						Nachname:</label>
-					<input type="text" class="form-control col-sm-10" required th:field="*{name}" maxlength="30" />
+					<input type="text" class="form-control" required th:field="*{name}" maxlength="30" />
 
 					<label>Uni-Kennung:</label>
-					<input type="text" class="form-control col-sm-10" required th:field="*{unikennung}"
-						maxlength="30" />
+					<input type="text" class="form-control" required th:field="*{unikennung}" maxlength="30" />
 
 					<label>Geburtsdatum und Alter:</label>
 					<div class="input-group">
-						<input type="date" class="form-control col-sm-8" required th:field="*{geburtsdatum}" />
+						<input type="date" class="form-control" required th:field="*{geburtsdatum}" />
 						<input type="number" class="form-control col-sm-2" placeholder="Alter" required
 							th:field="*{alter}" />
 
 					</div>
 					<label>Geburtsort:</label>
-					<input type="text" class="form-control col-sm-10" required th:field="*{geburtsort}" />
+					<input type="text" class="form-control " required th:field="*{geburtsort}" />
 
 					<label>Staatsangehörigkeit:</label>
-					<input type="text" id="nationalitaetinput" required class="form-control col-sm-10"
+					<input type="text" id="nationalitaetinput" required class="form-control "
 						th:field="*{nationalitaet}" />
 				</div>
 
-				<div class="form-group">
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
 					<h3>Adresse:</h3>
 					<label>
 						Straße:
 					</label>
 					<div class="input-group">
-						<input type="text" class="form-control col-sm-8" required th:field="*{adresse.straße}" />
+						<input type="text" class="form-control" required th:field="*{adresse.straße}" />
 						<input type="text" class="form-control col-sm-2" required th:field="*{adresse.hausnummer}"
 							placeholder="Hausnummer" />
 					</div>
 					<label>Postleitzahl:</label>
-					<input type="text" class="form-control col-sm-10" required th:field="*{adresse.PLZ}" />
+					<input type="text" class="form-control " required th:field="*{adresse.PLZ}" />
 
 					<label>Wohnort:</label>
-					<input type="text" class="form-control col-sm-10" required th:field="*{adresse.wohnort}" />
+					<input type="text" class="form-control " required th:field="*{adresse.wohnort}" />
 
 				</div>
 			</div>
 
 
 			<div class="container" th:object="${bewerber.praeferenzen}">
-				<div class="form-group">
+				<!--Fach:-->
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
 					<h3>Gewünschte Fächer</h3>
 					<h4>Welche Fächer möchten Sie unterstützen?
 						Wenn Sie ein Fach nicht gehört haben geben Sie ebenfalls "auf keinen Fall"
 						an.
 						Mehrfachnennungen sind ausdrücklich erwünscht! </h4>
-					<div class="input-group">
-						<select class="form-control col-sm-6" aria-placeholder="Gewünnschtes Modul">
-							<option th:value="'Programmierung'">Programmierung</option>
-						</select>
-						<select class="form-control col-sm-4" aria-placeholder="Priorität">
-							<option th:value="${1}">Priorität 1</option>
-							<option th:value="${2}">Priorität 2</option>
-							<option th:value="${3}">Priorität 3</option>
-							<option th:value="${4}">Priorität 4</option>
-						</select>
+					<div id="modulAuswahlListe">
+						<div class="form-group bewerbemodulitem">
+							<div class="input-group">
+								<select class="form-control" aria-placeholder="Gewünnschtes Modul">
+									<option th:value="'Programmierung'">Programmierung</option>
+								</select>
+								<select class="form-control col-sm-4" aria-placeholder="Priorität">
+									<option th:value="${1}">Priorität 1</option>
+									<option th:value="${2}">Priorität 2</option>
+									<option th:value="${3}">Priorität 3</option>
+									<option th:value="${4}">Priorität 4</option>
+								</select>
+							</div>
+						</div>
 					</div>
+					<button class="btn btn-success" type="button" onclick="addZuBewerbendesModul();">+</button>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
 					<h3>Um welche Art der Beschäftigung handelt es sich?</h3>
 					<div class="form-check">
 						<input type="radio" class="form-check-input" id="neueins" th:field="*{einstiegTyp}"
@@ -139,7 +154,7 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
 					<h3>Stunden</h3>
 					<h4>Alle Tutoren- und Korrektorenjobs starten am 01.10.2020. Die Dauer der Anstellung
 						richtet sich nach dem Fach (3-6 Monate).</h4>
@@ -160,10 +175,10 @@
 							placeholder="1-17 Maximum" pattern="^(?:[1-9]|1[0-7])$" />
 					</div>
 					<h3>Haben Sie Einschränkungen bzgl. der von Ihnen gewünschten Tätigkeiten?</h3>
-					<input type="text" class="form-control col-sm-10" th:field="*{einschraenkungen}">
+					<input type="text" class="form-control " th:field="*{einschraenkungen}">
 				</div>
 
-				<div class="form-group">
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
 					<h3>Es steht noch nicht fest, ob es eine Tutorenschulung für das
 						Wintersemester geben wird.
 						Wenn ja, wird diese voraussichtlich kurz vor Semesterbeginn
@@ -198,9 +213,9 @@
 			</div>
 
 			<div class="container" th:object="${bewerber.karriere}">
-				<div class="form-group">
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
 					<h3>Für welches Fach sind Sie derzeit an der HHU immatrikuliert?</h3>
-					<input type="text" class="form-control col-sm-10" id="immatrikuliertText"
+					<input type="text" class="form-control" id="immatrikuliertText"
 						th:field="*{immartikulationsStatus.fachrichtung}" />
 					<div class="form-check">
 						<label>
@@ -212,10 +227,10 @@
 					</div>
 				</div>
 
-				<div class="form-group">
-					<h3 class="col-sm-10">Bisherige Erfahrungen, Schulung und Nachricht an uns (sichtbar)
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+					<h3 class="">Bisherige Erfahrungen, Schulung und Nachricht an uns (sichtbar)
 					</h3>
-					<h4 class="col-sm-10">Beschreiben Sie hier bitte kurz Ihre bisherigen Erfahrungen als
+					<h4 class="">Beschreiben Sie hier bitte kurz Ihre bisherigen Erfahrungen als
 						Tutor oder Korrektor in
 						der Informatik.
 						Wenn Sie über keine solchen Erfahrungen verfügen können Sie gerne
@@ -226,15 +241,15 @@
 						Tätigkeiten der letzten
 						beiden Semester angeben, Sie brauchen keine vollständige Liste zu
 						erstellen. </h4>
-	
-					<textarea class="form-control col-sm-10" th:field="*{arbeitserfahrung}" rows="8" cols="50"></textarea>
+
+					<textarea class="form-control " th:field="*{arbeitserfahrung}" rows="8" cols="50"></textarea>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
 					<h3>Was ist ihr bisher höchster Uni-Abschluss?</h3>
 					<h4> (Schreiben Sie zusätzlich das Fach und ggf. die Universität, falls der Abschluss
 						nicht an der HHU erreicht wurde.)</h4>
-					<select class="form-control col-sm-10" th:field="*{fachAbschluss.abschluss}">
+					<select class="form-control " th:field="*{fachAbschluss.abschluss}">
 						<option th:value="'Bachelor'">Bachelor</option>
 						<option th:value="'Master'">Master</option>
 						<option th:value="'Diplom'">Diplom</option>
@@ -243,9 +258,9 @@
 						<option th:value="'Kein Uni-Abschluss'">Kein Uni-Abschluss</option>
 					</select>
 					<label>Fach:</label>
-					<input type="text" class="form-control col-sm-10" th:field="*{fachAbschluss.studiengang}" />
+					<input type="text" class="form-control " th:field="*{fachAbschluss.studiengang}" />
 					<label>Uni:</label>
-					<input type="text" class="form-control col-sm-10" value="HHU" th:field="*{fachAbschluss.uni}" />
+					<input type="text" class="form-control " value="HHU" th:field="*{fachAbschluss.uni}" />
 				</div>
 			</div>
 

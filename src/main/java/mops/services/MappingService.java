@@ -17,17 +17,9 @@ public class MappingService implements IMappingService {
     }
 
     @Override
-    public BestandeneModule load(BestandeneModuleDTO bestandeneModuleDTO) {
-        return (bestandeneModuleDTO == null) ? null
-                : new BestandeneModule(loadModul(bestandeneModuleDTO.getModul()), bestandeneModuleDTO.getNote());
-    }
-
-    @Override
     public Karriere load(KarriereDTO karriereDTO) {
-        List<BestandeneModule> bestandeneModule = karriereDTO.getBestandendeModule().stream().map(this::load)
-                .collect(Collectors.toList());
         return new Karriere(karriereDTO.getArbeitserfahrung(), load(karriereDTO.getImmartikulationsStatus()),
-                load(karriereDTO.getFachAbschluss()), bestandeneModule);
+                load(karriereDTO.getFachAbschluss()));
     }
 
     public StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss) {
@@ -40,7 +32,7 @@ public class MappingService implements IMappingService {
 
     @Override
     public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) {
-        return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet());
+        return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(), modulAuswahlDTO.getNote());
     }
 
     @Override
@@ -62,7 +54,7 @@ public class MappingService implements IMappingService {
     }
 
     public ModulAuswahl loadModulAuswahl(ModulAuswahlDTO modulAuswahlDTO) {
-        return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet());
+        return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(), modulAuswahlDTO.getNote());
     }
 
     public Adresse loadAdresse(PersonalienDTO personalienDTO) {

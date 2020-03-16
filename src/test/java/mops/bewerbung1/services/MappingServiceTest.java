@@ -30,39 +30,6 @@ public class MappingServiceTest {
     }
 
     @Test
-    public void bestandeneModuleDTOZuBestandeneModuleModel(){
-        //TODO: create a generator for this
-        //TODO: differentiate DTO embeddables from models
-        ModulDTO modulDTO = new ModulDTO("RA", "golov@hhu.de", "janine golov");
-
-        BestandeneModuleDTO bestandeneModuleDTO = new BestandeneModuleDTO();
-        bestandeneModuleDTO.setNote(1.3);
-        bestandeneModuleDTO.setModul(modulDTO);
-        System.out.println(mappingService);
-        BestandeneModule bestandeneModule = mappingService.load(bestandeneModuleDTO);
-        Modul modul = bestandeneModule.getModul();
-
-        assertNotNull(bestandeneModule);
-        assertNotNull(modul);
-
-        //are those checks below actually nessecary? not sure
-        assertEquals(bestandeneModule.getNote(), 1.3);
-        assertEquals(modulDTO.getModul(), modul.getModulName());
-    }
-
-    /**
-     * Make sure the mappingservice
-     * does not break when passing null
-     */
-    @Test
-    public void bestandenesModulDTOIsNullMappingReturnsNull(){
-        BestandeneModuleDTO bestandeneModuleDTO = null;
-        BestandeneModule bestandeneModule = mappingService.load(bestandeneModuleDTO);
-
-        assertNull(bestandeneModule);
-    }
-
-    @Test
     public void personalienDTOZuPersonalienModel(){
         AdresseDTO adresseDTO = new AdresseDTO();
         adresseDTO.setHausnummer("11a");
