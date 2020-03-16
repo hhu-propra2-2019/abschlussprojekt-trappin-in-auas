@@ -26,4 +26,9 @@ public class BewerberDTO{
 
     private String kennung;
     private String verteiltAn;
+
+
+
+
+
 }
