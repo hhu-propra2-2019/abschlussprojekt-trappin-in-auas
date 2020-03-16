@@ -23,7 +23,7 @@ public class BewerberDTO{
     @OneToOne
     @JoinColumn(name="prefs")
     private PraeferenzenDTO praeferenzen;
-
-    private String kennung;
+    
+    private String erstelltVon;
     private String verteiltAn;
 }

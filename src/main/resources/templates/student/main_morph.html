@@ -15,6 +15,7 @@
 				txtIn.disabled = !txtIn.disabled;
 			}
 		</script>
+		<link rel="stylesheet" type="text/css" th:href="@{/morphism.css}" />
 	</th:block>
 </head>
 
@@ -38,15 +39,13 @@
 	</header>
 
 
-	<main th:fragment="bodycontent" style="background-color: #EAEAEA; padding: 2%">
+	<main th:fragment="bodycontent" style="background-color: #EAEAEA" class="morph-container-dark">
 
 		<form th:action="@{/bewirbabschicken}" method="POST">
-			<div class="container">
-				<h1>Bewerbungsformular</h1>
-			</div>
+			<h1>Bewerbungsformular</h1>
 
 			<div class="container" th:object="${bewerber.personalien}">
-				<div class="form-group">
+				<div class="form-group morph-container">
 					<h3>Persönliche Daten:</h3>
 					<label for="vornameinput">Vorname:</label>
 					<input type="text" class="form-control col-sm-10" required th:field="*{vorname}" maxlength="30" />
@@ -74,7 +73,7 @@
 						th:field="*{nationalitaet}" />
 				</div>
 
-				<div class="form-group">
+				<div class="form-group morph-container">
 					<h3>Adresse:</h3>
 					<label>
 						Straße:
@@ -114,7 +113,7 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group morph-container">
 					<h3>Um welche Art der Beschäftigung handelt es sich?</h3>
 					<div class="form-check">
 						<input type="radio" class="form-check-input" id="neueins" th:field="*{einstiegTyp}"
@@ -139,7 +138,7 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group morph-container">
 					<h3>Stunden</h3>
 					<h4>Alle Tutoren- und Korrektorenjobs starten am 01.10.2020. Die Dauer der Anstellung
 						richtet sich nach dem Fach (3-6 Monate).</h4>
@@ -163,21 +162,21 @@
 					<input type="text" class="form-control col-sm-10" th:field="*{einschraenkungen}">
 				</div>
 
-				<div class="form-group">
+				<div class="form-group morph-container">
 					<h3>Es steht noch nicht fest, ob es eine Tutorenschulung für das
 						Wintersemester geben wird.
 						Wenn ja, wird diese voraussichtlich kurz vor Semesterbeginn
 						stattﬁnden. </h3>
 					<div class="form-check">
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
+						<label>
+							<input type="radio" th:field="*{tutorenSchulungTeilnahme}"
 								th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).TEILNAHME}" name="IDPro" />
 							Ich möchte an der Tutorenschulung teilnehmen.
 						</label>
 					</div>
 					<div class="form-check">
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
+						<label>
+							<input type="radio" th:field="*{tutorenSchulungTeilnahme}"
 								th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).NICHTTEILNAHME}"
 								name="IDProg" />
 							Ich habe bereits an der Tutorenschulung teilgenommen und möchte
@@ -186,8 +185,8 @@
 						</label>
 					</div>
 					<div class="form-check">
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
+						<label>
+							<input type="radio" th:field="*{tutorenSchulungTeilnahme}"
 								th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).TEILGENOMMEN}"
 								name="IDProg" />
 							Ich möchte nicht an der Tutorenschulung teilnehmen.
@@ -195,68 +194,47 @@
 					</div>
 
 				</div>
-			</div>
 
-			<div class="container" th:object="${bewerber.karriere}">
-				<div class="form-group">
-					<h3>Für welches Fach sind Sie derzeit an der HHU immatrikuliert?</h3>
-					<input type="text" class="form-control col-sm-10" id="immatrikuliertText"
-						th:field="*{immartikulationsStatus.fachrichtung}" />
-					<div class="form-check">
-						<label>
-							<input type="checkbox" class="form-check-input"
-								onchange="if(this.checked){disableInput('immatrikuliertText', 'Nicht immatrikuliert')}else{disableInput('immatrikuliertText', '')}"
-								th:field="*{immartikulationsStatus.status}">
-							Nicht immatrikuliert
-						</label>
+				<div class="container" th:object="${bewerber.karriere}">
+					<div class="form-group">
+						<h3>Für welches Fach sind Sie derzeit an der HHU immatrikuliert?</h3>
+						<input type="text" class="form-control col-sm-10" id="immatrikuliertText"
+							th:field="*{immartikulationsStatus.fachrichtung}" />
+						<div class="form-check">
+							<label>
+								<input type="checkbox" class="form-check-input"
+									onchange="if(this.checked){disableInput('immatrikuliertText', 'Nicht immatrikuliert')}else{disableInput('immatrikuliertText', '')}"
+									th:field="*{immartikulationsStatus.status}">
+								Nicht immatrikuliert
+							</label>
+						</div>
 					</div>
 				</div>
-
-				<div class="form-group">
-					<h3 class="col-sm-10">Bisherige Erfahrungen, Schulung und Nachricht an uns (sichtbar)
-					</h3>
-					<h4 class="col-sm-10">Beschreiben Sie hier bitte kurz Ihre bisherigen Erfahrungen als
-						Tutor oder Korrektor in
-						der Informatik.
-						Wenn Sie über keine solchen Erfahrungen verfügen können Sie gerne
-						ähnliche Erfahrungen
-						(Nachhilfe, Korrektur anderer Fächer, ...) angeben. Wenn Sie bereits
-						als Tutor oder
-						Korrektor für uns gearbeitet haben reicht es, wenn Sie die
-						Tätigkeiten der letzten
-						beiden Semester angeben, Sie brauchen keine vollständige Liste zu
-						erstellen. </h4>
-	
-					<textarea class="form-control col-sm-10" th:field="*{arbeitserfahrung}" rows="8" cols="50"></textarea>
+				<!--Submit Button-->
+				<div class="container">
+					<button type="submit" class="morph-button">Abschicken!</button>
 				</div>
 
-				<div class="form-group">
-					<h3>Was ist ihr bisher höchster Uni-Abschluss?</h3>
-					<h4> (Schreiben Sie zusätzlich das Fach und ggf. die Universität, falls der Abschluss
-						nicht an der HHU erreicht wurde.)</h4>
-					<select class="form-control col-sm-10" th:field="*{fachAbschluss.abschluss}">
-						<option th:value="'Bachelor'">Bachelor</option>
-						<option th:value="'Master'">Master</option>
-						<option th:value="'Diplom'">Diplom</option>
-						<option th:value="'Staatsexamen'">Staatsexamen</option>
-						<option th:value="'Anderes'">Anderes</option>
-						<option th:value="'Kein Uni-Abschluss'">Kein Uni-Abschluss</option>
-					</select>
-					<label>Fach:</label>
-					<input type="text" class="form-control col-sm-10" th:field="*{fachAbschluss.studiengang}" />
-					<label>Uni:</label>
-					<input type="text" class="form-control col-sm-10" value="HHU" th:field="*{fachAbschluss.uni}" />
-				</div>
-			</div>
-
-			<!--Submit Button-->
-			<div class="container">
-				<button type="submit" class="btn btn-primary">Abschicken!</button>
-			</div>
-			<!-- Karriere -->
-			<!--
+				<!-- Karriere -->
+				<!--
 					
-					
+					<div class="form-group">
+						<h3>Was ist ihr bisher höchster Uni-Abschluss?</h3>
+						<h4> (Schreiben Sie zusätzlich das Fach und ggf. die Universität, falls der Abschluss
+							nicht an der HHU erreicht wurde.)</h4>
+						<select class="form-control col-sm-10" th:field="*{Abschluss}">
+							<option th:value="'Bachelor'">Bachelor</option>
+							<option th:value="'Master'">Master</option>
+							<option th:value="'Diplom'">Diplom</option>
+							<option th:value="'Staatsexamen'">Staatsexamen</option>
+							<option th:value="'Anderes'">Anderes</option>
+							<option th:value="'Kein Uni-Abschluss'">Kein Uni-Abschluss</option>
+						</select>
+						<label>Fach:</label>
+						<input type="text" class="form-control col-sm-10" th:field="*{Fach}" />
+						<label>Uni:</label>
+						<input type="text" class="form-control col-sm-10" value="HHU" th:field="*{Uni}" />
+					</div>
 
 					<div class="form-group">
 				<h3>Bisherige Noten</h3>
@@ -335,7 +313,23 @@
 				</select>
 			</div>
 
+			<div class="form-group">
+				<h3>Bisherige Erfahrungen, Schulung und Nachricht an uns (sichtbar)
+				</h3>
+				<h4>Beschreiben Sie hier bitte kurz Ihre bisherigen Erfahrungen als
+					Tutor oder Korrektor in
+					der Informatik.
+					Wenn Sie über keine solchen Erfahrungen verfügen können Sie gerne
+					ähnliche Erfahrungen
+					(Nachhilfe, Korrektur anderer Fächer, ...) angeben. Wenn Sie bereits
+					als Tutor oder
+					Korrektor für uns gearbeitet haben reicht es, wenn Sie die
+					Tätigkeiten der letzten
+					beiden Semester angeben, Sie brauchen keine vollständige Liste zu
+					erstellen. </h4>
 
+				<textarea rows="8" cols="50"></textarea>
+			</div>
 			x
 
 

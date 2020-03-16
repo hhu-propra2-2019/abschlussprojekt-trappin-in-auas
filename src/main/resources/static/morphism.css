@@ -1,0 +1,64 @@
+input[type=text],
+input[type=number],
+input[type=date],
+select{
+    box-shadow: inset 4px 4px 8px #5555, 
+                inset -4px -4px 8px #ffffff;
+}
+
+input:focus[type=text],
+input:focus[type=number],
+input:focus[type=date],
+input:hover[type=text],
+input:hover[type=number],
+input:hover[type=date],
+input:active[type=text],
+input:active[type=number],
+input:active[type=date],
+select:focus,
+select:hover,
+select:active,
+textarea:hover,  
+textarea:active,
+textarea:focus, 
+label:focus
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: inset 4px 4px 8px #5555, 
+                inset -4px -4px 8px #ffffff;
+}
+
+.morph-container{
+    box-shadow: 4px 4px 8px #5555, 
+                -4px -4px 8px rgba(255, 255, 255, 0.3);
+
+    padding: 1%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.morph-container-inner{
+    box-shadow: inset 4px 4px 8px #5555, 
+    inset -4px -4px 8px rgba(255, 255, 255, 0.3);
+
+    padding: 1%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.morph-container-dark{
+    box-shadow: 4px 4px 8px #4444, 
+                -4px -4px 8px #dddd;
+
+    padding: 1%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+
+.morph-button{
+    background: linear-gradient(145deg, #eeee, #6666);
+    box-shadow:  4px 4px 8px #5555, 
+                -4px -4px 8px #ffffff;
+}

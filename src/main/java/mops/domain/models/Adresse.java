@@ -2,8 +2,10 @@ package mops.domain.models;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Adresse {
     private String PLZ;
     private String wohnort;

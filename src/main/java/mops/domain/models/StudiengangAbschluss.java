@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class StudiengangAbschluss {
     private String studiengang;
     private String abschluss;
+    private String uni;
 }

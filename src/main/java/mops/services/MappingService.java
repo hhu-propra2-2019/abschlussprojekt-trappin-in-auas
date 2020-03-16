@@ -31,7 +31,7 @@ public class MappingService implements IMappingService {
     }
 
     public StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss) {
-        return new StudiengangAbschluss(fachAbschluss.getStudiengang(), fachAbschluss.getAbschluss());
+        return new StudiengangAbschluss(fachAbschluss.getStudiengang(), fachAbschluss.getAbschluss(), fachAbschluss.getUni());
     }
 
     public ImmartikulationsStatus load(ImmartikulationsStatusDTO statusDTO) {
