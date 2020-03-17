@@ -8,10 +8,10 @@ import mops.domain.models.*;
 
 import org.springframework.stereotype.Service;
 
-import mops.domain.services.IMappingService;
+import mops.domain.services.IModelSerice;
 
 @Service
-public class ModelService implements IMappingService {
+public class ModelService implements IModelSerice {
 
     public ModelService() {
 

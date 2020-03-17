@@ -3,7 +3,7 @@ package mops.domain.services;
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
 
-public interface IMappingService {
+public interface IModelSerice {
     Karriere load(KarriereDTO karriereDTO);
     ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO);
     Personalien load(PersonalienDTO personalienDTO);

@@ -61,7 +61,7 @@ public class DTOService implements IDTOService {
         load(bewerber.getPraeferenzen()),bewerber.getVerteiltAn());
   }
 
-  private List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen){
+   public List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen){
     return praeferenzen.getModulAuswahl().stream().map(this::load).collect(Collectors.toList());
   }
 }
