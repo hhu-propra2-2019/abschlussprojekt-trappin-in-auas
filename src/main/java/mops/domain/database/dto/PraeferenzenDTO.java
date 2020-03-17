@@ -15,8 +15,8 @@ public class PraeferenzenDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private int maxWunschStunden;
     private int minWunschStunden;
+    private int maxWunschStunden;
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "praeferenzen", joinColumns = @JoinColumn(name = "praeferenzen_id"),
@@ -32,4 +32,17 @@ public class PraeferenzenDTO {
     @Enumerated(EnumType.STRING)
     private TutorenSchulungTeilnahme tutorenSchulungTeilnahme;
 
+    public PraeferenzenDTO(int minWunschStunden, int maxWunschStunden,
+        List<ModulAuswahlDTO> modulAuswahl, String kommentar,
+        EinstiegTyp einstiegTyp, String einschraenkungen,
+        BerufModulDTO berufModul, TutorenSchulungTeilnahme tutorenSchulungTeilnahme) {
+        this.minWunschStunden = minWunschStunden;
+        this.maxWunschStunden = maxWunschStunden;
+        this.modulAuswahl = modulAuswahl;
+        this.kommentar = kommentar;
+        this.einstiegTyp = einstiegTyp;
+        this.einschraenkungen = einschraenkungen;
+        this.berufModul = berufModul;
+        this.tutorenSchulungTeilnahme = tutorenSchulungTeilnahme;
+    }
 }

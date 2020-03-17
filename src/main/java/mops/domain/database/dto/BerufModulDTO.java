@@ -16,4 +16,9 @@ public class BerufModulDTO {
 
   @OneToOne
   private ModulDTO modul;
+
+  public BerufModulDTO(Beruf beruf, ModulDTO modul) {
+    this.beruf = beruf;
+    this.modul = modul;
+  }
 }

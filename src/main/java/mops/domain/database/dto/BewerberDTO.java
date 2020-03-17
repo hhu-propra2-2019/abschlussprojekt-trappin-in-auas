@@ -1,6 +1,8 @@
 package mops.domain.database.dto;
 
 import lombok.Data;
+import mops.domain.models.Dozent;
+
 import javax.persistence.*;
 
 @Data
@@ -13,12 +15,12 @@ public class BewerberDTO{
     private long id;
 
     @OneToOne
-    @JoinColumn(name="karriere")
-    private KarriereDTO karriere;
-
-    @OneToOne
     @JoinColumn(name="personalien")
     private PersonalienDTO personalien;
+
+    @OneToOne
+    @JoinColumn(name="karriere")
+    private KarriereDTO karriere;
 
     @OneToOne
     @JoinColumn(name="prefs")
@@ -26,4 +28,15 @@ public class BewerberDTO{
     
     private String erstelltVon;
     private String verteiltAn;
+
+    public BewerberDTO(PersonalienDTO personalien, KarriereDTO karriere,
+        PraeferenzenDTO praeferenzen, String verteiltAn) {
+        this.personalien = personalien;
+        this.karriere = karriere;
+        this.praeferenzen = praeferenzen;
+        this.verteiltAn = verteiltAn;
+    }
+
+	public BewerberDTO(PersonalienDTO load, KarriereDTO load2, PraeferenzenDTO load3, Dozent verteiltAn2) {
+	}
 }

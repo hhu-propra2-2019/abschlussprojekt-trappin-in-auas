@@ -8,57 +8,58 @@ import mops.domain.models.Bewerber;
 
 import org.springframework.stereotype.Service;
 
-
 import mops.domain.repositories.BewerberRepository;
 import mops.domain.services.IBewerberService;
-
 
 @Service
 public class BewerberService implements IBewerberService {
 
-    private transient BewerberRepository bewerberRepository;
-    private transient MappingService mappingService;
+  private transient BewerberRepository bewerberRepository;
+  private transient DTOService mappingService;
 
-    public BewerberService(BewerberRepository bewerberRepository, MappingService mappingService) {
-        this.bewerberRepository = bewerberRepository;
-        this.mappingService = mappingService;
-    }
+  public BewerberService(BewerberRepository bewerberRepository, DTOService mappingService) {
+    this.bewerberRepository = bewerberRepository;
+    this.mappingService = mappingService;
+  }
 
-    @Override
-    public void addBewerber(Bewerber b) {
-        bewerberRepository.save(mappingService.load(b));
-    }
+  @Override
+  public void addBewerber(Bewerber b) {
+    BewerberDTO bewerberDTO = mappingService.load(b);
+    System.out.println("bewerberDTO erstellt:");
+    System.out.println(bewerberDTO);
+    bewerberRepository.save(bewerberDTO);
+  }
 
-    @Override
-    public BewerberDTO findBewerberByKennung(String kennung) {
-        return bewerberRepository.findById(kennung).get();
-    }
+  @Override
+  public BewerberDTO findBewerberByKennung(String kennung) {
+    return bewerberRepository.findById(kennung).get();
+  }
 
-    public List<BewerberDTO> findAlleBewerber(){
-        return bewerberRepository.findAll();
-    }
+  public List<BewerberDTO> findAlleBewerber() {
+    return bewerberRepository.findAll();
+  }
 
-    @Override
-    public List<BewerberDTO> findAlleNichtVerteilteBewerber(List<BewerberDTO> alleBewerber) {
-        return alleBewerber.stream().filter(x -> x.getVerteiltAn() == null).collect(Collectors.toList());
-    }
+  @Override
+  public List<BewerberDTO> findAlleNichtVerteilteBewerber(List<BewerberDTO> alleBewerber) {
+    return alleBewerber.stream().filter(x -> x.getVerteiltAn() == null).collect(Collectors.toList());
+  }
 
-    @Override
-    public void verteile(String kennung, String dozent) {
-        BewerberDTO b = bewerberRepository.findById(kennung).get();
-        b.setVerteiltAn(dozent);
-        bewerberRepository.save(b);
-    }
+  @Override
+  public void verteile(String kennung, String dozent) {
+    BewerberDTO b = bewerberRepository.findById(kennung).get();
+    b.setVerteiltAn(dozent);
+    bewerberRepository.save(b);
+  }
 
-	public List<BewerberDTO> findAlleVerteilteBewerber(List<BewerberDTO> alleBewerber) {
-		return alleBewerber.stream().filter(x -> x.getVerteiltAn() != null).collect(Collectors.toList());
-    }
-    
-    public List<BewerberDTO> findNichtVerteilt(){
-        return bewerberRepository.findByVerteiltAnIsNull();
-    }
+  public List<BewerberDTO> findAlleVerteilteBewerber(List<BewerberDTO> alleBewerber) {
+    return alleBewerber.stream().filter(x -> x.getVerteiltAn() != null).collect(Collectors.toList());
+  }
 
-    public List<BewerberDTO> findVerteilt(){
-        return bewerberRepository.findByVerteiltAnIsNotNull();
-    }
+  public List<BewerberDTO> findNichtVerteilt() {
+    return bewerberRepository.findByVerteiltAnIsNull();
+  }
+
+  public List<BewerberDTO> findVerteilt() {
+    return bewerberRepository.findByVerteiltAnIsNotNull();
+  }
 }
