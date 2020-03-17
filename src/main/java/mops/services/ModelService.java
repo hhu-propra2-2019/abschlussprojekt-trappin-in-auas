@@ -19,6 +19,9 @@ public class ModelService implements IModelSerice {
 
     @Override
     public Karriere load(KarriereDTO karriereDTO) {
+        if(karriereDTO == null){
+            return null;
+        }
         return new Karriere(karriereDTO.getArbeitserfahrung(), load(karriereDTO.getImmartikulationsStatus()),
                 load(karriereDTO.getFachAbschluss()));
     }

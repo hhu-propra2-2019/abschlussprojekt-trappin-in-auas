@@ -80,5 +80,12 @@ public class ModelServiceTest {
 
         assertNull(personalien);
     }
+    
+    @Test
+    public void karriereDTOIsNullTest(){
+        KarriereDTO karriereDTO = null;
+        Karriere karriere = mappingService.load(karriereDTO);
+        assertNull(karriere);
+    }
 
 }
