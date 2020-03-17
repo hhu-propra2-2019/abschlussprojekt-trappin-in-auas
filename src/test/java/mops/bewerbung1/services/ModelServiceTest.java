@@ -106,4 +106,11 @@ public class ModelServiceTest {
         assertEquals(studiengangAbschlussDTO.getStudiengang(), studiengangAbschluss.getStudiengang());
         assertEquals(studiengangAbschlussDTO.getAbschluss(), studiengangAbschluss.getAbschluss());
     }
+
+    @Test
+    public void modulAuswahlIsNull() {
+        ModulAuswahlDTO modulAuswahlDTO = null;
+        ModulAuswahl modulAuswahl = mappingService.load(modulAuswahlDTO);
+        assertNull(modulAuswahl);
+    }
 }

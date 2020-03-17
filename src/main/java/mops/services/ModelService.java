@@ -36,6 +36,9 @@ public class ModelService implements IModelSerice {
 
     @Override
     public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) {
+        if(modulAuswahlDTO == null){
+            return null;
+        }
         return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet());
     }
 
