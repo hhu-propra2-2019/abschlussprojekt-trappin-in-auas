@@ -59,8 +59,11 @@ public class DTOService implements IDTOService {
   }
 
   public BewerberDTO load(Bewerber bewerber) {
-    BewerberDTO bewerberDTO = new BewerberDTO(load(bewerber.getPersonalien()), load(bewerber.getKarriere()),
-        load(bewerber.getPraeferenzen()), bewerber.getVerteiltAn());
+    BewerberDTO bewerberDTO = new BewerberDTO(
+      load(bewerber.getPersonalien()), 
+      load(bewerber.getKarriere()),
+      load(bewerber.getPraeferenzen()), 
+      bewerber.getVerteiltAn());
     System.out.println("bewerberDTO im dtoservice:");
     System.out.println(bewerberDTO);
     return bewerberDTO;

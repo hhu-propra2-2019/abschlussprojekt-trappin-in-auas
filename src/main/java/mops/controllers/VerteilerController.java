@@ -1,8 +1,5 @@
 package mops.controllers;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import mops.domain.database.dto.BewerberDTO;
 import mops.services.BewerberService;
 
@@ -21,27 +18,21 @@ public class VerteilerController {
 
   private transient BewerberService bewerberService;
 
-    public VerteilerController(BewerberService bewerberService){
-      this.bewerberService = bewerberService;
-    }
-    
-    @Secured({"ROLE_orga"})
-    @GetMapping("/uebersicht")
-    public String verteilen(Model model, KeycloakAuthenticationToken token){
-        //List<BewerberDTO> offeneBewerbungen = bewerberService.findNichtVerteilt();
-        //List<BewerberDTO> zugewieseneBewerbungen = bewerberService.findVerteilt();
-        //List<BewerberDTO> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
-        return "verteiler/verteilerMainpage";
-    }
-    
-    @Secured({"ROLE_orga"})
-    @GetMapping("/verteilteBewerbungen")
-    public String verteilen(Model model, KeycloakAuthenticationToken token){
-        //List<BewerberDTO> zugewieseneBewerbungen = bewerberService.findVerteilt();
-        return "verteiler/verteilerMainpage";
-    }
-    
-  @Secured({"ROLE_orga"})
+  public VerteilerController(BewerberService bewerberService) {
+    this.bewerberService = bewerberService;
+  }
+
+  @Secured({ "ROLE_orga" })
+  @GetMapping("/uebersicht")
+  public String verteilen(Model model, KeycloakAuthenticationToken token) {
+    // List<BewerberDTO> offeneBewerbungen = bewerberService.findNichtVerteilt();
+    // List<BewerberDTO> zugewieseneBewerbungen = bewerberService.findVerteilt();
+    // List<BewerberDTO> offeneBewerbungenPreview =
+    // offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
+    return "verteiler/verteilerMainpage";
+  }
+
+  @Secured({ "ROLE_orga" })
   @PostMapping("/verteilung")
   public String verteilDetails(Model m, @RequestParam String kennung) {
     System.out.println("print: " + kennung);

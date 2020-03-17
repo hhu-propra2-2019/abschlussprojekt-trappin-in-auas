@@ -14,15 +14,15 @@ public class BewerberDTO{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="personalien")
     private PersonalienDTO personalien;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="karriere")
     private KarriereDTO karriere;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="prefs")
     private PraeferenzenDTO praeferenzen;
     

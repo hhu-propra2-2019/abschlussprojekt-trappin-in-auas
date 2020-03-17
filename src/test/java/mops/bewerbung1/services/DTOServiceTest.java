@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import mops.domain.database.dto.BewerberDTO;
+import mops.domain.database.dto.PraeferenzenDTO;
 import mops.domain.models.*;
 import mops.services.DTOService;
 
@@ -23,7 +24,7 @@ public class DTOServiceTest {
   }
 
   @Test
-  public void bewerberZuBewerberDTO() {
+  public void bewerberZuBewerberDTO() throws Exception {
     Bewerber b = new Bewerber();
     Personalien personalien = new Personalien();
     personalien.setAlter(18);
@@ -65,8 +66,27 @@ public class DTOServiceTest {
 
     BewerberDTO bewerberDTO = dtoService.load(b);
 
+    assertNotNull(bewerberDTO.getPraeferenzen());
     assertNotNull(bewerberDTO.getPersonalien());
     assertNotNull(bewerberDTO.getKarriere());
-    assertNotNull(bewerberDTO.getPraeferenzen()));
+    
+  }
+
+  @Test
+  public void praeferenzenZuDTO() {
+    Modul propra = new Modul("propra", new Dozent("jens@hhu.de", "jens"));
+    ModulAuswahl propraAuswahl = new ModulAuswahl();
+    propraAuswahl.setModul(propra);
+    propraAuswahl.setNote(1.0);
+    propraAuswahl.setPrioritaet(2);
+
+    List<ModulAuswahl> modulAuswahls = new ArrayList<>();
+    modulAuswahls.add(propraAuswahl);
+
+    Praeferenzen pref = new Praeferenzen(14, 10, modulAuswahls, "irgendwas", EinstiegTyp.NEUEINSTIEG, "keine",
+        new BerufModul(Beruf.Korrektor, propra), TutorenSchulungTeilnahme.TEILNAHME);
+    
+    PraeferenzenDTO prefDTO = dtoService.load(pref);
+    assertNotNull(prefDTO);
   }
 }
