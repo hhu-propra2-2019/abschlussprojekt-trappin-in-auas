@@ -1,12 +1,13 @@
 package mops.domain.services;
 
 import java.util.List;
-import mops.domain.models.lehrstuhl.Modul;
+
+import mops.domain.database.dto.ModulDTO;
 
 public interface IModulService {
-  void addModul(Modul modul);
+  void addModul(ModulDTO modul);
 
-  Modul findModulById(Long id);
+  ModulDTO findModulById(Long id);
 
-  List<Modul> findAllModule();
+  List<ModulDTO> findAllModule();
 }

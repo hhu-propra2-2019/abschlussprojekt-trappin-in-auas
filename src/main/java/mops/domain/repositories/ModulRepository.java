@@ -1,18 +1,19 @@
 package mops.domain.repositories;
 
 import java.util.List;
-import mops.domain.models.lehrstuhl.Modul;
+
+import mops.domain.database.dto.ModulDTO;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ModulRepository extends CrudRepository<Modul, Long> {
+public interface ModulRepository extends CrudRepository<ModulDTO, Long> {
 
-  Modul findModulById(Long id);
+  ModulDTO findModulById(Long id);
 
-  List<Modul> findAll();
-
-  @Override
-  <S extends Modul> S save(S entity);
+  List<ModulDTO> findAll();
 
   @Override
-  <S extends Modul> Iterable<S> saveAll(Iterable<S> entities);
+  <S extends ModulDTO> S save(S entity);
+
+  @Override
+  <S extends ModulDTO> Iterable<S> saveAll(Iterable<S> entities);
 }

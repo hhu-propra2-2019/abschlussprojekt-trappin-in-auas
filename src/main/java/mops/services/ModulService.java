@@ -1,14 +1,17 @@
 package mops.services;
 
 import java.util.List;
-import mops.domain.models.lehrstuhl.Modul;
+
+import mops.domain.database.dto.ModulDTO;
 import mops.domain.repositories.ModulRepository;
 import mops.domain.services.IModulService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ModulService implements IModulService {
 
+  @Autowired
   private transient ModulRepository modulRepository;
 
   public ModulService(ModulRepository modulRepository) {
@@ -20,7 +23,7 @@ public class ModulService implements IModulService {
    * @param modul Zu speicherndes Modul
    */
   @Override
-  public void addModul(Modul modul) {
+  public void addModul(ModulDTO modul) {
     modulRepository.save(modul);
   }
 
@@ -30,7 +33,7 @@ public class ModulService implements IModulService {
    * @return Modul mit id
    */
   @Override
-  public Modul findModulById(Long id) {
+  public ModulDTO findModulById(Long id) {
     return modulRepository.findModulById(id);
   }
 
@@ -39,7 +42,7 @@ public class ModulService implements IModulService {
    * @return Liste mit allen Modulen
    */
   @Override
-  public List<Modul> findAllModule() {
+  public List<ModulDTO> findAllModule() {
     return modulRepository.findAll();
   }
 }

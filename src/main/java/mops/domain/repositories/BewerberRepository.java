@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BewerberRepository extends CrudRepository<BewerberDTO, String> {
-    BewerberDTO findBewerberByKennung(String kennung);
     List<BewerberDTO> findAll();
 
     @Override

@@ -1,20 +1,27 @@
 package mops.domain.database.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import mops.domain.models.Beruf;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import lombok.Data;
+import javax.persistence.OneToOne;
 
 @Data
 @Embeddable
+@NoArgsConstructor
 public class BerufModulDTO {
   @Enumerated(EnumType.STRING)
   private Beruf beruf;
 
-  @Embedded
+  @OneToOne(cascade=CascadeType.ALL)
   private ModulDTO modul;
+
+  public BerufModulDTO(Beruf beruf, ModulDTO modul) {
+    this.beruf = beruf;
+    this.modul = modul;
+  }
 }
