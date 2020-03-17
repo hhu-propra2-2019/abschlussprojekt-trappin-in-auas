@@ -50,11 +50,19 @@ public class BossController {
     return "redirect:/bewerbung1/boss/modules";
   }
 
-  @GetMapping("/delete")
-  public String deleteModule(Model m, KeycloakAuthenticationToken token, @RequestParam String modulName){
-
+  /**
+   * delete module. Login as "Boss" required.
+   * @param m injected, Model for Thymeleaf interaction
+   * @param token injected, present, if user is logged in
+   * @param modulName String, for delete query
+   * @return redirect to modules
+   */
+  //@Secured("ROLE_boss")
+  @PostMapping("/delete")
+  public String deleteModule(Model m, KeycloakAuthenticationToken token,
+      @RequestParam String modulName) {
+    System.out.println(modulName);
     modulService.deleteModulByName(modulName);
-
     return "redirect:/bewerbung1/boss/modules";
   }
 
