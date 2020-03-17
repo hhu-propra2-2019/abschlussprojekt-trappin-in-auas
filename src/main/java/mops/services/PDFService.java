@@ -41,36 +41,36 @@ public class PDFService {
             //befuellen der Datei
             PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
             PDField field = pDAcroForm.getField("Vorname");
-            field.setValue(bewerberDTO.getPersonalienDTO().getVorname());
+            field.setValue(bewerberDTO.getPersonalien().getVorname());
             field = pDAcroForm.getField("Name");
-            field.setValue(bewerberDTO.getPersonalienDTO().getName());
+            field.setValue(bewerberDTO.getPersonalien().getName());
             field = pDAcroForm.getField("Geburtsdatum");
-            field.setValue(bewerberDTO.getPersonalienDTO().getGeburtsdatum());
+            field.setValue(bewerberDTO.getPersonalien().getGeburtsdatum().toString());
             field = pDAcroForm.getField("Staatsangehörigkeit");
-            field.setValue(bewerberDTO.getPersonalienDTO().getNationalitaet());
+            field.setValue(bewerberDTO.getPersonalien().getNationalitaet());
             field = pDAcroForm.getField("Anschrift(Straße)");
-            field.setValue(bewerberDTO.getPersonalienDTO().getAdresseDTO().getStraße());
+            field.setValue(bewerberDTO.getPersonalien().getAdresse().getStraße());
             field = pDAcroForm.getField("Anschrift(Hausnummer)");
-            field.setValue(bewerberDTO.getPersonalienDTO().getAdresseDTO().getHausnummer());
+            field.setValue(bewerberDTO.getPersonalien().getAdresse().getHausnummer());
             field = pDAcroForm.getField("Anschrift(PLZ)");
-            field.setValue(bewerberDTO.getPersonalienDTO().getAdresseDTO().getPLZ());
+            field.setValue(bewerberDTO.getPersonalien().getAdresse().getPLZ());
             field = pDAcroForm.getField("Anschrift(ORT)");
-            field.setValue(bewerberDTO.getPersonalienDTO().getAdresseDTO().getWohnort());
+            field.setValue(bewerberDTO.getPersonalien().getAdresse().getWohnort());
 
 
             field = pDAcroForm.getField("Neueinstellung");
-            field.setValue(bewerberDTO.getPraeferenzenDTO().getEinstiegtyp());
+            field.setValue(bewerberDTO.getPraeferenzen().getEinstiegTyp().toString());
             field = pDAcroForm.getField("Weiterbeschäftigung");
-            field.setValue(bewerberDTO.getPraeferenzenDTO().getEinstiegtyp());
+            field.setValue(bewerberDTO.getPraeferenzen().getEinstiegTyp().toString());
             field = pDAcroForm.getField("Arbeitszeit");
-            field.setValue(bewerberDTO.getPraeferenzen().getMinWunschStunden() + " - " + bewerberDTO.getPraeferenzen().getMinWunschStunden().getMaxWunschStunden());
+            field.setValue(bewerberDTO.getPraeferenzen().getMinWunschStunden() + " - " + bewerberDTO.getPraeferenzen().getMaxWunschStunden());
             field = pDAcroForm.getField("Immatrikulation");
 
-            field.setValue(bewerberDTO.getKarriereDTO().getImmartikulationsStatus().getStatus());
+            field.setValue(bewerberDTO.getKarriere().getImmartikulationsStatus().isStatus() + "");
             field = pDAcroForm.getField("Studiengang");
-            field.setValue(bewerberDTO.getKarriereDTO().getImmartikulationsStatus().getFachrichtung());
+            field.setValue(bewerberDTO.getKarriere().getImmartikulationsStatus().getFachrichtung());
             field = pDAcroForm.getField("Bemerkung zum Antrag");
-            field.setValue(bewerberDTO.getKarriereDTO().getArbeitserfahrung() + "/n" + bewerberDTO.getPraeferenzenDTO().getKommentar() + "/n" + bewerberDTO.getPraeferenzenDTO().getEinschraenkungen() + "/n" + bewerberDTO.getPraeferenzenDTO().getTutorenSchulungTeilnahme());
+            field.setValue(bewerberDTO.getKarriere().getArbeitserfahrung() + "/n" + bewerberDTO.getPraeferenzen().getKommentar() + "/n" + bewerberDTO.getPraeferenzen().getEinschraenkungen());
 
             //Speichern der Datei
             pDDocument.save("/home/heyoka/Schreibtisch/progra2/projekt/abschlussprojekt-trappin-in-auas/output.pdf");
@@ -86,6 +86,7 @@ public class PDFService {
 
     }
 
+    /*
     public void fillWissenHilfskraft(BewerberDTO bewerberDTO) throws Exception {
 
         try {
@@ -121,5 +122,5 @@ public class PDFService {
         }
 
     }
-
+    */
 }
