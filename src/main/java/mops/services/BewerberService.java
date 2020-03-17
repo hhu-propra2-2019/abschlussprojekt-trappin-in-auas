@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import mops.domain.database.dto.BewerberDTO;
+import mops.domain.models.Bewerber;
+
 import org.springframework.stereotype.Service;
 
 
@@ -15,14 +17,16 @@ import mops.domain.services.IBewerberService;
 public class BewerberService implements IBewerberService {
 
     private transient BewerberRepository bewerberRepository;
+    private transient MappingService mappingService;
 
-    public BewerberService(BewerberRepository bewerberRepository) {
+    public BewerberService(BewerberRepository bewerberRepository, MappingService mappingService) {
         this.bewerberRepository = bewerberRepository;
+        this.mappingService = mappingService;
     }
 
     @Override
-    public void addBewerber(BewerberDTO b) {
-        bewerberRepository.save(b);
+    public void addBewerber(Bewerber b) {
+        bewerberRepository.save(mappingService.load(b));
     }
 
     @Override
