@@ -9,151 +9,143 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.mockito.internal.util.collections.Sets;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)
 class AuthenticationManagerTest {
 
+  @Autowired
+  private @Value("${role.orga}") String ROLE_ORGA;
+  @Autowired
+  private @Value("${role.studentin}") String ROLE_STUDENT;
+  @Autowired
+  private @Value("${role.boss}") String ROLE_BOSS;
+  @Autowired
+  private @Value("${role.verteiler}") String ROLE_VERTEILER;
+
+  @Autowired
   transient AuthenticationManager authenticationManager;
 
   transient Account orga;
   transient Account student;
   transient Account boss;
   transient Account nobody;
-  transient Account admin;
+  transient Account verteiler;
 
   @BeforeAll
   void setUp() {
-    orga = new Account("Orgaknilch", "orga@mops", "image", Sets.newSet("ROLE_orga"));
-    student = new Account("Student", "student@mops", "image2", Sets.newSet("ROLE_studentin"));
-    boss = new Account("BigBoss", "boss@mops", "boss_image", Sets.newSet("ROLE_verwaltung"));
+    orga = new Account("Orgaknilch", "orga@mops", "image", Sets.newSet(ROLE_ORGA));
+    student = new Account("Student", "student@mops", "image2", Sets.newSet(ROLE_STUDENT));
+    boss = new Account("BigBoss", "boss@mops", "boss_image", Sets.newSet(ROLE_BOSS));
     nobody = new Account("Herr Niemand", "", "null", Sets.newSet());
-    admin = new Account("ADMIN", "admin@mops", "admimage", Sets.newSet("ROLE_admin"));
+    verteiler = new Account("ADMIN", "admin@mops", "admimage", Sets.newSet(ROLE_VERTEILER));
   }
 
   // ORGA //
   @Test
   void testOrgaIsOrga() {
-    authenticationManager = new AuthenticationManager(orga);
-    assertThat(authenticationManager.isOrganizer()).isTrue();
+    assertThat(authenticationManager.isOrganizer(orga)).isTrue();
   }
 
   @Test
   void testOrgaIsNotStudent() {
-    authenticationManager = new AuthenticationManager(orga);
-    assertThat(authenticationManager.isStudent()).isFalse();
+    assertThat(authenticationManager.isStudent(orga)).isFalse();
   }
 
   @Test
   void testOrgaisNotAdmin() {
-    authenticationManager = new AuthenticationManager(orga);
-    assertThat(authenticationManager.isAdmin()).isFalse();
+    assertThat(authenticationManager.isAdmin(orga)).isFalse();
   }
 
   @Test
   void testOrgaIsNotBoss() {
-    authenticationManager = new AuthenticationManager(orga);
-    assertThat(authenticationManager.isBoss()).isFalse();
+    assertThat(authenticationManager.isBoss(orga)).isFalse();
   }
 
   // ADMIN //
   @Test
   void testAdminIsAdmin() {
-    authenticationManager = new AuthenticationManager(admin);
-    assertThat(authenticationManager.isAdmin()).isTrue();
+    assertThat(authenticationManager.isAdmin(verteiler)).isTrue();
   }
 
   @Test
   void testAdminIsNotOrga() {
-    authenticationManager = new AuthenticationManager(admin);
-    assertThat(authenticationManager.isOrganizer()).isFalse();
+    assertThat(authenticationManager.isOrganizer(verteiler)).isFalse();
   }
 
   @Test
   void testAdminIsNotBoss() {
-    authenticationManager = new AuthenticationManager(admin);
-    assertThat(authenticationManager.isBoss()).isFalse();
+    assertThat(authenticationManager.isBoss(verteiler)).isFalse();
   }
 
   @Test
   void testAdminIsNotStudent() {
-    authenticationManager = new AuthenticationManager(admin);
-    assertThat(authenticationManager.isStudent()).isFalse();
+    assertThat(authenticationManager.isStudent(verteiler)).isFalse();
   }
 
   // STUDENT //
   @Test
   void testStudentIsStudent() {
-    authenticationManager = new AuthenticationManager(student);
-    assertThat(authenticationManager.isStudent()).isTrue();
+    assertThat(authenticationManager.isStudent(student)).isTrue();
   }
 
   @Test
   void testStudentIsNotOrga() {
-    authenticationManager = new AuthenticationManager(student);
-    assertThat(authenticationManager.isOrganizer()).isFalse();
+    assertThat(authenticationManager.isOrganizer(student)).isFalse();
   }
 
   @Test
   void testStudentIsNotAdmin() {
-    authenticationManager = new AuthenticationManager(student);
-    assertThat(authenticationManager.isAdmin()).isFalse();
+    assertThat(authenticationManager.isAdmin(student)).isFalse();
   }
 
   @Test
   void testStudentIsNotBoss() {
-    authenticationManager = new AuthenticationManager(student);
-    assertThat(authenticationManager.isBoss()).isFalse();
+    assertThat(authenticationManager.isBoss(student)).isFalse();
   }
 
   // BOSS //
   @Test
   void testBossIsBoss() {
-    authenticationManager = new AuthenticationManager(boss);
-    assertThat(authenticationManager.isBoss()).isTrue();
+    assertThat(authenticationManager.isBoss(boss)).isTrue();
   }
 
   @Test
   void testBossIsNotStudent() {
-    authenticationManager = new AuthenticationManager(boss);
-    assertThat(authenticationManager.isStudent()).isFalse();
+    assertThat(authenticationManager.isStudent(boss)).isFalse();
   }
 
   @Test
   void testBossIsNotAdmin() {
-    authenticationManager = new AuthenticationManager(boss);
-    assertThat(authenticationManager.isAdmin()).isFalse();
+    assertThat(authenticationManager.isAdmin(boss)).isFalse();
   }
 
   @Test
   void testBossIsNotOrga() {
-    authenticationManager = new AuthenticationManager(boss);
-    assertThat(authenticationManager.isOrganizer()).isFalse();
+    assertThat(authenticationManager.isOrganizer(boss)).isFalse();
   }
 
   // NOBODY //
   @Test
   void testNobodyIsNotStudent() {
-    authenticationManager = new AuthenticationManager(nobody);
-    assertThat(authenticationManager.isStudent()).isFalse();
+    assertThat(authenticationManager.isStudent(nobody)).isFalse();
   }
 
   @Test
   void testNobodyIsNotAdmin() {
-    authenticationManager = new AuthenticationManager(nobody);
-    assertThat(authenticationManager.isAdmin()).isFalse();
+    assertThat(authenticationManager.isAdmin(nobody)).isFalse();
   }
 
   @Test
   void testNobodyIsNotOrga() {
-    authenticationManager = new AuthenticationManager(nobody);
-    assertThat(authenticationManager.isOrganizer()).isFalse();
+    assertThat(authenticationManager.isOrganizer(nobody)).isFalse();
   }
 
   @Test
   void testNobodyIsNotBoss() {
-    authenticationManager = new AuthenticationManager(nobody);
-    assertThat(authenticationManager.isBoss()).isFalse();
+    assertThat(authenticationManager.isBoss(nobody)).isFalse();
   }
 }
