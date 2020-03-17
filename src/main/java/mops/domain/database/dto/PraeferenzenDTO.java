@@ -7,28 +7,34 @@ import mops.domain.models.TutorenSchulungTeilnahme;
 import java.util.List;
 import javax.persistence.*;
 
-
 @Data
 @Table(name = "praeferenzen")
 @Entity
 public class PraeferenzenDTO {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private int minWunschStunden;
     private int maxWunschStunden;
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "praeferenzen", joinColumns = @JoinColumn(name = "praeferenzen_id"),
-        inverseJoinColumns = @JoinColumn(name = "modulAuswahl_id"))
+    @JoinTable(name = "modulAuswahl", 
+      joinColumns = @JoinColumn(name = "id"),
+      inverseJoinColumns = @JoinColumn(name = "modul_auswahl_id"))
     private List<ModulAuswahlDTO> modulAuswahl;
 
     private String kommentar;
+
     @Enumerated(EnumType.STRING)
     private EinstiegTyp einstiegTyp;
+
     private String einschraenkungen;
+
     @Embedded
     private BerufModulDTO berufModul;
+
     @Enumerated(EnumType.STRING)
     private TutorenSchulungTeilnahme tutorenSchulungTeilnahme;
 

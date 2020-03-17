@@ -59,13 +59,12 @@ public class DTOService implements IDTOService {
   }
 
   public BewerberDTO load(Bewerber bewerber) {
+    String verteiltAn = (bewerber.getVerteiltAn() == null) ? null : bewerber.getVerteiltAn().getDozentMail();
     BewerberDTO bewerberDTO = new BewerberDTO(
       load(bewerber.getPersonalien()), 
       load(bewerber.getKarriere()),
       load(bewerber.getPraeferenzen()), 
-      bewerber.getVerteiltAn());
-    System.out.println("bewerberDTO im dtoservice:");
-    System.out.println(bewerberDTO);
+      verteiltAn);
     return bewerberDTO;
   }
 
