@@ -5,16 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Bewerber {
+@AllArgsConstructor
+public class Bewerber{
 
-  private Personalien personalien;
-  private Karriere karriere;
-  private Praeferenzen praeferenzen;
-  private String kennung;
-  private String verteiltAn;
-
-
-
+    private Karriere karriere;
+    private Personalien personalien;
+    private Praeferenzen praeferenzen;
+    
+    private String erstelltVon;
+    private Dozent verteiltAn;
 }

@@ -1,9 +1,7 @@
 package mops.domain.database.dto;
 
 import javax.persistence.*;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Entity

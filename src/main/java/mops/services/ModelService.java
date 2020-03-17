@@ -8,10 +8,10 @@ import mops.domain.models.*;
 
 import org.springframework.stereotype.Service;
 
-import mops.domain.services.IMappingService;
+import mops.domain.services.IModelService;
 
 @Service
-public class ModelService implements IMappingService {
+public class ModelService implements IModelService {
 
     public ModelService() {
 
@@ -24,7 +24,7 @@ public class ModelService implements IMappingService {
     }
 
     public StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss) {
-        return new StudiengangAbschluss(fachAbschluss.getStudiengang(), fachAbschluss.getAbschluss());
+        return new StudiengangAbschluss(fachAbschluss.getStudiengang(), fachAbschluss.getAbschluss(), fachAbschluss.getUni());
     }
 
     public ImmartikulationsStatus load(ImmartikulationsStatusDTO statusDTO) {
@@ -33,7 +33,7 @@ public class ModelService implements IMappingService {
 
     @Override
     public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) {
-        return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet());
+        return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(), modulAuswahlDTO.getNote());
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ModelService implements IMappingService {
 
 
     public ModulAuswahl loadModulAuswahl(ModulAuswahlDTO modulAuswahlDTO) {
-        return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet());
+        return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(), modulAuswahlDTO.getNote());
     }
 
     public Adresse loadAdresse(PersonalienDTO personalienDTO) {
