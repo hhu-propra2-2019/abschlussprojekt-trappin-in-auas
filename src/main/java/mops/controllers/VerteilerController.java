@@ -33,7 +33,14 @@ public class VerteilerController {
         //List<BewerberDTO> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
         return "verteiler/verteilerMainpage";
     }
-
+    
+    @Secured({"ROLE_orga"})
+    @GetMapping("/verteilteBewerbungen")
+    public String verteilen(Model model, KeycloakAuthenticationToken token){
+        //List<BewerberDTO> zugewieseneBewerbungen = bewerberService.findVerteilt();
+        return "verteiler/verteilerMainpage";
+    }
+    
   @Secured({"ROLE_orga"})
   @PostMapping("/verteilung")
   public String verteilDetails(Model m, @RequestParam String kennung) {
