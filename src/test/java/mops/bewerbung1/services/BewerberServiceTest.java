@@ -1,11 +1,5 @@
 package mops.bewerbung1.services;
 
-import static org.mockito.Mockito.mock;
-
-import mops.domain.database.dto.*;
-import mops.domain.models.*;
-import mops.domain.repositories.BewerberRepository;
-import mops.services.BewerberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
