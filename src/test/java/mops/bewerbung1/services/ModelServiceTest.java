@@ -80,7 +80,7 @@ public class ModelServiceTest {
 
         assertNull(personalien);
     }
-    
+
     @Test
     public void karriereDTOIsNullTest(){
         KarriereDTO karriereDTO = null;
@@ -88,4 +88,22 @@ public class ModelServiceTest {
         assertNull(karriere);
     }
 
+    @Test
+    public void karriereDTOzuKarriereModel(){
+        ImmartikulationsStatusDTO immartikulationsStatusDTO = new ImmartikulationsStatusDTO(true, "Informatik");
+        StudiengangAbschlussDTO studiengangAbschlussDTO = new StudiengangAbschlussDTO("Informatik", "Bachelor");
+        KarriereDTO karriereDTO = new KarriereDTO("bei Apple Store gearbeitet.", immartikulationsStatusDTO, studiengangAbschlussDTO);
+
+        Karriere karriere = mappingService.load(karriereDTO);
+        StudiengangAbschluss studiengangAbschluss = karriere.getFachAbschluss();
+        ImmartikulationsStatus immartikulationsStatus = karriere.getImmartikulationsStatus();
+        assertNotNull(karriere);
+
+
+        assertEquals(karriereDTO.getArbeitserfahrung(), karriere.getArbeitserfahrung());
+        assertEquals(immartikulationsStatusDTO.getFachrichtung(), immartikulationsStatus.getFachrichtung());
+        assertEquals(immartikulationsStatusDTO.isStatus(), immartikulationsStatus.isStatus());
+        assertEquals(studiengangAbschlussDTO.getStudiengang(), studiengangAbschluss.getStudiengang());
+        assertEquals(studiengangAbschlussDTO.getAbschluss(), studiengangAbschluss.getAbschluss());
+    }
 }
