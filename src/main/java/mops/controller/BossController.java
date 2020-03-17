@@ -1,7 +1,8 @@
 package mops.controller;
 
 import mops.domain.models.Modul;
-import mops.services.MappingService;
+
+import mops.services.ModelService;
 import mops.services.ModulService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class BossController {
   private transient ModulService modulService;
 
   @Autowired
-  private transient MappingService mappingService;
+  private transient ModelService mappingService;
 
   /**
    * Modul list for boss. Login as "Boss" required.

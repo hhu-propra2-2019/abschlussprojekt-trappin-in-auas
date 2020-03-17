@@ -15,15 +15,15 @@ public class BewerberController {
 
     @GetMapping("/")
     public String index(Model model){
-        model.addAttribute("bewerber", new BewerberDTO());
+        model.addAttribute("bewerber", new Bewerber());
         return "bewerbungsformular";
     }
 
     @GetMapping("/bewirb")
     public String bewirb(Model model){
-       /* model.addAttribute("personal", new Personalien());
+        model.addAttribute("personal", new Personalien());
         model.addAttribute("modulauswahl", new ModulAuswahl());
-        model.addAttribute("preference", new Praeferenzen()); */
+        model.addAttribute("preference", new Praeferenzen());
         return "bewerbungsformular";
     }
 

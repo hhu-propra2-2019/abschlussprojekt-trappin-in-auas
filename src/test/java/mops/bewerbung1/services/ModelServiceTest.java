@@ -5,65 +5,32 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
 import java.util.Locale;
-
+import mops.domain.database.dto.*;
+import mops.domain.models.*;
+import mops.services.ModelService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import mops.domain.database.dto.*;
-import mops.domain.models.*;
 import mops.domain.services.IMappingService;
-import mops.services.MappingService;
 
 @SpringBootTest
-public class MappingServiceTest {
+public class ModelServiceTest {
     
     private transient IMappingService mappingService;
 
     @BeforeEach
      void setUp() {
-        mappingService = new MappingService();
+        mappingService = new ModelService();
         
     }
 
-    @Test
-    public void bestandeneModuleDTOZuBestandeneModuleModel(){
-        //TODO: create a generator for this
-        //TODO: differentiate DTO embeddables from models
-        ModulDTO modulDTO = new ModulDTO("RA", "golov@hhu.de", "janine golov");
 
-        BestandeneModuleDTO bestandeneModuleDTO = new BestandeneModuleDTO();
-        bestandeneModuleDTO.setNote(1.3);
-        bestandeneModuleDTO.setModul(modulDTO);
-        System.out.println(mappingService);
-        BestandeneModule bestandeneModule = mappingService.load(bestandeneModuleDTO);
-        Modul modul = bestandeneModule.getModul();
-
-        assertNotNull(bestandeneModule);
-        assertNotNull(modul);
-
-        //are those checks below actually nessecary? not sure
-        assertEquals(bestandeneModule.getNote(), 1.3);
-        assertEquals(modulDTO.getModul(), modul.getModulName());
-    }
-
-    /**
-     * Make sure the mappingservice
-     * does not break when passing null
-     */
-    @Test
-    public void bestandenesModulDTOIsNullMappingReturnsNull(){
-        BestandeneModuleDTO bestandeneModuleDTO = null;
-        BestandeneModule bestandeneModule = mappingService.load(bestandeneModuleDTO);
-
-        assertNull(bestandeneModule);
-    }
 
     @Test
-    public void personalienDTOZuPersonalienModel(){
+    public void personalienDTOZuPersonalienModel() {
         AdresseDTO adresseDTO = new AdresseDTO();
         adresseDTO.setHausnummer("11a");
         adresseDTO.setPLZ("40233");
@@ -83,9 +50,9 @@ public class MappingServiceTest {
         personalienDTO.setNationalitaet("Terminator");
         personalienDTO.setVorname("John");
         personalienDTO.setUnikennung("johwi200");
-        
+
         Personalien personalien = mappingService.load(personalienDTO);
-        
+
         Adresse adresse = personalien.getAdresse();
 
         assertNotNull(personalien);
@@ -105,6 +72,7 @@ public class MappingServiceTest {
         assertEquals(personalienDTO.getVorname(), personalien.getVorname());
     }
 
+
     @Test
     public void personalienDTOIsNullMappingReturnsNull(){
         PersonalienDTO personalienDTO = null;
@@ -112,4 +80,5 @@ public class MappingServiceTest {
 
         assertNull(personalien);
     }
+
 }

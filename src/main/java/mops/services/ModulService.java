@@ -5,11 +5,13 @@ import java.util.List;
 import mops.domain.database.dto.ModulDTO;
 import mops.domain.repositories.ModulRepository;
 import mops.domain.services.IModulService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ModulService implements IModulService {
 
+  @Autowired
   private transient ModulRepository modulRepository;
 
   public ModulService(ModulRepository modulRepository) {

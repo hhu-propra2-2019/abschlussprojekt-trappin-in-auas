@@ -8,4 +8,9 @@ import lombok.Data;
 public class StudiengangAbschlussDTO {
     private String studiengang;
     private String abschluss;
+
+    public StudiengangAbschlussDTO(String studiengang, String abschluss) {
+        this.studiengang = studiengang;
+        this.abschluss = abschluss;
+    }
 }
