@@ -1,559 +1,594 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="cards.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="cards.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 </head>
 <body>
-    <h1>Detailansicht</h1>
-    <div class="container-fluid">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 shadow p-3 mb-5 bg-light rounded">
-                    <ul>
-                        <h3>Persönliche Daten:</h3>
-                        <div class="form-group">
-                            <input  type="text" th:field="*{Vorname}" class="form-control" id="input1" placeholder="Vorname">
-                        </div>
-                        <div class="form-group">
-                            <input  type="text" th:field="*{Nachname}" class="form-control" id="input2" placeholder="Nachname">
-                        </div>
-                        <div class="form-group">
-                            <input  type="text" th:field="*{Straße}" class="form-control" id="input3" placeholder="Straße und Hausnummer">
-                        </div>
-                        <div class="form-group">
-                            <input  type="text" th:field="*{Postleitzahl}" class="form-control" id="input4" placeholder="Postleitzahl">
-                        </div>
-                        <div class="form-group">
-                            <input  type="text" th:field="*{Ort}" class="form-control" id="input5" placeholder="Ort">
-                        </div>
-                        <div class="form-group">
-                            <input  type="text" th:field="*{Staatsangehörigkeit}" class="form-control" id="input6" placeholder="Staatsangehörigkeit">
-                        </div>
-                    </ul>
-                </div>
-                    <div id="box1" style="width: 300px; padding: 0px; margin: 0 10px"></div>
-                    <div class="col-12 shadow p-3 mb-5 bg-light rounded">
-              <ul>
-                <h3>Für welches Fach sind Sie derzeit an der HHU immatrikuliert?</h3>
-                  <div class="form-group">
-                      <input  type="text" th:field="*{Immatrikulationsfach}" class="form-control" id="input 7" placeholder="Immatrikulationsfach">
-                  </div>
-              </ul>
-                        <br></br>
-              <ul>
-                <h3>Was ist ihr bisher höchster Uni-Abschluss?</h3>
-                <h7> (Schreiben Sie zusätzlich das Fach und ggf. die Universität, falls der Abschluss nicht an der HHU erreicht wurde.)</h7>
-                         <br></br>
-                  <div class="form-group">
-                      <select class="form-control" th:field="*{Abschluss}">
-                          <option th:value="'Bachelor'">Bachelor</option>
-                          <option th:value="'Master'" >Master</option>
-                          <option th:value="'Diplom'" >Diplom</option>
-                          <option th:value="'Staatsexamen'" >Staatsexamen</option>
-                          <option th:value="'Anderes'" >Anderes</option>
-                          <option th:value="'Kein Uni-Abschluss'" >Kein Uni-Abschluss</option>
-                      </select>
-                  </div>
-                  <div class="form-group">
-                      <input type="Fach" class="form-control" th:field="*{Fach}" placeholder="Fach bitte hier eintragen...">
-                  </div>
-                  <div class="form-group" >
-                      <input type="Fach" class="form-control" th:field="*{Uni}" placeholder="Universität bitte hier eintragen..." value="HHU">
-                  </div>
-              </ul>
+<h1>Detailansicht</h1>
+<div class="container-fluid">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 shadow p-3 mb-5 bg-light rounded">
+        <ul>
+          <h3>Persönliche Daten:</h3>
+          <div class="form-group">
+            <input  type="text" th:field="*{Vorname}" class="form-control" id="input1" placeholder="Vorname">
+          </div>
+          <div class="form-group">
+            <input  type="text" th:field="*{Nachname}" class="form-control" id="input2" placeholder="Nachname">
+          </div>
+          <div class="form-group">
+            <input  type="text" th:field="*{Straße}" class="form-control" id="input3" placeholder="Straße und Hausnummer">
+          </div>
+          <div class="form-group">
+            <input  type="text" th:field="*{Postleitzahl}" class="form-control" id="input4" placeholder="Postleitzahl">
+          </div>
+          <div class="form-group">
+            <input  type="text" th:field="*{Ort}" class="form-control" id="input5" placeholder="Ort">
+          </div>
+          <div class="form-group">
+            <input  type="text" th:field="*{Staatsangehörigkeit}" class="form-control" id="input6" placeholder="Staatsangehörigkeit">
+          </div>
+        </ul>
+      </div>
+      <div id="box1" style="width: 300px; padding: 0px; margin: 0 10px"></div>
+      <div class="col-12 shadow p-3 mb-5 bg-light rounded">
+        <ul>
+          <h3>Für welches Fach sind Sie derzeit an der HHU immatrikuliert?</h3>
+          <div class="form-group">
+            <input  type="text" th:field="*{Immatrikulationsfach}" class="form-control" id="input 7" placeholder="Immatrikulationsfach">
+          </div>
+        </ul>
+        <br></br>
+        <ul>
+          <h3>Was ist ihr bisher höchster Uni-Abschluss?</h3>
+          <h7> (Schreiben Sie zusätzlich das Fach und ggf. die Universität, falls der Abschluss nicht an der HHU erreicht wurde.)</h7>
+          <br></br>
+          <div class="form-group">
+            <select class="form-control" th:field="*{Abschluss}">
+              <option th:value="'Bachelor'">Bachelor</option>
+              <option th:value="'Master'" >Master</option>
+              <option th:value="'Diplom'" >Diplom</option>
+              <option th:value="'Staatsexamen'" >Staatsexamen</option>
+              <option th:value="'Anderes'" >Anderes</option>
+              <option th:value="'Kein Uni-Abschluss'" >Kein Uni-Abschluss</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="Fach" class="form-control" th:field="*{Fach}" placeholder="Fach bitte hier eintragen...">
+          </div>
+          <div class="form-group" >
+            <input type="Fach" class="form-control" th:field="*{Uni}" placeholder="Universität bitte hier eintragen..." value="HHU">
+          </div>
+        </ul>
 
-              <ul>
-                <h3>Bisherige Noten</h3>
-                <li>
-                  <h7>Bitte geben Sie Ihre bisherigen Noten zu den unten genannten Fächern an.</h7>
-                </li>
-                <li>
-                  <h7>Geben Sie zusätzlich an, bei welchem Dozenten und in welchem Semester Sie die Prüfung
-                  abgelegt haben (Beispiel: Conrad, SS2016 oder Bendisposto, WS2013)</h7>
-                </li>
-                <li>
-                  <h7>Die Veranstaltung Softwareentwicklung im Team beinhaltet Teile des alten Programmierpraktikums.
-                  Sollten Sie hierzu Fragen haben wenden Sie sich an Jens Bendisposto.</h7>
-                </li>
-                            <br></br>
-                  <div class="form-group">
-                      <label for="Programmierung">Grundlagen der Softwareentwicklung und Programmierung / Informatik 1 / Programmierung </label>
-                      <select class="form-control" id="Programmierung" th:field="*{NoteProgrammierung}">
-                          <option th:value="'1,0'">1,0</option>
-                          <option th:value="'1,3'" >1,3</option>
-                          <option th:value="'1,7'" >1,7</option>
-                          <option th:value="'2,0'" >2,0</option>
-                          <option th:value="'2,3'" >2,3</option>
-                          <option th:value="'2,7'" >2,7</option>
-                          <option th:value="'3,0'" >3,0</option>
-                          <option th:value="'3,3'" >3,3</option>
-                          <option th:value="'3,7'" >3,7</option>
-                          <option th:value="'4,0'" >4,0</option>
-                          <option th:value="'Keine Prüfung abgelegt'" >Keine Prüfung abgelegt</option>
-                      </select>
-                  </div>
-                  <div class="form-group">
-                      <label for="Programmierung">(Grundlagen der) Algorithmen und Datenstrukturen / Informatik III</label>
-                      <select class="form-control" id="Aldat" th:field="*{NoteAldat}">
-                          <option th:value="'1,0'">1,0</option>
-                          <option th:value="'1,3'" >1,3</option>
-                          <option th:value="'1,7'" >1,7</option>
-                          <option th:value="'2,0'" >2,0</option>
-                          <option th:value="'2,3'" >2,3</option>
-                          <option th:value="'2,7'" >2,7</option>
-                          <option th:value="'3,0'" >3,0</option>
-                          <option th:value="'3,3'" >3,3</option>
-                          <option th:value="'3,7'" >3,7</option>
-                          <option th:value="'4,0'" >4,0</option>
-                          <option th:value="'Keine Prüfung abgelegt'" >Keine Prüfung abgelegt</option>
-                      </select>
-                  </div>
-                  <div class="form-group">
-                      <label for="Datenbanksysteme">Datenbanksysteme</label>
-                      <select class="form-control" id="Datenbanksysteme" th:field="*{Datenbanksysteme}">
-                          <option th:value="'1,0'">1,0</option>
-                          <option th:value="'1,3'" >1,3</option>
-                          <option th:value="'1,7'" >1,7</option>
-                          <option th:value="'2,0'" >2,0</option>
-                          <option th:value="'2,3'" >2,3</option>
-                          <option th:value="'2,7'" >2,7</option>
-                          <option th:value="'3,0'" >3,0</option>
-                          <option th:value="'3,3'" >3,3</option>
-                          <option th:value="'3,7'" >3,7</option>
-                          <option th:value="'4,0'" >4,0</option>
-                          <option th:value="'Keine Prüfung abgelegt'" >Keine Prüfung abgelegt</option>
-                      </select>
-                  </div>
-                  <div class="form-group">
-                      <label for="Softwareentwicklung">Softwareentwicklung im Team</label>
-                      <select class="form-control" id="Softwareentwicklung" th:field="*{Softwareentwicklung}">
-                          <option th:value="'1,0'">1,0</option>
-                          <option th:value="'1,3'" >1,3</option>
-                          <option th:value="'1,7'" >1,7</option>
-                          <option th:value="'2,0'" >2,0</option>
-                          <option th:value="'2,3'" >2,3</option>
-                          <option th:value="'2,7'" >2,7</option>
-                          <option th:value="'3,0'" >3,0</option>
-                          <option th:value="'3,3'" >3,3</option>
-                          <option th:value="'3,7'" >3,7</option>
-                          <option th:value="'4,0'" >4,0</option>
-                          <option th:value="'Keine Prüfung abgelegt'" >Keine Prüfung abgelegt</option>
-                      </select>
-                  </div>
-              </ul>
-                        <br></br>
-                        <h3>Gewünschte Fächer</h3>
-                        <h7>Welche Fächer möchten Sie unterstützen?
-                            <br>
-                            Wenn Sie ein Fach nicht gehört haben geben Sie ebenfalls "auf keinen Fall" an.
-                            Mehrfachnennungen sind ausdrücklich erwünscht! </h7>
+        <ul>
+          <h3>Bisherige Noten</h3>
+          <li>
+            <h7>Bitte geben Sie Ihre bisherigen Noten zu den unten genannten Fächern an.</h7>
+          </li>
+          <li>
+            <h7>Geben Sie zusätzlich an, bei welchem Dozenten und in welchem Semester Sie die Prüfung
+              abgelegt haben (Beispiel: Conrad, SS2016 oder Bendisposto, WS2013)</h7>
+          </li>
+          <li>
+            <h7>Die Veranstaltung Softwareentwicklung im Team beinhaltet Teile des alten Programmierpraktikums.
+              Sollten Sie hierzu Fragen haben wenden Sie sich an Jens Bendisposto.</h7>
+          </li>
+          <br></br>
+          <div class="form-group">
+            <label for="Programmierung">Grundlagen der Softwareentwicklung und Programmierung / Informatik 1 / Programmierung </label>
+            <select class="form-control" id="Programmierung" th:field="*{NoteProgrammierung}">
+              <option th:value="'1,0'">1,0</option>
+              <option th:value="'1,3'" >1,3</option>
+              <option th:value="'1,7'" >1,7</option>
+              <option th:value="'2,0'" >2,0</option>
+              <option th:value="'2,3'" >2,3</option>
+              <option th:value="'2,7'" >2,7</option>
+              <option th:value="'3,0'" >3,0</option>
+              <option th:value="'3,3'" >3,3</option>
+              <option th:value="'3,7'" >3,7</option>
+              <option th:value="'4,0'" >4,0</option>
+              <option th:value="'Keine Prüfung abgelegt'" >Keine Prüfung abgelegt</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="Programmierung">(Grundlagen der) Algorithmen und Datenstrukturen / Informatik III</label>
+            <select class="form-control" id="Aldat" th:field="*{NoteAldat}">
+              <option th:value="'1,0'">1,0</option>
+              <option th:value="'1,3'" >1,3</option>
+              <option th:value="'1,7'" >1,7</option>
+              <option th:value="'2,0'" >2,0</option>
+              <option th:value="'2,3'" >2,3</option>
+              <option th:value="'2,7'" >2,7</option>
+              <option th:value="'3,0'" >3,0</option>
+              <option th:value="'3,3'" >3,3</option>
+              <option th:value="'3,7'" >3,7</option>
+              <option th:value="'4,0'" >4,0</option>
+              <option th:value="'Keine Prüfung abgelegt'" >Keine Prüfung abgelegt</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="Datenbanksysteme">Datenbanksysteme</label>
+            <select class="form-control" id="Datenbanksysteme" th:field="*{Datenbanksysteme}">
+              <option th:value="'1,0'">1,0</option>
+              <option th:value="'1,3'" >1,3</option>
+              <option th:value="'1,7'" >1,7</option>
+              <option th:value="'2,0'" >2,0</option>
+              <option th:value="'2,3'" >2,3</option>
+              <option th:value="'2,7'" >2,7</option>
+              <option th:value="'3,0'" >3,0</option>
+              <option th:value="'3,3'" >3,3</option>
+              <option th:value="'3,7'" >3,7</option>
+              <option th:value="'4,0'" >4,0</option>
+              <option th:value="'Keine Prüfung abgelegt'" >Keine Prüfung abgelegt</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="Softwareentwicklung">Softwareentwicklung im Team</label>
+            <select class="form-control" id="Softwareentwicklung" th:field="*{Softwareentwicklung}">
+              <option th:value="'1,0'">1,0</option>
+              <option th:value="'1,3'" >1,3</option>
+              <option th:value="'1,7'" >1,7</option>
+              <option th:value="'2,0'" >2,0</option>
+              <option th:value="'2,3'" >2,3</option>
+              <option th:value="'2,7'" >2,7</option>
+              <option th:value="'3,0'" >3,0</option>
+              <option th:value="'3,3'" >3,3</option>
+              <option th:value="'3,7'" >3,7</option>
+              <option th:value="'4,0'" >4,0</option>
+              <option th:value="'Keine Prüfung abgelegt'" >Keine Prüfung abgelegt</option>
+            </select>
+          </div>
+        </ul>
+        <ul>
+          <br></br>
+          <h3>Gewünschte Fächer</h3>
+          <h7>Welche Fächer möchten Sie unterstützen?
+            <br>
+            Wenn Sie ein Fach nicht gehört haben geben Sie ebenfalls "auf keinen Fall" an.
+            Mehrfachnennungen sind ausdrücklich erwünscht! </h7>
+        </ul>
 
+        <div class="table-responsive-xl">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Fach</th>
+              <th scope="col">sehr gerne</th>
+              <th scope="col">gerne, aber <br>lieber ein <br>anderes Fach</th>
+              <th scope="col">nicht gerne,<br> kann ich <br>aber machen</th>
+              <th scope="col">auf keinen Fall</th>
+            </tr>
+            </thead>
+            <tbody>
 
-                        <div class="table-responsive-xl">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Fach</th>
-                                    <th scope="col">sehr gerne</th>
-                                    <th scope="col">gerne, aber <br>lieber ein <br>anderes Fach</th>
-                                    <th scope="col">nicht gerne,<br> kann ich <br>aber machen</th>
-                                    <th scope="col">auf keinen Fall</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+            <tr>
+              <th scope="row">Programierung</th>
+              <td><input type="radio"
+                         th:field="*{GewProg}"
+                         th:value="${1}"
+                         name="GewIDProg"/>
+              </td>
+              <td><input type="radio"
+                         th:field="*{GewProg}"
+                         th:value="${2}"
+                         name="GewIDProg"/>
+              </td>
+              <td><input type="radio"
+                         th:field="*{GewProg}"
+                         th:value="${3}"
+                         name="GewIDProg"/>
+              </td>
+              <td><input type="radio"
+                         th:field="*{GewProg}"
+                         th:value="${4}"
+                         name="GewIDProg"/>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Aldat</th>
+              <td><input type="radio"
+                         th:field="*{GewAldat}"
+                         th:value="${1}"
+                         name="GewIDAldat"/>
+              </td>
+              <td><input type="radio"
+                         th:field="*{GewAldat}"
+                         th:value="${2}"
+                         name="GewIDAldat"/>
+              </td>
+              <td><input type="radio"
+                         th:field="*{GewAldat}"
+                         th:value="${3}"
+                         name="GewIDAldat"/>
+              </td>
+              <td><input type="radio"
+                         th:field="*{GewAldat}"
+                         th:value="${4}"
+                         name="GewIDAldat"/>
+              </td>
+            </tr>
 
-                                <tr>
-                                    <th scope="row">Programierung</th>
-                                    <td><input type="radio"
-                                               th:field="*{GewProg}"
-                                               th:value="${1}"
-                                               name="GewIDProg"/>
-                                    </td>
-                                    <td><input type="radio"
-                                               th:field="*{GewProg}"
-                                               th:value="${2}"
-                                               name="GewIDProg"/>
-                                    </td>
-                                    <td><input type="radio"
-                                               th:field="*{GewProg}"
-                                               th:value="${3}"
-                                               name="GewIDProg"/>
-                                    </td>
-                                    <td><input type="radio"
-                                               th:field="*{GewProg}"
-                                               th:value="${4}"
-                                               name="GewIDProg"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Aldat</th>
-                                    <td><input type="radio"
-                                               th:field="*{GewAldat}"
-                                               th:value="${1}"
-                                               name="GewIDAldat"/>
-                                    </td>
-                                    <td><input type="radio"
-                                               th:field="*{GewAldat}"
-                                               th:value="${2}"
-                                               name="GewIDAldat"/>
-                                    </td>
-                                    <td><input type="radio"
-                                               th:field="*{GewAldat}"
-                                               th:value="${3}"
-                                               name="GewIDAldat"/>
-                                    </td>
-                                    <td><input type="radio"
-                                               th:field="*{GewAldat}"
-                                               th:value="${4}"
-                                               name="GewIDAldat"/>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">Datenbank</th>
-                                    <td><input type="radio"
-                                               th:field="*{GewDatenbank}"
-                                               th:value="${1}"
-                                               name="GewIDDatenbank"/>
-                                    </td>
-                                    <td><input type="radio"
-                                               th:field="*{GewDatenbank}"
-                                               th:value="${2}"
-                                               name="GewIDDatenbank"/>
-                                    </td>
-                                    <td><input type="radio"
-                                               th:field="*{GewDatenbank}"
-                                               th:value="${3}"
-                                               name="GewIDDatenbank"/>
-                                    </td>
-                                    <td><input type="radio"
-                                               th:field="*{GewDatenbank}"
-                                               th:value="${4}"
-                                               name="GewIDDatenbank"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Software</th>
-                                    <td><input type="radio"
-                                               th:field="*{GewTeam}"
-                                               th:value="${1}"
-                                               name="GewIDTeam"/>
-                                    </td>
-                                    <td><input type="radio"
-                                               th:field="*{GewTeam}"
-                                               th:value="${2}"
-                                               name="GewIDTeam"/>
-                                    </td>
-                                    <td><input type="radio"
-                                               th:field="*{GewTeam}"
-                                               th:value="${3}"
-                                               name="GewIDTeam"/>
-                                    </td>
-                                    <td><input type="radio"
-                                               th:field="*{GewTeam}"
-                                               th:value="${4}"
-                                               name="GewIDTeam"/>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-            <h3>Bisherige Erfahrungen, Schulung und Nachricht an uns (sichtbar)</h3>
-            <h4>Beschreiben Sie hier bitte kurz Ihre bisherigen Erfahrungen als Tutor oder Korrektor in der Informatik.
+            <tr>
+              <th scope="row">Datenbank</th>
+              <td><input type="radio"
+                         th:field="*{GewDatenbank}"
+                         th:value="${1}"
+                         name="GewIDDatenbank"/>
+              </td>
+              <td><input type="radio"
+                         th:field="*{GewDatenbank}"
+                         th:value="${2}"
+                         name="GewIDDatenbank"/>
+              </td>
+              <td><input type="radio"
+                         th:field="*{GewDatenbank}"
+                         th:value="${3}"
+                         name="GewIDDatenbank"/>
+              </td>
+              <td><input type="radio"
+                         th:field="*{GewDatenbank}"
+                         th:value="${4}"
+                         name="GewIDDatenbank"/>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Software</th>
+              <td><input type="radio"
+                         th:field="*{GewTeam}"
+                         th:value="${1}"
+                         name="GewIDTeam"/>
+              </td>
+              <td><input type="radio"
+                         th:field="*{GewTeam}"
+                         th:value="${2}"
+                         name="GewIDTeam"/>
+              </td>
+              <td><input type="radio"
+                         th:field="*{GewTeam}"
+                         th:value="${3}"
+                         name="GewIDTeam"/>
+              </td>
+              <td><input type="radio"
+                         th:field="*{GewTeam}"
+                         th:value="${4}"
+                         name="GewIDTeam"/>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <h3>Bisherige Erfahrungen, Schulung und Nachricht an uns (sichtbar)</h3>
+          <h7>Beschreiben Sie hier bitte kurz Ihre bisherigen Erfahrungen als Tutor oder Korrektor in der Informatik.
             Wenn Sie über keine solchen Erfahrungen verfügen können Sie gerne ähnliche Erfahrungen (Nachhilfe, Korrektur anderer Fächer, ...) angeben.
             Wenn Sie bereits als Tutor oder Korrektor für uns gearbeitet haben reicht es, wenn Sie die Tätigkeiten der letzten beiden Semester angeben,
-            Sie brauchen keine vollständige Liste zu erstellen. </h4>
-            <textarea rows="8" cols="50"></textarea>
-          </ul>
-            </div>
-          </div>
+            Sie brauchen keine vollständige Liste zu erstellen. </h7>
+        </ul>
+        <div class="form-group">
+          <label for="Erfahrungen"></label>
+          <textarea class="form-control" id="Erfahrungen" rows="3"></textarea>
         </div>
-      </div>
-      <div class="container-fluid">
-            <div class="col-12 shadow p-3 mb-5 bg-light rounded">
-
-                <h3>Um welche Art der Beschäftigung handelt es sich?</h3>
-                <input type="radio" th:field="*{Beschäftigungsart}" th:value="${Neueinstellung}" name="einstellung"/>
-                Neueinstellung (bisher keine Anstellung an der HHU).
-                <br></br>
-                <input type="radio" th:field="*{Beschäftigungsart}" th:value="${Weiterbeschäftigung}" name="einstellung"/>
-                Weiterbeschäftigung (bestehender Vertrag bis zum 31.03.2020).
-                <br></br>
-                <input type="radio" th:field="*{Beschäftigungsart}" th:value="${Wiedereinstellung}" name="einstellung"/>
-                Wiedereinstellung (Kein bestehender Vertrag bis zum 31.03.2020).
-
-                    <h3>Stunden</h3>
-                <h4>Alle Tutoren- und Korrektorenjobs starten am 01.10.2020. Die Dauer der Anstellung richtet sich nach dem Fach (3-6 Monate).</h4>
-                <h4>Die Minijobgrenze liegt aktuell bei 9h/Woche für SHKs und bei 7h/Woche für WHBs. Sie können insgesamt nicht mehr als 17h/Woche
-                als Hilfskraft an der Universität angestellt sein, das schließt auch mehrere parallele Anstellungen ein. Einstellungen erfolgen in
-                der Regel für zwischen 9 und 17h/Woche, Einzelheiten können im Bewerbungsgespräch geklärt werden.</h4>
-                Wie viele Stunden möchten Sie mindestens und maximal pro Woche arbeiten?
-                <br></br>
-                <input type="number" th:field="*{Stunden}" placeholder="1-17 Minimum" pattern="^(?:[1-9]|1[0-7])$"/>
-                    -
-                <input type="number" th:field="*{Stunden}" placeholder="1-17 Maximum" pattern="^(?:[1-9]|1[0-7])$"/>
-                </ul>
-
-            <h3>Wählen Sie eins oder mehr Fächer aus.</h3>
-            <select th:field="*{Fach}">
-              <option th:value="'Algorithmen und Datenstrukturen'">Algorithmen und Datenstrukturen</option>
-              <option th:value="'Datenbanksysteme'" >Datenbanksysteme</option>
-              <option th:value="'Programmierung'" >Programmierung</option>
-              <option th:value="'Softwareentwicklung'" >Softwareentwicklung</option>
-            </select>
-          </ul>
-          <ul>
-            <h3>Gewünschte Fächer</h3>
-            <h4>Welche Fächer möchten Sie unterstützen?
-              Wenn Sie ein Fach nicht gehört haben geben Sie ebenfalls "auf keinen Fall" an.
-              Mehrfachnennungen sind ausdrücklich erwünscht! </h4>
-            <table class="table">
-              <thead>
-              <tr>
-                <th scope="col">Fach</th>
-                <th scope="col">sehr gerne</th>
-                <th scope="col">gerne, aber <br>lieber ein <br>anderes Fach</th>
-                <th scope="col">nicht gerne,<br> kann ich <br>aber machen</th>
-                <th scope="col">auf keinen Fall</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <th scope="row">Programierung</th>
-                <td><input type="radio"
-                       th:field="*{GewProg}"
-                       th:value="${1}"
-                       name="GewIDProg"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{GewProg}"
-                       th:value="${2}"
-                       name="GewIDProg"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{GewProg}"
-                       th:value="${3}"
-                       name="GewIDProg"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{GewProg}"
-                       th:value="${4}"
-                       name="GewIDProg"/>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Aldat</th>
-                <td><input type="radio"
-                       th:field="*{GewAldat}"
-                       th:value="${1}"
-                       name="GewIDAldat"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{GewAldat}"
-                       th:value="${2}"
-                       name="GewIDAldat"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{GewAldat}"
-                       th:value="${3}"
-                       name="GewIDAldat"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{GewAldat}"
-                       th:value="${4}"
-                       name="GewIDAldat"/>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Datenbank</th>
-                <td><input type="radio"
-                       th:field="*{GewDatenbank}"
-                       th:value="${1}"
-                       name="GewIDDatenbank"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{GewDatenbank}"
-                       th:value="${2}"
-                       name="GewIDDatenbank"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{GewDatenbank}"
-                       th:value="${3}"
-                       name="GewIDDatenbank"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{GewDatenbank}"
-                       th:value="${4}"
-                       name="GewIDDatenbank"/>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Software</th>
-                <td><input type="radio"
-                       th:field="*{GewTeam}"
-                       th:value="${1}"
-                       name="GewIDTeam"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{GewTeam}"
-                       th:value="${2}"
-                       name="GewIDTeam"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{GewTeam}"
-                       th:value="${3}"
-                       name="GewIDTeam"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{GewTeam}"
-                       th:value="${4}"
-                       name="GewIDTeam"/>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-            <h3>Haben Sie Einschränkungen bzgl. der von Ihnen gewünschten Tätigkeiten?</h3>
-            <h4>Sollten Sie zusätzlich zu den unten genannten strikten
-            Einschränkungen noch Wünsche haben, so können Sie diese im Freitext Feld angeben, ansonsten tragen sie "nein" ein.
-            Hinweis: Nicht in allen Fächern ist eine Einstellung ausschließlich als Tutor oder als Korrektor möglich. </h4>
-            <table class="table table-striped">
-              <thead>
-              <tr>
-                <th scope="col">Fach</th>
-                <th scope="col">sehr gerne</th>
-                <th scope="col">gerne, aber <br>lieber ein <br>anderes Fach</th>
-                <th scope="col">nicht gerne,<br> kann ich <br>aber machen</th>
-                <th scope="col">auf keinen Fall</th>
-              </tr>
-              </thead>
-              <tbody>
-
-
-              <tr>
-                <th scope="row">Programierung</th>
-                <td><input type="radio"
-                       th:field="*{PrioProg}"
-                       th:value="${1}"
-                       name="IDProg"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{PrioProg}"
-                       th:value="${2}"
-                       name="IDProg"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{PrioProg}"
-                       th:value="${3}"
-                       name="IDProg"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{PrioProg}"
-                       th:value="${4}"
-                       name="IDProg"/>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Aldat</th>
-                <td><input type="radio"
-                       th:field="*{PrioAldat}"
-                       th:value="${1}"
-                       name="IDAldat"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{PrioAldat}"
-                       th:value="${2}"
-                       name="IDAldat"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{PrioAldat}"
-                       th:value="${3}"
-                       name="IDAldat"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{PrioAldat}"
-                       th:value="${4}"
-                       name="IDAldat"/>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Datenbank</th>
-                <td><input type="radio"
-                       th:field="*{PrioDatenbank}"
-                       th:value="${1}"
-                       name="IDDatenbank"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{PrioDatenbank}"
-                       th:value="${2}"
-                       name="IDDatenbank"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{PrioDatenbank}"
-                       th:value="${3}"
-                       name="IDDatenbank"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{PrioDatenbank}"
-                       th:value="${4}"
-                       name="IDDatenbank"/>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Software</th>
-                <td><input type="radio"
-                       th:field="*{PrioTeam}"
-                       th:value="${1}"
-                       name="IDTeam"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{PrioTeam}"
-                       th:value="${2}"
-                       name="IDTeam"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{PrioTeam}"
-                       th:value="${3}"
-                       name="IDTeam"/>
-                </td>
-                <td><input type="radio"
-                       th:field="*{PrioTeam}"
-                       th:value="${4}"
-                       name="IDTeam"/>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-            <ul>
-              <h3>Es steht noch nicht fest, ob es eine Tutorenschulung für das Wintersemester geben wird. Wenn ja, wird diese voraussichtlich kurz vor Semesterbeginn stattﬁnden. </h3>
-              <input type="radio" th:field="*{PrioProg}" th:value="${3}" name="IDPro"/>
-              Ich möchte an der Tutorenschulung teilnehmen.
-              <br></br>
-              <input type="radio" th:field="*{PrioProg}" th:value="${4}" name="IDProg"/>
-              Ich habe bereits an der Tutorenschulung teilgenommen und möchte daher nicht erneut teilnehmen.
-              <br></br>
-              <input type="radio" th:field="*{PrioProg}" th:value="${4}" name="IDProg"/>
-              Ich möchte nicht an der Tutorenschulung teilnehmen.
-            </ul>
-            <ul>
-              <h3>Was reizt Sie an der Anstellung als Tutor oder Korrektor? Wo sehen Sie Herausforderungen?</h3>
-              <h4>Falls Sie uns sonst noch etwas mitteilen möchten, können Sie dies ebenfalls an dieser Stelle machen.</h4>
-              <textarea rows="8" cols="50"></textarea>
-            </ul>
-            </div>
-          </ul>
-            </div>
-          </ul>
-          
-        </div>
+        </ul>
       </div>
     </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="col-12 shadow p-3 mb-5 bg-light rounded">
+    <ul>
+      <h3>Um welche Art der Beschäftigung handelt es sich?</h3>
+    </ul>
+    <ul>
+      <input type="radio" th:field="*{Beschäftigungsart}" th:value="${Neueinstellung}" name="einstellung"/>
+      Neueinstellung (bisher keine Anstellung an der HHU).
+      <br></br>
+      <input type="radio" th:field="*{Beschäftigungsart}" th:value="${Weiterbeschäftigung}" name="einstellung"/>
+      Weiterbeschäftigung (bestehender Vertrag bis zum 31.03.2020).
+      <br></br>
+      <input type="radio" th:field="*{Beschäftigungsart}" th:value="${Wiedereinstellung}" name="einstellung"/>
+      Wiedereinstellung (Kein bestehender Vertrag bis zum 31.03.2020).
+      <br></br>
+    </ul>
+    <ul>
+      <h3>Stunden</h3>
+      <h7>Alle Tutoren- und Korrektorenjobs starten am 01.10.2020. Die Dauer der Anstellung richtet sich nach dem Fach (3-6 Monate).</h7>
+      <h7>Die Minijobgrenze liegt aktuell bei 9h/Woche für SHKs und bei 7h/Woche für WHBs. Sie können insgesamt nicht mehr als 17h/Woche
+        als Hilfskraft an der Universität angestellt sein, das schließt auch mehrere parallele Anstellungen ein. Einstellungen erfolgen in
+        der Regel für zwischen 9 und 17h/Woche, Einzelheiten können im Bewerbungsgespräch geklärt werden.</h7>
+      Wie viele Stunden möchten Sie mindestens und maximal pro Woche arbeiten?
+    </ul>
+    <br></br>
+    <div class="form-row">
+      <div class="form-group col-5">
+        <input  type="text" th:field="*{Stunden}" class="form-control" id="input8" placeholder="1-17 Minimum"  pattern="^(?:[1-9]|1[0-7])$">
+      </div>
+      -
+      <div class="form-group col-5">
+        <input  type="text" th:field="*{Stunden}" class="form-control" id="input9" placeholder="1-17 Maximum"  pattern="^(?:[1-9]|1[0-7])$">
+      </div>
+    </div>
+    </ul>
+    <ul>
+      <h3>Wählen Sie eins oder mehr Fächer aus.</h3>
+    </ul>
+
+    <div class="form-group">
+      <div class="form-control">
+        <select class="selectpicker col-12" multiple id="Fach" th:field="*{Softwareentwicklung}" >
+          <option th:value="'Algorithmen und Datenstrukturen'">Algorithmen und Datenstrukturen</option>
+          <option th:value="'Datenbanksysteme'" >Datenbanksysteme</option>
+          <option th:value="'Programmierung'" >Programmierung</option>
+          <option th:value="'Softwareentwicklung'" >Softwareentwicklung</option>
+        </select>
+      </div>
+    </div>
+    </ul>
+    <ul>
+      <h3>Gewünschte Fächer</h3>
+      <h7>Welche Fächer möchten Sie unterstützen?
+        Wenn Sie ein Fach nicht gehört haben geben Sie ebenfalls "auf keinen Fall" an.
+        Mehrfachnennungen sind ausdrücklich erwünscht! </h7>
+    </ul>
+    <div class="table-responsive-xl">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Fach</th>
+          <th scope="col">sehr gerne</th>
+          <th scope="col">gerne, aber <br>lieber ein <br>anderes Fach</th>
+          <th scope="col">nicht gerne,<br> kann ich <br>aber machen</th>
+          <th scope="col">auf keinen Fall</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+          <th scope="row">Programierung</th>
+          <td><input type="radio"
+                     th:field="*{GewProg}"
+                     th:value="${1}"
+                     name="GewIDProg"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewProg}"
+                     th:value="${2}"
+                     name="GewIDProg"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewProg}"
+                     th:value="${3}"
+                     name="GewIDProg"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewProg}"
+                     th:value="${4}"
+                     name="GewIDProg"/>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Aldat</th>
+          <td><input type="radio"
+                     th:field="*{GewAldat}"
+                     th:value="${1}"
+                     name="GewIDAldat"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewAldat}"
+                     th:value="${2}"
+                     name="GewIDAldat"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewAldat}"
+                     th:value="${3}"
+                     name="GewIDAldat"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewAldat}"
+                     th:value="${4}"
+                     name="GewIDAldat"/>
+          </td>
+        </tr>
+
+        <tr>
+          <th scope="row">Datenbank</th>
+          <td><input type="radio"
+                     th:field="*{GewDatenbank}"
+                     th:value="${1}"
+                     name="GewIDDatenbank"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewDatenbank}"
+                     th:value="${2}"
+                     name="GewIDDatenbank"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewDatenbank}"
+                     th:value="${3}"
+                     name="GewIDDatenbank"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewDatenbank}"
+                     th:value="${4}"
+                     name="GewIDDatenbank"/>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Software</th>
+          <td><input type="radio"
+                     th:field="*{GewTeam}"
+                     th:value="${1}"
+                     name="GewIDTeam"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewTeam}"
+                     th:value="${2}"
+                     name="GewIDTeam"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewTeam}"
+                     th:value="${3}"
+                     name="GewIDTeam"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewTeam}"
+                     th:value="${4}"
+                     name="GewIDTeam"/>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <h3>Haben Sie Einschränkungen bzgl. der von Ihnen gewünschten Tätigkeiten?</h3>
+      <h7>Sollten Sie zusätzlich zu den unten genannten strikten
+        Einschränkungen noch Wünsche haben, so können Sie diese im Freitext Feld angeben, ansonsten tragen sie "nein" ein.
+        Hinweis: Nicht in allen Fächern ist eine Einstellung ausschließlich als Tutor oder als Korrektor möglich. </h7>
+    </ul>
+    <div class="table-responsive-xl">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Fach</th>
+          <th scope="col">sehr gerne</th>
+          <th scope="col">gerne, aber <br>lieber ein <br>anderes Fach</th>
+          <th scope="col">nicht gerne,<br> kann ich <br>aber machen</th>
+          <th scope="col">auf keinen Fall</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+          <th scope="row">Programierung</th>
+          <td><input type="radio"
+                     th:field="*{GewProg}"
+                     th:value="${1}"
+                     name="GewIDProg"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewProg}"
+                     th:value="${2}"
+                     name="GewIDProg"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewProg}"
+                     th:value="${3}"
+                     name="GewIDProg"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewProg}"
+                     th:value="${4}"
+                     name="GewIDProg"/>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Aldat</th>
+          <td><input type="radio"
+                     th:field="*{GewAldat}"
+                     th:value="${1}"
+                     name="GewIDAldat"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewAldat}"
+                     th:value="${2}"
+                     name="GewIDAldat"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewAldat}"
+                     th:value="${3}"
+                     name="GewIDAldat"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewAldat}"
+                     th:value="${4}"
+                     name="GewIDAldat"/>
+          </td>
+        </tr>
+
+        <tr>
+          <th scope="row">Datenbank</th>
+          <td><input type="radio"
+                     th:field="*{GewDatenbank}"
+                     th:value="${1}"
+                     name="GewIDDatenbank"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewDatenbank}"
+                     th:value="${2}"
+                     name="GewIDDatenbank"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewDatenbank}"
+                     th:value="${3}"
+                     name="GewIDDatenbank"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewDatenbank}"
+                     th:value="${4}"
+                     name="GewIDDatenbank"/>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Software</th>
+          <td><input type="radio"
+                     th:field="*{GewTeam}"
+                     th:value="${1}"
+                     name="GewIDTeam"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewTeam}"
+                     th:value="${2}"
+                     name="GewIDTeam"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewTeam}"
+                     th:value="${3}"
+                     name="GewIDTeam"/>
+          </td>
+          <td><input type="radio"
+                     th:field="*{GewTeam}"
+                     th:value="${4}"
+                     name="GewIDTeam"/>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <h3>Es steht noch nicht fest, ob es eine Tutorenschulung für das Wintersemester geben wird. Wenn ja, wird diese voraussichtlich kurz vor Semesterbeginn stattﬁnden. </h3>
+      <input type="radio" th:field="*{PrioProg}" th:value="${3}" name="IDPro"/>
+      Ich möchte an der Tutorenschulung teilnehmen.
+      <br></br>
+      <input type="radio" th:field="*{PrioProg}" th:value="${4}" name="IDProg"/>
+      Ich habe bereits an der Tutorenschulung teilgenommen und möchte daher nicht erneut teilnehmen.
+      <br></br>
+      <input type="radio" th:field="*{PrioProg}" th:value="${4}" name="IDProg"/>
+      Ich möchte nicht an der Tutorenschulung teilnehmen.
+    </ul>
+    <ul>
+      <h3>Was reizt Sie an der Anstellung als Tutor oder Korrektor? Wo sehen Sie Herausforderungen?</h3>
+      <h4>Falls Sie uns sonst noch etwas mitteilen möchten, können Sie dies ebenfalls an dieser Stelle machen.</h4>
+      <div class="form-group">
+        <label for="Mitteilungen"></label>
+        <textarea class="form-control" id="Mitteilungen" rows="3"></textarea>
+      </div>
+    </ul>
+  </div>
+</div>
+</ul>
+
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 </body>
 </html>
