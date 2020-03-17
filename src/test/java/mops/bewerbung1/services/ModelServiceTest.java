@@ -14,12 +14,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import mops.domain.services.IMappingService;
+import mops.domain.services.IModelSerice;
 
 @SpringBootTest
 public class ModelServiceTest {
     
-    private transient IMappingService mappingService;
+    private transient IModelSerice mappingService;
 
     @BeforeEach
      void setUp() {
@@ -34,7 +34,7 @@ public class ModelServiceTest {
         AdresseDTO adresseDTO = new AdresseDTO();
         adresseDTO.setHausnummer("11a");
         adresseDTO.setPLZ("40233");
-        adresseDTO.setStraße("Simrockstr");
+        adresseDTO.setStrasse("Simrockstr");
         adresseDTO.setWohnort("Düsseldorf");
 
         PersonalienDTO personalienDTO = new PersonalienDTO();
@@ -60,7 +60,7 @@ public class ModelServiceTest {
 
         assertEquals(adresseDTO.getHausnummer(), adresse.getHausnummer());
         assertEquals(adresseDTO.getPLZ(), adresse.getPLZ());
-        assertEquals(adresseDTO.getStraße(), adresse.getStraße());
+        assertEquals(adresseDTO.getStrasse(), adresse.getStrasse());
         assertEquals(adresseDTO.getWohnort(), adresse.getWohnort());
 
         assertEquals(personalienDTO.getAlter(), personalien.getAlter());

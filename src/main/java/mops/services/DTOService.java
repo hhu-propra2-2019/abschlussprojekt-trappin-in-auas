@@ -3,7 +3,6 @@ package mops.services;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.NoArgsConstructor;
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
 import mops.domain.services.IDTOService;
@@ -27,7 +26,7 @@ public class DTOService implements IDTOService {
   }
 
   public AdresseDTO load(Adresse adresse){
-    return new AdresseDTO(adresse.getPLZ(),adresse.getWohnort(),adresse.getStraße(),adresse.getHausnummer());
+    return new AdresseDTO(adresse.getPLZ(),adresse.getWohnort(),adresse.getStrasse(),adresse.getHausnummer());
   }
 
   public ImmartikulationsStatusDTO load(ImmartikulationsStatus imStatus){

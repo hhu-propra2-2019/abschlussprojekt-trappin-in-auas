@@ -7,13 +7,13 @@ import lombok.Data;
 public class Adresse {
     private String PLZ;
     private String wohnort;
-    private String straße;
+    private String strasse;
     private String hausnummer;
 
-    public Adresse(String PLZ, String wohnort, String straße, String hausnummer) {
+    public Adresse(String PLZ, String wohnort, String strasse, String hausnummer) {
         this.PLZ = PLZ;
         this.wohnort = wohnort;
-        this.straße = straße;
+        this.strasse = strasse;
         this.hausnummer = hausnummer;
     }
 }

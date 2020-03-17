@@ -53,7 +53,7 @@ public class ModelService implements IModelSerice {
 
     public Adresse loadAdresse(PersonalienDTO personalienDTO) {
         return new Adresse(personalienDTO.getAdresse().getPLZ(), personalienDTO.getAdresse().getWohnort(),
-                personalienDTO.getAdresse().getStraße(), personalienDTO.getAdresse().getHausnummer());
+                personalienDTO.getAdresse().getStrasse(), personalienDTO.getAdresse().getHausnummer());
     }
 
     public BerufModul loadBerufModul(BerufModulDTO berufModulDTO) {
