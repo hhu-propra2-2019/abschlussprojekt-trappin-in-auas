@@ -38,7 +38,9 @@ class ModulServiceTest {
 
     List<ModulDTO> foundModules = modulService.findAllModule();
 
-    assertThat(foundModules).isEqualTo(modulDTOList);
+    assertThat(foundModules)
+            .as("check if processed list equals list")
+            .isEqualTo(modulDTOList);
   }
 
   @Test
@@ -47,7 +49,9 @@ class ModulServiceTest {
 
     when(modulRepository.findModulById(1L)).thenReturn(theo);
 
-    assertThat(modulService.findModulById(1L)).isEqualTo(theo);
+    assertThat(modulService.findModulById(1L))
+            .as("check %s", theo.getModul())
+            .isEqualTo(theo);
   }
 
 
