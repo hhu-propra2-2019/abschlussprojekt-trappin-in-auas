@@ -50,4 +50,12 @@ public class BossController {
     return "redirect:/bewerbung1/boss/modules";
   }
 
+  @GetMapping("/delete")
+  public String deleteModule(Model m, KeycloakAuthenticationToken token, @RequestParam String modulName){
+
+    modulService.deleteModulByName(modulName);
+
+    return "redirect:/bewerbung1/boss/modules";
+  }
+
 }
