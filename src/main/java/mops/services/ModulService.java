@@ -43,4 +43,9 @@ public class ModulService implements IModulService {
   public List<ModulDTO> findAllModule() {
     return modulRepository.findAll();
   }
+
+
+  public void deleteModulByName(String modulName) {
+    modulRepository.deleteModulByName(modulName);
+  }
 }
