@@ -9,11 +9,11 @@ import lombok.Data;
 @Entity
 public class ModulAuswahlDTO {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name = "modulAuswahl_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name="modul_auswahl_id")
     private long id;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ModulDTO modul;
     private int prioritaet;
     private double note;

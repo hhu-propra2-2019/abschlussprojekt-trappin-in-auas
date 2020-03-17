@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import mops.domain.models.Beruf;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,7 +17,7 @@ public class BerufModulDTO {
   @Enumerated(EnumType.STRING)
   private Beruf beruf;
 
-  @OneToOne
+  @OneToOne(cascade=CascadeType.ALL)
   private ModulDTO modul;
 
   public BerufModulDTO(Beruf beruf, ModulDTO modul) {

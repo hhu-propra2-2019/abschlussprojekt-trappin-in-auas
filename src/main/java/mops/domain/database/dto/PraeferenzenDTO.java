@@ -13,16 +13,14 @@ import javax.persistence.*;
 public class PraeferenzenDTO {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     private int minWunschStunden;
     private int maxWunschStunden;
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "modulAuswahl", 
-      joinColumns = @JoinColumn(name = "id"),
-      inverseJoinColumns = @JoinColumn(name = "modul_auswahl_id"))
+    @JoinColumn(name="praeferenzen", referencedColumnName="id")
     private List<ModulAuswahlDTO> modulAuswahl;
 
     private String kommentar;
