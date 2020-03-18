@@ -13,54 +13,54 @@ import mops.domain.services.IModelSerice;
 @Service
 public class ModelService implements IModelSerice {
 
-    public ModelService() {
+  public ModelService() {
 
+  }
+
+  @Override
+  public Karriere load(KarriereDTO karriereDTO) {
+    if(karriereDTO == null){
+      return null;
     }
+    return new Karriere(karriereDTO.getArbeitserfahrung(), load(karriereDTO.getImmartikulationsStatus()),
+        load(karriereDTO.getFachAbschluss()));
+  }
 
-    @Override
-    public Karriere load(KarriereDTO karriereDTO) {
-        if(karriereDTO == null){
-            return null;
-        }
-        return new Karriere(karriereDTO.getArbeitserfahrung(), load(karriereDTO.getImmartikulationsStatus()),
-                load(karriereDTO.getFachAbschluss()));
+  public StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss) {
+    return new StudiengangAbschluss(fachAbschluss.getStudiengang(), fachAbschluss.getAbschluss());
+  }
+
+  public ImmartikulationsStatus load(ImmartikulationsStatusDTO statusDTO) {
+    return new ImmartikulationsStatus(statusDTO.isStatus(), statusDTO.getFachrichtung());
+  }
+
+  @Override
+  public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) {
+    if(modulAuswahlDTO == null){
+      return null;
     }
+    return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet());
+  }
 
-    public StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss) {
-        return new StudiengangAbschluss(fachAbschluss.getStudiengang(), fachAbschluss.getAbschluss());
+  @Override
+  public Personalien load(PersonalienDTO pDTO) {
+    if(pDTO == null){
+      return null;
     }
+    Adresse adresse = loadAdresse(pDTO);
+    return new Personalien(adresse, pDTO.getUnikennung(), pDTO.getName(), pDTO.getVorname(), pDTO.getGeburtsdatum(),
+        pDTO.getAlter(), pDTO.getGeburtsort(), pDTO.getNationalitaet());
+  }
 
-    public ImmartikulationsStatus load(ImmartikulationsStatusDTO statusDTO) {
-        return new ImmartikulationsStatus(statusDTO.isStatus(), statusDTO.getFachrichtung());
-    }
+  public Adresse loadAdresse(PersonalienDTO personalienDTO) {
+    return new Adresse(personalienDTO.getAdresse().getPLZ(), personalienDTO.getAdresse().getWohnort(),
+        personalienDTO.getAdresse().getStrasse(), personalienDTO.getAdresse().getHausnummer());
+  }
 
-    @Override
-    public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) {
-        if(modulAuswahlDTO == null){
-            return null;
-        }
-        return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet());
-    }
+  public BerufModul loadBerufModul(BerufModulDTO berufModulDTO) {
+    return new BerufModul(berufModulDTO.getBeruf(), loadModul(berufModulDTO.getModul()));
 
-    @Override
-    public Personalien load(PersonalienDTO pDTO) {
-        if(pDTO == null){
-            return null;
-        }
-        Adresse adresse = loadAdresse(pDTO);
-        return new Personalien(adresse, pDTO.getUnikennung(), pDTO.getName(), pDTO.getVorname(), pDTO.getGeburtsdatum(),
-                pDTO.getAlter(), pDTO.getGeburtsort(), pDTO.getNationalitaet());
-    }
-
-    public Adresse loadAdresse(PersonalienDTO personalienDTO) {
-        return new Adresse(personalienDTO.getAdresse().getPLZ(), personalienDTO.getAdresse().getWohnort(),
-                personalienDTO.getAdresse().getStrasse(), personalienDTO.getAdresse().getHausnummer());
-    }
-
-    public BerufModul loadBerufModul(BerufModulDTO berufModulDTO) {
-        return new BerufModul(berufModulDTO.getBeruf(), loadModul(berufModulDTO.getModul()));
-
-    }
+  }
 
   @Override
   public Praeferenzen load(PraeferenzenDTO pDTO) {

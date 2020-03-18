@@ -14,7 +14,7 @@ public class DTOService implements IDTOService {
    * */
 
   public ModulDTO load(Modul modul){
-    return new ModulDTO(modul.getModulName(),modul.getDozent().getDozentMail(),modul.getDozent().getDozentMail());
+    return new ModulDTO(modul.getModulName(),modul.getDozent().getDozentName(),modul.getDozent().getDozentMail());
   }
 
   public ModulAuswahlDTO load(ModulAuswahl modulAuswahl){
