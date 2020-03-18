@@ -16,56 +16,56 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/dozent") //this site is specific to the logged in dozent
+@RequestMapping("/dozent") // this site is specific to the logged in dozent
 public class DozentController {
 
-    private transient BewerberService bewerberService;
-    private transient final String orgaRole = "ROLE_orga";
+  private transient BewerberService bewerberService;
+  private transient final String orgaRole = "ROLE_orga";
 
-    public DozentController(BewerberService bewerberService){
-      this.bewerberService = bewerberService;
-    }
+  public DozentController(BewerberService bewerberService) {
+    this.bewerberService = bewerberService;
+  }
 
-    @Secured({orgaRole})
-    @GetMapping("/uebersicht")
-    public String verteilen(Model model, KeycloakAuthenticationToken token){
-        List<BewerberDTO> alleBewerber = bewerberService.findAlleBewerber();
-        List<BewerberDTO> offeneBewerbungen = bewerberService.findNichtVerteilt();
-        List<BewerberDTO> zugewieseneBewerbungen = bewerberService.findVerteilt();
-        List<BewerberDTO> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
+  @Secured({ orgaRole })
+  @GetMapping("/uebersicht")
+  public String verteilen(Model model, KeycloakAuthenticationToken token) {
+    List<BewerberDTO> alleBewerber = bewerberService.findAlleBewerber();
+    List<BewerberDTO> offeneBewerbungen = bewerberService.findNichtVerteilt();
+    List<BewerberDTO> zugewieseneBewerbungen = bewerberService.findVerteilt();
+    List<BewerberDTO> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
 
     model.addAttribute("bewerbungen", alleBewerber);
     model.addAttribute("offenecount", offeneBewerbungen.size());
     model.addAttribute("zugewiesenecount", zugewieseneBewerbungen.size());
     model.addAttribute("preview", offeneBewerbungenPreview);
 
-    return "dozent/uebersicht";
+    return "dozent/ubersicht";
   }
 
-    @Secured({orgaRole})
-    @GetMapping("/uebersicht/offene")
-    public String offeneUebersicht(Model model, KeycloakAuthenticationToken token){
-        List<BewerberDTO> offeneBewerbungen = bewerberService.findNichtVerteilt();
+  @Secured({ orgaRole })
+  @GetMapping("/uebersicht/offene")
+  public String offeneUebersicht(Model model, KeycloakAuthenticationToken token) {
+    List<BewerberDTO> offeneBewerbungen = bewerberService.findNichtVerteilt();
 
     model.addAttribute("offene", offeneBewerbungen);
 
     return "";
   }
 
-    @Secured({orgaRole})
-    @GetMapping("/uebersicht/zugewiesene")
-    public String zugewieseneUebersicht(Model model, KeycloakAuthenticationToken token){
-        List<BewerberDTO> zugewiesene = bewerberService.findVerteilt();
+  @Secured({ orgaRole })
+  @GetMapping("/uebersicht/zugewiesene")
+  public String zugewieseneUebersicht(Model model, KeycloakAuthenticationToken token) {
+    List<BewerberDTO> zugewiesene = bewerberService.findVerteilt();
 
     model.addAttribute(zugewiesene);
 
     return "";
   }
 
-    @Secured({orgaRole})
-    @GetMapping("/uebersicht/detail/{kennung}")
-    public String detailAnsicht(Model model, KeycloakAuthenticationToken token, @PathVariable String kennung){
-        BewerberDTO bewerber = bewerberService.findBewerberByKennung(kennung);
+  @Secured({ orgaRole })
+  @GetMapping("/uebersicht/detail/{kennung}")
+  public String detailAnsicht(Model model, KeycloakAuthenticationToken token, @PathVariable String kennung) {
+    BewerberDTO bewerber = bewerberService.findBewerberByKennung(kennung);
 
     model.addAttribute("bewerber", bewerber);
     return "";

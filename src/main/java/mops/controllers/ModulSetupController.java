@@ -13,17 +13,17 @@ import mops.services.ModulService;
 @RequestMapping("/bewerbung1/boss")
 public class ModulSetupController {
 
-    @Autowired
-    private transient ModulService modulService;
+  @Autowired
+  private transient ModulService modulService;
 
-    @GetMapping("/modulsetup")
-    public String modulsetup(Model m) {
-        return "boss/modulsetup";
-    }
+  @GetMapping("/modulsetup")
+  public String modulsetup(Model m) {
+    return "boss/modulsetup";
+  }
 
-    @GetMapping("/module")
-    public String getModule(Model m, KeycloakAuthenticationToken token) {
-        m.addAttribute("modules", modulService.findAllModule());
-        return "boss/moduleEinsehen";
-    }
+  @GetMapping("/module")
+  public String getModule(Model m, KeycloakAuthenticationToken token) {
+    m.addAttribute("modules", modulService.findAllModule());
+    return "boss/moduleEinsehen";
+  }
 }
