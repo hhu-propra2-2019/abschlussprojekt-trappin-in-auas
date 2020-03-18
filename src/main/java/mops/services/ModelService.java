@@ -53,10 +53,6 @@ public class ModelService implements IModelSerice {
     }
 
 
-    public ModulAuswahl loadModulAuswahl(ModulAuswahlDTO modulAuswahlDTO) {
-        return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet());
-    }
-
     public Adresse loadAdresse(PersonalienDTO personalienDTO) {
         return new Adresse(personalienDTO.getAdresse().getPLZ(), personalienDTO.getAdresse().getWohnort(),
                 personalienDTO.getAdresse().getStrasse(), personalienDTO.getAdresse().getHausnummer());

@@ -4,11 +4,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import mops.domain.database.dto.AdresseDTO;
 import mops.domain.database.dto.BerufModulDTO;
 import mops.domain.database.dto.KarriereDTO;
+import mops.domain.database.dto.ModulAuswahlDTO;
 import mops.domain.database.dto.ModulDTO;
 import mops.domain.database.dto.PersonalienDTO;
+import mops.domain.database.dto.PraeferenzenDTO;
 import mops.domain.models.*;
 
 import mops.domain.services.IDTOService;
@@ -112,6 +116,48 @@ public class DTOServiceTest {
 
   @Test
   public void praeferenzenZuPraeferenDTO(){
-    Praeferenzen prf = new Praeferenzen();
+    Modul modul1 = new Modul("propra2",new Dozent( "jens@hhu.de", "Jens Bendisposto"));
+    Modul modul2 = new Modul("Aldat", new Dozent("stephan@hhu.de", "Stephan Mueller"));
+    Modul modul3 = new Modul("RDB", new Dozent("shoetner@hhu.de", "Michael Schoetner"));
+
+    ModulAuswahl modulAuswahl1 = new ModulAuswahl(modul1, 2);
+    ModulAuswahl modulAuswahl2 = new ModulAuswahl(modul2, 1);
+    ModulAuswahl modulAuswahl3 = new ModulAuswahl(modul3, 3);
+
+    List<ModulAuswahl> modulAuswahlList = new LinkedList<ModulAuswahl>();
+    modulAuswahlList.add(modulAuswahl1);
+    modulAuswahlList.add(modulAuswahl2);
+    modulAuswahlList.add(modulAuswahl3);
+
+    BerufModul berufModul = new BerufModul(Beruf.Tutor, modul1);
+    Praeferenzen praeferenzen = new Praeferenzen(6, 8, modulAuswahlList,
+        "No Comment", EinstiegTyp.NEUEINSTIEG, "Keine", berufModul, TutorenSchulungTeilnahme.TEILNAHME);
+
+    PraeferenzenDTO praeferenzenDTO = dtoService.load(praeferenzen);
+    assertNotNull(praeferenzen);
+
+    assertEquals(praeferenzenDTO.getMinWunschStunden(), praeferenzen.getMinWunschStunden());
+    assertEquals(praeferenzenDTO.getMaxWunschStunden(), praeferenzen.getMaxWunschStunden());
+    assertEquals(praeferenzenDTO.getKommentar(), praeferenzen.getKommentar());
+    assertEquals(praeferenzenDTO.getEinstiegTyp(), praeferenzen.getEinstiegTyp());
+    assertEquals(praeferenzenDTO.getEinschraenkungen(), praeferenzen.getEinschraenkungen());
+
+    assertEquals(praeferenzenDTO.getBerufModul().getBeruf(), praeferenzen.getBerufModul().getBeruf());
+    assertEquals(praeferenzenDTO.getBerufModul().getModul().getDozentName(),
+        praeferenzen.getBerufModul().getModul().getDozent().getDozentName());
+    assertEquals(praeferenzenDTO.getBerufModul().getModul().getDozentMail(),
+        praeferenzen.getBerufModul().getModul().getDozent().getDozentMail());
+    assertEquals(praeferenzenDTO.getBerufModul().getModul().getModulName(),
+        praeferenzen.getBerufModul().getModul().getModulName());
+    assertEquals(praeferenzenDTO.getTutorenSchulungTeilnahme(), praeferenzen.getTutorenSchulungTeilnahme());
+
+    assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getPrioritaet(),
+        praeferenzen.getModulAuswahl().get(1).getPrioritaet());
+    assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getModul().getModulName(),
+        praeferenzen.getModulAuswahl().get(1).getModul().getModulName());
+    assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getModul().getDozentName(),
+        praeferenzen.getModulAuswahl().get(1).getModul().getDozent().getDozentName());
+    assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getModul().getDozentMail(),
+        praeferenzen.getModulAuswahl().get(1).getModul().getDozent().getDozentMail());
   }
 }

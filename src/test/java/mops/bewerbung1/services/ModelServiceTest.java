@@ -140,9 +140,9 @@ public class ModelServiceTest {
 
     @Test
     public void praeferenzenDTOzuPraeferenzen(){
-        ModulDTO modulDTO1 = new ModulDTO("propra2", "jens@hhu.de", "Jens Bendisposto");
-        ModulDTO modulDTO2 = new ModulDTO("Aldat", "stephan@hhu.de", "Stephan Mueller");
-        ModulDTO modulDTO3 = new ModulDTO("RDB", "shoetner@hhu.de", "Michael Schoetner");
+        ModulDTO modulDTO1 = new ModulDTO("propra2" , "Jens Bendisposto","jens@hhu.de");
+        ModulDTO modulDTO2 = new ModulDTO("Aldat", "Stephan Mueller", "stephan@hhu.de");
+        ModulDTO modulDTO3 = new ModulDTO("RDB", "Michael Schoetner" ,"shoetner@hhu.de");
 
         ModulAuswahlDTO modulAuswahlDTO1 = new ModulAuswahlDTO(modulDTO1, 2);
         ModulAuswahlDTO modulAuswahlDTO2 = new ModulAuswahlDTO(modulDTO2, 1);
