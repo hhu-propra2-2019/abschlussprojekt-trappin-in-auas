@@ -14,6 +14,9 @@ import java.io.IOException;
 
 public class PDFService {
 
+      /* for (PDField field2 : pDAcroForm.getFields()){
+                System.out.println(field2.getFullyQualifiedName());
+            }*/ //spuckt alle titelfelder aus
 
 
 
@@ -196,7 +199,7 @@ public class PDFService {
             return "Weiterbeschäftigung";
 
 
-    }
+        }
     else if(bewerberDTO.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.NEUEINSTIEG){
 
         return "Einstellung";
