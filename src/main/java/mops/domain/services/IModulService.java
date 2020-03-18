@@ -10,4 +10,6 @@ public interface IModulService {
   ModulDTO findModulById(Long id);
 
   List<ModulDTO> findAllModule();
+
+  void deleteModulByName(String modulName);
 }
