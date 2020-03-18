@@ -34,7 +34,7 @@ public class DTOService implements IDTOService {
   }
 
   public StudiengangAbschlussDTO load(StudiengangAbschluss studiengangAbschluss){
-    return new StudiengangAbschlussDTO(studiengangAbschluss.getAbschluss(),studiengangAbschluss.getStudiengang());
+    return new StudiengangAbschlussDTO(studiengangAbschluss.getStudiengang(),studiengangAbschluss.getAbschluss());
   }
 
   public PersonalienDTO load(Personalien personalien){
