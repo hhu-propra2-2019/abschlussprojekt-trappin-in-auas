@@ -20,14 +20,31 @@ public class PDFService {
 
 
 
+    public void check(BewerberDTO bewerberDTO) throws Exception {
+        if(bewerberDTO.getKarriere().getFachAbschluss() == null) {
+            String path = "/home/heyoka/Schreibtisch/progra2/projekt/abschlussprojekt-trappin-in-auas/321_Antrag_Beschaeftigung_stud_Hilfskraefte.pdf";
+            fillStudentHilfskraft(bewerberDTO,path);
+        }
+        else {
+
+        String path = "/home/heyoka/Schreibtisch/progra2/projekt/abschlussprojekt-trappin-in-auas/323_Antrag_Beschaeftigung_wiss_Hilfskraefte_mit_BA.pdf";
+        fillWissenHilfskraft(bewerberDTO,path);
+
+        }
 
 
 
-    public void fillStudentHilfskraft(BewerberDTO bewerberDTO) throws Exception {
+
+    }
+
+
+
+
+    private void fillStudentHilfskraft(BewerberDTO bewerberDTO,String path) throws Exception {
 
 
         try {
-            PDDocument pDDocument = PDDocument.load(new File("/home/heyoka/Schreibtisch/progra2/projekt/abschlussprojekt-trappin-in-auas/321_Antrag_Beschaeftigung_stud_Hilfskraefte.pdf"));
+            PDDocument pDDocument = PDDocument.load(new File(path));
 
 
             if (pDDocument.isEncrypted()) {
@@ -98,10 +115,10 @@ public class PDFService {
     }
 
 
-    public void fillWissenHilfskraft(BewerberDTO bewerberDTO) throws Exception {
+    public void fillWissenHilfskraft(BewerberDTO bewerberDTO, String path) throws Exception {
 
         try {
-            PDDocument pDDocument = PDDocument.load(new File("/home/heyoka/Schreibtisch/progra2/projekt/abschlussprojekt-trappin-in-auas/323_Antrag_Beschaeftigung_wiss_Hilfskraefte_mit_BA.pdf"));
+            PDDocument pDDocument = PDDocument.load(new File(path));
 
 
             if (pDDocument.isEncrypted()) {
