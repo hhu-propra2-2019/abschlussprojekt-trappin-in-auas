@@ -8,4 +8,5 @@ public interface IModelSerice {
     ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO);
     Personalien load(PersonalienDTO personalienDTO);
     Praeferenzen load(PraeferenzenDTO praeferenzenDTO);
+    public Modul loadModul(ModulDTO modulDTO);
 }

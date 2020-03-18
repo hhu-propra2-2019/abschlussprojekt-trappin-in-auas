@@ -6,15 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Locale;
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
 import mops.services.ModelService;
+import org.hamcrest.collection.IsIterableContainingInOrder;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import mops.domain.services.IModelSerice;
+import org.springframework.security.core.parameters.P;
 
 @SpringBootTest
 public class ModelServiceTest {
@@ -112,5 +118,21 @@ public class ModelServiceTest {
         ModulAuswahlDTO modulAuswahlDTO = null;
         ModulAuswahl modulAuswahl = mappingService.load(modulAuswahlDTO);
         assertNull(modulAuswahl);
+    }
+
+    @Test
+    public void modulAuswahlDTOzuModulAuswahl(){
+        ModulDTO modulDTO = new ModulDTO("propra2", "jens@hhu.de", "Jens");
+        ModulAuswahlDTO modulAuswahlDTO = new ModulAuswahlDTO(modulDTO, 1);
+
+        ModulAuswahl modulAuswahl = mappingService.load(modulAuswahlDTO);
+        Modul modul = modulAuswahl.getModul();
+
+        assertNotNull(modul);
+        assertNotNull(modulAuswahl);
+
+        assertEquals(modulDTO.getDozentMail(), modul.getDozent().getDozentMail());
+        assertEquals(modulDTO.getDozentName(), modul.getDozent().getDozentName());
+        assertEquals(modulAuswahlDTO.getPrioritaet(), modulAuswahl.getPrioritaet());
     }
 }
