@@ -1,8 +1,9 @@
 package mops.controller;
 
+import static mops.authentication.account.keycloak.KeycloakRoles.*;
+
 import java.util.Set;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -14,15 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/bewerbung1")
 @PropertySource("classpath:roles.properties")
 public class BewerbungController {
-
-  @Value("${role.orga:ROLE_orga}")
-  private String ROLE_ORGA;
-  @Value("${role.studentin}")
-  private String ROLE_STUDENT;
-  @Value("${role.boss}")
-  private String role_boss_injected;
-  @Value("${role.verteiler}")
-  private String role_verteiler_injected;
 
   /**
    * Main page, checks login for roles studentin and orga.
@@ -51,7 +43,7 @@ public class BewerbungController {
    * @return studentMainpage html template
    */
   @GetMapping("/student")
-  //@Secured(ROLE_STUDENT)
+  @Secured(ROLE_STUDENT)
   public String getStudentMainpage(Model model, KeycloakAuthenticationToken token) {
     return "student/studentMainpage";
   }
@@ -63,7 +55,7 @@ public class BewerbungController {
    * @return orgaMainpage html template
    */
   @GetMapping("/orga")
-  //@Secured(ROLE_ORGA)
+  @Secured(ROLE_ORGA)
   public String getOrgaMainpage(Model model, KeycloakAuthenticationToken token) {
     return "orga/orgaMainpage";
   }
@@ -75,7 +67,7 @@ public class BewerbungController {
    * @return bossMainpage html template
    */
   @GetMapping("/boss")
-  //@Secured(ROLE_BOSS)
+  @Secured(ROLE_BOSS)
   public String getBossMainpage(Model model, KeycloakAuthenticationToken token) {
     return "boss/bossMainpage";
   }
@@ -87,7 +79,7 @@ public class BewerbungController {
    * @return verteilerMainpage html template
    */
   @GetMapping("/verteiler")
-  //@Secured(ROLE_VERTEILER)
+  @Secured(ROLE_VERTEILER)
   public String getVerteilerMainpage(Model m, KeycloakAuthenticationToken token) {
     return "verteiler/verteilerMainpage";
   }
