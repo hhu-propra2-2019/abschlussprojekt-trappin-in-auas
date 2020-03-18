@@ -1,29 +1,22 @@
 package mops.domain.database.dto;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import lombok.Data;
 
 
 @Data
 @Table(name = "modulAuswahl")
 @Entity
-
 public class ModulAuswahlDTO {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name="modul_auswahl_id")
     private long id;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ModulDTO modul;
     private int prioritaet;
+    private double note;
 
     public ModulAuswahlDTO(ModulDTO modul, int prioritaet) {
         this.modul = modul;

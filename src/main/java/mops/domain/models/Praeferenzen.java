@@ -3,14 +3,16 @@ package mops.domain.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.List;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+import lombok.*;
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Praeferenzen {
+
     private int maxWunschStunden;
     private int minWunschStunden;
     private List<ModulAuswahl> modulAuswahl;
