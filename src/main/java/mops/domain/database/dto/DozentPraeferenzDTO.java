@@ -14,6 +14,12 @@ public class DozentPraeferenzDTO {
   private String bewerber;
   private String dozentMail;
   private int praeferenz;
+
+  public DozentPraeferenzDTO(String bewerber, String dozentMail, int praeferenz){
+    this.bewerber = bewerber;
+    this.dozentMail = dozentMail;
+    this.praeferenz = praeferenz;
+  }
 }
 
 /*
