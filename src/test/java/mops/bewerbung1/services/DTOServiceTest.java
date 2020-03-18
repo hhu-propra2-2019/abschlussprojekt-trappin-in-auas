@@ -9,7 +9,6 @@ import java.util.List;
 import mops.domain.database.dto.AdresseDTO;
 import mops.domain.database.dto.BerufModulDTO;
 import mops.domain.database.dto.KarriereDTO;
-import mops.domain.database.dto.ModulAuswahlDTO;
 import mops.domain.database.dto.ModulDTO;
 import mops.domain.database.dto.PersonalienDTO;
 import mops.domain.database.dto.PraeferenzenDTO;
@@ -27,7 +26,7 @@ public class DTOServiceTest {
   private transient IDTOService dtoService;
 
   @BeforeEach
-  void setup(){
+  void setUp(){
     dtoService = new DTOService();
   }
 
@@ -71,16 +70,16 @@ public class DTOServiceTest {
   @Test
   public void personalienZuPersonalienDTO(){
     Adresse adresse = new Adresse("40233","Berlin","Magnumstr","16a");
-    Date geburtsdatum = new Date();
+    Date geburtsDatum = new Date();
     SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
     String datum = "24.05.1996";
     try {
-      geburtsdatum = ft.parse(datum);
+      geburtsDatum = ft.parse(datum);
     } catch (Exception ignored) {
 
     }
     Personalien p = new Personalien(adresse,"akkil100","Kilincarslan","Akin",
-        geburtsdatum,24,"Monheim", "Tuerke");
+        geburtsDatum,24,"Monheim", "Tuerke");
 
     PersonalienDTO pDTO = dtoService.load(p);
 
@@ -88,7 +87,7 @@ public class DTOServiceTest {
     assertEquals(adresse.getWohnort(),pDTO.getAdresse().getWohnort());
     assertEquals(adresse.getStrasse(),pDTO.getAdresse().getStrasse());
     assertEquals(adresse.getHausnummer(),pDTO.getAdresse().getHausnummer());
-    assertEquals(geburtsdatum,pDTO.getGeburtsdatum());
+    assertEquals(geburtsDatum,pDTO.getGeburtsdatum());
     assertEquals(p.getUnikennung(),pDTO.getUnikennung());
     assertEquals(p.getName(),pDTO.getName());
     assertEquals(p.getVorname(),pDTO.getVorname());
@@ -144,11 +143,11 @@ public class DTOServiceTest {
 
     assertEquals(praeferenzenDTO.getBerufModul().getBeruf(), praeferenzen.getBerufModul().getBeruf());
     assertEquals(praeferenzenDTO.getBerufModul().getModul().getDozentName(),
-        praeferenzen.getBerufModul().getModul().getDozent().getDozentName());
+        modul1.getDozent().getDozentName());
     assertEquals(praeferenzenDTO.getBerufModul().getModul().getDozentMail(),
-        praeferenzen.getBerufModul().getModul().getDozent().getDozentMail());
+        modul1.getDozent().getDozentMail());
     assertEquals(praeferenzenDTO.getBerufModul().getModul().getModulName(),
-        praeferenzen.getBerufModul().getModul().getModulName());
+        modul1.getModulName());
     assertEquals(praeferenzenDTO.getTutorenSchulungTeilnahme(), praeferenzen.getTutorenSchulungTeilnahme());
 
     assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getPrioritaet(),
