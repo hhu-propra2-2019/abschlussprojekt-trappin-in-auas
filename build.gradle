@@ -67,6 +67,8 @@ dependencies {
 
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
+
+	implementation 'com.c4-soft.springaddons:spring-security-test-keycloack-addons:1.2.0'
 }
 
 test {
