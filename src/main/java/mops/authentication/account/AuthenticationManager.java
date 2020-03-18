@@ -1,23 +1,14 @@
 package mops.authentication.account;
 
+import static mops.authentication.account.keycloak.KeycloakRoles.*;
+
 import mops.authentication.account.keycloak.Account;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource("classpath:roles.properties")
 public class AuthenticationManager {
 
-  @Autowired
-  private @Value("${role.orga}") String ROLE_ORGA;
-  @Autowired
-  private @Value("${role.studentin}") String ROLE_STUDENT;
-  @Autowired
-  private @Value("${role.boss}") String ROLE_BOSS;
-  @Autowired
-  private @Value("${role.verteiler}") String ROLE_VERTEILER;
+
 
   public boolean isOrganizerButNotStudent(Account account) {
     return account.getRoles().contains(ROLE_ORGA) && !account.getRoles().contains(ROLE_STUDENT);
