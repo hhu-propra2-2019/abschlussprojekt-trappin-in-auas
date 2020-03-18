@@ -1,11 +1,9 @@
 package mops.controllers;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 
 import mops.domain.database.dto.BewerberDTO;
 import mops.services.BewerberService;
-
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -25,7 +23,7 @@ public class VerteilerController {
       this.bewerberService = bewerberService;
     }
     
-    @Secured({"ROLE_orga"})
+    @Secured(ROLE_ORGA)
     @GetMapping("/uebersicht")
     public String verteilen(Model model, KeycloakAuthenticationToken token){
         //List<BewerberDTO> offeneBewerbungen = bewerberService.findNichtVerteilt();
@@ -34,7 +32,7 @@ public class VerteilerController {
         return "verteiler/verteilerMainpage";
     }
 
-  @Secured({"ROLE_orga"})
+  @Secured(ROLE_ORGA)
   @PostMapping("/verteilung")
   public String verteilDetails(Model m, @RequestParam String kennung) {
     System.out.println("print: " + kennung);
