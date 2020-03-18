@@ -18,15 +18,11 @@ public class DozentPraeferenzServiceTest {
 
   private IDozentPraeferenzService dozentPraeferenzService;
 
-  @BeforeEach
-  public void initialization() {
-    dozentPraeferenzService = new DozentPraeferenzService();
-  }
-
 
   @Test
   public void addDozentPraeverenz(){
     DozentPraeferenzRepo dozentPraeferenzRepoMock = mock(DozentPraeferenzRepo.class);
+    dozentPraeferenzService = new DozentPraeferenzService(dozentPraeferenzRepoMock);
     DozentPraeferenzDTO dozentPraeferenzDTO = new DozentPraeferenzDTO("bewerber","dozentMail", 3);
 
     dozentPraeferenzService.addPraeferenz(dozentPraeferenzDTO);
