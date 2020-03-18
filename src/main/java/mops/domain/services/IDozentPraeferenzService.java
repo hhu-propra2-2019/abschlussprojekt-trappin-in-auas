@@ -5,7 +5,7 @@ import java.util.List;
 import mops.domain.database.dto.DozentPraeferenzDTO;
 
 public interface IDozentPraeferenzService {
-  void addPraeferenz(String bewerber, String dozentMail, int preaferenz);
+  void addPraeferenz(DozentPraeferenzDTO dozentPraeferenzDTO);
 
   void deletePraeferenz(String bewerber, String dozentMail);
 
