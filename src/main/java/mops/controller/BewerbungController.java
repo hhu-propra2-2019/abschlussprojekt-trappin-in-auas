@@ -2,18 +2,13 @@ package mops.controller;
 
 import java.util.Set;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.annotation.security.RolesAllowed;
 
 @Controller
 @RequestMapping("/bewerbung1")
@@ -37,8 +32,6 @@ public class BewerbungController {
    */
   @GetMapping("")
   @Secured({ROLE_ORGA, ROLE_STUDENT})
-  //@RolesAllowed({ROLE_ORGA, ROLE_STUDENT})
-  @PreAuthorize("hasRole('ROLE_STUDENT')")
   public String mainpage(Model model, KeycloakAuthenticationToken token) {
     Set<String> tokenRole = token.getAccount().getRoles();
 
