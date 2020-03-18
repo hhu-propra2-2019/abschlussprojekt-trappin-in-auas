@@ -11,28 +11,30 @@ import mops.domain.services.IDozentPraeferenzService;
 import mops.services.DozentPraeferenzService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class DozentPraeferenzServiceTest {
 
+  @Autowired
   private IDozentPraeferenzService dozentPraeferenzService;
+
 
 
   @Test
   public void addDozentPraeverenz(){
     DozentPraeferenzRepo dozentPraeferenzRepoMock = mock(DozentPraeferenzRepo.class);
-    dozentPraeferenzService = new DozentPraeferenzService(dozentPraeferenzRepoMock);
+    IDozentPraeferenzService serviceWithMockRepo = new DozentPraeferenzService(dozentPraeferenzRepoMock);
     DozentPraeferenzDTO dozentPraeferenzDTO = new DozentPraeferenzDTO("bewerber","dozentMail", 3);
 
-    dozentPraeferenzService.addPraeferenz(dozentPraeferenzDTO);
+    serviceWithMockRepo.addPraeferenz(dozentPraeferenzDTO);
 
     verify(dozentPraeferenzRepoMock, times(1)).save(dozentPraeferenzDTO);
   }
 
   @Test
   public void readPraeferenzFromDb(){
-    dozentPraeferenzService = new DozentPraeferenzService();
     final String BEWERBER = "bewerber";
     final String DOZENT_MAIL = "dozentMail";
     final int PRAEFERENZ = 3;
