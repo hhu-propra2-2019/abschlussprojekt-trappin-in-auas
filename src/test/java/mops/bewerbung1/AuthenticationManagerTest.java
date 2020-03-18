@@ -1,6 +1,7 @@
 package mops.bewerbung1;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static mops.authentication.account.keycloak.KeycloakRoles.*;
 
 import mops.authentication.account.AuthenticationManager;
 import mops.authentication.account.keycloak.Account;
@@ -16,15 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)
 class AuthenticationManagerTest {
-
-  @Autowired
-  private @Value("${role.orga}") String ROLE_ORGA;
-  @Autowired
-  private @Value("${role.studentin}") String ROLE_STUDENT;
-  @Autowired
-  private @Value("${role.boss}") String ROLE_BOSS;
-  @Autowired
-  private @Value("${role.verteiler}") String ROLE_VERTEILER;
 
   @Autowired
   transient AuthenticationManager authenticationManager;
