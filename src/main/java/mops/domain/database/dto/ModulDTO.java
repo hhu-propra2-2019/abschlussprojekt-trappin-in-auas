@@ -2,7 +2,6 @@ package mops.domain.database.dto;
 
 import javax.persistence.*;
 import lombok.Data;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -11,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ModulDTO {
 
-    public ModulDTO(String modul, String dozentMail, String dozentName){
-        this.modul = modul;
+    public ModulDTO(String modulName, String dozentMail, String dozentName){
+        this.modulName = modulName;
         this.dozentMail = dozentMail;
         this.dozentName = dozentName;
     }
@@ -20,7 +19,7 @@ public class ModulDTO {
     @GeneratedValue
     @Id
     private long id;
-    private String modul;
+    private String modulName;
     private String dozentMail;
     private String dozentName;
 }
