@@ -2,10 +2,7 @@ package mops.services;
 
 import jdk.tools.jlink.internal.ModularJarArchive;
 import mops.domain.database.dto.BewerberDTO;
-import mops.domain.models.Karriere;
-import mops.domain.models.ModulAuswahl;
-import mops.domain.models.Personalien;
-import mops.domain.models.Praeferenzen;
+import mops.domain.models.*;
 import mops.domain.repositories.BewerberRepository;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
@@ -57,11 +54,7 @@ public class PDFService {
 
 
             PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
-
-           /* for (PDField field2 : pDAcroForm.getFields()){
-                System.out.println(field2.getFullyQualifiedName());
-            }*/ //spuckt alle titelfelder aus
-
+            
 
             //befuellen der datei
             PDField field = pDAcroForm.getField("Vorname");
@@ -81,12 +74,8 @@ public class PDFService {
             field = pDAcroForm.getField("Anschrift (ORT)");
             field.setValue(bewerberDTO.getPersonalien().getAdresse().getWohnort());
 
-
-            /*field = pDAcroForm.getField("Neueinstellung");
-            field.setValue(bewerberDTO.getPraeferenzen().getEinstiegTyp().toString());*/  //das feld neueinstellung hat einen anderen namen, leider weiß ich nicht welchen
-            /*field = pDAcroForm.getField("Weiterbeschäftigung"); / //anderer Name, muss nachschauen wie das Feld richtig heißt
-            field.setValue(bewerberDTO.getPraeferenzen().getEinstiegTyp().toString()); */
-
+            field = pDAcroForm.getField("Vertragsart");
+            field.setValue(pruefeVertragsart(bewerberDTO));
 
             field = pDAcroForm.getField("Stunden");
             field.setValue(bewerberDTO.getPraeferenzen().getMinWunschStunden() + " - " + bewerberDTO.getPraeferenzen().getMaxWunschStunden());
@@ -115,6 +104,7 @@ public class PDFService {
     }
 
 
+
     public void fillWissenHilfskraft(BewerberDTO bewerberDTO, String path) throws Exception {
 
         try {
@@ -130,9 +120,6 @@ public class PDFService {
             }
             PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
 
-           /* for (PDField field2 : pDAcroForm.getFields()){
-                System.out.println(field2.getFullyQualifiedName());
-            }*/ //spuckt alle titelfelder aus
 
 
             //befuellen der Datei
@@ -154,10 +141,8 @@ public class PDFService {
             field.setValue(bewerberDTO.getPersonalien().getAdresse().getWohnort());
 
 
-            /*field = pDAcroForm.getField("Neueinstellung");
-            field.setValue(bewerberDTO.getPraeferenzen().getEinstiegTyp().toString());*/  //das feld neueinstellung hat einen anderen namen, leider weiß ich nicht welchen
-            /*field = pDAcroForm.getField("Weiterbeschäftigung"); / //anderer Name, muss nachschauen wie das Feld richtig heißt
-            field.setValue(bewerberDTO.getPraeferenzen().getEinstiegTyp().toString()); */
+            field = pDAcroForm.getField("Vertragsart");
+            field.setValue(pruefeVertragsart(bewerberDTO));
 
 
             field = pDAcroForm.getField("Stunden");
@@ -203,4 +188,26 @@ public class PDFService {
 
 
     }
+
+
+    private String pruefeVertragsart(BewerberDTO bewerberDTO) {
+        if (bewerberDTO.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.WEITERBESCHAEFTIGUNG){
+
+            return "Weiterbeschäftigung";
+
+
+    }
+    else if(bewerberDTO.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.NEUEINSTIEG){
+
+        return "Einstellung";
+
+        }
+
+    else{
+
+        return "Off";
+        }
+
+    }
+
 }
