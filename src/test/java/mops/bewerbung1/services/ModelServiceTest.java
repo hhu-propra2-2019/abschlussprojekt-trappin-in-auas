@@ -177,4 +177,14 @@ public class ModelServiceTest {
         assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getModul().getDozentMail(), praeferenzen.getModulAuswahl().get(1).getModul().getDozent().getDozentMail());
     }
 
+    @Test
+    public void abschlussDTOzuAbschlussTest(){
+        StudiengangAbschlussDTO studiengangAbschlussDTO = new StudiengangAbschlussDTO("Informatik", "Master");
+
+        StudiengangAbschluss studiengangAbschluss = mappingService.load(studiengangAbschlussDTO);
+
+        assertEquals(studiengangAbschlussDTO.getAbschluss(), studiengangAbschluss.getAbschluss());
+        assertEquals(studiengangAbschlussDTO.getStudiengang(), studiengangAbschluss.getStudiengang());
+    }
+
 }

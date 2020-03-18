@@ -9,4 +9,5 @@ public interface IModelSerice {
     Personalien load(PersonalienDTO personalienDTO);
     Praeferenzen load(PraeferenzenDTO praeferenzenDTO);
     public Modul loadModul(ModulDTO modulDTO);
+    public StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss);
 }
