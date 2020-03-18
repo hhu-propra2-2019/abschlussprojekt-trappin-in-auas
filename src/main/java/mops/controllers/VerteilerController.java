@@ -33,16 +33,6 @@ public class VerteilerController {
   }
 
   @Secured(ROLE_ORGA)
-  @GetMapping("/uebersicht")
-  public String verteilen(Model model, KeycloakAuthenticationToken token) {
-    // List<BewerberDTO> offeneBewerbungen = bewerberService.findNichtVerteilt();
-    // List<BewerberDTO> zugewieseneBewerbungen = bewerberService.findVerteilt();
-    // List<BewerberDTO> offeneBewerbungenPreview =
-    // offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
-    return "verteiler/verteilerMainpage";
-  }
-
-  @Secured(ROLE_ORGA)
   @PostMapping("/verteilung")
   public String verteilDetails(Model m, @RequestParam String kennung) {
     System.out.println("print: " + kennung);
