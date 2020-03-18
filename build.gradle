@@ -7,6 +7,7 @@ plugins {
 	id "io.freefair.lombok" version "5.0.0-rc4"
 }
 
+
 group = 'mops.bewerbung1'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'

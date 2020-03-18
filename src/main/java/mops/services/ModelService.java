@@ -77,7 +77,7 @@ public class ModelService implements IModelSerice {
 
 
   public Modul loadModul(ModulDTO modulDTO) {
-    return new Modul(modulDTO.getModul(), new Dozent(modulDTO.getDozentMail(), modulDTO.getDozentName()));
+    return new Modul(modulDTO.getModulName(), new Dozent(modulDTO.getDozentMail(), modulDTO.getDozentName()));
   }
 
   public ModulDTO loadModulDTO(Modul modul) {
