@@ -30,4 +30,18 @@ public class DozentPraeferenzServiceTest {
     verify(dozentPraeferenzRepoMock, times(1)).save(dozentPraeferenzDTO);
   }
 
+  @Test
+  public void readPraeferenzFromDb(){
+    dozentPraeferenzService = new DozentPraeferenzService();
+    final String BEWERBER = "bewerber";
+    final String DOZENT_MAIL = "dozentMail";
+    final int PRAEFERENZ = 3;
+    DozentPraeferenzDTO addDozentPraeferenzDTO = new DozentPraeferenzDTO(BEWERBER, DOZENT_MAIL, PRAEFERENZ);
+
+    dozentPraeferenzService.addPraeferenz(addDozentPraeferenzDTO);
+    int dozentPraeferenz = dozentPraeferenzService.getDozentPraeferenz(BEWERBER, DOZENT_MAIL);
+
+    assertThat(dozentPraeferenz).isEqualTo(PRAEFERENZ);
+
+  }
 }
