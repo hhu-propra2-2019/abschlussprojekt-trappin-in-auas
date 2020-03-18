@@ -11,14 +11,11 @@ import java.util.Locale;
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
 import mops.services.ModelService;
-import org.hamcrest.collection.IsIterableContainingInOrder;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import mops.domain.services.IModelSerice;
 import org.springframework.security.core.parameters.P;
@@ -179,5 +176,5 @@ public class ModelServiceTest {
         assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getModul().getDozentName(), praeferenzen.getModulAuswahl().get(1).getModul().getDozent().getDozentName());
         assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getModul().getDozentMail(), praeferenzen.getModulAuswahl().get(1).getModul().getDozent().getDozentMail());
     }
-    
+
 }
