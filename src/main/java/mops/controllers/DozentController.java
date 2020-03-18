@@ -1,9 +1,9 @@
 package mops.controllers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import mops.domain.database.dto.BewerberDTO;
+import mops.domain.models.Bewerber;
 import mops.services.BewerberService;
 
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
@@ -29,17 +29,9 @@ public class DozentController {
   @Secured({ orgaRole })
   @GetMapping("/uebersicht")
   public String verteilen(Model model, KeycloakAuthenticationToken token) {
-    List<BewerberDTO> alleBewerber = bewerberService.findAlleBewerber();
-    List<BewerberDTO> offeneBewerbungen = bewerberService.findNichtVerteilt();
-    List<BewerberDTO> zugewieseneBewerbungen = bewerberService.findVerteilt();
-    List<BewerberDTO> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
-
-    model.addAttribute("bewerbungen", alleBewerber);
-    model.addAttribute("offenecount", offeneBewerbungen.size());
-    model.addAttribute("zugewiesenecount", zugewieseneBewerbungen.size());
-    model.addAttribute("preview", offeneBewerbungenPreview);
-
-    return "dozent/ubersicht";
+    List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
+    model.addAttribute("bewerber", meineBewerber);
+    return "orga/dozent/ubersicht";
   }
 
   @Secured({ orgaRole })

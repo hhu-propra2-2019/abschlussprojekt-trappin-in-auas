@@ -2,11 +2,13 @@ package mops.domain.database.dto;
 
 import javax.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
 @Table(name = "modulAuswahl")
 @Entity
+@NoArgsConstructor
 public class ModulAuswahlDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

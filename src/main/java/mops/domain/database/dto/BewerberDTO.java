@@ -1,12 +1,16 @@
 package mops.domain.database.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "bewerber")
+@NoArgsConstructor
 public class BewerberDTO {
 
   @Id
@@ -27,10 +31,12 @@ public class BewerberDTO {
 
   private String erstelltVon;
 
-  private String verteiltAn;
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "bewerber", referencedColumnName = "id")
+  private List<VerteilungDTO> verteiltAn;
 
   public BewerberDTO(PersonalienDTO personalien, KarriereDTO karriere, PraeferenzenDTO praeferenzen,
-      String verteiltAn) {
+      List<VerteilungDTO> verteiltAn) {
     this.personalien = personalien;
     this.karriere = karriere;
     this.praeferenzen = praeferenzen;

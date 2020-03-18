@@ -1,6 +1,7 @@
 package mops.domain.database.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import mops.domain.models.EinstiegTyp;
 import mops.domain.models.TutorenSchulungTeilnahme;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Data
 @Table(name = "praeferenzen")
 @Entity
+@NoArgsConstructor
 public class PraeferenzenDTO {
 
     @Id
