@@ -2,6 +2,7 @@ package mops.controller;
 
 import mops.domain.models.Modul;
 
+import mops.services.DTOService;
 import mops.services.ModelService;
 import mops.services.ModulService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
@@ -11,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/bewerbung1/boss")
@@ -22,6 +22,9 @@ public class BossController {
 
   @Autowired
   private transient ModelService mappingService;
+
+  @Autowired
+  private transient DTOService dtoService;
 
   /**
    * Modul list for boss. Login as "Boss" required.
@@ -47,7 +50,7 @@ public class BossController {
   //@Secured("ROLE_boss")
   @PostMapping("/postmodule")
   public String addModule(Model m, KeycloakAuthenticationToken token, Modul modul) {
-    modulService.addModul(mappingService.loadModulDTO(modul));
+    modulService.addModul(dtoService.load(modul));
     return "redirect:/bewerbung1/boss/modules";
   }
 

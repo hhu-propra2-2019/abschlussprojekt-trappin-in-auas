@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
 import mops.domain.services.IDTOService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DTOService implements IDTOService {
   /*
    * Mapping Models -> DTO
