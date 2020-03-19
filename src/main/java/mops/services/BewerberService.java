@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import mops.domain.database.dto.BewerberDTO;
+import mops.domain.database.dto.ModulAuswahlDTO;
 import mops.domain.models.Bewerber;
+import mops.domain.models.Dozent;
 
 import org.springframework.stereotype.Service;
 
@@ -16,10 +18,12 @@ public class BewerberService implements IBewerberService {
 
   private transient BewerberRepository bewerberRepository;
   private transient DTOService mappingService;
+  private transient ModelService modelService;
 
-  public BewerberService(BewerberRepository bewerberRepository, DTOService mappingService) {
+  public BewerberService(BewerberRepository bewerberRepository, DTOService mappingService, ModelService modelService) {
     this.bewerberRepository = bewerberRepository;
     this.mappingService = mappingService;
+    this.modelService = modelService;
   }
 
   @Override
@@ -44,10 +48,9 @@ public class BewerberService implements IBewerberService {
     return alleBewerber.stream().filter(x -> x.getVerteiltAn() == null).collect(Collectors.toList());
   }
 
-  @Override
-  public void verteile(String kennung, String dozent) {
+  public void verteile(String kennung, Dozent dozent) {
     BewerberDTO b = bewerberRepository.findById(kennung).get();
-    b.setVerteiltAn(dozent);
+    b.getVerteiltAn().add(mappingService.load(dozent));
     bewerberRepository.save(b);
   }
 
@@ -62,4 +65,17 @@ public class BewerberService implements IBewerberService {
   public List<BewerberDTO> findVerteilt() {
     return bewerberRepository.findByVerteiltAnIsNotNull();
   }
+
+  public List<Bewerber> findBewerberFuerDozent(String dozentKennung) {
+    List<BewerberDTO> alleBewerber = findAlleBewerber();
+    return alleBewerber.stream()
+    .filter(x -> modulAuswahlContainsDozent(x.getPraeferenzen().getModulAuswahl(), dozentKennung))
+    .map(x -> modelService.load(x)).collect(Collectors.toList());
+  }
+
+  private boolean modulAuswahlContainsDozent(List<ModulAuswahlDTO> auswahlDTO, String dozentKennung){
+    return auswahlDTO.stream().anyMatch(x -> x.getModul().getDozentMail().equals(dozentKennung));
+  }
+
+  
 }

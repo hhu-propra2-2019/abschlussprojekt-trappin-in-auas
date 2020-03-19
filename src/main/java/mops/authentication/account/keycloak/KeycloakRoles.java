@@ -1,21 +1,9 @@
 package mops.authentication.account.keycloak;
 
-//TODO: make this work with @Secured annotation, to have a singular place in which we can configure roles and shit
-public enum KeycloakRoles{
-    ORGA("ROLE_orga"),
-    STUDENT("ROLE_student");
-
-    private final String roleString;
-
-    /**
-     * @param roleString
-     */
-    KeycloakRoles(final String roleString) {
-        this.roleString = roleString;
-    }
-
-    @Override
-    public String toString() {
-        return roleString;
-    }
+public final class KeycloakRoles {
+  public static final String ROLE_ORGA = "ROLE_orga";
+  public static final String ROLE_STUDENT = "ROLE_studentin";
+  public static final String ROLE_BOSS = "ROLE_setup";
+  public static final String ROLE_VERTEILER = "ROLE_verteiler";
+  public static final String ROLE_APIUSER = "ROLE_api_user";
 }

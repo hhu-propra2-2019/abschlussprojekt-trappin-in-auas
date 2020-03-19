@@ -1,341 +1,362 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{mopslayout :: html(name='name', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+  th:replace="~{mopslayout :: html(name='name', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
 
 <head>
-	<meta charset="utf-8">
-	<title>main</title>
+  <meta charset="utf-8">
+  <title>main</title>
 
-	<th:block th:fragment="headcontent">
+  <th:block th:fragment="headcontent">
 
-	</th:block>
+  </th:block>
 </head>
 
 <body>
+  <header>
+    <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
+      <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
+      <ul>
+        <li>
+          <a href="#">test1</a>
+        </li>
+        <li>
+          <a href="#">test2</a>
+        </li>
+        <li>
+          <a href="#">test3</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
+  <main th:fragment="bodycontent" style="background-color: #EAEAEA; padding: 2%">
     <div class="container pt-3">
-        <div class="col-12 shadow p-3 mb-5 bg-light rounded">
+      <div class="col-12 shadow p-3 mb-5 bg-light rounded">
         <h1>Übersicht</h1>
-        <div class="card border-dark">
-            <table class="table">
-                <tbody>
-                <tr>
-                    <th scope="row">Nicht verteilte Bewerbungen</th>
-                    <td>0</td>
-                    <td><button type="button" class="btn btn-light">Alle Anzeigen</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">Verteilte Bewerbungen</th>
-                    <td>0</td>
-                    <td><button type="button" class="btn btn-light">Alle Anzeigen</button></td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="card shadow p-3 mb-5 bg-light rounded">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row">Offene Bewerbungen</th>
+                <td>0</td>
+                <td><button type="button" class="btn btn-light">Alle Anzeigen</button></td>
+              </tr>
+              <tr>
+                <th scope="row">Vorgemerkte Bewerbungen</th>
+                <td>0</td>
+                <td><button type="button" class="btn btn-light">Alle Anzeigen</button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        </div>
+      </div>
     </div>
 
     <div class="container pt-3">
-        <div class="col-12 shadow p-3 mb-5 bg-light rounded">
-            <div class="card-columns">
-                <div class="card border-dark">
-                    <div class="card-header font-weight-bold text-center">
-                        <h5>Bayar Abdullah</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">- ProPra Prio = 3</p>
-                        <p class="card-text">- Aldat Prio = 1</p>
-                        <p class="card-text">- Datenbank Prio = 2</p>
-                        <p class="card-text">- ProPra2 Prio = 1</p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
-                        </p>
-                        <h6>Fach zuteilen:</h6>
-                        <p>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Softwareentwicklung im Team</option>
-                                <option>Datenbanksysteme</option>
-                                <option>Algorithmen und Datenstrukturen</option>
-                                <option>Programierung</option>
-                            </select>
-                        </p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
-                        </p>
-                        <p>
-                            <div class="btn-group btn-block">
-                                <button type="button" class="btn btn-success">Modul hinzufügen</button>
-                                <button type="button" class="btn btn-primary">Akzeptieren</button>
-                            </div>
-                        </p>
-                    </div>
-                </div>
+      <div class="col-12 shadow p-3 mb-5 bg-light rounded">
+        <div class="card-columns" th:remove="all-but-first">
 
-                <div class="card border-dark">
-                    <div class="card-header font-weight-bold text-center">
-                        <h5>Bayar Abdullah</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">- ProPra Prio = 3</p>
-                        <p class="card-text">- Aldat Prio = 1</p>
-                        <p class="card-text">- Datenbank Prio = 2</p>
-                        <p class="card-text">- ProPra2 Prio = 1</p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
-                        </p>
-                        <h6>Fach zuteilen:</h6>
-                        <p>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Softwareentwicklung im Team</option>
-                                <option>Datenbanksysteme</option>
-                                <option>Algorithmen und Datenstrukturen</option>
-                                <option>Programierung</option>
-                            </select>
-                        </p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
-                        </p>
-                        <p>
-                        <div class="btn-group btn-block">
-                                <button type="button" class="btn btn-success">Modul hinzufügen</button>
-                                <button type="button" class="btn btn-primary">Akzeptieren</button>
-                            </div>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card border-dark">
-                    <div class="card-header font-weight-bold text-center">
-                        <h5>Bayar Abdullah</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">- ProPra Prio = 3</p>
-                        <p class="card-text">- Aldat Prio = 1</p>
-                        <p class="card-text">- Datenbank Prio = 2</p>
-                        <p class="card-text">- ProPra2 Prio = 1</p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
-                        </p>
-                        <h6>Fach zuteilen:</h6>
-                        <p>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Softwareentwicklung im Team</option>
-                                <option>Datenbanksysteme</option>
-                                <option>Algorithmen und Datenstrukturen</option>
-                                <option>Programierung</option>
-                            </select>
-                        </p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
-                        </p>
-                        <p>
-                        <div class="btn-group btn-block">
-                            <button type="button" class="btn btn-success">Modul hinzufügen</button>
-                            <button type="button" class="btn btn-primary">Akzeptieren</button>
-                        </div>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card border-dark">
-                    <div class="card-header font-weight-bold text-center">
-                        <h5>Bayar Abdullah</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">- ProPra Prio = 3</p>
-                        <p class="card-text">- Aldat Prio = 1</p>
-                        <p class="card-text">- Datenbank Prio = 2</p>
-                        <p class="card-text">- ProPra2 Prio = 1</p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
-                        </p>
-                        <h6>Fach zuteilen:</h6>
-                        <p>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Softwareentwicklung im Team</option>
-                                <option>Datenbanksysteme</option>
-                                <option>Algorithmen und Datenstrukturen</option>
-                                <option>Programierung</option>
-                            </select>
-                        </p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
-                        </p>
-                        <p>
-                        <div class="btn-group btn-block">
-                            <button type="button" class="btn btn-success">Modul hinzufügen</button>
-                            <button type="button" class="btn btn-primary">Akzeptieren</button>
-                        </div>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card border-dark">
-                    <div class="card-header font-weight-bold text-center">
-                        <h5>Bayar Abdullah</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">- ProPra Prio = 3</p>
-                        <p class="card-text">- Aldat Prio = 1</p>
-                        <p class="card-text">- Datenbank Prio = 2</p>
-                        <p class="card-text">- ProPra2 Prio = 1</p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
-                        </p>
-                        <h6>Fach zuteilen:</h6>
-                        <p>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Softwareentwicklung im Team</option>
-                                <option>Datenbanksysteme</option>
-                                <option>Algorithmen und Datenstrukturen</option>
-                                <option>Programierung</option>
-                            </select>
-                        </p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
-                        </p>
-                        <p>
-                        <div class="btn-group btn-block">
-                            <button type="button" class="btn btn-success">Modul hinzufügen</button>
-                            <button type="button" class="btn btn-primary">Akzeptieren</button>
-                        </div>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card border-dark">
-                    <div class="card-header font-weight-bold text-center">
-                        <h5>Bayar Abdullah</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">- ProPra Prio = 3</p>
-                        <p class="card-text">- Aldat Prio = 1</p>
-                        <p class="card-text">- Datenbank Prio = 2</p>
-                        <p class="card-text">- ProPra2 Prio = 1</p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
-                        </p>
-                        <h6>Fach zuteilen:</h6>
-                        <p>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Softwareentwicklung im Team</option>
-                                <option>Datenbanksysteme</option>
-                                <option>Algorithmen und Datenstrukturen</option>
-                                <option>Programierung</option>
-                            </select>
-                        </p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
-                        </p>
-                        <p>
-                        <div class="btn-group btn-block">
-                            <button type="button" class="btn btn-success">Modul hinzufügen</button>
-                            <button type="button" class="btn btn-primary">Akzeptieren</button>
-                        </div>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card border-dark">
-                    <div class="card-header font-weight-bold text-center">
-                        <h5>Bayar Abdullah</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">- ProPra Prio = 3</p>
-                        <p class="card-text">- Aldat Prio = 1</p>
-                        <p class="card-text">- Datenbank Prio = 2</p>
-                        <p class="card-text">- ProPra2 Prio = 1</p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
-                        </p>
-                        <h6>Fach zuteilen:</h6>
-                        <p>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Softwareentwicklung im Team</option>
-                                <option>Datenbanksysteme</option>
-                                <option>Algorithmen und Datenstrukturen</option>
-                                <option>Programierung</option>
-                            </select>
-                        </p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
-                        </p>
-                        <p>
-                        <div class="btn-group btn-block">
-                            <button type="button" class="btn btn-success">Modul hinzufügen</button>
-                            <button type="button" class="btn btn-primary">Akzeptieren</button>
-                        </div>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card border-dark">
-                    <div class="card-header font-weight-bold text-center">
-                        <h5>Bayar Abdullah</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">- ProPra Prio = 3</p>
-                        <p class="card-text">- Aldat Prio = 1</p>
-                        <p class="card-text">- Datenbank Prio = 2</p>
-                        <p class="card-text">- ProPra2 Prio = 1</p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
-                        </p>
-                        <h6>Fach zuteilen:</h6>
-                        <p>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Softwareentwicklung im Team</option>
-                                <option>Datenbanksysteme</option>
-                                <option>Algorithmen und Datenstrukturen</option>
-                                <option>Programierung</option>
-                            </select>
-                        </p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
-                        </p>
-                        <p>
-                        <div class="btn-group btn-block">
-                            <button type="button" class="btn btn-success">Modul hinzufügen</button>
-                            <button type="button" class="btn btn-primary">Akzeptieren</button>
-                        </div>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card border-dark">
-                    <div class="card-header font-weight-bold text-center">
-                        <h5>Bayar Abdullah</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">- ProPra Prio = 3</p>
-                        <p class="card-text">- Aldat Prio = 1</p>
-                        <p class="card-text">- Datenbank Prio = 2</p>
-                        <p class="card-text">- ProPra2 Prio = 1</p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
-                        </p>
-                        <h6>Fach zuteilen:</h6>
-                        <p>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Softwareentwicklung im Team</option>
-                                <option>Datenbanksysteme</option>
-                                <option>Algorithmen und Datenstrukturen</option>
-                                <option>Programierung</option>
-                            </select>
-                        </p>
-                        <p>
-                            <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
-                        </p>
-                        <p>
-                        <div class="btn-group btn-block">
-                            <button type="button" class="btn btn-success">Modul hinzufügen</button>
-                            <button type="button" class="btn btn-primary">Akzeptieren</button>
-                        </div>
-                        </p>
-                    </div>
-                </div>
+          <div th:each="bewerbung : ${bewerber}" class="card shadow p-3 mb-5 bg-light rounded">
+            <div class="card-header font-weight-bold text-center">
+              <h5>
+                <h5 th:text="${bewerbung.personalien.vorname}">Bayar</h5>
+                <h5 th:text="${bewerbung.personalien.name}">Abdullah</h5>
+              </h5>
             </div>
+            <div class="card-body">
+              <p class="card-text">- ProPra Prio = 3</p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
+              </p>
+              <h6>Fach zuteilen:</h6>
+              <p>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Softwareentwicklung im Team</option>
+                  <option>Datenbanksysteme</option>
+                  <option>Algorithmen und Datenstrukturen</option>
+                  <option>Programierung</option>
+                </select>
+              </p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
+              </p>
+              <p>
+                <div class="btn-group btn-block">
+                  <button type="button" class="btn btn-success">Modul hinzufügen</button>
+                  <button type="button" class="btn btn-primary">Akzeptieren</button>
+                </div>
+              </p>
+            </div>
+          </div>
+
+          <div class="card shadow p-3 mb-5 bg-light rounded">
+            <div class="card-header font-weight-bold text-center">
+              <h5>Bayar Abdullah</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">- ProPra Prio = 3</p>
+              <p class="card-text">- Aldat Prio = 1</p>
+              <p class="card-text">- Datenbank Prio = 2</p>
+              <p class="card-text">- ProPra2 Prio = 1</p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
+              </p>
+              <h6>Fach zuteilen:</h6>
+              <p>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Softwareentwicklung im Team</option>
+                  <option>Datenbanksysteme</option>
+                  <option>Algorithmen und Datenstrukturen</option>
+                  <option>Programierung</option>
+                </select>
+              </p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
+              </p>
+              <p>
+                <div class="btn-group btn-block">
+                  <button type="button" class="btn btn-success">Modul hinzufügen</button>
+                  <button type="button" class="btn btn-primary">Akzeptieren</button>
+                </div>
+              </p>
+            </div>
+          </div>
+
+          <div class="card shadow p-3 mb-5 bg-light rounded">
+            <div class="card-header font-weight-bold text-center">
+              <h5>Bayar Abdullah</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">- ProPra Prio = 3</p>
+              <p class="card-text">- Aldat Prio = 1</p>
+              <p class="card-text">- Datenbank Prio = 2</p>
+              <p class="card-text">- ProPra2 Prio = 1</p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
+              </p>
+              <h6>Fach zuteilen:</h6>
+              <p>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Softwareentwicklung im Team</option>
+                  <option>Datenbanksysteme</option>
+                  <option>Algorithmen und Datenstrukturen</option>
+                  <option>Programierung</option>
+                </select>
+              </p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
+              </p>
+              <p>
+                <div class="btn-group btn-block">
+                  <button type="button" class="btn btn-success">Modul hinzufügen</button>
+                  <button type="button" class="btn btn-primary">Akzeptieren</button>
+                </div>
+              </p>
+            </div>
+          </div>
+
+          <div class="card shadow p-3 mb-5 bg-light rounded">
+            <div class="card-header font-weight-bold text-center">
+              <h5>Bayar Abdullah</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">- ProPra Prio = 3</p>
+              <p class="card-text">- Aldat Prio = 1</p>
+              <p class="card-text">- Datenbank Prio = 2</p>
+              <p class="card-text">- ProPra2 Prio = 1</p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
+              </p>
+              <h6>Fach zuteilen:</h6>
+              <p>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Softwareentwicklung im Team</option>
+                  <option>Datenbanksysteme</option>
+                  <option>Algorithmen und Datenstrukturen</option>
+                  <option>Programierung</option>
+                </select>
+              </p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
+              </p>
+              <p>
+                <div class="btn-group btn-block">
+                  <button type="button" class="btn btn-success">Modul hinzufügen</button>
+                  <button type="button" class="btn btn-primary">Akzeptieren</button>
+                </div>
+              </p>
+            </div>
+          </div>
+
+          <div class="card shadow p-3 mb-5 bg-light rounded">
+            <div class="card-header font-weight-bold text-center">
+              <h5>Bayar Abdullah</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">- ProPra Prio = 3</p>
+              <p class="card-text">- Aldat Prio = 1</p>
+              <p class="card-text">- Datenbank Prio = 2</p>
+              <p class="card-text">- ProPra2 Prio = 1</p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
+              </p>
+              <h6>Fach zuteilen:</h6>
+              <p>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Softwareentwicklung im Team</option>
+                  <option>Datenbanksysteme</option>
+                  <option>Algorithmen und Datenstrukturen</option>
+                  <option>Programierung</option>
+                </select>
+              </p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
+              </p>
+              <p>
+                <div class="btn-group btn-block">
+                  <button type="button" class="btn btn-success">Modul hinzufügen</button>
+                  <button type="button" class="btn btn-primary">Akzeptieren</button>
+                </div>
+              </p>
+            </div>
+          </div>
+
+          <div class="card shadow p-3 mb-5 bg-light rounded">
+            <div class="card-header font-weight-bold text-center">
+              <h5>Bayar Abdullah</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">- ProPra Prio = 3</p>
+              <p class="card-text">- Aldat Prio = 1</p>
+              <p class="card-text">- Datenbank Prio = 2</p>
+              <p class="card-text">- ProPra2 Prio = 1</p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
+              </p>
+              <h6>Fach zuteilen:</h6>
+              <p>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Softwareentwicklung im Team</option>
+                  <option>Datenbanksysteme</option>
+                  <option>Algorithmen und Datenstrukturen</option>
+                  <option>Programierung</option>
+                </select>
+              </p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
+              </p>
+              <p>
+                <div class="btn-group btn-block">
+                  <button type="button" class="btn btn-success">Modul hinzufügen</button>
+                  <button type="button" class="btn btn-primary">Akzeptieren</button>
+                </div>
+              </p>
+            </div>
+          </div>
+
+          <div class="card shadow p-3 mb-5 bg-light rounded">
+            <div class="card-header font-weight-bold text-center">
+              <h5>Bayar Abdullah</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">- ProPra Prio = 3</p>
+              <p class="card-text">- Aldat Prio = 1</p>
+              <p class="card-text">- Datenbank Prio = 2</p>
+              <p class="card-text">- ProPra2 Prio = 1</p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
+              </p>
+              <h6>Fach zuteilen:</h6>
+              <p>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Softwareentwicklung im Team</option>
+                  <option>Datenbanksysteme</option>
+                  <option>Algorithmen und Datenstrukturen</option>
+                  <option>Programierung</option>
+                </select>
+              </p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
+              </p>
+              <p>
+                <div class="btn-group btn-block">
+                  <button type="button" class="btn btn-success">Modul hinzufügen</button>
+                  <button type="button" class="btn btn-primary">Akzeptieren</button>
+                </div>
+              </p>
+            </div>
+          </div>
+
+          <div class="card shadow p-3 mb-5 bg-light rounded">
+            <div class="card-header font-weight-bold text-center">
+              <h5>Bayar Abdullah</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">- ProPra Prio = 3</p>
+              <p class="card-text">- Aldat Prio = 1</p>
+              <p class="card-text">- Datenbank Prio = 2</p>
+              <p class="card-text">- ProPra2 Prio = 1</p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
+              </p>
+              <h6>Fach zuteilen:</h6>
+              <p>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Softwareentwicklung im Team</option>
+                  <option>Datenbanksysteme</option>
+                  <option>Algorithmen und Datenstrukturen</option>
+                  <option>Programierung</option>
+                </select>
+              </p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
+              </p>
+              <p>
+                <div class="btn-group btn-block">
+                  <button type="button" class="btn btn-success">Modul hinzufügen</button>
+                  <button type="button" class="btn btn-primary">Akzeptieren</button>
+                </div>
+              </p>
+            </div>
+          </div>
+
+          <div class="card shadow p-3 mb-5 bg-light rounded">
+            <div class="card-header font-weight-bold text-center">
+              <h5>Bayar Abdullah</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">- ProPra Prio = 3</p>
+              <p class="card-text">- Aldat Prio = 1</p>
+              <p class="card-text">- Datenbank Prio = 2</p>
+              <p class="card-text">- ProPra2 Prio = 1</p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
+              </p>
+              <h6>Fach zuteilen:</h6>
+              <p>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Softwareentwicklung im Team</option>
+                  <option>Datenbanksysteme</option>
+                  <option>Algorithmen und Datenstrukturen</option>
+                  <option>Programierung</option>
+                </select>
+              </p>
+              <p>
+                <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
+              </p>
+              <p>
+                <div class="btn-group btn-block">
+                  <button type="button" class="btn btn-success">Modul hinzufügen</button>
+                  <button type="button" class="btn btn-primary">Akzeptieren</button>
+                </div>
+              </p>
+            </div>
+          </div>
+
         </div>
+      </div>
     </div>
+  </main>
 </body>
+
 </html>

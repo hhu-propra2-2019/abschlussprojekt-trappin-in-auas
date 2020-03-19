@@ -14,22 +14,21 @@ public class DozentPraeferenzDTO {
   private long id;
   
   private String bewerber;
-  private String dozentMail;
+  private String dozentMail; //bzw dozentkennung
   private int praeferenz;
 
-  public DozentPraeferenzDTO(String bewerber, String dozentMail, int praeferenz){
+  public DozentPraeferenzDTO(String bewerber, String dozenMail, int praeferenz){
     this.bewerber = bewerber;
-    this.dozentMail = dozentMail;
+    this.dozentMail = dozenMail;
     this.praeferenz = praeferenz;
   }
 }
 
 /*
-Dozent | Bewerber | pref
--------------------------
-jens100| mawin125 | 2
-jens100| alish100 | 3
-jens100| bayab200 | 4
-golov20| alish100 | 1
-
+    Dozent | Bewerber | pref
+    -------------------------
+    jens100| mawin125 | 2
+    jens100| alish100 | 3
+    jens100| bayab200 | 4
+    golov20| alish100 | 1
 */
