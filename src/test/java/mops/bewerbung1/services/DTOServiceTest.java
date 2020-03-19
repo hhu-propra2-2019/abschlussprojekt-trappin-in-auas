@@ -2,6 +2,7 @@ package mops.bewerbung1.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -74,16 +75,11 @@ public class DTOServiceTest {
   }
 
   @Test
-  public void personalienZuPersonalienDTO(){
+  public void personalienZuPersonalienDTO() throws Exception {
     Adresse adresse = new Adresse("40233","Berlin","Magnumstr","16a");
-    Date geburtsDatum = new Date();
-    SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
-    String datum = "24.05.1996";
-    try {
-      geburtsDatum = ft.parse(datum);
-    } catch (Exception ignored) {
+    Date geburtsDatum = Date.from(new SimpleDateFormat("dd.MM.yyyy",
+        Locale.getDefault()).parse("15.07.1999").toInstant());
 
-    }
     Personalien p = new Personalien(adresse,"akkil100","Kilincarslan","Akin",
         geburtsDatum,24,"Monheim", "Tuerke");
 
@@ -104,7 +100,7 @@ public class DTOServiceTest {
 
   @Test
   public void karriereZuKarriereDTO(){
-    ImmartikulationsStatus immartikulationsStatus = new ImmartikulationsStatus(true,"Informatik");
+    ImmartikulationsStatus immartikulationsStatus = new ImmartikulationsStatus(true,"KI");
     StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor","HHU");
     Karriere karriere = new Karriere("keine",immartikulationsStatus,studiengangAbschluss);
 
