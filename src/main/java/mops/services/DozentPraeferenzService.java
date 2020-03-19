@@ -25,7 +25,7 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
 
   @Override
   public void deletePraeferenz(String bewerber, String dozentMail) {
-
+    dozentPraeferenzRepo.deleteByBewerberAndDozentMail(bewerber, dozentMail);
   }
 
   @Override
@@ -33,7 +33,7 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
     List<DozentPraeferenzDTO> matchingRows = dozentPraeferenzRepo.findByBewerberAndDozentMail(bewerber, dozentMail);
 
     if(matchingRows.isEmpty()){
-      return 0;
+      return -1;
     }
     return matchingRows.get(0).getPraeferenz();
   }

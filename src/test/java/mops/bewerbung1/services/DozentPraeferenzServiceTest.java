@@ -58,6 +58,6 @@ public class DozentPraeferenzServiceTest {
     dozentPraeferenzService.deletePraeferenz(BEWERBER, DOZENT_MAIL);
     Integer readDozentPraeferenzDTO = dozentPraeferenzService.getDozentPraeferenz(BEWERBER, DOZENT_MAIL);
 
-    assertThat(readDozentPraeferenzDTO).isNull();
+    assertThat(readDozentPraeferenzDTO).isEqualTo(-1);
   }
 }
