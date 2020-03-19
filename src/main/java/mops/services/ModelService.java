@@ -17,9 +17,17 @@ public class ModelService implements IModelService {
 
   }
 
-  public StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss) {
-    return new StudiengangAbschluss(fachAbschluss.getStudiengang(), fachAbschluss.getAbschluss(),
-        fachAbschluss.getUni());
+  public Bewerber load(BewerberDTO bewerberDTO){
+    return new Bewerber(
+      load(bewerberDTO.getKarriere()), 
+      load(bewerberDTO.getPersonalien()),
+      load(bewerberDTO.getPraeferenzen()), 
+      bewerberDTO.getErstelltVon(),
+      bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()));
+  }
+
+  public Dozent load(VerteilungDTO verteilungDTO){
+    return new Dozent(verteilungDTO.getDozentKennung(), verteilungDTO.getDozentName());
   }
 
   @Override
@@ -31,19 +39,23 @@ public class ModelService implements IModelService {
         load(karriereDTO.getFachAbschluss()));
   }
 
-
+  public StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss) {
+    return new StudiengangAbschluss(fachAbschluss.getStudiengang(), fachAbschluss.getAbschluss(),
+        fachAbschluss.getUni());
+  }
 
   public ImmartikulationsStatus load(ImmartikulationsStatusDTO statusDTO) {
     return new ImmartikulationsStatus(statusDTO.isStatus(), statusDTO.getFachrichtung());
   }
 
   @Override
-    public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) {
-      if(modulAuswahlDTO == null){
-        return null;
-      }
-      return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(),
-          modulAuswahlDTO.getNote());
+  public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) {
+    if(modulAuswahlDTO == null){
+      return null;
+    }
+    return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(),
+        modulAuswahlDTO.getNote());
+
   }
 
   @Override
@@ -69,17 +81,17 @@ public class ModelService implements IModelService {
   @Override
   public Praeferenzen load(PraeferenzenDTO pDTO) {
     List<ModulAuswahl> modulAuswahl = pDTO.getModulAuswahl().stream().map(this::load).collect(Collectors.toList());
-    return new Praeferenzen(pDTO.getMaxWunschStunden(), pDTO.getMinWunschStunden(), modulAuswahl,
-        pDTO.getKommentar(), pDTO.getEinstiegTyp(), pDTO.getEinschraenkungen(),
-        loadBerufModul(pDTO.getBerufModul()), pDTO.getTutorenSchulungTeilnahme());
+    return new Praeferenzen(pDTO.getMaxWunschStunden(), pDTO.getMinWunschStunden(), modulAuswahl, pDTO.getKommentar(),
+        pDTO.getEinstiegTyp(), pDTO.getEinschraenkungen(), loadBerufModul(pDTO.getBerufModul()),
+        pDTO.getTutorenSchulungTeilnahme());
   }
-
 
   public Modul loadModul(ModulDTO modulDTO) {
     return new Modul(modulDTO.getModulName(), new Dozent(modulDTO.getDozentMail(), modulDTO.getDozentName()));
   }
 
-  @SuppressWarnings("PMD.DataflowAnomalyAnalysis")  //Fix gradle bug: False positive  https://github.com/pmd/pmd/issues/387
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis") // Fix gradle bug: False positive
+                                                   // https://github.com/pmd/pmd/issues/387
   public List<Modul> loadModulList(List<ModulDTO> dtoList) {
     List<Modul> modulist = new LinkedList<>();
     for (ModulDTO modulDTO : dtoList) {

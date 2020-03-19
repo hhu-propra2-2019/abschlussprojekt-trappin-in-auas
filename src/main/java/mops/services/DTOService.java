@@ -64,16 +64,25 @@ public class DTOService implements IDTOService {
   }
 
   public BewerberDTO load(Bewerber bewerber) {
-    String verteiltAn = (bewerber.getVerteiltAn() == null) ? null : bewerber.getVerteiltAn().getDozentMail();
-    BewerberDTO bewerberDTO = new BewerberDTO(
-      load(bewerber.getPersonalien()), 
-      load(bewerber.getKarriere()),
-      load(bewerber.getPraeferenzen()), 
-      verteiltAn);
+    List<VerteilungDTO> verteiltAn = (bewerber.getVerteiltAn() == null) ? null : load(bewerber.getVerteiltAn());
+    BewerberDTO bewerberDTO = new BewerberDTO(load(bewerber.getPersonalien()), load(bewerber.getKarriere()),
+        load(bewerber.getPraeferenzen()), verteiltAn);
     return bewerberDTO;
   }
 
-   public List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen){
+  public VerteilungDTO load(Dozent dozent) {
+    return new VerteilungDTO(dozent.getDozentName(), dozent.getDozentMail());
+  }
+
+  private List<VerteilungDTO> load(List<Dozent> verteiltAn) {
+    return verteiltAn.stream().map(x -> load(x)).collect(Collectors.toList());
+  }
+
+  public List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen) {
     return praeferenzen.getModulAuswahl().stream().map(this::load).collect(Collectors.toList());
+  }
+
+  public DozentPraeferenzDTO load(DozentPraeferenz dPraeferenz) {
+    return new DozentPraeferenzDTO(dPraeferenz.getBewerberKennung(), dPraeferenz.getDozentKennung(), dPraeferenz.getPraeferenz());
   }
 }
