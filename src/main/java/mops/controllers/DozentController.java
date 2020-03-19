@@ -30,9 +30,15 @@ public class DozentController {
   @GetMapping("/uebersicht")
   public String verteilen(Model model, KeycloakAuthenticationToken token) {
     List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
+    /*
+      TODO: anzahl bewerbungen ohne prio und anzahl bewerbungen mit prio
+
+    */
     model.addAttribute("bewerber", meineBewerber);
     return "orga/dozent/ubersicht";
   }
+
+  //TODO: DozentPraeferenz hinzufügen
 
   @Secured({ orgaRole })
   @GetMapping("/uebersicht/offene")

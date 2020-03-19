@@ -1,7 +1,6 @@
 package mops.domain.database.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Data
+@Table(name = "verteilung")
 public class VerteilungDTO {
   @Id
   private long id;

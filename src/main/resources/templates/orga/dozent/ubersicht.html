@@ -59,8 +59,8 @@
           <div th:each="bewerbung : ${bewerber}" class="card shadow p-3 mb-5 bg-light rounded">
             <div class="card-header font-weight-bold text-center">
               <h5>
-                <div th:text="${bewerbung.personalien.vorname}">Bayar</div>
-                <div th:text="${bewerbung.personalien.name}">Abdullah</div>
+                <h5 th:text="${bewerbung.personalien.vorname}">Bayar</h5>
+                <h5 th:text="${bewerbung.personalien.name}">Abdullah</h5>
               </h5>
             </div>
             <div class="card-body">
