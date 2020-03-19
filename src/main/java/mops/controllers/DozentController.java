@@ -59,7 +59,7 @@ public class DozentController {
   }
 
   @Secured({ orgaRole })
-  @GetMapping("/uebersicht/unbearbeitete")
+  @GetMapping("/unbearbeitete")
   public String offeneUebersicht(Model model, KeycloakAuthenticationToken token) {
     List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
     List<Bewerber> bearbeitet = dozentService.getBewerbungenMitPraeferenz(meineBewerber, token.getName());
@@ -73,7 +73,7 @@ public class DozentController {
   }
 
   @Secured({ orgaRole })
-  @GetMapping("/uebersicht/bearbeitete")
+  @GetMapping("/bearbeitete")
   public String zugewieseneUebersicht(Model model, KeycloakAuthenticationToken token) {
     List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
     List<Bewerber> bearbeitet = dozentService.getBewerbungenMitPraeferenz(meineBewerber, token.getName());

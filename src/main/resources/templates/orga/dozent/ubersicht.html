@@ -17,13 +17,13 @@
       <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
       <ul>
         <li>
-          <a href="#">test1</a>
+          <a th:href="@{./uebersicht}">Übersicht</a>
         </li>
         <li>
-          <a href="#">test2</a>
+          <a th:href="@{./unbearbeitete}">Offene Bewerbungen</a>
         </li>
         <li>
-          <a href="#">test3</a>
+          <a th:href="@{./bearbeitete}">Vorgemerkte Bewerbungen</a>
         </li>
       </ul>
     </nav>
@@ -32,19 +32,19 @@
   <main th:fragment="bodycontent" style="background-color: #EAEAEA; padding: 2%">
     <div class="container pt-3">
       <div class="col-12 shadow p-3 mb-5 bg-light rounded">
-        <h1>Übersicht</h1>
+        <a th:href="@{./uebersicht}" style="text-decoration: none !important; color: black" class="h1">Übersicht</a>
         <div class="card shadow p-3 mb-5 bg-light rounded">
           <table class="table">
             <tbody>
               <tr>
                 <th scope="row">Offene Bewerbungen</th>
                 <td th:text="${nichtBearbeitetCount}">0</td>
-                <td><button type="button" class="btn btn-light">Alle Anzeigen</button></td>
+                <td><a th:href="@{./unbearbeitete}" class="btn btn-light">Alle Anzeigen</a></td>
               </tr>
               <tr>
                 <th scope="row">Vorgemerkte Bewerbungen</th>
                 <td th:text="${bearbeitetCount}">0</td>
-                <td><button type="button" class="btn btn-light">Alle Anzeigen</button></td>
+                <td><a th:href="@{./bearbeitete}" class="btn btn-light">Alle Anzeigen</a></td>
               </tr>
             </tbody>
           </table>
