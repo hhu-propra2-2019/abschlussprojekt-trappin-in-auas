@@ -27,7 +27,10 @@ public class DozentPraeferenzServiceTest {
   @BeforeEach
   public void buildDTO(){
     addDozentPraeferenzDTO = new DozentPraeferenzDTO(BEWERBER, DOZENT_MAIL, PRAEFERENZ);
+    dozentPraeferenzService.deletePraeferenz(BEWERBER, DOZENT_MAIL);
   }
+
+
 
 
 
@@ -61,10 +64,18 @@ public class DozentPraeferenzServiceTest {
   }
 
   @Test
-  public void testBooleanAlreadyConfirmed(){
+  public void testBooleanAlreadyConfirmed_true(){
     dozentPraeferenzService.addPraeferenz(addDozentPraeferenzDTO);
     boolean alreadyConfirmed = dozentPraeferenzService.alreadyConfirmed(BEWERBER, DOZENT_MAIL);
 
     assertThat(alreadyConfirmed).isEqualTo(true);
+  }
+
+  @Test
+  public void testBooleanAlreadyConfirmed_false(){
+    dozentPraeferenzService.addPraeferenz(addDozentPraeferenzDTO);
+    boolean alreadyConfirmed = dozentPraeferenzService.alreadyConfirmed("andererBewerber", DOZENT_MAIL);
+
+    assertThat(alreadyConfirmed).isEqualTo(false);
   }
 }
