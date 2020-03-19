@@ -96,7 +96,7 @@ public class ModelServiceTest {
     @Test
     public void karriereDTOzuKarriereModel(){
         ImmartikulationsStatusDTO immartikulationsStatusDTO = new ImmartikulationsStatusDTO(true, "Informatik");
-        StudiengangAbschlussDTO studiengangAbschlussDTO = new StudiengangAbschlussDTO("Informatik", "Bachelor","HHU");
+        StudiengangAbschlussDTO studiengangAbschlussDTO = new StudiengangAbschlussDTO("Mathematik", "Bachelor","HHU");
         KarriereDTO karriereDTO = new KarriereDTO("bei Apple Store gearbeitet.", immartikulationsStatusDTO, studiengangAbschlussDTO);
 
         Karriere karriere = modelService.load(karriereDTO);
@@ -148,7 +148,7 @@ public class ModelServiceTest {
         ModulAuswahlDTO modulAuswahlDTO2 = new ModulAuswahlDTO(modulDTO2, 1,3.3);
         ModulAuswahlDTO modulAuswahlDTO3 = new ModulAuswahlDTO(modulDTO3, 3,1.0);
 
-        Modul modul1 = modelService.loadModul(modulDTO1);
+        
 
         List<ModulAuswahlDTO> modulAuswahlDTOSlist = new LinkedList<ModulAuswahlDTO>();
         modulAuswahlDTOSlist.add(modulAuswahlDTO1);
@@ -183,7 +183,7 @@ public class ModelServiceTest {
 
     @Test
     public void abschlussDTOzuAbschlussTest(){
-        StudiengangAbschlussDTO studiengangAbschlussDTO = new StudiengangAbschlussDTO("Informatik", "Master","HHU");
+        StudiengangAbschlussDTO studiengangAbschlussDTO = new StudiengangAbschlussDTO("Chemie", "Master","HHU");
 
         StudiengangAbschluss studiengangAbschluss = modelService.load(studiengangAbschlussDTO);
 
