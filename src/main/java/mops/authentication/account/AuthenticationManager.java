@@ -1,40 +1,36 @@
 package mops.authentication.account;
 
+import static mops.authentication.account.keycloak.KeycloakRoles.*;
+
 import mops.authentication.account.keycloak.Account;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthenticationManager {
-  transient private Account account;
 
-  private static final String ROLE_ORGA = "ROLE_orga";
-  private static final String ROLE_STUDENT = "ROLE_studentin";
-  private static final String ROLE_BOSS = "ROLE_verwaltung";
-  private static final String ROLE_ADMIN = "ROLE_admin";
 
-  public AuthenticationManager(Account account) {
-    this.account = account;
-  }
 
-  public boolean isOrganizerButNotStudent() {
+  public boolean isOrganizerButNotStudent(Account account) {
     return account.getRoles().contains(ROLE_ORGA) && !account.getRoles().contains(ROLE_STUDENT);
   }
 
-  public boolean isStudentButNotOrganizer() {
+  public boolean isStudentButNotOrganizer(Account account) {
     return account.getRoles().contains(ROLE_STUDENT) && !account.getRoles().contains(ROLE_ORGA);
   }
 
-  public boolean isStudent() {
+  public boolean isStudent(Account account) {
     return account.getRoles().contains(ROLE_STUDENT);
   }
 
-  public boolean isOrganizer() {
+  public boolean isOrganizer(Account account) {
     return account.getRoles().contains(ROLE_ORGA);
   }
 
-  public boolean isBoss() {
+  public boolean isBoss(Account account) {
     return account.getRoles().contains(ROLE_BOSS);
   }
 
-  public boolean isAdmin()  {
-    return account.getRoles().contains(ROLE_ADMIN);
+  public boolean isAdmin(Account account)  {
+    return account.getRoles().contains(ROLE_VERTEILER);
   }
 }
