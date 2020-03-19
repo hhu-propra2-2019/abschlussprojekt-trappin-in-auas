@@ -16,10 +16,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class DozentPraeferenzServiceTest {
-  private final String BEWERBER = "bewerber";
-  private final String DOZENT_MAIL = "dozentMail";
-  private final int PRAEFERENZ = 3;
-  DozentPraeferenzDTO addDozentPraeferenzDTO;
+  private transient final String BEWERBER = "bewerber";
+  private transient final String DOZENT_MAIL = "dozentMail";
+  private transient final int PRAEFERENZ = 3;
+  transient DozentPraeferenzDTO addDozentPraeferenzDTO;
 
   @Autowired
   private transient IDozentPraeferenzService dozentPraeferenzService;
