@@ -39,6 +39,17 @@ public class BewerberController {
     return "student/main_min";
   }
 
+  @GetMapping("/verteil")
+  @Secured({ "ROLE_orga" })
+  public String verteil(Model model, KeycloakAuthenticationToken token) {
+    Bewerber b = new Bewerber(new Karriere(), new Personalien(), new Praeferenzen(), token.getName(), null);
+    b.getPraeferenzen().setModulAuswahl(new ArrayList<>()); // avoid list beeing null errors
+    b.getPraeferenzen().getModulAuswahl().add(new ModulAuswahl());
+    System.out.println(b);
+    model.addAttribute("bewerber", b);
+    return "student/main_min";
+  }
+
   @PostMapping("/addModul")
   public String addModul(Model m, Bewerber b) {
     List<ModulAuswahl> modulauswahl = b.getPraeferenzen().getModulAuswahl();
