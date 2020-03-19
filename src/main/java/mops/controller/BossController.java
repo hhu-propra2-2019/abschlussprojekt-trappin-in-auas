@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/bewerbung1/boss")
@@ -59,7 +60,7 @@ public class BossController {
    * @param modulName String, for delete query
    * @return redirect to modules
    */
-  @Secured(ROLE_boss)
+  @Secured(ROLE_BOSS)
   @PostMapping("/delete")
   public String deleteModule(Model m, KeycloakAuthenticationToken token,
       @RequestParam String modulName) {
