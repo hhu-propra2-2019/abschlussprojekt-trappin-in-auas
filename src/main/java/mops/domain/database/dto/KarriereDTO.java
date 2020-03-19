@@ -3,10 +3,12 @@ package mops.domain.database.dto;
 
 import javax.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Table(name = "karriere")
 @Entity
+@NoArgsConstructor
 public class KarriereDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

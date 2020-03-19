@@ -2,7 +2,6 @@ package mops.controllers;
 
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
-import mops.domain.repositories.BewerberRepository;
 import mops.services.BewerberService;
 
 import java.util.ArrayList;
