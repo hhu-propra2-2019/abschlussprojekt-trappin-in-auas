@@ -16,9 +16,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class DozentPraeferenzServiceTest {
+  private final String BEWERBER = "bewerber";
+  private final String DOZENT_MAIL = "dozentMail";
+  private final int PRAEFERENZ = 3;
+  DozentPraeferenzDTO addDozentPraeferenzDTO;
 
   @Autowired
   private transient IDozentPraeferenzService dozentPraeferenzService;
+
+  @BeforeEach
+  public void buildDTO(){
+    addDozentPraeferenzDTO = new DozentPraeferenzDTO(BEWERBER, DOZENT_MAIL, PRAEFERENZ);
+  }
 
 
 
@@ -35,11 +44,6 @@ public class DozentPraeferenzServiceTest {
 
   @Test
   public void readPraeferenzFromDb(){
-    final String BEWERBER = "bewerber";
-    final String DOZENT_MAIL = "dozentMail";
-    final int PRAEFERENZ = 3;
-    DozentPraeferenzDTO addDozentPraeferenzDTO = new DozentPraeferenzDTO(BEWERBER, DOZENT_MAIL, PRAEFERENZ);
-
     dozentPraeferenzService.addPraeferenz(addDozentPraeferenzDTO);
     int dozentPraeferenz = dozentPraeferenzService.getDozentPraeferenz(BEWERBER, DOZENT_MAIL);
 
@@ -49,15 +53,18 @@ public class DozentPraeferenzServiceTest {
 
   @Test
   public void deletePraeferenzFromDb(){
-    final String BEWERBER = "bewerber";
-    final String DOZENT_MAIL = "dozentMail";
-    final int PRAEFERENZ = 3;
-    DozentPraeferenzDTO addDozentPraeferenzDTO = new DozentPraeferenzDTO(BEWERBER, DOZENT_MAIL, PRAEFERENZ);
-
     dozentPraeferenzService.addPraeferenz(addDozentPraeferenzDTO);
     dozentPraeferenzService.deletePraeferenz(BEWERBER, DOZENT_MAIL);
     Integer readDozentPraeferenzDTO = dozentPraeferenzService.getDozentPraeferenz(BEWERBER, DOZENT_MAIL);
 
     assertThat(readDozentPraeferenzDTO).isEqualTo(-1);
+  }
+
+  @Test
+  public void testBooleanAlreadyConfirmed(){
+    dozentPraeferenzService.addPraeferenz(addDozentPraeferenzDTO);
+    boolean alreadyConfirmed = dozentPraeferenzService.alreadyConfirmed(BEWERBER, DOZENT_MAIL);
+
+    assertThat(alreadyConfirmed).isEqualTo(true);
   }
 }
