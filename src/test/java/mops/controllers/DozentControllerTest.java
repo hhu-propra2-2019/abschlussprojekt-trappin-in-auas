@@ -48,7 +48,7 @@ class DozentControllerTest {
 
   @BeforeEach
   void setUp() {
-    bewerberDTO = new BewerberDTO(
+    /*bewerberDTO = new BewerberDTO(
             new PersonalienDTO(new AdresseDTO("40489", "Düsseldorf", "Kalkumer Schlossallee", "28"),
                     "abc1234", "Name", "Vorname", new Date(1234L), 25,"Düsseldorf", "deutsch"),
             new KarriereDTO("Arbeitserfahrung", new ImmartikulationsStatusDTO(true, "Informatik"),
@@ -62,6 +62,7 @@ class DozentControllerTest {
     when(bewerberService.findBewerberByKennung("abc1234")).thenReturn(bewerberDTO);
     when(bewerberService.findNichtVerteilt()).thenReturn(Collections.singletonList(bewerberDTO));
     when(bewerberService.findVerteilt()).thenReturn(Collections.emptyList());
+     */
   }
 
   // GET UEBERSICHT //
