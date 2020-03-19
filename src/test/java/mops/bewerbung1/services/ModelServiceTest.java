@@ -207,5 +207,5 @@ public class ModelServiceTest {
         assertEquals(modulDTOList.get(1).getDozentMail(), modulList.get(1).getDozent().getDozentMail());
         assertEquals(modulDTOList.get(1).getDozentName(), modulList.get(1).getDozent().getDozentName());
     }
-
+    
 }

@@ -18,7 +18,7 @@ public class ModelService implements IModelSerice {
   }
 
   @Override
-  public Karriere load(KarriereDTO karriereDTO) {
+  public Karriere load(KarriereDTO karriereDTO) { //TESTED!
     if(karriereDTO == null){
       return null;
     }
@@ -35,7 +35,7 @@ public class ModelService implements IModelSerice {
   }
 
   @Override
-  public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) {
+  public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) { //TESTED!
     if(modulAuswahlDTO == null){
       return null;
     }
@@ -43,7 +43,7 @@ public class ModelService implements IModelSerice {
   }
 
   @Override
-  public Personalien load(PersonalienDTO pDTO) {
+  public Personalien load(PersonalienDTO pDTO) { //TESTED!
     if(pDTO == null){
       return null;
     }
@@ -80,7 +80,7 @@ public class ModelService implements IModelSerice {
   }
 
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis")  //Fix gradle bug: False positive  https://github.com/pmd/pmd/issues/387
-  public List<Modul> loadModulList(List<ModulDTO> dtoList) {
+  public List<Modul> loadModulList(List<ModulDTO> dtoList) { //TESTED!
     List<Modul> modulist = new LinkedList<>();
     for (ModulDTO modulDTO : dtoList) {
       modulist.add(loadModul(modulDTO));
