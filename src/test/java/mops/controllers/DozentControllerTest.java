@@ -35,16 +35,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class DozentControllerTest {
 
   @Autowired
-  private MockMvc mockMvc;
+  private transient MockMvc mockMvc;
 
   @MockBean
   private BewerberService bewerberService;
 
   private BewerberDTO bewerberDTO;
 
-  private String dozentViewGetUri = "/dozent/uebersicht";
-  private String dozentViewOpenGetUri = "/dozent/uebersicht/offene";
-  private String dozentViewClosedGetUri = "/dozent/uebersicht/zugewiesene";
+  private transient String dozentViewGetUri = "/dozent/uebersicht";
+  private transient String dozentViewOpenGetUri = "/dozent/uebersicht/offene";
+  private transient String dozentViewClosedGetUri = "/dozent/uebersicht/zugewiesene";
 
   @BeforeEach
   void setUp() {
