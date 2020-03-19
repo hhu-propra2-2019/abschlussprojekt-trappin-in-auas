@@ -38,12 +38,12 @@
             <tbody>
               <tr>
                 <th scope="row">Offene Bewerbungen</th>
-                <td>0</td>
+                <td th:text="${nichtBearbeitetCount}">0</td>
                 <td><button type="button" class="btn btn-light">Alle Anzeigen</button></td>
               </tr>
               <tr>
                 <th scope="row">Vorgemerkte Bewerbungen</th>
-                <td>0</td>
+                <td th:text="${bearbeitetCount}">0</td>
                 <td><button type="button" class="btn btn-light">Alle Anzeigen</button></td>
               </tr>
             </tbody>

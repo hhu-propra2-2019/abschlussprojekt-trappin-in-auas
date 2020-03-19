@@ -40,41 +40,50 @@ public class DozentController {
   @GetMapping("/uebersicht")
   public String verteilen(Model model, KeycloakAuthenticationToken token) {
     List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
+    List<Bewerber> bearbeitet = dozentService.getBewerbungenMitPraeferenz(meineBewerber, token.getName());
+    List<Bewerber> nichtBearbeitet = dozentService.getBewerbungenOhnePraeferenz(meineBewerber, token.getName());
 
-    /*
-      TODO: anzahl bewerbungen ohne prio und anzahl bewerbungen mit prio
-    */
-
-    model.addAttribute("bewerber", meineBewerber);
+    model.addAttribute("bearbeitetCount", bearbeitet.size());
+    model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
+    model.addAttribute("bewerber", meineBewerber);
     return "orga/dozent/ubersicht";
   }
 
-  @Secured({orgaRole})
+  @Secured({ orgaRole })
   @PostMapping("/addPreference")
-  public String addPreference(Model model, KeycloakAuthenticationToken token, int praeferenz, String dozentKennung, String bewerberKennung){
+  public String addPreference(Model model, KeycloakAuthenticationToken token, int praeferenz, String dozentKennung,
+      String bewerberKennung) {
     dozentPraeferenzService.addPraeferenz(new DozentPraeferenz(dozentKennung, bewerberKennung, praeferenz));
     return "redirect:./uebersicht";
   }
 
   @Secured({ orgaRole })
-  @GetMapping("/uebersicht/offene")
+  @GetMapping("/uebersicht/unbearbeitete")
   public String offeneUebersicht(Model model, KeycloakAuthenticationToken token) {
-    List<BewerberDTO> offeneBewerbungen = bewerberService.findNichtVerteilt();
+    List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
+    List<Bewerber> bearbeitet = dozentService.getBewerbungenMitPraeferenz(meineBewerber, token.getName());
+    List<Bewerber> nichtBearbeitet = dozentService.getBewerbungenOhnePraeferenz(meineBewerber, token.getName());
 
-    model.addAttribute("offene", offeneBewerbungen);
-
-    return "";
+    model.addAttribute("bearbeitetCount", bearbeitet.size());
+    model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
+    model.addAttribute("me", token.getName());
+    model.addAttribute("bewerber", nichtBearbeitet);
+    return "orga/dozent/ubersicht";
   }
 
   @Secured({ orgaRole })
-  @GetMapping("/uebersicht/zugewiesene")
+  @GetMapping("/uebersicht/bearbeitete")
   public String zugewieseneUebersicht(Model model, KeycloakAuthenticationToken token) {
-    List<BewerberDTO> zugewiesene = bewerberService.findVerteilt();
+    List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
+    List<Bewerber> bearbeitet = dozentService.getBewerbungenMitPraeferenz(meineBewerber, token.getName());
+    List<Bewerber> nichtBearbeitet = dozentService.getBewerbungenOhnePraeferenz(meineBewerber, token.getName());
 
-    model.addAttribute(zugewiesene);
-
-    return "";
+    model.addAttribute("bearbeitetCount", bearbeitet.size());
+    model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
+    model.addAttribute("me", token.getName());
+    model.addAttribute("bewerber", bearbeitet);
+    return "orga/dozent/ubersicht";
   }
 
   @Secured({ orgaRole })
