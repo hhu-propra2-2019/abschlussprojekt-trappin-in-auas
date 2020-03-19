@@ -12,8 +12,9 @@ public class StudiengangAbschlussDTO {
     private String abschluss;
     private String uni;
     
-    public StudiengangAbschlussDTO(String studiengang, String abschluss) {
+    public StudiengangAbschlussDTO(String studiengang, String abschluss, String uni) {
         this.studiengang = studiengang;
         this.abschluss = abschluss;
+        this.uni = uni;
     }
 }

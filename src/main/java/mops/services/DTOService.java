@@ -9,34 +9,40 @@ import mops.domain.database.dto.*;
 import mops.domain.models.*;
 import mops.domain.services.IDTOService;
 
+
 @Service
 public class DTOService implements IDTOService {
   /*
    * Mapping Models -> DTO Für Bewerbungsbogen -> Datenbank
    */
 
-  public ModulDTO load(Modul modul) {
-    return new ModulDTO(modul.getModulName(), modul.getDozent().getDozentMail(), modul.getDozent().getDozentMail());
+
+  public ModulDTO load(Modul modul){
+    return new ModulDTO(modul.getModulName(),modul.getDozent().getDozentName(),modul.getDozent().getDozentMail());
+
   }
 
   public ModulAuswahlDTO load(ModulAuswahl modulAuswahl) {
-    return new ModulAuswahlDTO(load(modulAuswahl.getModul()), modulAuswahl.getPrioritaet());
+    return new ModulAuswahlDTO(load(modulAuswahl.getModul()), modulAuswahl.getPrioritaet(),modulAuswahl.getNote());
   }
 
   public BerufModulDTO load(BerufModul berufModul) {
     return new BerufModulDTO(berufModul.getBeruf(), load(berufModul.getModul()));
   }
 
-  public AdresseDTO load(Adresse adresse) {
-    return new AdresseDTO(adresse.getPLZ(), adresse.getWohnort(), adresse.getStraße(), adresse.getHausnummer());
+  public AdresseDTO load(Adresse adresse){
+    return new AdresseDTO(adresse.getPLZ(),adresse.getWohnort(),adresse.getStrasse(),adresse.getHausnummer());
+
   }
 
   public ImmartikulationsStatusDTO load(ImmartikulationsStatus imStatus) {
     return new ImmartikulationsStatusDTO(imStatus.isStatus(), imStatus.getFachrichtung());
   }
 
-  public StudiengangAbschlussDTO load(StudiengangAbschluss studiengangAbschluss) {
-    return new StudiengangAbschlussDTO(studiengangAbschluss.getAbschluss(), studiengangAbschluss.getStudiengang());
+  public StudiengangAbschlussDTO load(StudiengangAbschluss studiengangAbschluss){
+    return new StudiengangAbschlussDTO(studiengangAbschluss.getStudiengang(),studiengangAbschluss.getAbschluss(),
+        studiengangAbschluss.getUni());
+
   }
 
   public PersonalienDTO load(Personalien personalien) {
@@ -72,7 +78,7 @@ public class DTOService implements IDTOService {
     return verteiltAn.stream().map(x -> load(x)).collect(Collectors.toList());
   }
 
-  private List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen) {
+  public List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen) {
     return praeferenzen.getModulAuswahl().stream().map(this::load).collect(Collectors.toList());
   }
 
