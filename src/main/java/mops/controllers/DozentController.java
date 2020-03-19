@@ -1,13 +1,13 @@
 package mops.controllers;
 
-import java.util.List;
+import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import mops.domain.database.dto.BewerberDTO;
 import mops.domain.models.Bewerber;
 import mops.services.BewerberService;
-
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
-
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

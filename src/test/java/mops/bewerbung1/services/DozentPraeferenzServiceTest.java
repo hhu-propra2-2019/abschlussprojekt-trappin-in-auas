@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class DozentPraeferenzServiceTest {
 
   @Autowired
-  private IDozentPraeferenzService dozentPraeferenzService;
+  private transient IDozentPraeferenzService dozentPraeferenzService;
 
 
 
