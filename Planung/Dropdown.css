@@ -1,38 +1,49 @@
-select {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    border: none;
-    width: 100%;
-    height: 40px;
-    padding-left: 10px;
-    background: #545454 repeat;
-    color: #fff;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3);
-    border-radius: 3px;
-    outline: none;
-    cursor: pointer;
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #004882;
+    transition: .3s;
+    opacity: 0.7;
+    -webkit-transition: all 0.3s ease 0s;
+}
+
+.box {
     position: relative;
 }
-select option {
-    color: #666;
-}
-select:focus::-ms-value {
-    background-color: transparent;
-}
-select::-ms-expand {
-    display: none;
-}
-.select-wrapper::before {
-    content: "\f107";
+
+.box select {
+    background-color: #545454;
+    color: white;
+    padding: 12px;
+    width: 250px;
+    border: none;
     font-size: 20px;
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    color: #fff;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    outline: none;
 }
 
+.box::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
 
+.box:hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+}
 
+.box select option {
+    padding: 30px;
+}

@@ -5,9 +5,42 @@
 <head>
 	<meta charset="utf-8">
 	<title>main</title>
+
 	<th:block th:fragment="headcontent">
 
+		<script>
 
+			function disableInput(inputid, txt) {
+				var txtIn = document.getElementById(inputid);
+				txtIn.value = txt;
+				txtIn.disabled = !txtIn.disabled;
+			}
+
+			function addZuBewerbendesModul() {
+				let allBlocks = document.querySelectorAll('#modulAuswahlListe .bewerbemodulitemList .input-group');
+				let rowIndex = allBlocks.length;
+
+				let toAppend = allBlocks[0].cloneNode(true); //clone to preserve options
+				toAppend.querySelectorAll("select, input").forEach(selectItem => {
+					selectItem.id = selectItem.id.replace('0', "" + rowIndex);
+					selectItem.name = selectItem.name.replace('0', "" + rowIndex);
+					selectItem.className = selectItem.className.replace('0', "" + rowIndex);
+				});
+
+				let outer = document.createElement('div');
+				outer.className = "form-group bewerbemodulitemList";
+				outer.appendChild(toAppend);
+				document.getElementById('modulAuswahlListe').appendChild(outer);
+			}
+
+			function handleSyncSelect(current, classnames) {
+				let toSync = document.querySelectorAll("." + classnames);
+				toSync.forEach(x => {
+					x.selectedIndex = current.selectedIndex;
+				});
+			}
+
+		</script>
 	</th:block>
 </head>
 
@@ -31,36 +64,14 @@
 	</header>
 
 
-	<main th:fragment="bodycontent"
-		style="background-color: #FFFFFF; background-image: -webkit-linear-gradient(45deg, #EAEAEA 50%, #F0F0F0 50%);">
+	<main th:fragment="bodycontent" style="background-color: #EAEAEA; padding: 2%">
 
 		<form th:action="@{/bewirbabschicken}" method="POST">
-			<h1>Bewerbungsformular</h1>
-
 			<div class="container">
-				<div th:object="${personal}">
-					<div class="form-group">
-						<h3>Persönliche Daten:</h3>
-						<label for="vornameinput">Vorname:</label>
-						<input type="text" class="form-control col-sm-10" required th:field="*{vorname}"
-							maxlength="30" />
+				<h1>Bewerbungsformular</h1>
+			</div>
 
-						<label for="nachnameinput">
-							Nachname:</label>
-						<input type="text" class="form-control col-sm-10" required th:field="*{name}" maxlength="30" />
-
-						<label>Uni-Kennung:</label>
-						<input type="text" class="form-control col-sm-10" required th:field="*{unikennung}"
-							maxlength="30" />
-
-						<label>Geburtsort:</label>
-						<input type="text" class="form-control col-sm-10" required th:field="*{geburtsort}" />
-
-						<label>Staatsangehörigkeit:</label>
-						<input type="text" id="nationalitaetinput" required class="form-control col-sm-10"
-							th:field="*{nationalitaet}" />
-					</div>
-
+<<<<<<< HEAD
 					<div class="form-group">
 						<h3>Adresse:</h3>
 						<label>
@@ -73,417 +84,259 @@
 						</div>
 						<label>Postleitzahl:</label>
 						<input type="text" class="form-control col-sm-10" required th:field="*{adresse.PLZ}" />
+=======
+			<div class="container" th:object="${bewerber.personalien}">
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+					<h3>Persönliche Daten:</h3>
+					<label for="vornameinput">Vorname:</label>
+					<input type="text" class="form-control" required th:field="*{vorname}" maxlength="30" />
+>>>>>>> master
 
-						<label>Wohnort:</label>
-						<input type="text" class="form-control col-sm-10" required th:field="*{adresse.wohnort}" />
+					<label for="nachnameinput">
+						Nachname:</label>
+					<input type="text" class="form-control" required th:field="*{name}" maxlength="30" />
+
+					<label>Uni-Kennung:</label>
+					<input type="text" class="form-control" required th:field="*{unikennung}" maxlength="30" />
+
+					<label>Geburtsdatum und Alter:</label>
+					<div class="input-group">
+						<input type="date" class="form-control" required th:field="*{geburtsdatum}" />
+						<input type="number" class="form-control col-sm-2" placeholder="Alter" required
+							th:field="*{alter}" />
 
 					</div>
+					<label>Geburtsort:</label>
+					<input type="text" class="form-control " required th:field="*{geburtsort}" />
+
+					<label>Staatsangehörigkeit:</label>
+					<input type="text" id="nationalitaetinput" required class="form-control "
+						th:field="*{nationalitaet}" />
+				</div>
+
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+					<h3>Adresse:</h3>
+					<label>
+						Straße:
+					</label>
+					<div class="input-group">
+						<input type="text" class="form-control" required th:field="*{adresse.straße}" />
+						<input type="text" class="form-control col-sm-2" required th:field="*{adresse.hausnummer}"
+							placeholder="Hausnummer" />
+					</div>
+					<label>Postleitzahl:</label>
+					<input type="text" class="form-control " required th:field="*{adresse.PLZ}" />
+
+					<label>Wohnort:</label>
+					<input type="text" class="form-control " required th:field="*{adresse.wohnort}" />
+
 				</div>
 			</div>
 
 
-			<div class="container">
-				<div th:object="${modulauswahl}" class="form-group">
-					<h3>Wählen Sie eins oder mehr Fächer aus.</h3>
-					<select th:field="*{modul.modul}" class="form-control col-sm-10">
-						<option th:value="'Algorithmen und Datenstrukturen'">Algorithmen und Datenstrukturen
-						</option>
-						<option th:value="'Datenbanksysteme'">Datenbanksysteme</option>
-						<option th:value="'Programmierung'">Programmierung</option>
-						<option th:value="'Softwareentwicklung'">Softwareentwicklung</option>
-					</select>
+			<div class="container" th:object="${bewerber.praeferenzen}">
+				<!--Fach:-->
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+					<h3>Gewünschte Fächer</h3>
+					<h4>Welche Fächer möchten Sie unterstützen?
+						Wenn Sie ein Fach nicht gehört haben geben Sie ebenfalls "auf keinen Fall"
+						an.
+						Mehrfachnennungen sind ausdrücklich erwünscht! </h4>
+					<div id="modulAuswahlListe">
+						<div class="form-group bewerbemodulitemList" th:each="auswahl, itemStat : *{modulAuswahl}">
+							<div class="input-group">
 
-				</div>
-			</div>
+								<select class="form-control" aria-placeholder="Gewünnschtes Modul"
+									th:classappend="'bewerbemodulitemMaster'+__${itemStat.index}__"
+									onchange="handleSyncSelect(this, 'bewerbemodulitem'+this.className.slice(-1))"
+									th:field="*{modulAuswahl[__${itemStat.index}__].modul.modulName}">
+									<option th:value="'Programmierung'">Programmierung</option>
+									<option th:value="'ProPra'">ProPra</option>
+								</select>
+								<select class="form-control hiddenSelct"
+									th:classappend="'bewerbemodulitem'+__${itemStat.index}__"
+									th:field="*{modulAuswahl[__${itemStat.index}__].modul.dozent.dozentName}" hidden>
+									<option th:value="'Conrad'">Conrad</option>
+									<option th:value="'Jens'">Jens</option>
+								</select>
+								<select class="form-control hiddenSelct"
+									th:classappend="'bewerbemodulitem'+__${itemStat.index}__"
+									th:field="*{modulAuswahl[__${itemStat.index}__].modul.dozent.dozentMail}" hidden>
+									<option th:value="'conrad@hhu.de'">conrad@hhu.de</option>
+									<option th:value="'jens@hhu.de'">jens@hhu.de</option>
+								</select>
 
-			<div class="container" th:object="${preference}">
-				<div>
-					<div class="form-group">
-						<h3>Um welche Art der Beschäftigung handelt es sich?</h3>
-						<div class="col-sm-10" style="padding-left: 5%;">
-							<input type="radio" class="form-check-input" id="neueins" th:field="*{einstiegTyp}"
-								th:value="${T(mops.domain.models.EinstiegTyp).NEUEINSTIEG}" name="einstellung" />
-							<label class="form-check-label" for="neueins">
-								Neueinstellung (bisher keine Anstellung an der HHU)
-							</label>
+								<select class="form-control col-sm-4" aria-placeholder="Priorität"
+									th:field="*{modulAuswahl[__${itemStat.index}__].prioritaet}">
+									<option th:value="${1}">Priorität 1</option>
+									<option th:value="${2}">Priorität 2</option>
+									<option th:value="${3}">Priorität 3</option>
+									<option th:value="${4}">Priorität 4</option>
+								</select>
+								<input type="number" class="form-control col-sm-4"
+									step="0.01"
+									min="1.00"
+									max="5.00"
+									th:field="*{modulAuswahl[__${itemStat.index}__].note}"
+									placeholder="Bestanden mit...">
+							</div>
 						</div>
+					</div>
+					<button class="btn btn-success" type="button" onclick="addZuBewerbendesModul()">+</button>
+				</div>
 
-						<div class="col-sm-10" style="padding-left: 5%;">
-							<input type="radio" class="form-check-input" id="weiterbesch"
-								th:field="*{einstiegTyp}"
-								th:value="${T(mops.domain.models.EinstiegTyp).WEITERBESCHAEFTIGUNG}"
-								name="einstellung" />
-							<label class="form-check-label" for="weiterbesch">
-								Weiterbeschäftigung (bestehender Vertrag bis zum 31.03.2020)
-							</label>
-						</div>
-
-						<div class="col-sm-10" style="padding-left: 5%;">
-							<input type="radio" class="form-check-input" id="wiedereins"
-								th:field="*{einstiegTyp}" th:value="${T(mops.domain.models.EinstiegTyp).WIEDEREINSTIEG}"
-								name="einstellung" />
-							<label class="form-check-label" for="wiedereins">
-								Wiedereinstellung (Kein bestehender Vertrag bis zum 31.03.2020)
-							</label>
-						</div>
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+					<h3>Um welche Art der Beschäftigung handelt es sich?</h3>
+					<div class="form-check">
+						<input type="radio" class="form-check-input" id="neueins" th:field="*{einstiegTyp}"
+							th:value="${T(mops.domain.models.EinstiegTyp).NEUEINSTIEG}" name="einstellung" />
+						<label class="form-check-label" for="neueins">
+							Neueinstellung (bisher keine Anstellung an der HHU)
+						</label>
+					</div>
+					<div class="form-check">
+						<input type="radio" class="form-check-input" id="weiterbesch" th:field="*{einstiegTyp}"
+							th:value="${T(mops.domain.models.EinstiegTyp).WEITERBESCHAEFTIGUNG}" name="einstellung" />
+						<label class="form-check-label" for="weiterbesch">
+							Weiterbeschäftigung (bestehender Vertrag bis zum 31.03.2020)
+						</label>
+					</div>
+					<div class="form-check">
+						<input type="radio" class="form-check-input" id="wiedereins" th:field="*{einstiegTyp}"
+							th:value="${T(mops.domain.models.EinstiegTyp).WIEDEREINSTIEG}" name="einstellung" />
+						<label class="form-check-label" for="wiedereins">
+							Wiedereinstellung (Kein bestehender Vertrag bis zum 31.03.2020)
+						</label>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary">Abschicken!</button>
-			</div>
 
-<!-- Karriere -->
-<!--
-					<div class="form-group">
-					<h3>Für welches Fach sind Sie derzeit an der HHU immatrikuliert?</h3>
-					<input type="text" class="form-control col-sm-10" th:field="*{Immatrikulationsfach}" />
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+					<h3>Stunden</h3>
+					<h4>Alle Tutoren- und Korrektorenjobs starten am 01.10.2020. Die Dauer der Anstellung
+						richtet sich nach dem Fach (3-6 Monate).</h4>
+					<h4>Die Minijobgrenze liegt aktuell bei 9h/Woche für SHKs und bei 7h/Woche für WHBs. Sie
+						können insgesamt nicht mehr als 17h/Woche
+						als Hilfskraft an der Universität angestellt sein, das schließt auch mehrere parallele
+						Anstellungen ein. Einstellungen erfolgen in
+						der Regel für zwischen 9 und 17h/Woche, Einzelheiten können im Bewerbungsgespräch
+						geklärt werden.</h4>
+
+					Wie viele Stunden möchten Sie mindestens und maximal pro Woche arbeiten?
+
+					<div class="input-group">
+						<input type="number" class="form-control col-sm-6" th:field="*{minWunschStunden}" required
+							placeholder="1-17 Minimum" pattern="^(?:[1-9]|1[0-7])$" />
+
+						<input type="number" class="form-control col-sm-6" th:field="*{maxWunschStunden}" required
+							placeholder="1-17 Maximum" pattern="^(?:[1-9]|1[0-7])$" />
+					</div>
+					<h3>Haben Sie Einschränkungen bzgl. der von Ihnen gewünschten Tätigkeiten?</h3>
+					<input type="text" class="form-control " th:field="*{einschraenkungen}">
 				</div>
-					<div class="form-group">
-						<h3>Was ist ihr bisher höchster Uni-Abschluss?</h3>
-						<h4> (Schreiben Sie zusätzlich das Fach und ggf. die Universität, falls der Abschluss
-							nicht an der HHU erreicht wurde.)</h4>
-						<select class="form-control col-sm-10" th:field="*{Abschluss}">
-							<option th:value="'Bachelor'">Bachelor</option>
-							<option th:value="'Master'">Master</option>
-							<option th:value="'Diplom'">Diplom</option>
-							<option th:value="'Staatsexamen'">Staatsexamen</option>
-							<option th:value="'Anderes'">Anderes</option>
-							<option th:value="'Kein Uni-Abschluss'">Kein Uni-Abschluss</option>
-						</select>
-						<label>Fach:</label>
-						<input type="text" class="form-control col-sm-10" th:field="*{Fach}" />
-						<label>Uni:</label>
-						<input type="text" class="form-control col-sm-10" value="HHU" th:field="*{Uni}" />
-					</div>
-				-->
-<!--Prefs-->
-					<div class="form-group">
-						<h3>Stunden</h3>
-						<h4>Alle Tutoren- und Korrektorenjobs starten am 01.10.2020. Die Dauer der Anstellung
-							richtet sich nach dem Fach (3-6 Monate).</h4>
-						<h4>Die Minijobgrenze liegt aktuell bei 9h/Woche für SHKs und bei 7h/Woche für WHBs. Sie
-							können insgesamt nicht mehr als 17h/Woche
-							als Hilfskraft an der Universität angestellt sein, das schließt auch mehrere parallele
-							Anstellungen ein. Einstellungen erfolgen in
-							der Regel für zwischen 9 und 17h/Woche, Einzelheiten können im Bewerbungsgespräch
-							geklärt werden.</h4>
 
-						Wie viele Stunden möchten Sie mindestens und maximal pro Woche arbeiten?
-
-
-						<input type="number" th:field="*{Stunden}" required placeholder="1-17 Minimum"
-							pattern="^(?:[1-9]|1[0-7])$" />
-						-
-						<input type="number" th:field="*{Stunden}" required placeholder="1-17 Maximum"
-							pattern="^(?:[1-9]|1[0-7])$" />
-					</div>
-
-					<div class="form-group">
-						<h3>Bisherige Noten</h3>
-						<h4>Bitte geben Sie Ihre bisherigen Noten zu den unten genannten Fächern an.
-						</h4>
-						<h4>Geben Sie zusätzlich an, bei welchem Dozenten und in welchem Semester Sie
-							die
-							Prüfung
-							abgelegt haben (Beispiel: Conrad, SS2016 oder Bendisposto, WS2013)</h4>
-						<h4>Die Veranstaltung Softwareentwicklung im Team beinhaltet Teile des alten
-							Programmierpraktikums.
-							Sollten Sie hierzu Fragen haben wenden Sie sich an Jens Bendisposto.
-						</h4>
-
-						Grundlagen der Softwareentwicklung und Programmierung / Informatik 1 /
-						Programmierung
-						<select th:field="*{NoteProgrammierung}">
-							<option th:value="'1,0'">1,0</option>
-							<option th:value="'1,3'">1,3</option>
-							<option th:value="'1,7'">1,7</option>
-							<option th:value="'2,0'">2,0</option>
-							<option th:value="'2,3'">2,3</option>
-							<option th:value="'2,7'">2,7</option>
-							<option th:value="'3,0'">3,0</option>
-							<option th:value="'3,3'">3,3</option>
-							<option th:value="'3,7'">3,7</option>
-							<option th:value="'4,0'">4,0</option>
-							<option th:value="'Keine Prüfung abgelegt'">Keine Prüfung abgelegt</option>
-						</select>
-						(Grundlagen der) Algorithmen und Datenstrukturen / Informatik III
-						<select th:field="*{NoteAldat}">
-							<option th:value="'1,0'">1,0</option>
-							<option th:value="'1,3'">1,3</option>
-							<option th:value="'1,7'">1,7</option>
-							<option th:value="'2,0'">2,0</option>
-							<option th:value="'2,3'">2,3</option>
-							<option th:value="'2,7'">2,7</option>
-							<option th:value="'3,0'">3,0</option>
-							<option th:value="'3,3'">3,3</option>
-							<option th:value="'3,7'">3,7</option>
-							<option th:value="'4,0'">4,0</option>
-							<option th:value="'Keine Prüfung abgelegt'">Keine Prüfung abgelegt</option>
-						</select>
-
-						<br></br>
-						Datenbanksysteme
-						<br></br>
-						<select th:field="*{NoteDatenbank}">
-							<option th:value="'1,0'">1,0</option>
-							<option th:value="'1,3'">1,3</option>
-							<option th:value="'1,7'">1,7</option>
-							<option th:value="'2,0'">2,0</option>
-							<option th:value="'2,3'">2,3</option>
-							<option th:value="'2,7'">2,7</option>
-							<option th:value="'3,0'">3,0</option>
-							<option th:value="'3,3'">3,3</option>
-							<option th:value="'3,7'">3,7</option>
-							<option th:value="'4,0'">4,0</option>
-							<option th:value="'Keine Prüfung abgelegt'">Keine Prüfung abgelegt</option>
-						</select>
-						<br></br>
-						Softwareentwicklung im Team
-						<br></br>
-						<select th:field="*{NoteSoftwareentwicklung}">
-							<option th:value="'1,0'">1,0</option>
-							<option th:value="'1,3'">1,3</option>
-							<option th:value="'1,7'">1,7</option>
-							<option th:value="'2,0'">2,0</option>
-							<option th:value="'2,3'">2,3</option>
-							<option th:value="'2,7'">2,7</option>
-							<option th:value="'3,0'">3,0</option>
-							<option th:value="'3,3'">3,3</option>
-							<option th:value="'3,7'">3,7</option>
-							<option th:value="'4,0'">4,0</option>
-							<option th:value="'Keine Prüfung abgelegt'">Keine Prüfung abgelegt</option>
-						</select>
-					</div>
-<!--Prefs-->
-					<div class="form-group">
-						<ul>
-							<h3>Gewünschte Fächer</h3>
-							<h4>Welche Fächer möchten Sie unterstützen?
-								Wenn Sie ein Fach nicht gehört haben geben Sie ebenfalls "auf keinen Fall"
-								an.
-								Mehrfachnennungen sind ausdrücklich erwünscht! </h4>
-							Programmierung
-							<br></br>
-							<input type="radio" th:field="*{PrioProg}" th:value="${1}" name="IDProg" />
-							Sehr gerne.
-							<br></br>
-							<input type="radio" th:field="*{PrioProg}" th:value="${2}" name="IDPro" />
-							Gerne, aber lieber ein anderes Fach.
-							<br></br>
-							<input type="radio" th:field="*{PrioProg}" th:value="${3}" name="IDPro" />
-							Nicht gerne, aber kann ich machen.
-							<br></br>
-							<input type="radio" th:field="*{PrioProg}" th:value="${4}" name="IDProg" />
-							Auf keinen Fall.
-							<br></br>
-							<br></br>
-
-							Algorithmen und Datenstrukturen
-							<br></br>
-							<input type="radio" th:field="*{PrioAldat}" th:value="${1}" name="IDAldat" />
-							Sehr gerne.
-							<br></br>
-							<input type="radio" th:field="*{PrioAldat}" th:value="${2}" name="IDAldat" />
-							Gerne, aber lieber ein anderes Fach.
-							<br></br>
-							<input type="radio" th:field="*{PrioAldat}" th:value="${3}" name="IDAldat" />
-							Nicht gerne, aber kann ich machen.
-							<br></br>
-							<input type="radio" th:field="*{PrioAldat}" th:value="${4}" name="IDAldat" />
-							Auf keinen Fall.
-
-							Datenbanksysteme (praktische übung)
-							<br></br>
-							<input type="radio" th:field="*{PrioDatenbank}" th:value="${1}" name="IDDatenbank" />
-							Sehr gerne.
-							<br></br>
-							<input type="radio" th:field="*{PrioDatenbank}" th:value="${2}" name="IDDatenbank" />
-							Gerne, aber lieber ein anderes Fach.
-							<br></br>
-							<input type="radio" th:field="*{PrioDatenbank}" th:value="${3}" name="IDDatenbank" />
-							Nicht gerne, aber kann ich machen.
-							<br></br>
-							<input type="radio" th:field="*{PrioDatenbank}" th:value="${4}" name="IDDatenbank" />
-							Auf keinen Fall.
-							<br></br>
-							<br></br>
-
-							Softwareentwicklung im Team
-							<br></br>
-							<input type="radio" th:field="*{PrioTeam}" th:value="${1}" name="IDTeam" />
-							Sehr gerne.
-							<br></br>
-							<input type="radio" th:field="*{PrioTeam}" th:value="${2}" name="IDTeam" />
-							Gerne, aber lieber ein anderes Fach.
-							<br></br>
-							<input type="radio" th:field="*{PrioTeam}" th:value="${3}" name="IDTeam" />
-							Nicht gerne, aber kann ich machen.
-							<br></br>
-							<input type="radio" th:field="*{PrioTeam}" th:value="${4}" name="IDTeam" />
-							Auf keinen Fall.
-						</ul>
-					</div>
-
-					<br></br>
-					<!--Prefs-->
-					<div class="form-group">
-						<ul>
-							<h3>Haben Sie Einschränkungen bzgl. der von Ihnen gewünschten Tätigkeiten?
-							</h3>
-							<h4>Sollten Sie zusätzlich zu den unten genannten strikten
-								Einschränkungen noch Wünsche haben, so können Sie diese im Freitext Feld
-								angeben,
-								ansonsten tragen sie "nein" ein.
-								Hinweis: Nicht in allen Fächern ist eine Einstellung ausschließlich als
-								Tutor oder als
-								Korrektor möglich. </h4>
-							Programmierung
-
-							<input type="radio" th:field="*{PrioProg}" th:value="${1}" name="IDProg" />
-							Ich möchte ausschließlich als Korrektor und nicht als Tutor arbeiten, auch
-							wenn das
-							bedeutet, dass ich für die Stelle nicht in Betracht komme.
-
-							<br></br>
-							<input type="radio" th:field="*{PrioProg}" th:value="${2}" name="IDPro" />
-							Ich möchte auf jeden Fall auch als Tutor und nicht nur als Korrektor
-							arbeiten, auch wenn das
-							bedeutet, dass ich für die Stelle nicht in Betracht komme.
-
-							<br></br>
-							<input type="radio" th:field="*{PrioProg}" th:value="${3}" name="IDPro" />
-							Ich würde sowohl als Tutor als auch als Korrektor arbeiten.
-
-							<br></br>
-							<input type="radio" th:field="*{PrioProg}" th:value="${4}" name="IDProg" />
-							Dieses Fach kommt für mich auf keinen Fall in Frage.
-
-							<br></br>
-							<br></br>
-
-							Algorithmen und Datenstrukturen
-							<br></br>
-							<input type="radio" th:field="*{PrioAldat}" th:value="${1}" name="IDAldat" />
-							Ich möchte ausschließlich als Korrektor und nicht als Tutor arbeiten, auch
-							wenn das
-							bedeutet, dass ich für die Stelle nicht in Betracht komme.
-
-							<br></br>
-							<input type="radio" th:field="*{PrioAldat}" th:value="${2}" name="IDAldat" />
-							Ich möchte auf jeden Fall auch als Tutor und nicht nur als Korrektor
-							arbeiten, auch wenn das
-							bedeutet, dass ich für die Stelle nicht in Betracht komme.
-
-							<br></br>
-							<input type="radio" th:field="*{PrioAldat}" th:value="${3}" name="IDAldat" />
-							Ich würde sowohl als Tutor als auch als Korrektor arbeiten.
-
-							<br></br>
-							<input type="radio" th:field="*{PrioAldat}" th:value="${4}" name="IDAldat" />
-							Dieses Fach kommt für mich auf keinen Fall in Frage.
-
-							<br></br>
-							<br></br>
-
-							Datenbanksysteme (praktische übung)
-							<br></br>
-							<input type="radio" th:field="*{PrioDatenbank}" th:value="${1}" name="IDDatenbank" />
-							Ich möchte ausschließlich als Korrektor und nicht als Tutor arbeiten, auch
-							wenn das
-							bedeutet, dass ich für die Stelle nicht in Betracht komme.
-
-							<br></br>
-							<input type="radio" th:field="*{PrioDatenbank}" th:value="${2}" name="IDDatenbank" />
-							Ich möchte auf jeden Fall auch als Tutor und nicht nur als Korrektor
-							arbeiten, auch wenn das
-							bedeutet, dass ich für die Stelle nicht in Betracht komme.
-
-							<br></br>
-							<input type="radio" th:field="*{PrioDatenbank}" th:value="${3}" name="IDDatenbank" />
-							Ich würde sowohl als Tutor als auch als Korrektor arbeiten.
-
-							<br></br>
-							<input type="radio" th:field="*{PrioDatenbank}" th:value="${4}" name="IDDatenbank" />
-							Dieses Fach kommt für mich auf keinen Fall in Frage.
-
-							<br></br>
-							<br></br>
-
-							Softwareentwicklung im Team
-							<br></br>
-							<input type="radio" th:field="*{PrioTeam}" th:value="${1}" name="IDTeam" />
-							Ich möchte ausschließlich als Korrektor und nicht als Tutor arbeiten, auch
-							wenn das
-							bedeutet, dass ich für die Stelle nicht in Betracht komme.
-
-							<br></br>
-							<input type="radio" th:field="*{PrioTeam}" th:value="${2}" name="IDTeam" />
-							Ich möchte auf jeden Fall auch als Tutor und nicht nur als Korrektor
-							arbeiten, auch wenn das
-							bedeutet, dass ich für die Stelle nicht in Betracht komme.
-
-							<br></br>
-							<input type="radio" th:field="*{PrioTeam}" th:value="${3}" name="IDTeam" />
-							Ich würde sowohl als Tutor als auch als Korrektor arbeiten.
-
-							<br></br>
-							<input type="radio" th:field="*{PrioTeam}" th:value="${4}" name="IDTeam" />
-							Dieses Fach kommt für mich auf keinen Fall in Frage.
-					</div>
-
-
-					<div class="form-group">
-							<h3>Bisherige Erfahrungen, Schulung und Nachricht an uns (sichtbar)
-							</h3>
-							<h4>Beschreiben Sie hier bitte kurz Ihre bisherigen Erfahrungen als
-								Tutor oder Korrektor in
-								der Informatik.
-								Wenn Sie über keine solchen Erfahrungen verfügen können Sie gerne
-								ähnliche Erfahrungen
-								(Nachhilfe, Korrektur anderer Fächer, ...) angeben. Wenn Sie bereits
-								als Tutor oder
-								Korrektor für uns gearbeitet haben reicht es, wenn Sie die
-								Tätigkeiten der letzten
-								beiden Semester angeben, Sie brauchen keine vollständige Liste zu
-								erstellen. </h4>
-
-							<textarea rows="8" cols="50"></textarea>
-					</div>
-<!--Prefs-->
-					<div class="form-group">
-							<h3>Es steht noch nicht fest, ob es eine Tutorenschulung für das
-								Wintersemester geben wird.
-								Wenn ja, wird diese voraussichtlich kurz vor Semesterbeginn
-								stattﬁnden. </h3>
-							<input type="radio" th:field="*{PrioProg}" th:value="${3}" name="IDPro" />
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+					<h3>Es steht noch nicht fest, ob es eine Tutorenschulung für das
+						Wintersemester geben wird.
+						Wenn ja, wird diese voraussichtlich kurz vor Semesterbeginn
+						stattﬁnden. </h3>
+					<div class="form-check">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
+								th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).TEILNAHME}" name="IDPro" />
 							Ich möchte an der Tutorenschulung teilnehmen.
-
-							<input type="radio" th:field="*{PrioProg}" th:value="${4}" name="IDProg" />
+						</label>
+					</div>
+					<div class="form-check">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
+								th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).NICHTTEILNAHME}"
+								name="IDProg" />
 							Ich habe bereits an der Tutorenschulung teilgenommen und möchte
 							daher nicht erneut
 							teilnehmen.
-
-							<input type="radio" th:field="*{PrioProg}" th:value="${4}" name="IDProg" />
+						</label>
+					</div>
+					<div class="form-check">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
+								th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).TEILGENOMMEN}"
+								name="IDProg" />
 							Ich möchte nicht an der Tutorenschulung teilnehmen.
+						</label>
 					</div>
 
-					<div class="form-group">
-						<ul>
-							<h3>Was reizt Sie an der Anstellung als Tutor oder Korrektor? Wo
-								sehen Sie
-								Herausforderungen?
-							</h3>
-							<h4>Falls Sie uns sonst noch etwas mitteilen möchten, können Sie
-								dies ebenfalls an dieser
-								Stelle machen.
-							</h4>
+				</div>
 
-							<textarea rows="8" cols="50"></textarea>
-						</ul>
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+						<h3>Was reizt Sie an der Anstellung als Tutor oder Korrektor? Wo
+							sehen Sie
+							Herausforderungen?
+						</h3>
+						<h4>Falls Sie uns sonst noch etwas mitteilen möchten, können Sie
+							dies ebenfalls an dieser
+							Stelle machen.
+						</h4>
+	
+						<textarea class="form-control" th:field="*{kommentar}" rows="8" cols="50"></textarea>
+				</div>
+			</div>
+
+			<div class="container" th:object="${bewerber.karriere}">
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+					<h3>Für welches Fach sind Sie derzeit an der HHU immatrikuliert?</h3>
+					<input type="text" class="form-control" id="immatrikuliertText"
+						th:field="*{immartikulationsStatus.fachrichtung}" />
+					<div class="form-check">
+						<label>
+							<input type="checkbox" class="form-check-input"
+								onchange="if(this.checked){disableInput('immatrikuliertText', 'Nicht immatrikuliert')}else{disableInput('immatrikuliertText', '')}"
+								th:field="*{immartikulationsStatus.status}">
+							Nicht immatrikuliert
+						</label>
 					</div>
+				</div>
 
-					<ul>
-						<input type="submit" value="Abschicken!" />
-					</ul>
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+					<h3 class="">Bisherige Erfahrungen, Schulung und Nachricht an uns (sichtbar)
+					</h3>
+					<h4 class="">Beschreiben Sie hier bitte kurz Ihre bisherigen Erfahrungen als
+						Tutor oder Korrektor in
+						der Informatik.
+						Wenn Sie über keine solchen Erfahrungen verfügen können Sie gerne
+						ähnliche Erfahrungen
+						(Nachhilfe, Korrektur anderer Fächer, ...) angeben. Wenn Sie bereits
+						als Tutor oder
+						Korrektor für uns gearbeitet haben reicht es, wenn Sie die
+						Tätigkeiten der letzten
+						beiden Semester angeben, Sie brauchen keine vollständige Liste zu
+						erstellen. </h4>
+
+					<textarea class="form-control " th:field="*{arbeitserfahrung}" rows="8" cols="50"></textarea>
+				</div>
+
+				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+					<h3>Was ist ihr bisher höchster Uni-Abschluss?</h3>
+					<h4> (Schreiben Sie zusätzlich das Fach und ggf. die Universität, falls der Abschluss
+						nicht an der HHU erreicht wurde.)</h4>
+					<select class="form-control " th:field="*{fachAbschluss.abschluss}">
+						<option th:value="'Bachelor'">Bachelor</option>
+						<option th:value="'Master'">Master</option>
+						<option th:value="'Diplom'">Diplom</option>
+						<option th:value="'Staatsexamen'">Staatsexamen</option>
+						<option th:value="'Anderes'">Anderes</option>
+						<option th:value="'Kein Uni-Abschluss'">Kein Uni-Abschluss</option>
+					</select>
+					<label>Fach:</label>
+					<input type="text" class="form-control " th:field="*{fachAbschluss.studiengang}" />
+					<label>Uni:</label>
+					<input type="text" class="form-control " value="HHU" th:field="*{fachAbschluss.uni}" />
+				</div>
+			</div>
+
+			<!--Submit Button-->
+			<div class="container">
+				<button type="submit" class="btn btn-primary">Abschicken!</button>
+			</div>
 		</form>
 
 	</main>

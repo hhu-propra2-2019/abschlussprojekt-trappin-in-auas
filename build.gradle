@@ -37,7 +37,7 @@ configurations {
 }
 
 dependencies {
-	implementation 'mops:styleguide:2.0.0'
+	implementation 'mops:styleguide:2.2.0'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-integration'
 	implementation 'org.springframework.boot:spring-boot-starter-security'

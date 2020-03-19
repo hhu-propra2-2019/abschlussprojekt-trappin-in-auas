@@ -6,15 +6,20 @@ import java.util.stream.Collectors;
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
 
+import mops.domain.services.IModelService;
 import org.springframework.stereotype.Service;
 
-import mops.domain.services.IModelSerice;
 
 @Service
-public class ModelService implements IModelSerice {
+public class ModelService implements IModelService {
 
   public ModelService() {
 
+  }
+
+  public StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss) {
+    return new StudiengangAbschluss(fachAbschluss.getStudiengang(), fachAbschluss.getAbschluss(),
+        fachAbschluss.getUni());
   }
 
   @Override
@@ -26,20 +31,19 @@ public class ModelService implements IModelSerice {
         load(karriereDTO.getFachAbschluss()));
   }
 
-  public StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss) {
-    return new StudiengangAbschluss(fachAbschluss.getStudiengang(), fachAbschluss.getAbschluss());
-  }
+
 
   public ImmartikulationsStatus load(ImmartikulationsStatusDTO statusDTO) {
     return new ImmartikulationsStatus(statusDTO.isStatus(), statusDTO.getFachrichtung());
   }
 
   @Override
-  public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) {
-    if(modulAuswahlDTO == null){
-      return null;
-    }
-    return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet());
+    public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) {
+      if(modulAuswahlDTO == null){
+        return null;
+      }
+      return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(),
+          modulAuswahlDTO.getNote());
   }
 
   @Override
