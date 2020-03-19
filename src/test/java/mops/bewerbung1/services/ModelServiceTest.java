@@ -187,4 +187,25 @@ public class ModelServiceTest {
         assertEquals(studiengangAbschlussDTO.getStudiengang(), studiengangAbschluss.getStudiengang());
     }
 
+    @Test
+    public void loadModulListTest(){
+        ModulDTO modulDTO1 = new ModulDTO("propra2", "jens@hhu.de", "Jens Bendisposto");
+        ModulDTO modulDTO2 = new ModulDTO("Aldat", "stephan@hhu.de", "Stephan Mueller");
+
+        List<ModulDTO> modulDTOList = new LinkedList<ModulDTO>();
+
+        modulDTOList.add(modulDTO1);
+        modulDTOList.add(modulDTO2);
+
+        List<Modul> modulList = mappingService.loadModulList(modulDTOList);
+
+        assertEquals(modulDTOList.get(0).getModulName(), modulList.get(0).getModulName());
+        assertEquals(modulDTOList.get(0).getDozentMail(), modulList.get(0).getDozent().getDozentMail());
+        assertEquals(modulDTOList.get(0).getDozentName(), modulList.get(0).getDozent().getDozentName());
+
+        assertEquals(modulDTOList.get(1).getModulName(), modulList.get(1).getModulName());
+        assertEquals(modulDTOList.get(1).getDozentMail(), modulList.get(1).getDozent().getDozentMail());
+        assertEquals(modulDTOList.get(1).getDozentName(), modulList.get(1).getDozent().getDozentName());
+    }
+
 }
