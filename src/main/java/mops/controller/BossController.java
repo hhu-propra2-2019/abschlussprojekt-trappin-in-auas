@@ -2,6 +2,7 @@ package mops.controller;
 
 import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_BOSS;
 
+import mops.services.DTOService;
 import mops.domain.models.Modul;
 import mops.services.ModelService;
 import mops.services.ModulService;
@@ -24,6 +25,9 @@ public class BossController {
 
   @Autowired
   private transient ModelService mappingService;
+
+  @Autowired
+  private transient DTOService dtoService;
 
   /**
    * Modul list for boss. Login as "Boss" required.
@@ -49,7 +53,7 @@ public class BossController {
   @Secured(ROLE_BOSS)
   @PostMapping("/postmodule")
   public String addModule(Model m, KeycloakAuthenticationToken token, Modul modul) {
-    modulService.addModul(mappingService.loadModulDTO(modul));
+    modulService.addModul(dtoService.load(modul));
     return "redirect:/bewerbung1/boss/modules";
   }
 

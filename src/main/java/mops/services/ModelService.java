@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
 
+import mops.domain.services.IModelService;
 import org.springframework.stereotype.Service;
 
-import mops.domain.services.IModelService;
 
 @Service
 public class ModelService implements IModelService {
@@ -32,6 +32,9 @@ public class ModelService implements IModelService {
 
   @Override
   public Karriere load(KarriereDTO karriereDTO) {
+    if(karriereDTO == null){
+      return null;
+    }
     return new Karriere(karriereDTO.getArbeitserfahrung(), load(karriereDTO.getImmartikulationsStatus()),
         load(karriereDTO.getFachAbschluss()));
   }
@@ -47,13 +50,17 @@ public class ModelService implements IModelService {
 
   @Override
   public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) {
+    if(modulAuswahlDTO == null){
+      return null;
+    }
     return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(),
         modulAuswahlDTO.getNote());
+
   }
 
   @Override
   public Personalien load(PersonalienDTO pDTO) {
-    if (pDTO == null) {
+    if(pDTO == null){
       return null;
     }
     Adresse adresse = loadAdresse(pDTO);
@@ -61,14 +68,9 @@ public class ModelService implements IModelService {
         pDTO.getAlter(), pDTO.getGeburtsort(), pDTO.getNationalitaet());
   }
 
-  public ModulAuswahl loadModulAuswahl(ModulAuswahlDTO modulAuswahlDTO) {
-    return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(),
-        modulAuswahlDTO.getNote());
-  }
-
   public Adresse loadAdresse(PersonalienDTO personalienDTO) {
     return new Adresse(personalienDTO.getAdresse().getPLZ(), personalienDTO.getAdresse().getWohnort(),
-        personalienDTO.getAdresse().getStraße(), personalienDTO.getAdresse().getHausnummer());
+        personalienDTO.getAdresse().getStrasse(), personalienDTO.getAdresse().getHausnummer());
   }
 
   public BerufModul loadBerufModul(BerufModulDTO berufModulDTO) {
@@ -85,11 +87,7 @@ public class ModelService implements IModelService {
   }
 
   public Modul loadModul(ModulDTO modulDTO) {
-    return new Modul(modulDTO.getModul(), new Dozent(modulDTO.getDozentMail(), modulDTO.getDozentName()));
-  }
-
-  public ModulDTO loadModulDTO(Modul modul) {
-    return new ModulDTO(modul.getModulName(), modul.getDozent().getDozentMail(), modul.getDozent().getDozentName());
+    return new Modul(modulDTO.getModulName(), new Dozent(modulDTO.getDozentMail(), modulDTO.getDozentName()));
   }
 
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis") // Fix gradle bug: False positive

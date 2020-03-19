@@ -71,11 +71,26 @@
 				<h1>Bewerbungsformular</h1>
 			</div>
 
+<<<<<<< HEAD
+					<div class="form-group">
+						<h3>Adresse:</h3>
+						<label>
+							Straße:
+						</label>
+						<div class="input-group">
+							<input type="text" class="form-control col-sm-8" required th:field="*{adresse.strasse}" />
+							<input type="text" class="form-control col-sm-2" required th:field="*{adresse.hausnummer}"
+								placeholder="Hausnummer" />
+						</div>
+						<label>Postleitzahl:</label>
+						<input type="text" class="form-control col-sm-10" required th:field="*{adresse.PLZ}" />
+=======
 			<div class="container" th:object="${bewerber.personalien}">
 				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
 					<h3>Persönliche Daten:</h3>
 					<label for="vornameinput">Vorname:</label>
 					<input type="text" class="form-control" required th:field="*{vorname}" maxlength="30" />
+>>>>>>> master
 
 					<label for="nachnameinput">
 						Nachname:</label>
