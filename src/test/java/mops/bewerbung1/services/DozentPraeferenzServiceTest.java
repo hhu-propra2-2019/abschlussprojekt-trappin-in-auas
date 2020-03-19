@@ -46,4 +46,18 @@ public class DozentPraeferenzServiceTest {
     assertThat(dozentPraeferenz).isEqualTo(PRAEFERENZ);
 
   }
+
+  @Test
+  public void deletePraeferenzFromDb(){
+    final String BEWERBER = "bewerber";
+    final String DOZENT_MAIL = "dozentMail";
+    final int PRAEFERENZ = 3;
+    DozentPraeferenzDTO addDozentPraeferenzDTO = new DozentPraeferenzDTO(BEWERBER, DOZENT_MAIL, PRAEFERENZ);
+
+    dozentPraeferenzService.addPraeferenz(addDozentPraeferenzDTO);
+    dozentPraeferenzService.deletePraeferenz(BEWERBER, DOZENT_MAIL);
+    Integer readDozentPraeferenzDTO = dozentPraeferenzService.getDozentPraeferenz(BEWERBER, DOZENT_MAIL);
+
+    assertThat(readDozentPraeferenzDTO).isNull();
+  }
 }
