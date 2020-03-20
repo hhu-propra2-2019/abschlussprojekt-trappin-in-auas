@@ -45,7 +45,7 @@ public class PdfServiceTest {
         ImmartikulationsStatus immartikulationsStatus = new ImmartikulationsStatus(true,"Informatik");
         Karriere karriere = new Karriere("war Praktikant",immartikulationsStatus ,null,null);
         Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.NEUEINSTIEG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
-        //BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); To DO
+        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //To DO
         PDFService pdfService = new PDFService();
 
 
@@ -79,7 +79,7 @@ public class PdfServiceTest {
         StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor");
         Karriere karriere = new Karriere("war Praktikant",immartikulationsStatus,studiengangAbschluss,null);
         Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.NEUEINSTIEG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
-        //BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); TO DO
+        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
         PDFService pdfService = new PDFService();
 
 
@@ -89,12 +89,68 @@ public class PdfServiceTest {
 
 
         //Assert
-        Assert.assertEquals(AntragOhneFachAbschluss, pruefeFachabschluss);
+       Assert.assertEquals(AntragOhneFachAbschluss, pruefeFachabschluss);
 
 
 
 
 
+
+
+    }
+
+    @Test
+    public void testStatus() throws ParseException {
+
+        //Arrange
+        Date geburtsdatum = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
+        String datum = "2.10.1995";
+        geburtsdatum = ft.parse(datum);
+        Adresse a = new Adresse("40789","Monheim","Tegeler Straße","15");
+        Personalien personalien = new Personalien(a,"1234","Akin","Kilincarslan",geburtsdatum,24,"Leverkusen","Deutsch");
+        ImmartikulationsStatus immartikulationsStatus = new ImmartikulationsStatus(true,"Informatik");
+        StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor");
+        Karriere karriere = new Karriere("war Praktikant",immartikulationsStatus,studiengangAbschluss,null);
+        Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.NEUEINSTIEG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
+        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
+        PDFService pdfService = new PDFService();
+
+
+        //Act
+        String s = pdfService.pruefeStatus(bewerberDTO);
+
+
+        //Assert
+        Assert.assertEquals("On", s);
+
+
+    }
+
+    @Test
+    public void testNichtStatus() throws ParseException {
+
+        //Arrange
+        Date geburtsdatum = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
+        String datum = "2.10.1995";
+        geburtsdatum = ft.parse(datum);
+        Adresse a = new Adresse("40789","Monheim","Tegeler Straße","15");
+        Personalien personalien = new Personalien(a,"1234","Akin","Kilincarslan",geburtsdatum,24,"Leverkusen","Deutsch");
+        ImmartikulationsStatus immartikulationsStatus = new ImmartikulationsStatus(true,"Informatik");
+        StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor");
+        Karriere karriere = new Karriere("war Praktikant",null,studiengangAbschluss,null);
+        Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.NEUEINSTIEG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
+        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
+        PDFService pdfService = new PDFService();
+
+
+        //Act
+        String s = pdfService.pruefeStatus(bewerberDTO);
+
+
+        //Assert
+        Assert.assertEquals("Off", s);
 
 
     }
