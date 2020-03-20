@@ -52,6 +52,7 @@ public class VerteilerController {
     return "verteiler/Verteiler";
   }
 
+  /*
   @Secured(ROLE_VERTEILER)
   @PostMapping("/verteilung")
   public String verteilDetails(Model m, @RequestParam String kennung) {
@@ -67,11 +68,14 @@ public class VerteilerController {
     return "verteilungsdetails";
   }
 
+   */
+
   @Secured(ROLE_VERTEILER)
   @PostMapping("/verteile")
-  public String verteile(Model m, @RequestParam String bewerberKennung, @RequestParam Modul modul) {
+  public String verteile(Model m, @RequestParam String bewerberKennung, @RequestParam String modulName) {
     //ModelService modelService = new ModelService();
-    bewerberService.verteile(bewerberKennung, modul.getDozent());
+    System.out.println(modulName);
+    bewerberService.verteile(bewerberKennung, modelService.loadModul( modulService.findModulByModulName(modulName) ).getDozent() );
     return "redirect:/bewerbung1/verteiler/uebersicht";
   }
 }

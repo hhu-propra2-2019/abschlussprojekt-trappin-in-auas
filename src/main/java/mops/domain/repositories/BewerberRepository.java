@@ -20,13 +20,14 @@ public interface BewerberRepository extends CrudRepository<BewerberDTO, String> 
     @Override
     <S extends BewerberDTO> Iterable<S> saveAll(Iterable<S> entities);
 
-    List<BewerberDTO> findByVerteiltAnIsNull();
+    @Query("select b from BewerberDTO b where b.personalien.unikennung=?1")
+    BewerberDTO findBewerberByKennung(String kenung);
+
+
+    List<BewerberDTO> findBewerberDTOBByVerteiltAnIsNull();
+
     List<BewerberDTO> findByVerteiltAnIsNotNull();
 
-    @Modifying
-    @Transactional
-    @Query("update BewerberDTO b set b.verteiltAn=?1 where b.personalien.unikennung =?2")
-    void update(VerteilungDTO verteilungDTO, String unikenung);
 
 }
 

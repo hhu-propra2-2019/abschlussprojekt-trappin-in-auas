@@ -26,6 +26,8 @@ public class ModelService implements IModelService {
       bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()));
   }
 
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis") // Fix gradle bug: False positive
+  // https://github.com/pmd/pmd/issues/387
   public List<Bewerber> loadBewerberList(List<BewerberDTO> bewerberDTOList) {
     List<Bewerber> bewerberList = new LinkedList<>();
     for (BewerberDTO bewerberDTO : bewerberDTOList) {

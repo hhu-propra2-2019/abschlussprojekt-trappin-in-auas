@@ -70,14 +70,15 @@
                         -->
 
                         <form method="POST" th:action="@{/bewerbung1/verteiler/verteile}">
+                            <input type="hidden" name="bewerberKennung" th:value="${bewerber.personalien.unikennung}">
 
                             <p>
-                                <select class="form-control" id="exampleFormControlSelect2" name="modul">
-                                    <option th:each="einModul : ${alleModule}" th:text="${einModul.modulName}" th:value="${einModul}"></option> //value einModul.moduNAme
+                                <select class="form-control" id="exampleFormControlSelect2" name="modulName">
+                                    <option th:each="einModul : ${alleModule}" th:text="${einModul.modulName}" th:value="${einModul.modulName}"></option> //value einModul.moduNAme
                                 </select>
                             </p>
 
-                            <input type="hidden" name="bewerberKennung" th:value="${bewerber.personalien.unikennung}">
+
 
 
                             <button type="submit" class="btn btn-primary">Submit</button>

@@ -36,7 +36,7 @@ public class BewerberService implements IBewerberService {
 
   @Override
   public BewerberDTO findBewerberByKennung(String kennung) {
-    return bewerberRepository.findById(kennung).get();
+    return bewerberRepository.findBewerberByKennung(kennung);
   }
 
   public List<BewerberDTO> findAlleBewerber() {
@@ -49,7 +49,7 @@ public class BewerberService implements IBewerberService {
   }
 
   public void verteile(String kennung, Dozent dozent) {
-    BewerberDTO b = bewerberRepository.findById(kennung).get();
+    BewerberDTO b = findBewerberByKennung(kennung);
     b.getVerteiltAn().add(mappingService.load(dozent));
     bewerberRepository.save(b);
   }
@@ -59,7 +59,7 @@ public class BewerberService implements IBewerberService {
   }
 
   public List<Bewerber> findNichtVerteilt() {
-    return modelService.loadBewerberList(  bewerberRepository.findByVerteiltAnIsNull() );
+    return modelService.loadBewerberList(  bewerberRepository.findBewerberDTOBByVerteiltAnIsNull() );
   }
 
   public List<Bewerber> findVerteilt() {
