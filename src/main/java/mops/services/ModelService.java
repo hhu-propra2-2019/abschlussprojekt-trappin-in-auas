@@ -26,6 +26,15 @@ public class ModelService implements IModelService {
       bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()));
   }
 
+  public List<Bewerber> loadBewerberList(List<BewerberDTO> bewerberDTOList) {
+    List<Bewerber> bewerberList = new LinkedList<>();
+    for (BewerberDTO bewerberDTO : bewerberDTOList) {
+      bewerberList.add(load(bewerberDTO));
+    }
+    return bewerberList;
+  }
+
+
   public Dozent load(VerteilungDTO verteilungDTO){
     return new Dozent(verteilungDTO.getDozentKennung(), verteilungDTO.getDozentName());
   }

@@ -4,6 +4,8 @@ import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_VERTEILER;
 
 import mops.domain.database.dto.BewerberDTO;
 import mops.domain.database.dto.ModulDTO;
+import mops.domain.models.Bewerber;
+import mops.domain.models.Modul;
 import mops.services.BewerberService;
 import mops.services.ModelService;
 import mops.services.ModulService;
@@ -25,24 +27,27 @@ public class VerteilerController {
 
   private transient BewerberService bewerberService;
   private transient ModulService modulService;
+  private transient ModelService modelService;
 
-  public VerteilerController(BewerberService bewerberService, ModulService modulService) {
+  public VerteilerController(BewerberService bewerberService, ModulService modulService, ModelService modelService) {
     this.bewerberService = bewerberService;
     this.modulService = modulService;
+    this.modelService = modelService;
   }
     
   @Secured(ROLE_VERTEILER)
   @GetMapping("/uebersicht")
   public String verteilen(Model model, KeycloakAuthenticationToken token) {
-    List<BewerberDTO> offeneBewerbungen = bewerberService.findNichtVerteilt();
-    List<BewerberDTO> zugewieseneBewerbungen = bewerberService.findVerteilt();
-    List<BewerberDTO> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
+    List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
+    List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
+    List<Bewerber> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
 
     model.addAttribute("offeneBewerbungen", offeneBewerbungen);
     model.addAttribute("zugewieseneBewerbungen", zugewieseneBewerbungen);
     model.addAttribute("offeneBewerbungenPreview", offeneBewerbungenPreview);
-    model.addAttribute("alleModule", modulService.findAllModule());
-    model.addAttribute("modul", new ModulDTO());
+
+    model.addAttribute("alleModule", modelService.loadModulList( modulService.findAllModule()) );
+    //model.addAttribute("modul", new ModulDTO());
 
     return "verteiler/Verteiler";
   }
@@ -64,9 +69,9 @@ public class VerteilerController {
 
   @Secured(ROLE_VERTEILER)
   @PostMapping("/verteile")
-  public String verteile(Model m, @RequestParam String bewerberKennung, ModulDTO modulDTO) {
-    ModelService modelService = new ModelService();
-    bewerberService.verteile(bewerberKennung, modelService.loadModul(modulDTO).getDozent());
+  public String verteile(Model m, @RequestParam String bewerberKennung, @RequestParam Modul modul) {
+    //ModelService modelService = new ModelService();
+    bewerberService.verteile(bewerberKennung, modul.getDozent());
     return "redirect:/bewerbung1/verteiler/uebersicht";
   }
 }

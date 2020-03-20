@@ -58,12 +58,12 @@ public class BewerberService implements IBewerberService {
     return alleBewerber.stream().filter(x -> x.getVerteiltAn() != null).collect(Collectors.toList());
   }
 
-  public List<BewerberDTO> findNichtVerteilt() {
-    return bewerberRepository.findByVerteiltAnIsNull();
+  public List<Bewerber> findNichtVerteilt() {
+    return modelService.loadBewerberList(  bewerberRepository.findByVerteiltAnIsNull() );
   }
 
-  public List<BewerberDTO> findVerteilt() {
-    return bewerberRepository.findByVerteiltAnIsNotNull();
+  public List<Bewerber> findVerteilt() {
+    return modelService.loadBewerberList(  bewerberRepository.findByVerteiltAnIsNotNull()  );
   }
 
   public List<Bewerber> findBewerberFuerDozent(String dozentKennung) {

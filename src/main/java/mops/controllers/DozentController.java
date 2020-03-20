@@ -43,7 +43,7 @@ public class DozentController {
   @Secured({ orgaRole })
   @GetMapping("/uebersicht/offene")
   public String offeneUebersicht(Model model, KeycloakAuthenticationToken token) {
-    List<BewerberDTO> offeneBewerbungen = bewerberService.findNichtVerteilt();
+    List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt(); //NICHT MEHR DTO
 
     model.addAttribute("offene", offeneBewerbungen);
 
@@ -53,7 +53,7 @@ public class DozentController {
   @Secured({ orgaRole })
   @GetMapping("/uebersicht/zugewiesene")
   public String zugewieseneUebersicht(Model model, KeycloakAuthenticationToken token) {
-    List<BewerberDTO> zugewiesene = bewerberService.findVerteilt();
+    List<Bewerber> zugewiesene = bewerberService.findVerteilt(); //NICHT MEHR DTO
 
     model.addAttribute(zugewiesene);
 

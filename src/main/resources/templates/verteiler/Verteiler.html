@@ -46,7 +46,7 @@
                         <h5>Bewerberpräferenzen:</h5>
                         <ul>
                             <li th:each="praeferenz : ${bewerber.praeferenzen.modulAuswahl}"
-                                th:text="${praeferenz.modul.modul + ': ' + praeferenz.prioritaet}"></li>
+                                th:text="${praeferenz.modul.modulName + ': ' + praeferenz.prioritaet}"></li>
                         </ul>
                         <h5>Dozentenpräferenzen:</h5>
                         <p class="card-text">- ProPra Prio = 3</p>
@@ -57,6 +57,7 @@
                             <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
                         </p>
                         <h6>Fach zuteilen:</h6>
+                        <!--
                         <p>
                             <select class="form-control" id="exampleFormControlSelect1">
                                 <option th:each="einModul : ${alleModule}" th:text="${einModul.modulName}" th:value="${einModul.modulName}"></option>
@@ -66,6 +67,22 @@
                             <button type="button" class="btn btn-light btn-block">+ Modul hinzufügen</button>
                         </p>
                         <p>
+                        -->
+
+                        <form method="POST" th:action="@{/bewerbung1/verteiler/verteile}">
+
+                            <p>
+                                <select class="form-control" id="exampleFormControlSelect2" name="modul">
+                                    <option th:each="einModul : ${alleModule}" th:text="${einModul.modulName}" th:value="${einModul}"></option> //value einModul.moduNAme
+                                </select>
+                            </p>
+
+                            <input type="hidden" name="bewerberKennung" th:value="${bewerber.personalien.unikennung}">
+
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
                             <div class="btn-group btn-block">
                                 <button type="button" class="btn btn-success">Modul hinzufügen</button>
                                 <button type="button" class="btn btn-primary">Akzeptieren</button>
