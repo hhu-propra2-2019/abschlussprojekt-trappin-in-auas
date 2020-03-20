@@ -39,13 +39,15 @@ public class BewerberController {
   }
 
   @PostMapping("/addModul")
-  public String addModul(Model m, Bewerber b) {
+  @Secured({ "ROLE_studentin" })
+  public String addModul(Model m, Bewerber b, KeycloakAuthenticationToken token) {
     List<ModulAuswahl> modulauswahl = b.getPraeferenzen().getModulAuswahl();
     if (modulauswahl == null) {
       modulauswahl = new ArrayList<>();
     }
     modulauswahl.add(new ModulAuswahl());
     b.getPraeferenzen().setModulAuswahl(modulauswahl);
+    b.setErstelltVon(token.getName());
     m.addAttribute("bewerber", b);
     System.out.println(b.getPraeferenzen().getModulAuswahl());
     return "student/main_min";
@@ -56,7 +58,8 @@ public class BewerberController {
   public String bewirbabschicken(Model model, Bewerber bewerber, KeycloakAuthenticationToken token) {
     bewerber.getPraeferenzen().setBerufModul(
         new BerufModul(Beruf.KorrektorUndTutor, new Modul("sample", new Dozent("sample@hhu.de", "sampleDozent"))));
-    System.out.println("form abgeschickt. folgende inhalte:");
+    bewerber.setErstelltVon(token.getName());
+    System.out.println("Form abgeschickt:");
     System.out.println(bewerber);
     bewerberService.addBewerber(bewerber);
     return "redirect:/bewirb";

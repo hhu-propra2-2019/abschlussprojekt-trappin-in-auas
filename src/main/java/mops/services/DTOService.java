@@ -67,6 +67,7 @@ public class DTOService implements IDTOService {
     List<VerteilungDTO> verteiltAn = (bewerber.getVerteiltAn() == null) ? null : load(bewerber.getVerteiltAn());
     BewerberDTO bewerberDTO = new BewerberDTO(load(bewerber.getPersonalien()), load(bewerber.getKarriere()),
         load(bewerber.getPraeferenzen()), verteiltAn);
+    bewerberDTO.setErstelltVon(bewerber.getErstelltVon());
     return bewerberDTO;
   }
 
