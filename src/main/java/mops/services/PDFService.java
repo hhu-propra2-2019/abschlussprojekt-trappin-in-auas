@@ -193,7 +193,7 @@ public class PDFService {
     }
 
 
-    private String pruefeVertragsart(BewerberDTO bewerberDTO) {
+    public String pruefeVertragsart(BewerberDTO bewerberDTO) {
         if (bewerberDTO.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.WEITERBESCHAEFTIGUNG){
 
             return "Weiterbeschäftigung";

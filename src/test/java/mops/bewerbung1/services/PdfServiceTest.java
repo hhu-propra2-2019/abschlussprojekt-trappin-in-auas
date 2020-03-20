@@ -100,7 +100,7 @@ public class PdfServiceTest {
     }
 
     @Test
-    public void testStatus() throws ParseException {
+    public void testStatus() throws Exception {
 
         //Arrange
         Date geburtsdatum = new Date();
@@ -128,7 +128,7 @@ public class PdfServiceTest {
     }
 
     @Test
-    public void testNichtStatus() throws ParseException {
+    public void testNichtStatus() throws Exception {
 
         //Arrange
         Date geburtsdatum = new Date();
@@ -156,6 +156,86 @@ public class PdfServiceTest {
     }
 
 
+    @Test
+    public void testVertragsart() throws Exception {
+        //Arrange
+        Date geburtsdatum = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
+        String datum = "2.10.1995";
+        geburtsdatum = ft.parse(datum);
+        Adresse a = new Adresse("40789","Monheim","Tegeler Straße","15");
+        Personalien personalien = new Personalien(a,"1234","Akin","Kilincarslan",geburtsdatum,24,"Leverkusen","Deutsch");
+        ImmartikulationsStatus immartikulationsStatus = new ImmartikulationsStatus(true,"Informatik");
+        StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor");
+        Karriere karriere = new Karriere("war Praktikant",null,studiengangAbschluss,null);
+        Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.NEUEINSTIEG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
+        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
+        PDFService pdfService = new PDFService();
 
+        //Act
+        String s = pdfService.pruefeVertragsart(bewerberDTO);
+
+
+        //Assert
+        Assert.assertEquals("Einstellung", s);
+
+
+
+    }
+
+
+    @Test
+    public void testVertragsart2() throws Exception {
+        //Arrange
+        Date geburtsdatum = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
+        String datum = "2.10.1995";
+        geburtsdatum = ft.parse(datum);
+        Adresse a = new Adresse("40789","Monheim","Tegeler Straße","15");
+        Personalien personalien = new Personalien(a,"1234","Akin","Kilincarslan",geburtsdatum,24,"Leverkusen","Deutsch");
+        ImmartikulationsStatus immartikulationsStatus = new ImmartikulationsStatus(true,"Informatik");
+        StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor");
+        Karriere karriere = new Karriere("war Praktikant",null,studiengangAbschluss,null);
+        Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.WEITERBESCHAEFTIGUNG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
+        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
+        PDFService pdfService = new PDFService();
+
+        //Act
+        String s = pdfService.pruefeVertragsart(bewerberDTO);
+
+
+        //Assert
+        Assert.assertEquals("Weiterbeschäftigung", s);
+
+
+
+    }
+
+    @Test
+    public void testVertragsart3() throws Exception {
+        //Arrange
+        Date geburtsdatum = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
+        String datum = "2.10.1995";
+        geburtsdatum = ft.parse(datum);
+        Adresse a = new Adresse("40789","Monheim","Tegeler Straße","15");
+        Personalien personalien = new Personalien(a,"1234","Akin","Kilincarslan",geburtsdatum,24,"Leverkusen","Deutsch");
+        ImmartikulationsStatus immartikulationsStatus = new ImmartikulationsStatus(true,"Informatik");
+        StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor");
+        Karriere karriere = new Karriere("war Praktikant",null,studiengangAbschluss,null);
+        Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.WIEDEREINSTIEG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
+        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
+        PDFService pdfService = new PDFService();
+
+        //Act
+        String s = pdfService.pruefeVertragsart(bewerberDTO);
+
+
+        //Assert
+        Assert.assertEquals("Off", s);
+
+
+
+    }
 
 }
