@@ -3,6 +3,7 @@ package mops.controllers;
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
 import mops.services.BewerberService;
+import mops.services.ModulService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,9 @@ public class BewerberController {
   @Autowired
   private transient BewerberService bewerberService;
 
+  @Autowired
+  private transient ModulService modulService;
+
   @GetMapping("/")
   public String index(Model model) {
     model.addAttribute("bewerber", new Bewerber());
@@ -33,8 +37,9 @@ public class BewerberController {
     Bewerber b = new Bewerber(new Karriere(), new Personalien(), new Praeferenzen(), token.getName(), null);
     b.getPraeferenzen().setModulAuswahl(new ArrayList<>()); // avoid list beeing null errors
     b.getPraeferenzen().getModulAuswahl().add(new ModulAuswahl());
-    System.out.println(b);
+
     model.addAttribute("bewerber", b);
+    model.addAttribute("existingmodule", modulService.findAllModule());
     return "student/main_min";
   }
 

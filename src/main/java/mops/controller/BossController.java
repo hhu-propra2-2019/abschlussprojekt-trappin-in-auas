@@ -35,7 +35,7 @@ public class BossController {
   @GetMapping("/modules")
   public String getModule(Model m, KeycloakAuthenticationToken token) {
     m.addAttribute("modul", new Modul());
-    m.addAttribute("modulListe", mappingService.loadModulList(modulService.findAllModule()));
+    m.addAttribute("modulListe", modulService.findAllModule());
     return "boss/modulsetup";
   }
 
