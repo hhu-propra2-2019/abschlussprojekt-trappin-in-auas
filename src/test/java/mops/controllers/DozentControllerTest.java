@@ -42,9 +42,9 @@ class DozentControllerTest {
 
   private BewerberDTO bewerberDTO;
 
-  private transient String dozentViewGetUri = "/dozent/uebersicht";
-  private transient String dozentViewOpenGetUri = "/dozent/uebersicht/offene";
-  private transient String dozentViewClosedGetUri = "/dozent/uebersicht/zugewiesene";
+  private transient String dozentViewGetUri = "/bewerbung1/dozent/uebersicht";
+  private transient String dozentViewOpenGetUri = "/bewerbung1/dozent/uebersicht/offene";
+  private transient String dozentViewClosedGetUri = "/bewerbung1/dozent/uebersicht/zugewiesene";
 
   @BeforeEach
   void setUp() {

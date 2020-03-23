@@ -16,6 +16,9 @@ public interface ModulRepository extends CrudRepository<ModulDTO, Long> {
 
   List<ModulDTO> findAll();
 
+  @Query("select m from ModulDTO m where m.modulName=?1")
+  ModulDTO findModulByModulName(String ModulName);
+
   @Override
   <S extends ModulDTO> S save(S entity);
 

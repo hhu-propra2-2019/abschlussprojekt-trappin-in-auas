@@ -3,6 +3,7 @@ package mops.services;
 import java.util.List;
 
 import mops.domain.database.dto.ModulDTO;
+import mops.domain.models.Modul;
 import mops.domain.repositories.ModulRepository;
 import mops.domain.services.IModulService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,10 @@ public class ModulService implements IModulService {
     return modulRepository.findAll();
   }
 
+
+  public ModulDTO findModulByModulName(String ModulName){
+    return modulRepository.findModulByModulName(ModulName);
+  }
 
   public void deleteModulByName(String modulName) {
     modulRepository.deleteModulByName(modulName);

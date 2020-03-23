@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/bewerbung1")
-@PropertySource("classpath:roles.properties")
 public class BewerbungController {
 
   /**
