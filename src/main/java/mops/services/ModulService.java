@@ -32,16 +32,6 @@ public class ModulService implements IModulService {
   }
 
   /**
-   * Gibt Modul mit gegebener Id zurück
-   * @param id id des Moduls
-   * @return Modul mit id
-   */
-  @Override
-  public ModulDTO findModulById(Long id) {
-    return modulRepository.findModulById(id);
-  }
-
-  /**
    * Listet alle Module in der Datenbank auf
    * @return Liste mit allen Modulen
    */
