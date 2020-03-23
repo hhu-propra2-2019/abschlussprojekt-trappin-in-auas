@@ -20,9 +20,10 @@ public class ModulAuswahlDTO {
     private int prioritaet;
     private double note;
 
-    public ModulAuswahlDTO(ModulDTO modul, int prioritaet) {
+    public ModulAuswahlDTO(ModulDTO modul, int prioritaet, double note) {
         this.modul = modul;
         this.prioritaet = prioritaet;
+        this.note = note;
     }
 
 }

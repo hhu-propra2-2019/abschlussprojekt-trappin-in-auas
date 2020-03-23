@@ -4,7 +4,6 @@ import java.util.List;
 import mops.domain.database.dto.DozentPraeferenzDTO;
 import mops.domain.models.DozentPraeferenz;
 import mops.domain.repositories.DozentPraeferenzRepo;
-import mops.domain.repositories.ModulRepository;
 import mops.domain.services.IDozentPraeferenzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +43,13 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
       return -1;
     }
     return matchingRows.get(0).getPraeferenz();
+  }
+
+  @Override
+  public boolean alreadyConfirmed(String bewerber, String dozentMail) {
+    if(getDozentPraeferenz(bewerber, dozentMail) == -1){
+      return false;
+    }
+    return true;
   }
 }
