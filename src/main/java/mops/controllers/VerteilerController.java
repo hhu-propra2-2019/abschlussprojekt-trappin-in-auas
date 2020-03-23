@@ -42,12 +42,53 @@ public class VerteilerController {
     List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
     List<Bewerber> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
 
-    model.addAttribute("offeneBewerbungen", offeneBewerbungen);
-    model.addAttribute("zugewieseneBewerbungen", zugewieseneBewerbungen);
-    model.addAttribute("offeneBewerbungenPreview", offeneBewerbungenPreview);
+    model.addAttribute("anzahlOffeneBewerbungen", offeneBewerbungen.size());
+    model.addAttribute("anzahlZugewieseneBewerbungen", zugewieseneBewerbungen.size());
+    model.addAttribute("anzuzeigende", offeneBewerbungenPreview);
 
     model.addAttribute("alleModule", modulService.findAllModule());
     //model.addAttribute("modul", new ModulDTO());
+
+    model.addAttribute("anzeige", 0);
+
+    return "verteiler/Verteiler";
+  }
+
+  @Secured(ROLE_VERTEILER)
+  @GetMapping("/uebersicht/verteilte")
+  public String showVerteilteBewerber(Model model, KeycloakAuthenticationToken token) {
+    List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
+    List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
+    List<Bewerber> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
+
+    model.addAttribute("anzahlOffeneBewerbungen", offeneBewerbungen.size());
+    model.addAttribute("anzahlZugewieseneBewerbungen", zugewieseneBewerbungen.size());
+    model.addAttribute("anzuzeigende", zugewieseneBewerbungen);
+
+    model.addAttribute("alleModule", modulService.findAllModule());
+    //model.addAttribute("modul", new ModulDTO());
+
+    model.addAttribute("anzeige", 1);
+
+    return "verteiler/Verteiler";
+  }
+
+
+  @Secured(ROLE_VERTEILER)
+  @GetMapping("/uebersicht/offene")
+  public String showOffeneBewerber(Model model, KeycloakAuthenticationToken token) {
+    List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
+    List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
+    List<Bewerber> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
+
+    model.addAttribute("anzahlOffeneBewerbungen", offeneBewerbungen.size());
+    model.addAttribute("anzahlZugewieseneBewerbungen", zugewieseneBewerbungen.size());
+    model.addAttribute("anzuzeigende", offeneBewerbungen);
+
+    model.addAttribute("alleModule", modulService.findAllModule());
+    //model.addAttribute("modul", new ModulDTO());
+
+    model.addAttribute("anzeige", 0);
 
     return "verteiler/Verteiler";
   }
