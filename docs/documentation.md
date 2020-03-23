@@ -1,40 +1,46 @@
-# Dokumentation nach arc24
+# Dokumentation nach arc42
 
 ## Einführung und Ziele
 
 
 ### Aufgabenstellung
-
-Für potentielle Korrektoren soll ein Bewerbungsportal erstellt werden.
-Grundlegende Funktionalitäten sind die Datenspeicherung der Fragebögen sowie
-teilautomatisierte Zuordnung zu den Dozenten.
+Für die Modulare Online Plattform für Studierende (MOPS) beschäftigt sich das Team TrappinInAuas mit dem Subsystem
+"Korrektorinnenberwerbung". Dort wird ein Formular bereitgestellt, wo sich Studenten als Korrektor für ein Fach oder mehrer Fächer bewerben können. 
+Der Dozent soll die Möglichkeit haben dem Bewerber eine Prioriät zu geben, bevor dann endgültig dem Studenten das Fach, indem Er oder Sie korrigieren wird, zugewiesen wird.
 
 ### Qualitätsziele
-
+- einfach
+- übersichtlich
+- optisch ansprechend
+- optimale Ansicht für mobile Endgeräte
+- flexibel/anpassbar (Module hinzufügen/entfernen)
+- schneller Bewerbungs- und Zuteilungsprozess
 ### Stakeholder
 
 - Bewerber (Studenten und nicht-Studenten)
 - Dozenten (Stellenausschreiber)
 - verantwortliche Person zum zuordnen der Bewerbung
+- verantwortliche Person zum erstellen eines Moduls
 
 | Rolle      | Kontakt | Erwartungshaltung |
 |:-----------|-------------:| -----:|
 | Bewerber   |  |  |
 | Dozenten   |  |  |
-| Verwaltung |  |  |
-
+| Ersteller  |  |  |
+| Zuordner   |  |  | 
 ## Randbedingungen
-
+- Team aus 8 Personen
+- 4 Wochen à 4 Stunden Arbeitszeit
+- Jeweils 2 Tage Urlaub
+- Beachtung des MOPS.STYLE Style-Sheet
+- Einbettung von Key-Cloak
+- Spring Framework, JPA, Postgress, DBeaver, Docker und PDFBOX von Apache
 
 ## Kontextabgrenzung
 
 
 ### Fachlicher Kontext
-
-
-**\<Diagramm und/oder Tabelle\>**
-
-**\<optional: Erläuterung der externen fachlichen Schnittstellen\>**
+- fachliche Abgrenzung für die Persistenz der Daten (Informationen der Bewerber persistieren)
 
 ### Technischer Kontext
 
@@ -43,172 +49,13 @@ des Instituts für Informatik (MOPS) eingebunden sein. Zur vereinheitlichung
 gibt es einen vorgegebenen [Styleguide](https://mops.style) sowie HTML-Templates.
 
 
-**\<Diagramm oder Tabelle\>**
+### Lösungsstrategie
+- Entwerfen eines ER-Modells
+- Implementieren der Modellstruktur mit der Datenbank mithilfe des ER-Modells
+- anhand von Modells DTOs ertellt und diese mit JPA Annoationen versehen
+- Datenbank von Hibernate generieren lassen
+- PDF-Service mit PDFBOX von Apache implementieren
 
-**\<optional: Erläuterung der externen technischen Schnittstellen\>**
-
-**\<Mapping fachliche auf technische Schnittstellen\>**
-
-## Lösungsstrategie
-
-
-## Bausteinsicht
-
-
-### Whitebox Gesamtsystem
-
-
-***\<Übersichtsdiagramm\>***
-
-Begründung
-
-:   *\<Erläuternder Text\>*
-
-Enthaltene Bausteine
-
-:   *\<Beschreibung der enthaltenen Bausteine (Blackboxen)\>*
-
-Wichtige Schnittstellen
-
-:   *\<Beschreibung wichtiger Schnittstellen\>*
-
-### \<Name Blackbox 1\>
-
-*\<Zweck/Verantwortung\>*
-
-*\<Schnittstelle(n)\>*
-
-*\<(Optional) Qualitäts-/Leistungsmerkmale\>*
-
-*\<(Optional) Ablageort/Datei(en)\>*
-
-*\<(Optional) Erfüllte Anforderungen\>*
-
-*\<(optional) Offene Punkte/Probleme/Risiken\>*
-
-### \<Name Blackbox 2\>
-
-*\<Blackbox-Template\>*
-
-### \<Name Blackbox n\>
-
-*\<Blackbox-Template\>*
-
-### \<Name Schnittstelle 1\>
-
-...
-
-### \<Name Schnittstelle m\>
-
-Ebene 2 {#_ebene_2}
--------
-
-### Whitebox *\<Baustein 1\>*
-
-*\<Whitebox-Template\>*
-
-### Whitebox *\<Baustein 2\>* 
-
-*\<Whitebox-Template\>*
-
-...
-
-### Whitebox *\<Baustein m\>* 
-
-*\<Whitebox-Template\>*
-
-Ebene 3
--------
-
-### Whitebox \<\_Baustein x.1\_\> 
-
-*\<Whitebox-Template\>*
-
-### Whitebox \<\_Baustein x.2\_\>
-
-*\<Whitebox-Template\>*
-
-### Whitebox \<\_Baustein y.1\_\> 
-
-*\<Whitebox-Template\>*
-
-## Laufzeitsicht
-
-
-### *\<Bezeichnung Laufzeitszenario 1\>* 
-
-
--   \<hier Laufzeitdiagramm oder Ablaufbeschreibung einfügen\>
-
--   \<hier Besonderheiten bei dem Zusammenspiel der Bausteine in diesem
-    Szenario erläutern\>
-
-### *\<Bezeichnung Laufzeitszenario 2\>*
-
-
-...
-
-### *\<Bezeichnung Laufzeitszenario n\>*
-
-
-...
-
-## Verteilungssicht 
-
-
-### Infrastruktur Ebene 1 
-
-
-***\<Übersichtsdiagramm\>***
-
-Begründung
-
-:   *\<Erläuternder Text\>*
-
-Qualitäts- und/oder Leistungsmerkmale
-
-:   *\<Erläuternder Text\>*
-
-Zuordnung von Bausteinen zu Infrastruktur
-
-:   *\<Beschreibung der Zuordnung\>*
-
-### Infrastruktur Ebene 2 
-
-
-### *\<Infrastrukturelement 1\>* 
-
-*\<Diagramm + Erläuterungen\>*
-
-### *\<Infrastrukturelement 2\>*
-
-*\<Diagramm + Erläuterungen\>*
-
-...
-
-### *\<Infrastrukturelement n\>*
-
-*\<Diagramm + Erläuterungen\>*
-
-## Querschnittliche Konzepte
-
-
-#### *\<Konzept 1\>*
-
-
-*\<Erklärung\>*
-
-####*\<Konzept 2\>*
-
-
-*\<Erklärung\>*
-
-...
-
-#### *\<Konzept n\>* 
-
-
-*\<Erklärung\>*
 
 ## Entwurfsentscheidungen
 
@@ -217,30 +64,21 @@ Zuordnung von Bausteinen zu Infrastruktur
 
 ## Qualitätsanforderungen 
 
-
 - OOP
-- Testbarkeit
-- Modularität von Modulen und Dozenten
-
-### Qualitätsbaum 
-
-
-### Qualitätsszenarien 
-
+- Testbarkeit (nach AAA)
+- Änderbarkeit (Module und Dozenten hinzufügen/entfernen)
+- Effizienz (schnelles Bewerbungs- und Auswahlverfahren)
+- Benutzbarkeit (verständlich und übersichtlich)
+- Zuverlässigkeit und Funktionalität 
+- Sicherheit (durch Key-Cloak)
 
 ## Risiken und technische Schulden
 
 
-- Datenschutz!
+- Datenschutz
+- Gleichzeitiges Abschicken von Bewerbungen
+- fehlerhafte oder falsche Eingaben
 - 
-
-## Glossar
-
-
-| Begriff        | Definition    |
-|:---------------|-------------:|
-| Fragebogen     | Eine Art Einstellungsbogen, in dem persönliche Daten abgefragen werden |
-| Begriff 2      | Erläuterung 2      |
 
 ## Frontend
 ### MarvinW1:
@@ -248,12 +86,16 @@ Zuordnung von Bausteinen zu Infrastruktur
 - Eine Woche später ist das Problem gelöst. Die Frage wurde so umformuliert, dass es nur noch ein Textfeld gibt, indem man das Fach als Text eingibt, dass man studiert. Durch Informationen, die ich von Jens erhalten habe, konnte ich den Code so anpassen, dass dort eine Tabelle erstellt wurde, wo man ausführliche Informationen brauchte und Dropdowns, wo man nicht alle Informationen braucht, damit man ein Platzsparendes und effektives Design hat. Mittlerweile ist die HTML Main Page fertig und Bootstrap wurde auch teilweise angewandt. Die Main Page wurde nun an LanPodder weitergeben, der die einzelnen Inputfelder des Formulars mit der Datenbank verknüpft.
 ### Tepri:
 - Ich habe mich erstmals erkundigt, wie schöne Styles aussehen könnten und die Mops.style Seite begutachtet. Daran orientiert habe ich versucht schöne Dropdown-Menüs mit css selbst zu erstellen. Es viel mir zuerst nicht leicht eine css ordentlich zu schreiben, so dass das Dropdown-Menü einen gleichen Effekt erzielt beim Hovern wie bei der Mops.Style Seite. Zuerst musste ich mir eine Pseudo HTML-Struktur aufbauen mit Beispiel-Feldern für Eingabefeldern, Textfeldern und Radios. An der erstellten Pseudo-HTML-Datei habe ich dann meine Stylesheets angewandt und getestet. Durch einige Tutorials im Internet habe ich letzten endes ein einheitliches Design für Radios, Eingabefeldern und Textfelder erstellt, dies hat mehr Zeit eingenommen als zuvor erwartet war.
-
-
-
-
-
-
->>>>>>> c311cf1db8411cef4808b15c735e5b6747027967
 ### bayarabd:
 - Ich habe mich die zweite Woche mit Frontend beschäftigt und an ein paar Seiten gearbeitet. Eine Endseite, wohin man nach der Bewerbung weitergeleitet wird, eine Dozentseite, wo der Dozent die Anzahl der Bewerbungen und die Infos der BewerberInnen ansehen könnte. Ich habe zusätzlich eine Seite für Verteiler geschrieben, wo der Verteiler die Studentendaten und Prioritäten ansehen könnten und dann entscheiden welcher Student zu welchem fach gehört. Außerdem habe ich etwas an Formular gearbeitet; besonders ein paar Felder habe ich umstruktuiert, früher haben wir die Prioritäten in verschiedenen Zeilen geschrieben, aber ich die Radiobuttons in eine Tabelle zusammengebracht. Es wäre so meiner Meinung nach "benutzerfreundlicher". Außerdem habe ich mich für Bootstrap entschieden, statt eigene css zu schreiben, da mehr Möglichkeiten angeboten sind.
+
+## Backend
+### LanPodder
+
+### AcnoZed
+
+### heyoka95
+
+### jhandke
+
+### Mimbulus
