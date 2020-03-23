@@ -20,13 +20,10 @@ public class DTOService implements IDTOService {
   private transient ModulRepository modulRepository;
 
   public ModulDTO load(Modul modul) {
-    // nicht "new" moduldto, sondern find moduldto
     List<ModulDTO> modulDTOs = modulRepository.findByModulAndDozentMail(modul.getModulName(),
         modul.getDozent().getDozentMail());
-    System.out.println("===========================");
-    System.out.println("Modul find by modulname und dozentmail:");
-    System.out.println(modulDTOs);
-    return modulDTOs.get(0);
+    return (modulDTOs.size() > 0) ? modulDTOs.get(0)
+        : new ModulDTO(modul.getModulName(), modul.getDozent().getDozentMail(), modul.getDozent().getDozentName());
   }
 
   public ModulAuswahlDTO load(ModulAuswahl modulAuswahl) {
@@ -84,9 +81,6 @@ public class DTOService implements IDTOService {
   }
 
   private List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen) {
-    System.out.println("/////////////////////////////");
-    System.out.println("meine modulauswahls:");
-    System.out.println(praeferenzen.getModulAuswahl());
     return praeferenzen.getModulAuswahl().stream().map(this::load).collect(Collectors.toList());
   }
 
