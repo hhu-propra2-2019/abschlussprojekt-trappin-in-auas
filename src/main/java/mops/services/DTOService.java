@@ -3,10 +3,12 @@ package mops.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
+import mops.domain.repositories.ModulRepository;
 import mops.domain.services.IDTOService;
 
 @Service
@@ -14,9 +16,17 @@ public class DTOService implements IDTOService {
   /*
    * Mapping Models -> DTO Für Bewerbungsbogen -> Datenbank
    */
+  @Autowired
+  private transient ModulRepository modulRepository;
 
   public ModulDTO load(Modul modul) {
-    return new ModulDTO(modul.getModulName(), modul.getDozent().getDozentMail(), modul.getDozent().getDozentMail());
+    // nicht "new" moduldto, sondern find moduldto
+    List<ModulDTO> modulDTOs = modulRepository.findByModulAndDozentMail(modul.getModulName(),
+        modul.getDozent().getDozentMail());
+    System.out.println("===========================");
+    System.out.println("Modul find by modulname und dozentmail:");
+    System.out.println(modulDTOs);
+    return modulDTOs.get(0);
   }
 
   public ModulAuswahlDTO load(ModulAuswahl modulAuswahl) {
@@ -24,6 +34,7 @@ public class DTOService implements IDTOService {
   }
 
   public BerufModulDTO load(BerufModul berufModul) {
+    System.out.println("ich mache probleme");
     return new BerufModulDTO(berufModul.getBeruf(), load(berufModul.getModul()));
   }
 
@@ -53,8 +64,7 @@ public class DTOService implements IDTOService {
   public PraeferenzenDTO load(Praeferenzen praeferenzen) {
     return new PraeferenzenDTO(praeferenzen.getMinWunschStunden(), praeferenzen.getMaxWunschStunden(),
         loadList(praeferenzen), praeferenzen.getKommentar(), praeferenzen.getEinstiegTyp(),
-        praeferenzen.getEinschraenkungen(), load(praeferenzen.getBerufModul()),
-        praeferenzen.getTutorenSchulungTeilnahme());
+        praeferenzen.getEinschraenkungen(), null, praeferenzen.getTutorenSchulungTeilnahme());
   }
 
   public BewerberDTO load(Bewerber bewerber) {
@@ -74,10 +84,14 @@ public class DTOService implements IDTOService {
   }
 
   private List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen) {
+    System.out.println("/////////////////////////////");
+    System.out.println("meine modulauswahls:");
+    System.out.println(praeferenzen.getModulAuswahl());
     return praeferenzen.getModulAuswahl().stream().map(this::load).collect(Collectors.toList());
   }
 
   public DozentPraeferenzDTO load(DozentPraeferenz dPraeferenz) {
-    return new DozentPraeferenzDTO(dPraeferenz.getBewerberKennung(), dPraeferenz.getDozentKennung(), dPraeferenz.getPraeferenz());
+    return new DozentPraeferenzDTO(dPraeferenz.getBewerberKennung(), dPraeferenz.getDozentKennung(),
+        dPraeferenz.getPraeferenz());
   }
 }

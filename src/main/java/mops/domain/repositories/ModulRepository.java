@@ -20,6 +20,8 @@ public interface ModulRepository extends CrudRepository<ModulDTO, Long> {
   @Override
   <S extends ModulDTO> Iterable<S> saveAll(Iterable<S> entities);
 
+  List<ModulDTO> findByModulAndDozentMail(String modul, String dozentMail);
+
   @Transactional
   @Modifying
   @Query("delete from ModulDTO m  where m.modul  = ?1")
