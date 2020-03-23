@@ -1,16 +1,16 @@
 package mops.services;
 
-import jdk.tools.jlink.internal.ModularJarArchive;
+
 import mops.domain.database.dto.BewerberDTO;
 import mops.domain.models.*;
-import mops.domain.repositories.BewerberRepository;
+
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
+
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 
 import java.io.File;
-import java.io.IOException;
+
 
 public class PDFService {
 
@@ -22,12 +22,11 @@ public class PDFService {
 
     public String filedirectory(BewerberDTO bewerberDTO) throws Exception {
         if(bewerberDTO.getKarriere().getFachAbschluss() == null) {
-            String path = "/home/heyoka/Schreibtisch/progra2/projekt/abschlussprojekt-trappin-in-auas/321_Antrag_Beschaeftigung_stud_Hilfskraefte.pdf";
+            String path = "../../../resources/static/321_Antrag_Beschaeftigung_stud_Hilfskraefte.pdf";
           return path;
         }
         else {
-
-        String path = "/home/heyoka/Schreibtisch/progra2/projekt/abschlussprojekt-trappin-in-auas/323_Antrag_Beschaeftigung_wiss_Hilfskraefte_mit_BA.pdf";
+        String path = "../../../resources/static/323_Antrag_Beschaeftigung_wiss_Hilfskraefte_mit_BA.pdf";
         return path;
 
         }
@@ -93,7 +92,7 @@ public class PDFService {
             field.setValue(bewerberDTO.getKarriere().getArbeitserfahrung() + "/n" + bewerberDTO.getPraeferenzen().getKommentar() + "/n" + bewerberDTO.getPraeferenzen().getEinschraenkungen());
 
             //Speichern der Datei
-            pDDocument.save("/home/heyoka/Schreibtisch/progra2/projekt/abschlussprojekt-trappin-in-auas/output.pdf");
+            pDDocument.save("../../../resources/static/output.pdf");
             pDDocument.close();
 
         } catch (Exception e) {
@@ -169,7 +168,7 @@ public class PDFService {
 
 
             //Speichern der Datei
-            pDDocument.save("/home/heyoka/Schreibtisch/progra2/projekt/abschlussprojekt-trappin-in-auas/output2t.pdf");
+            pDDocument.save("../../../resources/static//output2.pdf");
             pDDocument.close();
 
         } catch (Exception e) {

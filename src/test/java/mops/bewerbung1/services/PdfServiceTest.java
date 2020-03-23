@@ -45,7 +45,7 @@ public class PdfServiceTest {
         ImmartikulationsStatus immartikulationsStatus = new ImmartikulationsStatus(true,"Informatik");
         Karriere karriere = new Karriere("war Praktikant",immartikulationsStatus ,null,null);
         Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.NEUEINSTIEG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
-        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //To DO
+        //BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //To DO
         PDFService pdfService = new PDFService();
 
 
@@ -79,7 +79,7 @@ public class PdfServiceTest {
         StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor");
         Karriere karriere = new Karriere("war Praktikant",immartikulationsStatus,studiengangAbschluss,null);
         Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.NEUEINSTIEG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
-        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
+        //BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
         PDFService pdfService = new PDFService();
 
 
@@ -113,7 +113,7 @@ public class PdfServiceTest {
         StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor");
         Karriere karriere = new Karriere("war Praktikant",immartikulationsStatus,studiengangAbschluss,null);
         Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.NEUEINSTIEG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
-        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
+        //BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
         PDFService pdfService = new PDFService();
 
 
@@ -141,7 +141,7 @@ public class PdfServiceTest {
         StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor");
         Karriere karriere = new Karriere("war Praktikant",null,studiengangAbschluss,null);
         Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.NEUEINSTIEG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
-        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
+        //BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
         PDFService pdfService = new PDFService();
 
 
@@ -169,7 +169,7 @@ public class PdfServiceTest {
         StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor");
         Karriere karriere = new Karriere("war Praktikant",null,studiengangAbschluss,null);
         Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.NEUEINSTIEG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
-        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
+        //BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
         PDFService pdfService = new PDFService();
 
         //Act
@@ -197,7 +197,7 @@ public class PdfServiceTest {
         StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor");
         Karriere karriere = new Karriere("war Praktikant",null,studiengangAbschluss,null);
         Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.WEITERBESCHAEFTIGUNG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
-        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
+        //BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
         PDFService pdfService = new PDFService();
 
         //Act
@@ -224,7 +224,7 @@ public class PdfServiceTest {
         StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor");
         Karriere karriere = new Karriere("war Praktikant",null,studiengangAbschluss,null);
         Praeferenzen praeferenzen = new Praeferenzen(15,20,null,null,EinstiegTyp.WIEDEREINSTIEG,null,null,TutorenSchulungTeilnahme.NICHTTEILNAHME);
-        BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
+        //BewerberDTO bewerberDTO = new BewerberDTO(karriere,personalien,praeferenzen); //TO DO
         PDFService pdfService = new PDFService();
 
         //Act
