@@ -1,346 +1,320 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{mopslayout :: html(name='name', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+  th:replace="~{mopslayout :: html(name='name', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
 
 <head>
-	<meta charset="utf-8">
-	<title>main</title>
+  <meta charset="utf-8">
+  <title>main</title>
 
-	<th:block th:fragment="headcontent">
+  <th:block th:fragment="headcontent">
 
-		<script>
+    <script>
 
-			function disableInput(inputid, txt) {
-				var txtIn = document.getElementById(inputid);
-				txtIn.value = txt;
-				txtIn.disabled = !txtIn.disabled;
-			}
+      function disableInput(inputid, txt) {
+        var txtIn = document.getElementById(inputid);
+        txtIn.value = txt;
+        txtIn.disabled = !txtIn.disabled;
+      }
 
-			function addZuBewerbendesModul() {
-				let allBlocks = document.querySelectorAll('#modulAuswahlListe .bewerbemodulitemList .input-group');
-				let rowIndex = allBlocks.length;
+      function addZuBewerbendesModul() {
+        let allBlocks = document.querySelectorAll('#modulAuswahlListe .bewerbemodulitemList .input-group');
+        let rowIndex = allBlocks.length;
 
-				let toAppend = allBlocks[0].cloneNode(true); //clone to preserve options
-				toAppend.querySelectorAll("select, input").forEach(selectItem => {
-					selectItem.id = selectItem.id.replace('0', "" + rowIndex);
-					selectItem.name = selectItem.name.replace('0', "" + rowIndex);
-					selectItem.className = selectItem.className.replace('0', "" + rowIndex);
-				});
+        let toAppend = allBlocks[0].cloneNode(true); //clone to preserve options
+        toAppend.querySelectorAll("select, input").forEach(selectItem => {
+          selectItem.id = selectItem.id.replace('0', "" + rowIndex);
+          selectItem.name = selectItem.name.replace('0', "" + rowIndex);
+          selectItem.className = selectItem.className.replace('0', "" + rowIndex);
+        });
 
-				let outer = document.createElement('div');
-				outer.className = "form-group bewerbemodulitemList";
-				outer.appendChild(toAppend);
-				document.getElementById('modulAuswahlListe').appendChild(outer);
-			}
+        let outer = document.createElement('div');
+        outer.className = "form-group bewerbemodulitemList";
+        outer.appendChild(toAppend);
+        document.getElementById('modulAuswahlListe').appendChild(outer);
+      }
 
-			function handleSyncSelect(current, classnames) {
-				let toSync = document.querySelectorAll("." + classnames);
-				toSync.forEach(x => {
-					x.selectedIndex = current.selectedIndex;
-				});
-			}
+      function handleSyncSelect(current, classnames) {
+        let toSync = document.querySelectorAll("." + classnames);
+        toSync.forEach(x => {
+          x.selectedIndex = current.selectedIndex;
+        });
+      }
 
-		</script>
-	</th:block>
+    </script>
+  </th:block>
 </head>
 
 
 <body>
-	<header>
-		<nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
-			<!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
-			<ul>
-				<li>
-					<a href="#">test1</a>
-				</li>
-				<li>
-					<a href="#">test2</a>
-				</li>
-				<li>
-					<a href="#">test3</a>
-				</li>
-			</ul>
-		</nav>
-	</header>
+  <header>
+    <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
+      <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
+      <ul>
+        <li>
+          <a href="#">test1</a>
+        </li>
+        <li>
+          <a href="#">test2</a>
+        </li>
+        <li>
+          <a href="#">test3</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
 
-	<main th:fragment="bodycontent" style="background-color: #EAEAEA; padding: 2%">
+  <main th:fragment="bodycontent" style="background-color: #EAEAEA; padding: 2%">
 
-		<form th:action="@{/bewirbabschicken}" method="POST">
-			<div class="container">
-				<h1>Bewerbungsformular</h1>
-			</div>
+    <form th:action="@{/bewirbabschicken}" method="POST">
+      <div class="container">
+        <h1>Bewerbungsformular</h1>
+      </div>
 
-<!--Mergekonflikt HEAD-->
-				<!--	<div class="form-group">
-						<h3>Adresse:</h3>
-						<label>
-							Straße:
-						</label>
-						<div class="input-group">
-							<input type="text" class="form-control col-sm-8" required th:field="*{adresse.strasse}" />
-							<input type="text" class="form-control col-sm-2" required th:field="*{adresse.hausnummer}"
-								placeholder="Hausnummer" />
-						</div>
-						<label>Postleitzahl:</label>
-						<input type="text" class="form-control col-sm-10" required th:field="*{adresse.PLZ}" />
-						-->
-			<!--Mergekonflikt =====-->
-			<div class="container" th:object="${bewerber.personalien}">
-				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
-					<h3>Persönliche Daten:</h3>
-					<label for="vornameinput">Vorname:</label>
-					<input type="text" class="form-control" required th:field="*{vorname}" maxlength="30" id="vornameinput" />
-					<!--Mergekonflikt <<<<<<MASTER-->
+      <div class="container" th:object="${bewerber.personalien}">
+        <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+          <h3>Persönliche Daten:</h3>
+          <label for="vornameinput">Vorname:</label>
+          <input type="text" class="form-control" required th:field="*{vorname}" maxlength="30" />
 
-					<label for="nachnameinput">
-						Nachname:</label>
-					<input type="text" class="form-control" required th:field="*{name}" maxlength="30" id="nachnameinput" />
+          <label for="nachnameinput">
+            Nachname:</label>
+          <input type="text" class="form-control" required th:field="*{name}" maxlength="30" />
 
-					<label>Uni-Kennung:</label>
-					<input type="text" class="form-control" required th:field="*{unikennung}" maxlength="30" />
+          <label>Uni-Kennung:</label>
+          <input type="text" class="form-control" required th:field="*{unikennung}" maxlength="30" />
 
-					<label>Geburtsdatum und Alter:</label>
-					<div class="input-group">
-						<input type="date" class="form-control" required th:field="*{geburtsdatum}" />
-						<input type="number" class="form-control col-sm-2" placeholder="Alter" required
-							th:field="*{alter}" />
+          <label>Geburtsdatum und Alter:</label>
+          <div class="input-group">
+            <input type="date" class="form-control" required th:field="*{geburtsdatum}" />
+            <input type="number" class="form-control col-sm-2" placeholder="Alter" required th:field="*{alter}" />
 
-					</div>
-					<label>Geburtsort:</label>
-					<input type="text" class="form-control " required th:field="*{geburtsort}" />
+          </div>
+          <label>Geburtsort:</label>
+          <input type="text" class="form-control " required th:field="*{geburtsort}" />
 
-					<label>Staatsangehörigkeit:</label>
-					<input type="text" id="nationalitaetinput" required class="form-control "
-						th:field="*{nationalitaet}" />
-				</div>
+          <label>Staatsangehörigkeit:</label>
+          <input type="text" id="nationalitaetinput" required class="form-control " th:field="*{nationalitaet}" />
+        </div>
 
-				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
-					<h3>Adresse:</h3>
-					<label>
-						Straße:
-					</label>
-					<div class="input-group">
-						<input type="text" class="form-control" required th:field="*{adresse.strasse}" />
-						<input type="text" class="form-control col-sm-2" required th:field="*{adresse.hausnummer}"
-							placeholder="Hausnummer" />
-					</div>
-					<label>Postleitzahl:</label>
-					<input type="text" class="form-control " required th:field="*{adresse.PLZ}" />
+        <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+          <h3>Adresse:</h3>
+          <label>
+            Straße:
+          </label>
+          <div class="input-group">
+            <input type="text" class="form-control" required th:field="*{adresse.straße}" />
+            <input type="text" class="form-control col-sm-2" required th:field="*{adresse.hausnummer}"
+              placeholder="Hausnummer" />
+          </div>
+          <label>Postleitzahl:</label>
+          <input type="text" class="form-control " required th:field="*{adresse.PLZ}" />
 
-					<label>Wohnort:</label>
-					<input type="text" class="form-control " required th:field="*{adresse.wohnort}" />
+          <label>Wohnort:</label>
+          <input type="text" class="form-control " required th:field="*{adresse.wohnort}" />
 
-				</div>
-			</div>
+        </div>
+      </div>
 
 
-			<div class="container" th:object="${bewerber.praeferenzen}">
-				<!--Fach:-->
-				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
-					<h3>Gewünschte Fächer</h3>
-					<h4>Welche Fächer möchten Sie unterstützen?
-						Wenn Sie ein Fach nicht gehört haben geben Sie ebenfalls "auf keinen Fall"
-						an.
-						Mehrfachnennungen sind ausdrücklich erwünscht! </h4>
-					<div id="modulAuswahlListe">
-						<div class="form-group bewerbemodulitemList" th:each="auswahl, itemStat : *{modulAuswahl}">
-							<div class="input-group">
+      <div class="container" th:object="${bewerber.praeferenzen}">
+        <!--Fach:-->
+        <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+          <h3>Gewünschte Fächer</h3>
+          <h4>Welche Fächer möchten Sie unterstützen?
+            Wenn Sie ein Fach nicht gehört haben geben Sie ebenfalls "auf keinen Fall"
+            an.
+            Mehrfachnennungen sind ausdrücklich erwünscht! </h4>
+          <div id="modulAuswahlListe">
+            <div class="form-group bewerbemodulitemList" th:each="auswahl, itemStat : *{modulAuswahl}">
+              <div class="input-group">
 
-								<select class="form-control" aria-placeholder="Gewünnschtes Modul"
-									th:classappend="'bewerbemodulitemMaster'+__${itemStat.index}__"
-									onchange="handleSyncSelect(this, 'bewerbemodulitem'+this.className.slice(-1))"
-									th:field="*{modulAuswahl[__${itemStat.index}__].modul.modulName}">
-									<option th:value="'Programmierung'">Programmierung</option>
-									<option th:value="'ProPra'">ProPra</option>
-								</select>
-								<select class="form-control hiddenSelct"
-									th:classappend="'bewerbemodulitem'+__${itemStat.index}__"
-									th:field="*{modulAuswahl[__${itemStat.index}__].modul.dozent.dozentName}" hidden>
-									<option th:value="'Conrad'">Conrad</option>
-									<option th:value="'Jens'">Jens</option>
-								</select>
-								<select class="form-control hiddenSelct"
-									th:classappend="'bewerbemodulitem'+__${itemStat.index}__"
-									th:field="*{modulAuswahl[__${itemStat.index}__].modul.dozent.dozentMail}" hidden>
-									<option th:value="'conrad@hhu.de'">conrad@hhu.de</option>
-									<option th:value="'orga'">orga</option>
-								</select>
+                <select class="form-control" aria-placeholder="Gewünnschtes Modul"
+                  th:classappend="'bewerbemodulitemMaster'+__${itemStat.index}__"
+                  onchange="handleSyncSelect(this, 'bewerbemodulitem'+this.className.slice(-1))"
+                  th:field="*{modulAuswahl[__${itemStat.index}__].modul.modulName}">
+                  <option th:each="existingmodul : ${existingmodule}" th:value="${existingmodul.modulName}"
+                    th:text="${existingmodul.modulName}">Programmierung</option>
+                </select>
+                <select class="form-control hiddenSelct" th:classappend="'bewerbemodulitem'+__${itemStat.index}__"
+                  th:field="*{modulAuswahl[__${itemStat.index}__].modul.dozent.dozentName}" hidden>
+                  <option th:each="existingmodul : ${existingmodule}" th:value="${existingmodul.dozent.dozentName}"
+                  th:text="${existingmodul.dozent.dozentName}">Conrad</option>
+                </select>
+                <select class="form-control hiddenSelct" th:classappend="'bewerbemodulitem'+__${itemStat.index}__"
+                  th:field="*{modulAuswahl[__${itemStat.index}__].modul.dozent.dozentMail}" hidden>
+                  <option th:each="existingmodul : ${existingmodule}" th:value="${existingmodul.dozent.dozentMail}"
+                  th:text="${existingmodul.dozent.dozentMail}">conrad@hhu.de</option>
+                </select>
 
-								<select class="form-control col-sm-4" aria-placeholder="Priorität"
-									th:field="*{modulAuswahl[__${itemStat.index}__].prioritaet}">
-									<option th:value="${1}">Priorität 1</option>
-									<option th:value="${2}">Priorität 2</option>
-									<option th:value="${3}">Priorität 3</option>
-									<option th:value="${4}">Priorität 4</option>
-								</select>
-								<input type="number" class="form-control col-sm-4"
-									step="0.01"
-									min="1.00"
-									max="5.00"
-									th:field="*{modulAuswahl[__${itemStat.index}__].note}"
-									placeholder="Bestanden mit...">
-							</div>
-						</div>
-					</div>
-					<button class="btn btn-success" type="button" onclick="addZuBewerbendesModul()">+</button>
-				</div>
+                <select class="form-control col-sm-4" aria-placeholder="Priorität"
+                  th:field="*{modulAuswahl[__${itemStat.index}__].prioritaet}">
+                  <option th:value="${1}">Priorität 1</option>
+                  <option th:value="${2}">Priorität 2</option>
+                  <option th:value="${3}">Priorität 3</option>
+                  <option th:value="${4}">Priorität 4</option>
+                </select>
+                <input type="number" class="form-control col-sm-4" step="0.01" min="1.00" max="5.00"
+                  th:field="*{modulAuswahl[__${itemStat.index}__].note}" placeholder="Bestanden mit...">
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success" type="button" onclick="addZuBewerbendesModul()">+</button>
+        </div>
 
-				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
-					<h3>Um welche Art der Beschäftigung handelt es sich?</h3>
-					<div class="form-check">
-						<input type="radio" class="form-check-input" id="neueins" th:field="*{einstiegTyp}"
-							th:value="${T(mops.domain.models.EinstiegTyp).NEUEINSTIEG}" name="einstellung" />
-						<label class="form-check-label" for="neueins">
-							Neueinstellung (bisher keine Anstellung an der HHU)
-						</label>
-					</div>
-					<div class="form-check">
-						<input type="radio" class="form-check-input" id="weiterbesch" th:field="*{einstiegTyp}"
-							th:value="${T(mops.domain.models.EinstiegTyp).WEITERBESCHAEFTIGUNG}" name="einstellung" />
-						<label class="form-check-label" for="weiterbesch">
-							Weiterbeschäftigung (bestehender Vertrag bis zum 31.03.2020)
-						</label>
-					</div>
-					<div class="form-check">
-						<input type="radio" class="form-check-input" id="wiedereins" th:field="*{einstiegTyp}"
-							th:value="${T(mops.domain.models.EinstiegTyp).WIEDEREINSTIEG}" name="einstellung" />
-						<label class="form-check-label" for="wiedereins">
-							Wiedereinstellung (Kein bestehender Vertrag bis zum 31.03.2020)
-						</label>
-					</div>
-				</div>
+        <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+          <h3>Um welche Art der Beschäftigung handelt es sich?</h3>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="neueins" th:field="*{einstiegTyp}"
+              th:value="${T(mops.domain.models.EinstiegTyp).NEUEINSTIEG}" name="einstellung" />
+            <label class="form-check-label" for="neueins">
+              Neueinstellung (bisher keine Anstellung an der HHU)
+            </label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="weiterbesch" th:field="*{einstiegTyp}"
+              th:value="${T(mops.domain.models.EinstiegTyp).WEITERBESCHAEFTIGUNG}" name="einstellung" />
+            <label class="form-check-label" for="weiterbesch">
+              Weiterbeschäftigung (bestehender Vertrag bis zum 31.03.2020)
+            </label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="wiedereins" th:field="*{einstiegTyp}"
+              th:value="${T(mops.domain.models.EinstiegTyp).WIEDEREINSTIEG}" name="einstellung" />
+            <label class="form-check-label" for="wiedereins">
+              Wiedereinstellung (Kein bestehender Vertrag bis zum 31.03.2020)
+            </label>
+          </div>
+        </div>
 
-				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
-					<h3>Stunden</h3>
-					<h4>Alle Tutoren- und Korrektorenjobs starten am 01.10.2020. Die Dauer der Anstellung
-						richtet sich nach dem Fach (3-6 Monate).</h4>
-					<h4>Die Minijobgrenze liegt aktuell bei 9h/Woche für SHKs und bei 7h/Woche für WHBs. Sie
-						können insgesamt nicht mehr als 17h/Woche
-						als Hilfskraft an der Universität angestellt sein, das schließt auch mehrere parallele
-						Anstellungen ein. Einstellungen erfolgen in
-						der Regel für zwischen 9 und 17h/Woche, Einzelheiten können im Bewerbungsgespräch
-						geklärt werden.</h4>
+        <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+          <h3>Stunden</h3>
+          <h4>Alle Tutoren- und Korrektorenjobs starten am 01.10.2020. Die Dauer der Anstellung
+            richtet sich nach dem Fach (3-6 Monate).</h4>
+          <h4>Die Minijobgrenze liegt aktuell bei 9h/Woche für SHKs und bei 7h/Woche für WHBs. Sie
+            können insgesamt nicht mehr als 17h/Woche
+            als Hilfskraft an der Universität angestellt sein, das schließt auch mehrere parallele
+            Anstellungen ein. Einstellungen erfolgen in
+            der Regel für zwischen 9 und 17h/Woche, Einzelheiten können im Bewerbungsgespräch
+            geklärt werden.</h4>
 
-					Wie viele Stunden möchten Sie mindestens und maximal pro Woche arbeiten?
+          Wie viele Stunden möchten Sie mindestens und maximal pro Woche arbeiten?
 
-					<div class="input-group">
-						<input type="number" class="form-control col-sm-6" th:field="*{minWunschStunden}" required
-							placeholder="1-17 Minimum" pattern="^(?:[1-9]|1[0-7])$" />
+          <div class="input-group">
+            <input type="number" class="form-control col-sm-6" th:field="*{minWunschStunden}" required
+              placeholder="1-17 Minimum" pattern="^(?:[1-9]|1[0-7])$" />
 
-						<input type="number" class="form-control col-sm-6" th:field="*{maxWunschStunden}" required
-							placeholder="1-17 Maximum" pattern="^(?:[1-9]|1[0-7])$" />
-					</div>
-					<h3>Haben Sie Einschränkungen bzgl. der von Ihnen gewünschten Tätigkeiten?</h3>
-					<input type="text" class="form-control " th:field="*{einschraenkungen}">
-				</div>
+            <input type="number" class="form-control col-sm-6" th:field="*{maxWunschStunden}" required
+              placeholder="1-17 Maximum" pattern="^(?:[1-9]|1[0-7])$" />
+          </div>
+          <h3>Haben Sie Einschränkungen bzgl. der von Ihnen gewünschten Tätigkeiten?</h3>
+          <input type="text" class="form-control " th:field="*{einschraenkungen}">
+        </div>
 
-				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
-					<h3>Es steht noch nicht fest, ob es eine Tutorenschulung für das
-						Wintersemester geben wird.
-						Wenn ja, wird diese voraussichtlich kurz vor Semesterbeginn
-						stattﬁnden. </h3>
-					<div class="form-check">
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
-								th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).TEILNAHME}" name="IDPro" />
-							Ich möchte an der Tutorenschulung teilnehmen.
-						</label>
-					</div>
-					<div class="form-check">
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
-								th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).NICHTTEILNAHME}"
-								name="IDProg" />
-							Ich habe bereits an der Tutorenschulung teilgenommen und möchte
-							daher nicht erneut
-							teilnehmen.
-						</label>
-					</div>
-					<div class="form-check">
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
-								th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).TEILGENOMMEN}"
-								name="IDProg" />
-							Ich möchte nicht an der Tutorenschulung teilnehmen.
-						</label>
-					</div>
+        <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+          <h3>Es steht noch nicht fest, ob es eine Tutorenschulung für das
+            Wintersemester geben wird.
+            Wenn ja, wird diese voraussichtlich kurz vor Semesterbeginn
+            stattﬁnden. </h3>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
+                th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).TEILNAHME}" name="IDPro" />
+              Ich möchte an der Tutorenschulung teilnehmen.
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
+                th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).NICHTTEILNAHME}" name="IDProg" />
+              Ich habe bereits an der Tutorenschulung teilgenommen und möchte
+              daher nicht erneut
+              teilnehmen.
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
+                th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).TEILGENOMMEN}" name="IDProg" />
+              Ich möchte nicht an der Tutorenschulung teilnehmen.
+            </label>
+          </div>
 
-				</div>
+        </div>
 
-				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
-						<h3>Was reizt Sie an der Anstellung als Tutor oder Korrektor? Wo
-							sehen Sie
-							Herausforderungen?
-						</h3>
-						<h4>Falls Sie uns sonst noch etwas mitteilen möchten, können Sie
-							dies ebenfalls an dieser
-							Stelle machen.
-						</h4>
-	
-						<textarea class="form-control" th:field="*{kommentar}" rows="8" cols="50"></textarea>
-				</div>
-			</div>
+        <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+          <h3>Was reizt Sie an der Anstellung als Tutor oder Korrektor? Wo
+            sehen Sie
+            Herausforderungen?
+          </h3>
+          <h4>Falls Sie uns sonst noch etwas mitteilen möchten, können Sie
+            dies ebenfalls an dieser
+            Stelle machen.
+          </h4>
 
-			<div class="container" th:object="${bewerber.karriere}">
-				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
-					<h3>Für welches Fach sind Sie derzeit an der HHU immatrikuliert?</h3>
-					<input type="text" class="form-control" id="immatrikuliertText"
-						th:field="*{immartikulationsStatus.fachrichtung}" />
-					<div class="form-check">
-						<label>
-							<input type="checkbox" class="form-check-input"
-								onchange="if(this.checked){disableInput('immatrikuliertText', 'Nicht immatrikuliert')}else{disableInput('immatrikuliertText', '')}"
-								th:field="*{immartikulationsStatus.status}">
-							Nicht immatrikuliert
-						</label>
-					</div>
-				</div>
+          <textarea class="form-control" th:field="*{kommentar}" rows="8" cols="50"></textarea>
+        </div>
+      </div>
 
-				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
-					<h3 class="">Bisherige Erfahrungen, Schulung und Nachricht an uns (sichtbar)
-					</h3>
-					<h4 class="">Beschreiben Sie hier bitte kurz Ihre bisherigen Erfahrungen als
-						Tutor oder Korrektor in
-						der Informatik.
-						Wenn Sie über keine solchen Erfahrungen verfügen können Sie gerne
-						ähnliche Erfahrungen
-						(Nachhilfe, Korrektur anderer Fächer, ...) angeben. Wenn Sie bereits
-						als Tutor oder
-						Korrektor für uns gearbeitet haben reicht es, wenn Sie die
-						Tätigkeiten der letzten
-						beiden Semester angeben, Sie brauchen keine vollständige Liste zu
-						erstellen. </h4>
+      <div class="container" th:object="${bewerber.karriere}">
+        <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+          <h3>Für welches Fach sind Sie derzeit an der HHU immatrikuliert?</h3>
+          <input type="text" class="form-control" id="immatrikuliertText"
+            th:field="*{immartikulationsStatus.fachrichtung}" />
+          <div class="form-check">
+            <label>
+              <input type="checkbox" class="form-check-input"
+                onchange="if(this.checked){disableInput('immatrikuliertText', 'Nicht immatrikuliert')}else{disableInput('immatrikuliertText', '')}"
+                th:field="*{immartikulationsStatus.status}">
+              Nicht immatrikuliert
+            </label>
+          </div>
+        </div>
 
-					<textarea class="form-control " th:field="*{arbeitserfahrung}" rows="8" cols="50"></textarea>
-				</div>
+        <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+          <h3 class="">Bisherige Erfahrungen, Schulung und Nachricht an uns (sichtbar)
+          </h3>
+          <h4 class="">Beschreiben Sie hier bitte kurz Ihre bisherigen Erfahrungen als
+            Tutor oder Korrektor in
+            der Informatik.
+            Wenn Sie über keine solchen Erfahrungen verfügen können Sie gerne
+            ähnliche Erfahrungen
+            (Nachhilfe, Korrektur anderer Fächer, ...) angeben. Wenn Sie bereits
+            als Tutor oder
+            Korrektor für uns gearbeitet haben reicht es, wenn Sie die
+            Tätigkeiten der letzten
+            beiden Semester angeben, Sie brauchen keine vollständige Liste zu
+            erstellen. </h4>
 
-				<div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
-					<h3>Was ist ihr bisher höchster Uni-Abschluss?</h3>
-					<h4> (Schreiben Sie zusätzlich das Fach und ggf. die Universität, falls der Abschluss
-						nicht an der HHU erreicht wurde.)</h4>
-					<select class="form-control " th:field="*{fachAbschluss.abschluss}">
-						<option th:value="'Bachelor'">Bachelor</option>
-						<option th:value="'Master'">Master</option>
-						<option th:value="'Diplom'">Diplom</option>
-						<option th:value="'Staatsexamen'">Staatsexamen</option>
-						<option th:value="'Anderes'">Anderes</option>
-						<option th:value="'Kein Uni-Abschluss'">Kein Uni-Abschluss</option>
-					</select>
-					<label>Fach:</label>
-					<input type="text" class="form-control " th:field="*{fachAbschluss.studiengang}" />
-					<label>Uni:</label>
-					<input type="text" class="form-control " value="HHU" th:field="*{fachAbschluss.uni}" />
-				</div>
-			</div>
+          <textarea class="form-control " th:field="*{arbeitserfahrung}" rows="8" cols="50"></textarea>
+        </div>
 
-			<!--Submit Button-->
-			<div class="container">
-				<button type="submit" class="btn btn-primary">Abschicken!</button>
-			</div>
-		</form>
+        <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+          <h3>Was ist ihr bisher höchster Uni-Abschluss?</h3>
+          <h4> (Schreiben Sie zusätzlich das Fach und ggf. die Universität, falls der Abschluss
+            nicht an der HHU erreicht wurde.)</h4>
+          <select class="form-control " th:field="*{fachAbschluss.abschluss}">
+            <option th:value="'Bachelor'">Bachelor</option>
+            <option th:value="'Master'">Master</option>
+            <option th:value="'Diplom'">Diplom</option>
+            <option th:value="'Staatsexamen'">Staatsexamen</option>
+            <option th:value="'Anderes'">Anderes</option>
+            <option th:value="'Kein Uni-Abschluss'">Kein Uni-Abschluss</option>
+          </select>
+          <label>Fach:</label>
+          <input type="text" class="form-control " th:field="*{fachAbschluss.studiengang}" />
+          <label>Uni:</label>
+          <input type="text" class="form-control " value="HHU" th:field="*{fachAbschluss.uni}" />
+        </div>
+      </div>
 
-	</main>
+      <!--Submit Button-->
+      <div class="container">
+        <button type="submit" class="btn btn-primary">Abschicken!</button>
+      </div>
+    </form>
+
+  </main>
 </body>
 
 </html>

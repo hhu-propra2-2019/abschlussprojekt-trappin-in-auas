@@ -8,7 +8,8 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ModulAuswahl {
-    private Modul modul;
-    private int prioritaet;
-    private double note;
+  private Modul modul;
+  private int prioritaet;
+  private double note;
+  private Beruf beruf;
 }
