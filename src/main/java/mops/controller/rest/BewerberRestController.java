@@ -1,4 +1,4 @@
-package mops.controllers.rest;
+package mops.controller.rest;
 
 import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 

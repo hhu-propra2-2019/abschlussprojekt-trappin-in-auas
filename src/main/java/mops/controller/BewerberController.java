@@ -1,4 +1,4 @@
-package mops.controllers;
+package mops.controller;
 
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
