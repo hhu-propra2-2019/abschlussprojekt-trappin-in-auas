@@ -46,7 +46,7 @@ public class VerteilerController {
     model.addAttribute("zugewieseneBewerbungen", zugewieseneBewerbungen);
     model.addAttribute("offeneBewerbungenPreview", offeneBewerbungenPreview);
 
-    model.addAttribute("alleModule", modelService.loadModulList( modulService.findAllModule()) );
+    model.addAttribute("alleModule", modulService.findAllModule());
     //model.addAttribute("modul", new ModulDTO());
 
     return "verteiler/Verteiler";

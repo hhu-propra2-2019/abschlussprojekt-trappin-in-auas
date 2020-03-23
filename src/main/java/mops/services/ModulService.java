@@ -15,6 +15,9 @@ public class ModulService implements IModulService {
   @Autowired
   private transient ModulRepository modulRepository;
 
+  @Autowired
+  private transient ModelService modelService;
+
   public ModulService(ModulRepository modulRepository) {
     this.modulRepository = modulRepository;
   }
@@ -43,8 +46,8 @@ public class ModulService implements IModulService {
    * @return Liste mit allen Modulen
    */
   @Override
-  public List<ModulDTO> findAllModule() {
-    return modulRepository.findAll();
+  public List<Modul> findAllModule() {
+    return modelService.loadModulList(modulRepository.findAll());
   }
 
 
