@@ -16,9 +16,10 @@ public class ModulService implements IModulService {
   @Autowired
   private transient ModulRepository modulRepository;
 
+  @Autowired
   private transient ModelService modelService;
 
-  public ModulService(ModulRepository modulRepository, ModelService modelService) {
+  public ModulService(ModulRepository modulRepository) {
     this.modulRepository = modulRepository;
     this.modelService = modelService;
   }
@@ -33,27 +34,17 @@ public class ModulService implements IModulService {
   }
 
   /**
-   * Gibt Modul mit gegebener Id zurück
-   * @param id id des Moduls
-   * @return Modul mit id
-   */
-  @Override
-  public ModulDTO findModulById(Long id) {
-    return modulRepository.findModulById(id);
-  }
-
-  /**
    * Listet alle Module in der Datenbank auf
    * @return Liste mit allen Modulen
    */
   @Override
   public List<Modul> findAllModule() {
-    return modulRepository.findAll().stream().map(x -> modelService.loadModul(x)).collect(Collectors.toList());
+    return modelService.loadModulList(modulRepository.findAll());
   }
 
 
-  public ModulDTO findModulByModulName(String ModulName){
-    return modulRepository.findModulByModulName(ModulName);
+  public Modul findModulByModulName(String ModulName){
+    return modelService.loadModul(modulRepository.findModulByModulName(ModulName));
   }
 
   public void deleteModulByName(String modulName) {
