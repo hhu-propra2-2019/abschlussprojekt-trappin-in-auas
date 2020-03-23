@@ -3,7 +3,6 @@ package mops.controller;
 import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import mops.domain.database.dto.BewerberDTO;
 import mops.domain.models.Bewerber;
 import mops.domain.models.DozentPraeferenz;
@@ -34,9 +33,9 @@ public class DozentController {
   @Autowired
   private transient DozentPraeferenzService dozentPraeferenzService;
 
-  private transient final String orgaRole = "ROLE_orga";
+  private transient final String bewerberAttribute = "bewerber";
 
-  @Secured({ orgaRole })
+  @Secured({ ROLE_ORGA })
   @GetMapping("/uebersicht")
   public String verteilen(Model model, KeycloakAuthenticationToken token) {
     List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
@@ -46,11 +45,11 @@ public class DozentController {
     model.addAttribute("bearbeitetCount", bearbeitet.size());
     model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
-    model.addAttribute("bewerber", meineBewerber);
+    model.addAttribute(bewerberAttribute, meineBewerber);
     return "orga/dozent/ubersicht";
   }
 
-  @Secured({ orgaRole })
+  @Secured({ ROLE_ORGA })
   @PostMapping("/addPreference")
   public String addPreference(Model model, KeycloakAuthenticationToken token, int praeferenz, String dozentKennung,
       String bewerberKennung) {
@@ -58,7 +57,7 @@ public class DozentController {
     return "redirect:./uebersicht";
   }
 
-  @Secured({ orgaRole })
+  @Secured({ ROLE_ORGA })
   @GetMapping("/unbearbeitete")
   public String offeneUebersicht(Model model, KeycloakAuthenticationToken token) {
     List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
@@ -68,11 +67,11 @@ public class DozentController {
     model.addAttribute("bearbeitetCount", bearbeitet.size());
     model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
-    model.addAttribute("bewerber", nichtBearbeitet);
+    model.addAttribute(bewerberAttribute, nichtBearbeitet);
     return "orga/dozent/ubersicht";
   }
 
-  @Secured({ orgaRole })
+  @Secured({ ROLE_ORGA })
   @GetMapping("/bearbeitete")
   public String zugewieseneUebersicht(Model model, KeycloakAuthenticationToken token) {
     List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
@@ -82,15 +81,15 @@ public class DozentController {
     model.addAttribute("bearbeitetCount", bearbeitet.size());
     model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
-    model.addAttribute("bewerber", bearbeitet);
+    model.addAttribute(bewerberAttribute, bearbeitet);
     return "orga/dozent/ubersicht";
   }
 
-  @Secured({ orgaRole })
+  @Secured({ ROLE_ORGA })
   @GetMapping("/uebersicht/detail")
   public String detailAnsicht(Model model, KeycloakAuthenticationToken token, @PathVariable String kennung) {
     BewerberDTO bewerber = bewerberService.findBewerberByKennung(kennung);
-    model.addAttribute("bewerber", bewerber);
+    model.addAttribute(bewerberAttribute, bewerber);
     return "";
   }
 }
