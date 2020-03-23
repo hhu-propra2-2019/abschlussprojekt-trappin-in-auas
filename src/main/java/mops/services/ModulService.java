@@ -51,6 +51,11 @@ public class ModulService implements IModulService {
     return modulRepository.findAll().stream().map(x -> modelService.loadModul(x)).collect(Collectors.toList());
   }
 
+
+  public ModulDTO findModulByModulName(String ModulName){
+    return modulRepository.findModulByModulName(ModulName);
+  }
+
   public void deleteModulByName(String modulName) {
     modulRepository.deleteModulByName(modulName);
   }

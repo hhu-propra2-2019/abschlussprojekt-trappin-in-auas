@@ -21,7 +21,7 @@ public class DTOService implements IDTOService {
   private transient ModulRepository modulRepository;
 
   public ModulDTO load(Modul modul) {
-    List<ModulDTO> modulDTOs = modulRepository.findByModulAndDozentMail(modul.getModulName(),
+    List<ModulDTO> modulDTOs = modulRepository.findByModulNameAndDozentMail(modul.getModulName(),
         modul.getDozent().getDozentMail());
     return (modulDTOs.size() > 0) ? modulDTOs.get(0)
         : new ModulDTO(modul.getModulName(), modul.getDozent().getDozentMail(), modul.getDozent().getDozentName());
