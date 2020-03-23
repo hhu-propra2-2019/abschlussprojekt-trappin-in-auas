@@ -61,8 +61,6 @@ public class BewerberController {
   @PostMapping("/bewirbabschicken")
   @Secured({ "ROLE_studentin" })
   public String bewirbabschicken(Model model, Bewerber bewerber, KeycloakAuthenticationToken token) {
-    bewerber.getPraeferenzen().setBerufModul(
-        new BerufModul(Beruf.KorrektorUndTutor, new Modul("sample", new Dozent("sample@hhu.de", "sampleDozent"))));
     bewerber.setErstelltVon(token.getName());
     System.out.println("Form abgeschickt:");
     System.out.println(bewerber);

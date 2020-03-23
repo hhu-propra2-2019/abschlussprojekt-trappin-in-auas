@@ -20,20 +20,23 @@ public class DTOService implements IDTOService {
   @Autowired
   private transient ModulRepository modulRepository;
 
+  public DTOService(){
+
+  }
+
+  public DTOService(ModulRepository modulRepository){
+    this.modulRepository = modulRepository;
+  }
+
   public ModulDTO load(Modul modul) {
     List<ModulDTO> modulDTOs = modulRepository.findByModulNameAndDozentMail(modul.getModulName(),
         modul.getDozent().getDozentMail());
     return (modulDTOs.size() > 0) ? modulDTOs.get(0)
-        : new ModulDTO(modul.getModulName(), modul.getDozent().getDozentMail(), modul.getDozent().getDozentName());
+        : new ModulDTO(modul.getModulName(), modul.getDozent().getDozentName(), modul.getDozent().getDozentMail());
   }
 
   public ModulAuswahlDTO load(ModulAuswahl modulAuswahl) {
-    return new ModulAuswahlDTO(load(modulAuswahl.getModul()), modulAuswahl.getPrioritaet(),modulAuswahl.getNote());
-  }
-
-  public BerufModulDTO load(BerufModul berufModul) {
-    System.out.println("ich mache probleme");
-    return new BerufModulDTO(berufModul.getBeruf(), load(berufModul.getModul()));
+    return new ModulAuswahlDTO(load(modulAuswahl.getModul()), modulAuswahl.getPrioritaet(),modulAuswahl.getNote(), modulAuswahl.getBeruf());
   }
 
   public AdresseDTO load(Adresse adresse){
@@ -65,7 +68,7 @@ public class DTOService implements IDTOService {
   public PraeferenzenDTO load(Praeferenzen praeferenzen) {
     return new PraeferenzenDTO(praeferenzen.getMinWunschStunden(), praeferenzen.getMaxWunschStunden(),
         loadList(praeferenzen), praeferenzen.getKommentar(), praeferenzen.getEinstiegTyp(),
-        praeferenzen.getEinschraenkungen(), null, praeferenzen.getTutorenSchulungTeilnahme());
+        praeferenzen.getEinschraenkungen(), praeferenzen.getTutorenSchulungTeilnahme());
   }
 
   public BewerberDTO load(Bewerber bewerber) {

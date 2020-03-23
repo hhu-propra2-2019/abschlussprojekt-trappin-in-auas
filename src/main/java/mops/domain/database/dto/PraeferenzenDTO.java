@@ -14,41 +14,36 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class PraeferenzenDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  private long id;
 
-    private int minWunschStunden;
-    private int maxWunschStunden;
-    
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="praeferenzen", referencedColumnName="id")
-    private List<ModulAuswahlDTO> modulAuswahl;
+  private int minWunschStunden;
+  private int maxWunschStunden;
 
-    private String kommentar;
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinColumn(name = "praeferenzen", referencedColumnName = "id")
+  private List<ModulAuswahlDTO> modulAuswahl;
 
-    @Enumerated(EnumType.STRING)
-    private EinstiegTyp einstiegTyp;
+  private String kommentar;
 
-    private String einschraenkungen;
+  @Enumerated(EnumType.STRING)
+  private EinstiegTyp einstiegTyp;
 
-    @Embedded
-    private BerufModulDTO berufModul;
+  private String einschraenkungen;
 
-    @Enumerated(EnumType.STRING)
-    private TutorenSchulungTeilnahme tutorenSchulungTeilnahme;
+  @Enumerated(EnumType.STRING)
+  private TutorenSchulungTeilnahme tutorenSchulungTeilnahme;
 
-    public PraeferenzenDTO(int minWunschStunden, int maxWunschStunden,
-        List<ModulAuswahlDTO> modulAuswahl, String kommentar,
-        EinstiegTyp einstiegTyp, String einschraenkungen,
-        BerufModulDTO berufModul, TutorenSchulungTeilnahme tutorenSchulungTeilnahme) {
-        this.minWunschStunden = minWunschStunden;
-        this.maxWunschStunden = maxWunschStunden;
-        this.modulAuswahl = modulAuswahl;
-        this.kommentar = kommentar;
-        this.einstiegTyp = einstiegTyp;
-        this.einschraenkungen = einschraenkungen;
-        this.berufModul = berufModul;
-        this.tutorenSchulungTeilnahme = tutorenSchulungTeilnahme;
-    }
+  public PraeferenzenDTO(int minWunschStunden, int maxWunschStunden, List<ModulAuswahlDTO> modulAuswahl,
+      String kommentar, EinstiegTyp einstiegTyp, String einschraenkungen,
+      TutorenSchulungTeilnahme tutorenSchulungTeilnahme) {
+    this.minWunschStunden = minWunschStunden;
+    this.maxWunschStunden = maxWunschStunden;
+    this.modulAuswahl = modulAuswahl;
+    this.kommentar = kommentar;
+    this.einstiegTyp = einstiegTyp;
+    this.einschraenkungen = einschraenkungen;
+    this.tutorenSchulungTeilnahme = tutorenSchulungTeilnahme;
+  }
 }

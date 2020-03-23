@@ -8,17 +8,17 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import mops.domain.database.dto.AdresseDTO;
-import mops.domain.database.dto.BerufModulDTO;
 import mops.domain.database.dto.BewerberDTO;
 import mops.domain.database.dto.KarriereDTO;
 import mops.domain.database.dto.ModulDTO;
 import mops.domain.database.dto.PersonalienDTO;
 import mops.domain.database.dto.PraeferenzenDTO;
 import mops.domain.models.*;
-
+import mops.domain.repositories.ModulRepository;
 import mops.domain.services.IDTOService;
 import mops.services.DTOService;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.mock;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -31,10 +31,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class DTOServiceTest {
 
   private transient IDTOService dtoService;
+  private transient ModulRepository modulRepo;
 
   @BeforeEach
   void setUp(){
-    dtoService = new DTOService();
+    modulRepo = mock(ModulRepository.class);
+    dtoService = new DTOService(modulRepo);
   }
 
 
@@ -52,26 +54,13 @@ public class DTOServiceTest {
 
   @Test
   public void modulZuModulDTO(){
-    Modul modul = new Modul("Propra",new Dozent("propra@cshhu.de","Bendi"));
+    Modul modul = new Modul("Propra", new Dozent("propra@cshhu.de","Bendi"));
 
     ModulDTO modulDTO = dtoService.load(modul);
 
-    assertEquals(modul.getModulName(),modulDTO.getModulName());
-    assertEquals(modul.getDozent().getDozentMail(),modulDTO.getDozentMail());
-    assertEquals(modul.getModulName(),modulDTO.getModulName());
-  }
-
-  @Test
-  public void berufModulZuBerufModul(){
-    Modul modul = new Modul("Propra",new Dozent("propra@cshhu.de","Bendi"));
-    BerufModul berufModul = new BerufModul(Beruf.Korrektor,modul);
-
-    BerufModulDTO berufModulDTO = dtoService.load(berufModul);
-
-    assertEquals(berufModulDTO.getBeruf(),berufModul.getBeruf());
-    assertEquals(modul.getModulName(),berufModulDTO.getModul().getModulName());
-    assertEquals(modul.getDozent().getDozentMail(),berufModulDTO.getModul().getDozentMail());
-    assertEquals(modul.getModulName(),berufModulDTO.getModul().getModulName());
+    assertEquals(modul.getModulName(), modulDTO.getModulName());
+    assertEquals(modul.getDozent().getDozentMail(), modulDTO.getDozentMail());
+    assertEquals(modul.getModulName(), modulDTO.getModulName());
   }
 
   @Test
@@ -122,18 +111,17 @@ public class DTOServiceTest {
     Modul modul2 = new Modul("Aldat", new Dozent("stephan@hhu.de", "Stephan Mueller"));
     Modul modul3 = new Modul("RDB", new Dozent("shoetner@hhu.de", "Michael Schoetner"));
 
-    ModulAuswahl modulAuswahl1 = new ModulAuswahl(modul1, 2, 2.0);
-    ModulAuswahl modulAuswahl2 = new ModulAuswahl(modul2, 1, 4.0);
-    ModulAuswahl modulAuswahl3 = new ModulAuswahl(modul3, 3, 2.7);
+    ModulAuswahl modulAuswahl1 = new ModulAuswahl(modul1, 2, 2.0, Beruf.Korrektor);
+    ModulAuswahl modulAuswahl2 = new ModulAuswahl(modul2, 1, 4.0, Beruf.Korrektor);
+    ModulAuswahl modulAuswahl3 = new ModulAuswahl(modul3, 3, 2.7, Beruf.Korrektor);
 
     List<ModulAuswahl> modulAuswahlList = new LinkedList<ModulAuswahl>();
     modulAuswahlList.add(modulAuswahl1);
     modulAuswahlList.add(modulAuswahl2);
     modulAuswahlList.add(modulAuswahl3);
 
-    BerufModul berufModul = new BerufModul(Beruf.Tutor, modul1);
     Praeferenzen praeferenzen = new Praeferenzen(6, 8, modulAuswahlList,
-        "No Comment", EinstiegTyp.NEUEINSTIEG, "Keine", berufModul, TutorenSchulungTeilnahme.TEILNAHME);
+        "No Comment", EinstiegTyp.NEUEINSTIEG, "Keine", TutorenSchulungTeilnahme.TEILNAHME);
 
     PraeferenzenDTO praeferenzenDTO = dtoService.load(praeferenzen);
     assertNotNull(praeferenzen);
@@ -144,13 +132,7 @@ public class DTOServiceTest {
     assertEquals(praeferenzenDTO.getEinstiegTyp(), praeferenzen.getEinstiegTyp());
     assertEquals(praeferenzenDTO.getEinschraenkungen(), praeferenzen.getEinschraenkungen());
 
-    assertEquals(praeferenzenDTO.getBerufModul().getBeruf(), praeferenzen.getBerufModul().getBeruf());
-    assertEquals(praeferenzenDTO.getBerufModul().getModul().getDozentName(),
-        modul1.getDozent().getDozentName());
-    assertEquals(praeferenzenDTO.getBerufModul().getModul().getDozentMail(),
-        modul1.getDozent().getDozentMail());
-    assertEquals(praeferenzenDTO.getBerufModul().getModul().getModulName(),
-        modul1.getModulName());
+    assertEquals(praeferenzenDTO.getModulAuswahl().get(0).getBeruf(), praeferenzen.getModulAuswahl().get(0).getBeruf());
     assertEquals(praeferenzenDTO.getTutorenSchulungTeilnahme(), praeferenzen.getTutorenSchulungTeilnahme());
 
     assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getPrioritaet(),
@@ -186,7 +168,6 @@ public class DTOServiceTest {
     propraModul.setModulName("ProPra");
     propraModul.setDozent(new Dozent("jens@hhu.de", "jens"));
 
-    praeferenzen.setBerufModul(new BerufModul(Beruf.Korrektor, propraModul));
     praeferenzen.setEinschraenkungen("Keine");
     praeferenzen.setEinstiegTyp(EinstiegTyp.NEUEINSTIEG);
     praeferenzen.setKommentar("Ich mag ProPra");
@@ -194,7 +175,7 @@ public class DTOServiceTest {
     praeferenzen.setMinWunschStunden(7);
 
     List<ModulAuswahl> modulAuswahl = new ArrayList<>();
-    modulAuswahl.add(new ModulAuswahl(propraModul, 2, 1.0));
+    modulAuswahl.add(new ModulAuswahl(propraModul, 2, 1.0, Beruf.Korrektor));
 
     praeferenzen.setModulAuswahl(modulAuswahl);
     praeferenzen.setTutorenSchulungTeilnahme(TutorenSchulungTeilnahme.TEILNAHME);

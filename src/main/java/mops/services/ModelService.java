@@ -65,8 +65,7 @@ public class ModelService implements IModelService {
       return null;
     }
     return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(),
-        modulAuswahlDTO.getNote());
-
+        modulAuswahlDTO.getNote(), modulAuswahlDTO.getBeruf());
   }
 
   @Override
@@ -84,16 +83,11 @@ public class ModelService implements IModelService {
         personalienDTO.getAdresse().getStrasse(), personalienDTO.getAdresse().getHausnummer());
   }
 
-  public BerufModul loadBerufModul(BerufModulDTO berufModulDTO) {
-    return new BerufModul(berufModulDTO.getBeruf(), loadModul(berufModulDTO.getModul()));
-
-  }
-
   @Override
   public Praeferenzen load(PraeferenzenDTO pDTO) {
     List<ModulAuswahl> modulAuswahl = pDTO.getModulAuswahl().stream().map(this::load).collect(Collectors.toList());
     return new Praeferenzen(pDTO.getMaxWunschStunden(), pDTO.getMinWunschStunden(), modulAuswahl, pDTO.getKommentar(),
-        pDTO.getEinstiegTyp(), pDTO.getEinschraenkungen(), loadBerufModul(pDTO.getBerufModul()),
+        pDTO.getEinstiegTyp(), pDTO.getEinschraenkungen(),
         pDTO.getTutorenSchulungTeilnahme());
   }
 
