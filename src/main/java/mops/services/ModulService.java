@@ -51,8 +51,8 @@ public class ModulService implements IModulService {
   }
 
 
-  public ModulDTO findModulByModulName(String ModulName){
-    return modulRepository.findModulByModulName(ModulName);
+  public Modul findModulByModulName(String ModulName){
+    return modelService.loadModul(modulRepository.findModulByModulName(ModulName));
   }
 
   public void deleteModulByName(String modulName) {

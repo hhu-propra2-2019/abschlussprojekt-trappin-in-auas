@@ -75,7 +75,7 @@ public class VerteilerController {
   public String verteile(Model m, @RequestParam String bewerberKennung, @RequestParam String modulName) {
     //ModelService modelService = new ModelService();
     System.out.println(modulName);
-    bewerberService.verteile(bewerberKennung, modelService.loadModul( modulService.findModulByModulName(modulName) ).getDozent() );
+    bewerberService.verteile(bewerberKennung, modulService.findModulByModulName(modulName).getDozent());
     return "redirect:/bewerbung1/verteiler/uebersicht";
   }
 }
