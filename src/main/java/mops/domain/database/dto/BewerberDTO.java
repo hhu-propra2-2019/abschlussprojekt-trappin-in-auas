@@ -30,7 +30,7 @@ public class BewerberDTO {
   private PraeferenzenDTO praeferenzen;
 
   @OneToMany(cascade = CascadeType.ALL)
-  @JoinColumn(name = "bewerber", referencedColumnName = "id")
+  @JoinColumn(name = "bewerber", referencedColumnName = "kennung")
   private List<VerteilungDTO> verteiltAn;
 
   public BewerberDTO(PersonalienDTO personalien, KarriereDTO karriere, PraeferenzenDTO praeferenzen,
