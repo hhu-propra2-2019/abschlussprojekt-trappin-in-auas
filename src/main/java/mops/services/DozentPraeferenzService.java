@@ -33,7 +33,6 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
 
       bewerberDTO.getDozentPraeferenz().add(dozentPraeferenzDTO);
       bewerberRepository.save(bewerberDTO);
-      System.out.println("suche mit"+dozentPraeferenzDTO.getBewerber());
 
     }
     catch (NullPointerException e){
