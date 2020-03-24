@@ -1,5 +1,6 @@
 package mops.services;
 import mops.domain.models.*;
+import mops.domain.services.IPDFService;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
@@ -8,12 +9,7 @@ import java.io.File;
 import org.springframework.stereotype.Service;
 @SuppressWarnings("PMD.UnusedLocalVariable")
 @Service
-public class PDFService {
-  /*
-  for (PDField field2 : pDAcroForm.getFields()){
-    System.out.println(field2.getFullyQualifiedName());
-  }
-  */
+public class PDFService implements IPDFService {
 
   public String filedirectory(Bewerber bewerber) {
     if(bewerber.getKarriere().getFachAbschluss() == null) {
@@ -43,9 +39,9 @@ public class PDFService {
         e.printStackTrace();
       } finally {
         if (hatAbschluss(bewerber)) {
-          pDDocument.save("../../../resources/static//output2.pdf");
+          pDDocument.save("../../../resources/static/output2.pdf");
         } else {
-          pDDocument.save("../../../resources/static//output.pdf");
+          pDDocument.save("../../../resources/static/output.pdf");
         }
         pDDocument.close();
       }
