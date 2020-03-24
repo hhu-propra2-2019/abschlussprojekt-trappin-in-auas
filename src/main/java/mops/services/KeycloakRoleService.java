@@ -24,6 +24,18 @@ public class KeycloakRoleService {
   }
 
   public String getHighestPrivilegeRedirect(Set<String> tokenRoles) {
-    return "unimplemented";
+    if(tokenRoles.contains("setup")){
+      return getRedirect("setup");
+    }
+    if(tokenRoles.contains("verteiler")){
+      return getRedirect("verteiler");
+    }
+    if(tokenRoles.contains("orga")){
+      return getRedirect("orga");
+    }
+    if(tokenRoles.contains("studentin")){
+      return getRedirect("studentin");
+    }
+    return "";
   }
 }
