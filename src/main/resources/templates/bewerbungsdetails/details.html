@@ -19,13 +19,18 @@
 <body>
 <header>
   <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
+    <ul>
+      <li>
+        <a th:href="@{../uebersicht}">Zurück zur Übersicht</a>
+      </li>
+    </ul>
   </nav>
 </header>
 <main th:fragment="bodycontent">
   <div class="h2" th:text="${bewerber.personalien.vorname + ' ' + bewerber.personalien.name}"></div>
   <div class="container pt-3">
     <div class="col-12 shadow p-3 mb-4 bg-light rounded">
-      <div class="card-columns">
+      <div class="card-deck">
         <div class="card shadow p-0 mb-4 bg-light rounded">
           <div class="card-header font-weight-bold text-left">
             <div class="h4">
