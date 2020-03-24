@@ -1,8 +1,12 @@
 package mops.services;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import mops.domain.database.dto.BewerberDTO;
 import mops.domain.database.dto.DozentPraeferenzDTO;
 import mops.domain.models.DozentPraeferenz;
+import mops.domain.repositories.BewerberRepository;
 import mops.domain.repositories.DozentPraeferenzRepo;
 import mops.domain.services.IDozentPraeferenzService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,37 +16,57 @@ import org.springframework.stereotype.Service;
 public class DozentPraeferenzService implements IDozentPraeferenzService {
 
   @Autowired
-  private transient DozentPraeferenzRepo dozentPraeferenzRepo;
+  private transient BewerberService bewerberService;
 
   @Autowired
   private transient DTOService dtoService;
 
-  public DozentPraeferenzService(DozentPraeferenzRepo dozentPraeferenzRepo) {
-    this.dozentPraeferenzRepo = dozentPraeferenzRepo;
-  }
+  @Autowired
+  private transient BewerberRepository bewerberRepository;
+
 
   @Override
   public void addPraeferenz(DozentPraeferenzDTO dozentPraeferenzDTO) {
-    dozentPraeferenzRepo.save(dozentPraeferenzDTO);
+    try {
+      BewerberDTO bewerberDTO = bewerberService
+          .findBewerberByKennung(dozentPraeferenzDTO.getBewerber());
+
+      bewerberDTO.getDozentPraeferenz().add(dozentPraeferenzDTO);
+      bewerberRepository.save(bewerberDTO);
+
+    }
+    catch (Exception e) {
+      return;
+    }
+
   }
 
   public void addPraeferenz(DozentPraeferenz dozentPraeferenz) {
-    dozentPraeferenzRepo.save(dtoService.load(dozentPraeferenz));
+    DozentPraeferenzDTO dozentPraeferenzDTO = dtoService.load(dozentPraeferenz);
+    addPraeferenz(dozentPraeferenzDTO);
   }
 
   @Override
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
   public void deletePraeferenz(String bewerber, String dozentMail) {
-    dozentPraeferenzRepo.deleteByBewerberAndDozentMail(bewerber, dozentMail);
+    BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(bewerber);
+    List<DozentPraeferenzDTO> matching = getMatchingDozentPraeferenz(bewerber, dozentMail);
+
+    if(!matching.isEmpty()){
+      bewerberDTO.getDozentPraeferenz().removeAll(matching);
+      bewerberRepository.save(bewerberDTO);
+    }
+
   }
 
   @Override
   public Integer getDozentPraeferenz(String bewerber, String dozentMail) {
-    List<DozentPraeferenzDTO> matchingRows = dozentPraeferenzRepo.findByBewerberAndDozentMail(bewerber, dozentMail);
+    List<DozentPraeferenzDTO> matching = getMatchingDozentPraeferenz(bewerber, dozentMail);
 
-    if(matchingRows.isEmpty()){
+    if(matching.isEmpty()){
       return -1;
     }
-    return matchingRows.get(0).getPraeferenz();
+    return matching.get(0).getPraeferenz();
   }
 
   @Override
@@ -52,4 +76,23 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
     }
     return true;
   }
+
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
+  private List<DozentPraeferenzDTO> getMatchingDozentPraeferenz(String bewerber, String dozentMail){
+    BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(bewerber);
+    List<DozentPraeferenzDTO> matching;
+    try {
+      matching =
+          bewerberDTO.getDozentPraeferenz().stream()
+              .filter(d -> d.getBewerber().equals(bewerber) && d.getDozentMail().equals(dozentMail))
+              .collect(Collectors.toList());
+    } catch (Exception e) {
+      matching = Collections.emptyList();
+    }
+
+
+    return matching;
+
+  }
+
 }

@@ -16,13 +16,17 @@ import mops.services.DTOService;
 import mops.services.ModelService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
 import java.util.List;
 
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 
 @SpringBootTest
+
 public class ModelServiceTest {
 
   private transient IDTOService dtoService;
