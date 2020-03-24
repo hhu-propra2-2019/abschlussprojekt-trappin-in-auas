@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:margin-="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{mopslayout :: html(name='Korrektorenbewerbung', title='Zuordnung', headcontent=~{:: headcontent},
+      navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
 <head>
   <title>Korrektorenbewerbung</title>
   <th:block th:fragment="headcontent">
