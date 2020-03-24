@@ -9,13 +9,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Bewerber{
+public class Bewerber {
 
-    private Karriere karriere;
-    private Personalien personalien;
-    private Praeferenzen praeferenzen;
-    
-    private String erstelltVon;
-    private List<Dozent> verteiltAn;
-    private List<DozentPraeferenz> dozentPraeferenz;
+  private Karriere karriere;
+  private Personalien personalien;
+  private Praeferenzen praeferenzen;
+
+  private String kennung;
+  private List<Dozent> verteiltAn;
+  private List<DozentPraeferenz> dozentPraeferenz;
+
+  public Bewerber(Karriere karriere, Personalien personalien, Praeferenzen praeferenzen){
+    this.karriere = karriere;
+    this.personalien = personalien;
+    this.praeferenzen = praeferenzen;
+  }
 }

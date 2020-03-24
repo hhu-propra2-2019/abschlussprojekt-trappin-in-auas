@@ -54,7 +54,7 @@ public class BossController {
   @PostMapping("/postmodule")
   public String addModule(Model m, KeycloakAuthenticationToken token, Modul modul) {
     modulService.addModul(dtoService.load(modul));
-    return "redirect:/bewerbung1/boss/modules";
+    return "redirect:./modules";
   }
 
   /**
@@ -70,6 +70,6 @@ public class BossController {
       @RequestParam String modulName) {
     System.out.println(modulName);
     modulService.deleteModulByName(modulName);
-    return "redirect:/bewerbung1/boss/modules";
+    return "redirect:./modules";
   }
 }

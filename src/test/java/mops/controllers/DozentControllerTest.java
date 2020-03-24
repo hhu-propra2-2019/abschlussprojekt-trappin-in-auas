@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -31,6 +33,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = Bewerbung1Application.class)
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+
 @SpringBootTest
 class DozentControllerTest {
 
@@ -43,8 +47,8 @@ class DozentControllerTest {
   private BewerberDTO bewerberDTO;
 
   private transient String dozentViewGetUri = "/bewerbung1/dozent/uebersicht";
-  private transient String dozentViewOpenGetUri = "/bewerbung1/dozent/uebersicht/offene";
-  private transient String dozentViewClosedGetUri = "/bewerbung1/dozent/uebersicht/zugewiesene";
+  private transient String dozentViewOpenGetUri = "/bewerbung1/dozent/unbearbeitete";
+  private transient String dozentViewClosedGetUri = "/bewerbung1/dozent/bearbeitete";
 
   @BeforeEach
   void setUp() {

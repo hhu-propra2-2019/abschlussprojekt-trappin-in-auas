@@ -23,9 +23,7 @@ public interface BewerberRepository extends CrudRepository<BewerberDTO, String> 
     @Query("select b from BewerberDTO b where b.erstelltVon=?1")
     BewerberDTO findBewerberByKennung(String kenung);
 
-
     List<BewerberDTO> findBewerberDTOBByVerteiltAnIsNull();
-
 
     List<BewerberDTO> findByVerteiltAnIsNotNull();
 
