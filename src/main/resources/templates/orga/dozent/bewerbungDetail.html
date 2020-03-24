@@ -24,18 +24,18 @@
         <ul>
           <div>
             <h3>Persönliche Daten:</h3>
-            <p th:text="${bewerber.personalien.vorname}">Vorname: </p>
-            <p th:text="variable">Nachname: </p>
-            <p th:text="${bewerber.kennung}">Uni-Kennung: </p>
-            <p th:text="variable">Geburtsdatum und Alter: </p>
+            <p>Vorname: <div th:text="${bewerber.personalien.vorname}"></div></p>
+            <p>Nachname: <div th:text="${bewerber.personalien.nachname}"></div></p>
+            <p>Uni-Kennung: <div th:text="${bewerber.personalien.kennung}"></div></p>
+            <p>Geburtsdatum: <div th:text="${bewerber.personalien.geburtsdatum}"></div></p>
 
             <hr>
 
             <h4>Adresse:</h4>
-            <p th:text="variable">Straße: </p>
-            <p th:text="variable">Postleitzahl: </p>
-            <p th:text="variable">Wohnort: </p>
-
+            <p>Straße: <div th:text="${bewerber.personalien.strasse}"></div></p>
+            <p>Hausnummer: <div th:text="${bewerber.personalien.hausnummer}"></div></p>
+            <p>Postleitzahl: <div th:text="${bewerber.personalien.PLZ}"></div></p>
+            <p>Wohnort: <div th:text="${bewerber.personalien.wohnort}"></div></p>
           </div>
         </ul>
       </div>
@@ -50,12 +50,13 @@
           <hr>
 
           <h3>Art der Beschäftigung:</h3>
-          <p th:text="variable">Neueinstellung: </p>
+          <p><div th:text="${bewerber.praeferenzen.einstiegtyp}"></div></p>
 
           <hr>
 
           <h3>Anzahl der Stunden</h3>
-          <p th:text="variable">Minimum: und Maximum: an Arbeitsstunden </p>
+          <p>Mininum: <div th:text="${bewerber.praeferenzen.minWunschStunden}"></div></p>
+          <p>Maximum: <div th:text="${bewerber.praeferenzen.maxWunschStunden}"></div></p>
 
           <hr>
 
@@ -64,42 +65,45 @@
           <tr th:if="${value.empty}">
             <td colspan="2"> Keine. </td>
           </tr>
-          <tr th:if="${value}">
+          <tr th:if="${bewerber.praeferenzen.einschraenkungen}">
             Behinderung
           </tr>
 
           <hr>
 
-          <h3>Haben sie bereits eine Tutorenschulung absolviert?</h3>
-          <p th:text="variable">Ich möchte an der Tutorenschulung teilnehmen. </p>
+          <h3>Möchten Sie an einer Tutorenschulung teilnehmen?</h3>
+          <p>Status: <div th:text="${bewerber.praeferenzen.tutorenSchulungTeilnahme}"></div></p>
+
+
 
           <hr>
 
           <h3>Ihr Reiz Korrektor zu werden und Herrausforderungen:</h3>
-          <p th:text="variable"> Ihr Text. </p>
+          <p>Ihr Text: <div th:text="${bewerber.praeferenzen.kommentar}"></div></p>
 
           <hr>
 
-          <h3>Einschränkungen</h3>
+          <h3>Immatrikulationsstatus</h3>
           <!-- Falls keine Behinderung existiert: "Keine." Anzeigen -->
           <tr th:if="${value.empty}">
             <td colspan="2"> Nicht immatrikuliert </td>
           </tr>
-          <tr th:if="${value}">
+          <tr th:if="${${bewerber.karriere.immartikulationsStatus}}">
             Fach
           </tr>
 
           <hr>
 
           <h3>Bisherige Erfahrungen, Schulung und Nachricht an uns:</h3>
-          <p th:text="variable"> Ihr Text. </p>
+          <p>Ihr Text: <div th:text="${bewerber.karriere.arbeitserfahrung}"></div></p>
+
 
           <hr>
 
           <h3>Was ist ihr bisher höchster Uni-Abschluss</h3>
-          <p th:text="variable"> Ihr Text. </p>
-          <p th:text="variable"> Fach </p>
-          <p th:text="variable"> Uni </p>
+          <p>Abschluss: <div th:text="${bewerber.karriere.fachAbschluss.abschluss}"></div></p>
+          <p>Fach: <div th:text="${bewerber.karriere.fachAbschluss.studiengang}"></div></p>
+          <p>Universität: <div th:text="${bewerber.karriere.fachAbschluss.uni}"></div></p>
 
 
         </ul>
