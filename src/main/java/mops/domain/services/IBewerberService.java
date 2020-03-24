@@ -14,4 +14,5 @@ public interface IBewerberService {
     List<BewerberDTO> findAlleBewerber();
     List<BewerberDTO> findAlleNichtVerteilteBewerber(List<BewerberDTO> alleBewerber);
     void verteile(String kennung, Dozent dozent);
+    List<BewerberDTO> findAlleVerteilteBewerber(List<BewerberDTO> alleBewerber);
 }

@@ -31,6 +31,7 @@ public class BewerberService implements IBewerberService {
     BewerberDTO bewerberDTO = mappingService.load(b);
     System.out.println("bewerberDTO erstellt:");
     System.out.println(bewerberDTO);
+    System.out.println(b);
     bewerberRepository.save(bewerberDTO);
   }
 
