@@ -22,12 +22,14 @@
                 <tr>
                     <th scope="row">Nicht verteilte Bewerbungen</th>
                     <td th:text="${anzahlOffeneBewerbungen}">0</td>
-                    <td><button type="button" class="btn btn-light">Alle Anzeigen</button></td>
+                    <td><a href="/bewerbung1/verteiler/uebersicht/offene" class="btn"
+                           th:classappend="${anzeige == 0} ? btn-primary : btn-outline-primary">Alle Anzeigen</a></td>
                 </tr>
                 <tr>
                     <th scope="row">Verteilte Bewerbungen</th>
                     <td th:text="${anzahlZugewieseneBewerbungen}">0</td>
-                    <td><a href="/bewerbung1/verteiler/uebersicht/verteilte" class="btn btn-light">Alle Anzeigen</a></td>
+                    <td><a href="/bewerbung1/verteiler/uebersicht/verteilte" class="btn"
+                           th:classappend="${anzeige == 1} ? btn-primary : btn-outline-primary">Alle Anzeigen</a></td>
                 </tr>
                 </tbody>
             </table>
@@ -80,18 +82,10 @@
                                         <option th:each="einModul : ${alleModule}" th:text="${einModul.modulName}" th:value="${einModul.modulName}"></option> //value einModul.moduNAme
                                     </select>
                                 </p>
-
-
-
-
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-
                                 <div class="btn-group btn-block">
-                                    <button type="button" class="btn btn-success">Modul hinzufügen</button>
-                                    <button type="button" class="btn btn-primary">Akzeptieren</button>
+                                    <button type="submit" class="btn btn-success">Zuteilen</button>
                                 </div>
-                            </p>
+                            </form>
                         </div>
 
                         <div class="card-body" th:case="'1'" >

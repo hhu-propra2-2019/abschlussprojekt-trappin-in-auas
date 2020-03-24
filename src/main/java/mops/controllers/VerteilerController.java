@@ -5,6 +5,7 @@ import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_VERTEILER;
 import mops.domain.database.dto.BewerberDTO;
 import mops.domain.database.dto.ModulDTO;
 import mops.domain.models.Bewerber;
+import mops.domain.models.DozentPraeferenz;
 import mops.domain.models.Modul;
 import mops.services.BewerberService;
 import mops.services.ModelService;
@@ -49,7 +50,7 @@ public class VerteilerController {
     model.addAttribute("alleModule", modulService.findAllModule());
     //model.addAttribute("modul", new ModulDTO());
 
-    model.addAttribute("anzeige", 0);
+    model.addAttribute("anzeige", 2);
 
     return "verteiler/Verteiler";
   }
@@ -86,7 +87,6 @@ public class VerteilerController {
     model.addAttribute("anzuzeigende", offeneBewerbungen);
 
     model.addAttribute("alleModule", modulService.findAllModule());
-    //model.addAttribute("modul", new ModulDTO());
 
     model.addAttribute("anzeige", 0);
 
