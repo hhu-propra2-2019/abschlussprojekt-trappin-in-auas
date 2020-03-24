@@ -61,7 +61,7 @@ gibt es einen vorgegebenen [Styleguide](https://mops.style) sowie HTML-Templates
 ## Entwurfsentscheidungen
 
 
-- Schichtenarchitektur
+- Schichtenarchitektur/ Zwibelarchitektur
 
 ## Qualitätsanforderungen 
 
@@ -79,30 +79,14 @@ gibt es einen vorgegebenen [Styleguide](https://mops.style) sowie HTML-Templates
 - Datenschutz
 - Gleichzeitiges Abschicken von Bewerbungen
 - fehlerhafte oder falsche Eingaben
-- 
 
-## Frontend
-#### Woche 1
-In der ersten Woche hat man sich nach der großen groben Planung des Sub-Systems in kleinere Teams aufgeteilt (Front-end und Back-end), wo dann jeweils die spezifischen Details besprochen wurden. Für das Front-end haben sich Yousef, Marvin und Bayar zusammengesetzt. Zunächst sind wir in dieser Woche die alte Bewerbungs-PDF durchgegangen und haben dort gefiltert und ergänzt, wo es uns sinnvoll erschien. Unser Fokus lag dabei auf eine möglichst knappe, übersichtliche, aber dennoch detailierte und verständliche Bewerbungs-PDF, die wir unter "Vision_Bewerbungsbogen.pdf" gespeichert haben. Anschließend fingen wir direkt mit Coden an. Yousef hat sich zunächst um das Design gekümmert, Bayar und Marvin um das HTML-Gerüst. Wir fingen in dieser Woche mit dem Bewerbungsformular (main.html) an. Dort entstanden die ersten Probleme mit Radio-Input-Feldern. In unseren Vision sollte sich nach Anklicken einer Radio-Box ein Input-Textfeld öffnen, wo dann eine spezifische Antwort reingeschrieben werden könnte. Um dieses Problem zu lösen kam man nicht an Java-Script vorbei, wo man sich zunächst stark reinlesen musste. Nach viel googlen und nachfragen gelang es uns schließlich die Vision umzusetzen. Enttäuschenderweise wurde das Feature im Nachhinein rausgenommen, da es sich nicht so leicht mit Thymeleaf verknüpfen lies und deshalb sind wir aus Zeit-Gründen auf einfach Input-Textfelder umgestiegen. Zum Ende der Woche hatten wir jedenfalls ein vollständiges Gerüst der Hauptseite (Bewerbungsformular) inklusive Thymeleaf Einbettung, sowie erste CSS-Templates für ein sauberes und modernes Design.
-
-#### Woche 2
-
-#### Woche 3
-
-#### Woche 4
-
-### Tepri:
-- Ich habe mich erstmals erkundigt, wie schöne Styles aussehen könnten und die Mops.style Seite begutachtet. Daran orientiert habe ich versucht schöne Dropdown-Menüs mit css selbst zu erstellen. Es viel mir zuerst nicht leicht eine css ordentlich zu schreiben, so dass das Dropdown-Menü einen gleichen Effekt erzielt beim Hovern wie bei der Mops.Style Seite. Zuerst musste ich mir eine Pseudo HTML-Struktur aufbauen mit Beispiel-Feldern für Eingabefeldern, Textfeldern und Radios. An der erstellten Pseudo-HTML-Datei habe ich dann meine Stylesheets angewandt und getestet. Durch einige Tutorials im Internet habe ich letzten endes ein einheitliches Design für Radios, Eingabefeldern und Textfelder erstellt, dies hat mehr Zeit eingenommen als zuvor erwartet war.
-### bayarabd:
-- Ich habe mich die zweite Woche mit Frontend beschäftigt und an ein paar Seiten gearbeitet. Eine Endseite, wohin man nach der Bewerbung weitergeleitet wird, eine Dozentseite, wo der Dozent die Anzahl der Bewerbungen und die Infos der BewerberInnen ansehen könnte. Ich habe zusätzlich eine Seite für Verteiler geschrieben, wo der Verteiler die Studentendaten und Prioritäten ansehen könnten und dann entscheiden welcher Student zu welchem fach gehört. Außerdem habe ich etwas an Formular gearbeitet; besonders ein paar Felder habe ich umstruktuiert, früher haben wir die Prioritäten in verschiedenen Zeilen geschrieben, aber ich die Radiobuttons in eine Tabelle zusammengebracht. Es wäre so meiner Meinung nach "benutzerfreundlicher". Außerdem habe ich mich für Bootstrap entschieden, statt eigene css zu schreiben, da mehr Möglichkeiten angeboten sind.
-
-## Backend
-### LanPodder
-
-### AcnoZed
-
-### heyoka95
-
-### jhandke
-
-### Mimbulus
+## ADR template by Michael Nygard
+### Radio-Buttons
+#### Status
+Wir wollten Radio-Buttons im Bewerbungsformular einbauen, wo sich ein Input-Textfeld öffnen nachdem man sie ausgewählt hat. Als Beispiel: "Sonstiges" auswählen und dann ins Textfeld die spezifische Antwort, falls diese nicht zum ankreuzen aufgelistet war.
+#### Context
+Das Problem ist, dass HTML-Form dieses Feature nicht so anbietet und man es mit Java-Script nur hinbekommt. Dort kommt ergibt sich aber dann das Problem, dass die Einbettung mit Thymeleaf dann unnötig kompliziert ist.
+#### Decision
+Wir haben uns entschieden, dieses schöne Feature weg zu lassen, damit wir keine Zeit mit der Implementierung verschwenden, falls vermutete auftauchen sollten.
+#### Consequences
+Das Design des Formular hat etwas dran gelitten, jedoch haben wir im Nachhinein eine Menge Zeit gewonnen.
