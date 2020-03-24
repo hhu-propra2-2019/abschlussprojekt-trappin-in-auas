@@ -2,11 +2,7 @@ package mops.controller;
 
 import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_VERTEILER;
 
-import mops.domain.database.dto.BewerberDTO;
-import mops.domain.database.dto.ModulDTO;
 import mops.domain.models.Bewerber;
-import mops.domain.models.DozentPraeferenz;
-import mops.domain.models.Modul;
 import mops.services.BewerberService;
 import mops.services.DozentPraeferenzService;
 import mops.services.ModelService;
@@ -52,7 +48,7 @@ public class VerteilerController {
 
     model.addAttribute("anzeigeModus", "uebersicht");
 
-    return "verteiler/Verteiler";
+    return "verteiler/verteiler";
   }
 
   @Secured(ROLE_VERTEILER)
@@ -69,7 +65,7 @@ public class VerteilerController {
 
     model.addAttribute("anzeigeModus", "verteilte");
 
-    return "verteiler/Verteiler";
+    return "verteiler/verteiler";
   }
 
 
@@ -87,25 +83,8 @@ public class VerteilerController {
 
     model.addAttribute("anzeigeModus", "offene");
 
-    return "verteiler/Verteiler";
+    return "verteiler/verteiler";
   }
-
-  /*
-  @Secured(ROLE_VERTEILER)
-  @PostMapping("/verteilung")
-  public String verteilDetails(Model m, @RequestParam String kennung) {
-    System.out.println("print: " + kennung);
-    System.out.println("=============================");
-    System.out.println(bewerberService.findAlleBewerber());
-    System.out.println("=============================");
-    System.out.println(bewerberService.findBewerberByKennung(kennung));
-    System.out.println("///////////////////////////////");
-    BewerberDTO bewerber = bewerberService.findBewerberByKennung(kennung);
-    m.addAttribute("bewerber", bewerber);
-    m.addAttribute("verteiltan", "");
-    return "verteilungsdetails";
-  }
-   */
 
   @Secured(ROLE_VERTEILER)
   @GetMapping("/details/{kennung}")
