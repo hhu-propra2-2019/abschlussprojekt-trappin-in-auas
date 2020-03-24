@@ -46,7 +46,9 @@ public class DozentController {
     model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
     model.addAttribute(bewerberAttribute, meineBewerber);
-    return "orga/dozent/ubersicht";
+
+    model.addAttribute("anzeigeModus", "uebersicht");
+    return "dozent/dozent";
   }
 
   @Secured({ ROLE_ORGA })
@@ -68,7 +70,9 @@ public class DozentController {
     model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
     model.addAttribute(bewerberAttribute, nichtBearbeitet);
-    return "orga/dozent/ubersicht";
+
+    model.addAttribute("anzeigeModus", "offene");
+    return "dozent/dozent";
   }
 
   @Secured({ ROLE_ORGA })
@@ -82,7 +86,9 @@ public class DozentController {
     model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
     model.addAttribute(bewerberAttribute, bearbeitet);
-    return "orga/dozent/ubersicht";
+
+    model.addAttribute("anzeigeModus", "vorgemerkte");
+    return "dozent/dozent";
   }
 
   @Secured({ ROLE_ORGA })
