@@ -19,6 +19,9 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BewerberRestController {
     //TODO: Crud operations for applications
+    
+    //currently not in use
+
     private transient BewerberRepository bewerberRepository;
 
     private transient IBewerberService bewerberService;
@@ -33,7 +36,7 @@ public class BewerberRestController {
     @Secured(ROLE_ORGA) //andere clientrollen kommen noch
     public BewerberDTO index(Model model, @RequestBody BewerberDTO b, KeycloakAuthenticationToken token){
         //bewerberRepository.save(b);
-        System.out.println("added " + b.getPersonalien().getUnikennung()+ " to database");
+        System.out.println("added " + b.getKennung()+ " to database");
         return b;
     }
 

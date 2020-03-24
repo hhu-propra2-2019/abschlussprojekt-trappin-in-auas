@@ -51,7 +51,7 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.postgresql:postgresql'
-
+  
 	implementation 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
 	compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
