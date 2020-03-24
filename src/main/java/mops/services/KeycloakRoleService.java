@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class KeycloakRoleService {
 
-  private Map<String, String> roleRedirect;
+  private transient Map<String, String> roleRedirect;
 
   public KeycloakRoleService(){
     roleRedirect = new HashMap<>();

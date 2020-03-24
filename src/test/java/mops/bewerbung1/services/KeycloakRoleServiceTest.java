@@ -14,7 +14,7 @@ public class KeycloakRoleServiceTest {
   private transient KeycloakRoleService keycloakRoleService;
 
   @BeforeEach
-  public void setup(){
+  public void setUp(){
     keycloakRoleService = new KeycloakRoleService();
   }
 
