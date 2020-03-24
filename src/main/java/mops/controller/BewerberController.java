@@ -27,9 +27,9 @@ public class BewerberController {
   @Autowired
   private transient ModulService modulService;
 
-  @GetMapping("/")
+  @GetMapping("")
   public String index(Model model) {
-    return "";
+    return "student/bewerberuebersicht";
   }
 
   @GetMapping("/bewerbung")
