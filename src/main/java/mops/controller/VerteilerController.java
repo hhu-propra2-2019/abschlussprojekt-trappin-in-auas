@@ -52,7 +52,7 @@ public class VerteilerController {
   }
 
   @Secured(ROLE_VERTEILER)
-  @GetMapping("/uebersicht/verteilte")
+  @GetMapping("/verteilte")
   public String showVerteilteBewerber(Model model, KeycloakAuthenticationToken token) {
     List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
     List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
@@ -70,7 +70,7 @@ public class VerteilerController {
 
 
   @Secured(ROLE_VERTEILER)
-  @GetMapping("/uebersicht/offene")
+  @GetMapping("/offene")
   public String showOffeneBewerber(Model model, KeycloakAuthenticationToken token) {
     List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
     List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
