@@ -7,7 +7,6 @@ import mops.domain.database.dto.BewerberDTO;
 import mops.domain.database.dto.DozentPraeferenzDTO;
 import mops.domain.models.DozentPraeferenz;
 import mops.domain.repositories.BewerberRepository;
-import mops.domain.repositories.DozentPraeferenzRepo;
 import mops.domain.services.IDozentPraeferenzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,17 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
       BewerberDTO bewerberDTO = bewerberService
           .findBewerberByKennung(dozentPraeferenzDTO.getBewerber());
 
-      bewerberDTO.getDozentPraeferenz().add(dozentPraeferenzDTO);
+      List<DozentPraeferenzDTO> existierndeBewertung = bewerberDTO.getDozentPraeferenz()
+          .stream()
+          .filter(x -> x.getDozentMail().equals(dozentPraeferenzDTO.getDozentMail()))
+          .collect(Collectors.toList());
+
+      if(existierndeBewertung.isEmpty() ){
+        bewerberDTO.getDozentPraeferenz().add(dozentPraeferenzDTO);
+      }
+      else {
+        existierndeBewertung.get(0).setPraeferenz(dozentPraeferenzDTO.getPraeferenz());
+      }
       bewerberRepository.save(bewerberDTO);
 
     }

@@ -2,13 +2,10 @@ package mops.bewerbung1.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import mops.domain.database.dto.DozentPraeferenzDTO;
-import mops.domain.repositories.DozentPraeferenzRepo;
 import mops.domain.services.IDozentPraeferenzService;
-import mops.services.DozentPraeferenzService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
