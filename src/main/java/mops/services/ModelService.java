@@ -23,7 +23,10 @@ public class ModelService implements IModelService {
       load(bewerberDTO.getPersonalien()),
       load(bewerberDTO.getPraeferenzen()), 
       bewerberDTO.getErstelltVon(),
-      bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()));
+      bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()),
+      bewerberDTO.getDozentPraeferenz().stream().map(x -> load(x)).collect(Collectors.toList())
+    );
+
   }
 
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis") // Fix gradle bug: False positive
@@ -111,4 +114,11 @@ public class ModelService implements IModelService {
     return modulist;
   }
 
+  @Override
+  public DozentPraeferenz load(DozentPraeferenzDTO dozentPraeferenzDTO) {
+    return new DozentPraeferenz(
+        dozentPraeferenzDTO.getDozentMail(),
+        dozentPraeferenzDTO.getBewerber(),
+        dozentPraeferenzDTO.getPraeferenz());
+  }
 }

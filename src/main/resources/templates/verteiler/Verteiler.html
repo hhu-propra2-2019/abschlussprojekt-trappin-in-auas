@@ -52,6 +52,13 @@
                                     th:text="${praeferenz.modul.modulName + ': ' + praeferenz.prioritaet}"></li>
                             </ul>
                             <h5>Dozentenpräferenzen:</h5>
+
+
+                            <ul>
+                                <li th:each="praeferenz : ${bewerber.dozentPraeferenz}"
+                                    th:text="${praeferenz.dozentMail + ': ' + praeferenz.praeferenz}"></li>
+                            </ul>
+
                             <p class="card-text">- ProPra Prio = 3</p>
                             <p class="card-text">- Aldat Prio = 1</p>
                             <p class="card-text">- Datenbank Prio = 2</p>

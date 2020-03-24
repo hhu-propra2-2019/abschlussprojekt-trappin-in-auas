@@ -17,4 +17,5 @@ public class Bewerber{
     
     private String erstelltVon;
     private List<Dozent> verteiltAn;
+    private List<DozentPraeferenz> dozentPraeferenz;
 }

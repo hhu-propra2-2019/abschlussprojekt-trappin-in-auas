@@ -47,7 +47,6 @@ public class VerteilerController {
     model.addAttribute("anzuzeigende", offeneBewerbungenPreview);
 
     model.addAttribute("alleModule", modulService.findAllModule());
-    //model.addAttribute("modul", new ModulDTO());
 
     model.addAttribute("anzeige", 0);
 
@@ -66,7 +65,6 @@ public class VerteilerController {
     model.addAttribute("anzuzeigende", zugewieseneBewerbungen);
 
     model.addAttribute("alleModule", modulService.findAllModule());
-    //model.addAttribute("modul", new ModulDTO());
 
     model.addAttribute("anzeige", 1);
 
@@ -86,7 +84,6 @@ public class VerteilerController {
     model.addAttribute("anzuzeigende", offeneBewerbungen);
 
     model.addAttribute("alleModule", modulService.findAllModule());
-    //model.addAttribute("modul", new ModulDTO());
 
     model.addAttribute("anzeige", 0);
 

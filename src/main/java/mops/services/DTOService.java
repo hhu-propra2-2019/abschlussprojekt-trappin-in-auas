@@ -65,8 +65,9 @@ public class DTOService implements IDTOService {
 
   public BewerberDTO load(Bewerber bewerber) {
     List<VerteilungDTO> verteiltAn = (bewerber.getVerteiltAn() == null) ? null : load(bewerber.getVerteiltAn());
+    List<DozentPraeferenzDTO> dozentPraeferenz = (bewerber.getDozentPraeferenz() == null) ? null : loadDozentPraeferenzList(bewerber.getDozentPraeferenz());
     BewerberDTO bewerberDTO = new BewerberDTO(load(bewerber.getPersonalien()), load(bewerber.getKarriere()),
-        load(bewerber.getPraeferenzen()), verteiltAn);
+        load(bewerber.getPraeferenzen()), verteiltAn, dozentPraeferenz);
     bewerberDTO.setErstelltVon(bewerber.getErstelltVon());
     return bewerberDTO;
   }
@@ -77,6 +78,10 @@ public class DTOService implements IDTOService {
 
   private List<VerteilungDTO> load(List<Dozent> verteiltAn) {
     return verteiltAn.stream().map(x -> load(x)).collect(Collectors.toList());
+  }
+
+  private List<DozentPraeferenzDTO> loadDozentPraeferenzList(List<DozentPraeferenz> dozentPraeferenzs){
+    return  dozentPraeferenzs.stream().map(x -> load(x)).collect(Collectors.toList());
   }
 
   public List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen) {

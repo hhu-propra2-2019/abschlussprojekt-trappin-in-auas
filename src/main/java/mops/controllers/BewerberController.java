@@ -30,7 +30,7 @@ public class BewerberController {
   @GetMapping("/bewirb")
   @Secured({ "ROLE_studentin" })
   public String bewirb(Model model, KeycloakAuthenticationToken token) {
-    Bewerber b = new Bewerber(new Karriere(), new Personalien(), new Praeferenzen(), token.getName(), null);
+    Bewerber b = new Bewerber(new Karriere(), new Personalien(), new Praeferenzen(), token.getName(), null, null);
     b.getPraeferenzen().setModulAuswahl(new ArrayList<>()); // avoid list beeing null errors
     b.getPraeferenzen().getModulAuswahl().add(new ModulAuswahl());
     System.out.println(b);
