@@ -23,11 +23,11 @@ public class PDFService {
     public String filedirectory(BewerberDTO bewerberDTO) throws Exception {
         if(bewerberDTO.getKarriere().getFachAbschluss() == null) {
             String path = "../../../resources/static/321_Antrag_Beschaeftigung_stud_Hilfskraefte.pdf";
-          return path;
+            return path;
         }
         else {
-        String path = "../../../resources/static/323_Antrag_Beschaeftigung_wiss_Hilfskraefte_mit_BA.pdf";
-        return path;
+            String path = "../../../resources/static/323_Antrag_Beschaeftigung_wiss_Hilfskraefte_mit_BA.pdf";
+            return path;
         }
 
 
@@ -40,11 +40,8 @@ public class PDFService {
 
     public void fillStudentHilfskraft(BewerberDTO bewerberDTO,String filedirectory) throws Exception {
 
-
+        PDDocument pDDocument = PDDocument.load(new File(filedirectory));
         try {
-            PDDocument pDDocument = PDDocument.load(new File(filedirectory));
-
-
             if (pDDocument.isEncrypted()) {
                 try {
                     pDDocument.setAllSecurityToBeRemoved(true);
@@ -52,7 +49,6 @@ public class PDFService {
                     throw new Exception("The document is encrypted, and we can't decrypt it.", e);
                 }
             }
-
 
             PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
 
@@ -92,12 +88,13 @@ public class PDFService {
 
             //Speichern der Datei
             pDDocument.save("../../../resources/static/output.pdf");
-            pDDocument.close();
 
         } catch (Exception e) {
 
             e.printStackTrace();
 
+        } finally{
+            pDDocument.close();
         }
 
 
@@ -107,10 +104,8 @@ public class PDFService {
 
 
     public void fillWissenHilfskraft(BewerberDTO bewerberDTO, String filedirectory) throws Exception {
-
+        PDDocument pDDocument = PDDocument.load(new File(filedirectory));
         try {
-            PDDocument pDDocument = PDDocument.load(new File(filedirectory));
-
 
             if (pDDocument.isEncrypted()) {
                 try {
@@ -171,13 +166,15 @@ public class PDFService {
 
             //Speichern der Datei
             pDDocument.save("../../../resources/static//output2.pdf");
-            pDDocument.close();
 
         } catch (Exception e) {
 
             e.printStackTrace();
 
+        }finally{
+            pDDocument.close();
         }
+
 
     }
 
@@ -201,15 +198,15 @@ public class PDFService {
 
 
         }
-    else if(bewerberDTO.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.NEUEINSTIEG){
+        else if(bewerberDTO.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.NEUEINSTIEG){
 
-        return "Einstellung";
+            return "Einstellung";
 
         }
 
-    else{
+        else{
 
-        return "Off";
+            return "Off";
         }
 
     }
