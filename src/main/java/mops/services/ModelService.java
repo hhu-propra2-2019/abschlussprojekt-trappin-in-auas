@@ -18,6 +18,9 @@ public class ModelService implements IModelService {
   }
 
   public Bewerber load(BewerberDTO bewerberDTO){
+    if(bewerberDTO == null){
+      return null;
+    }
     return new Bewerber(
       load(bewerberDTO.getKarriere()), 
       load(bewerberDTO.getPersonalien()),

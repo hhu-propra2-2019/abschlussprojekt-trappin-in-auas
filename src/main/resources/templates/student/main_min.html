@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-  th:replace="~{mopslayout :: html(name='name', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+  th:replace="~{mopslayout :: html(name='Bewerbung', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
 
 <head>
   <meta charset="utf-8">
@@ -51,13 +51,7 @@
       <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
       <ul>
         <li>
-          <a href="#">test1</a>
-        </li>
-        <li>
-          <a href="#">test2</a>
-        </li>
-        <li>
-          <a href="#">test3</a>
+          <a href="/bewerbung1/bewerber">Übersicht</a>
         </li>
       </ul>
     </nav>
@@ -302,7 +296,7 @@
             <option th:value="'Diplom'">Diplom</option>
             <option th:value="'Staatsexamen'">Staatsexamen</option>
             <option th:value="'Anderes'">Anderes</option>
-            <option th:value="'Kein Uni-Abschluss'">Kein Uni-Abschluss</option>
+            <option th:value="null">Kein Uni-Abschluss</option>
           </select>
           <label>Fach:</label>
           <input type="text" class="form-control " th:field="*{fachAbschluss.studiengang}" />

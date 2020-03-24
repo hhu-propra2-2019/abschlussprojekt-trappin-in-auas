@@ -4,16 +4,21 @@ import static mops.authentication.account.keycloak.KeycloakRoles.*;
 
 import java.util.Set;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import mops.services.KeycloakRoleService;
+
 @Controller
 @RequestMapping("/bewerbung1")
 public class BewerbungController {
+
+  @Autowired
+  private transient KeycloakRoleService keycloakRoleService;
 
   /**
    * Main page, checks login for roles studentin and orga.
@@ -24,27 +29,8 @@ public class BewerbungController {
   @GetMapping("")
   @Secured({ROLE_ORGA, ROLE_STUDENT, ROLE_BOSS, ROLE_VERTEILER})
   public String mainpage(Model model, KeycloakAuthenticationToken token) {
-    Set<String> tokenRole = token.getAccount().getRoles();
-
-    if (tokenRole.contains("studentin")) {
-      return "redirect:/bewerbung1/student";
-    } else if (tokenRole.contains("orga")) {
-      return "redirect:/bewerbung1/orga";
-    } else {
-      return "falscheRolle";
-    }
-  }
-
-  /**
-   * Students dashboard. Login as "studentin" required.
-   * @param model injected, Model for Thymeleaf interaction
-   * @param token injected, present, if user is logged in
-   * @return studentMainpage html template
-   */
-  @GetMapping("/student")
-  @Secured(ROLE_STUDENT)
-  public String getStudentMainpage(Model model, KeycloakAuthenticationToken token) {
-    return "student/studentMainpage";
+    Set<String> tokenRoles = token.getAccount().getRoles();
+    return "redirect:/bewerbung1"+keycloakRoleService.getHighestPrivilegeRedirect(tokenRoles);
   }
 
   /**
