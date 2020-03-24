@@ -26,7 +26,7 @@
             <h3>Persönliche Daten:</h3>
             <p th:text="${bewerber.personalien.vorname}">Vorname: </p>
             <p th:text="variable">Nachname: </p>
-            <p th:text="variable">Uni-Kennung: </p>
+            <p th:text="${bewerber.kennung}">Uni-Kennung: </p>
             <p th:text="variable">Geburtsdatum und Alter: </p>
 
             <hr>
@@ -43,8 +43,8 @@
       <div class="col-12 shadow p-3 mb-5 bg-light rounded">
         <ul>
           <h3>Gewünschte Fächer:</h3>
-          <tr th:each="auswahl, itemStat : *{modulAuswahl}">
-            <td><span th:text="${itemStat}"> Fach </span></td>
+          <tr th:each="auswahl, itemStat : ${bewerber.praeferenzen.modulAuswahl}">
+            <td><span th:text="${auswahl.modul.modulName}"> Fach </span></td>
           </tr>
 
           <hr>
