@@ -7,7 +7,6 @@ import mops.domain.database.dto.BewerberDTO;
 import mops.domain.database.dto.DozentPraeferenzDTO;
 import mops.domain.models.DozentPraeferenz;
 import mops.domain.repositories.BewerberRepository;
-import mops.domain.repositories.DozentPraeferenzRepo;
 import mops.domain.services.IDozentPraeferenzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
