@@ -55,7 +55,7 @@ public class DTOService implements IDTOService {
   }
 
   public PersonalienDTO load(Personalien personalien) {
-    return new PersonalienDTO(load(personalien.getAdresse()), personalien.getUnikennung(), personalien.getName(),
+    return new PersonalienDTO(load(personalien.getAdresse()), personalien.getName(),
         personalien.getVorname(), personalien.getGeburtsdatum(), personalien.getAlter(), personalien.getGeburtsort(),
         personalien.getNationalitaet());
   }
@@ -75,7 +75,7 @@ public class DTOService implements IDTOService {
     List<VerteilungDTO> verteiltAn = (bewerber.getVerteiltAn() == null) ? null : load(bewerber.getVerteiltAn());
     BewerberDTO bewerberDTO = new BewerberDTO(load(bewerber.getPersonalien()), load(bewerber.getKarriere()),
         load(bewerber.getPraeferenzen()), verteiltAn);
-    bewerberDTO.setErstelltVon(bewerber.getErstelltVon());
+    bewerberDTO.setKennung(bewerber.getKennung());
     return bewerberDTO;
   }
 

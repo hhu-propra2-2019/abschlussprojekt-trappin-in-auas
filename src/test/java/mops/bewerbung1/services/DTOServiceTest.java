@@ -69,7 +69,7 @@ public class DTOServiceTest {
     Date geburtsDatum = Date.from(new SimpleDateFormat("dd.MM.yyyy",
         Locale.getDefault()).parse("15.07.1999").toInstant());
 
-    Personalien p = new Personalien(adresse,"akkil100","Kilincarslan","Akin",
+    Personalien p = new Personalien(adresse,"Kilincarslan","Akin",
         geburtsDatum,24,"Monheim", "Tuerke");
 
     PersonalienDTO pDTO = dtoService.load(p);
@@ -79,7 +79,6 @@ public class DTOServiceTest {
     assertEquals(adresse.getStrasse(),pDTO.getAdresse().getStrasse());
     assertEquals(adresse.getHausnummer(),pDTO.getAdresse().getHausnummer());
     assertEquals(geburtsDatum,pDTO.getGeburtsdatum());
-    assertEquals(p.getUnikennung(),pDTO.getUnikennung());
     assertEquals(p.getName(),pDTO.getName());
     assertEquals(p.getVorname(),pDTO.getVorname());
     assertEquals(p.getAlter(),pDTO.getAlter());
@@ -159,7 +158,6 @@ public class DTOServiceTest {
     personalien.setGeburtsort("Duesseldorf");
     personalien.setName("Winkler");
     personalien.setNationalitaet("Deutschland");
-    personalien.setUnikennung("mawin125");
     personalien.setVorname("Marvin");
     personalien.setAdresse(new Adresse("40235", "Duesseldorf", "Porschestraße", "17"));
 

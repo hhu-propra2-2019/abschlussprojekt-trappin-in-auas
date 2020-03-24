@@ -18,11 +18,14 @@ public class ModelService implements IModelService {
   }
 
   public Bewerber load(BewerberDTO bewerberDTO){
+    if(bewerberDTO == null){
+      return null;
+    }
     return new Bewerber(
       load(bewerberDTO.getKarriere()), 
       load(bewerberDTO.getPersonalien()),
       load(bewerberDTO.getPraeferenzen()), 
-      bewerberDTO.getErstelltVon(),
+      bewerberDTO.getKennung(),
       bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()));
   }
 
@@ -74,7 +77,7 @@ public class ModelService implements IModelService {
       return null;
     }
     Adresse adresse = loadAdresse(pDTO);
-    return new Personalien(adresse, pDTO.getUnikennung(), pDTO.getName(), pDTO.getVorname(), pDTO.getGeburtsdatum(),
+    return new Personalien(adresse, pDTO.getName(), pDTO.getVorname(), pDTO.getGeburtsdatum(),
         pDTO.getAlter(), pDTO.getGeburtsort(), pDTO.getNationalitaet());
   }
 
