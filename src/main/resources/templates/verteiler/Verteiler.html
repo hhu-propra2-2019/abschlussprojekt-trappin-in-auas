@@ -59,8 +59,8 @@
 
   <div class="container pt-3">
     <div class="col-12 shadow p-3 mb-4 bg-light rounded">
-      <div class="card-columns" th:each="bewerber : ${anzuzeigende}">
-        <div class="card border-dark">
+      <div class="card-columns">
+        <div class="card border-dark" th:each="bewerber : ${anzuzeigende}">
           <div class="card-header font-weight-bold text-center">
             <h5 th:text="${bewerber.personalien.vorname + ' ' + bewerber.personalien.name}">Vorname Nachname</h5>
           </div>
