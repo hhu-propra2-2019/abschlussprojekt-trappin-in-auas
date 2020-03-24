@@ -35,11 +35,16 @@ public class BewerberDTO {
   @JoinColumn(name = "bewerber", referencedColumnName = "id")
   private List<VerteilungDTO> verteiltAn;
 
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "bewerberpreaf", referencedColumnName = "id")
+  private List<DozentPraeferenzDTO> dozentPraeferenz;
+
   public BewerberDTO(PersonalienDTO personalien, KarriereDTO karriere, PraeferenzenDTO praeferenzen,
-      List<VerteilungDTO> verteiltAn) {
+      List<VerteilungDTO> verteiltAn, List<DozentPraeferenzDTO> dozentPraeferenz) {
     this.personalien = personalien;
     this.karriere = karriere;
     this.praeferenzen = praeferenzen;
     this.verteiltAn = verteiltAn;
+    this.dozentPraeferenz = dozentPraeferenz;
   }
 }

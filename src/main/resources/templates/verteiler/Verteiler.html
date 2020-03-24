@@ -1,10 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{mopslayout :: html(name='Korrektorenbewerbung', title='Zuordnung', headcontent=~{:: headcontent},
-      navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+<html lang="en" xmlns:margin-="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Korrektorenbewerbung</title>
-  <th:block th:fragment="headcontent">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,44 +14,28 @@
 </head>
 
 <body>
-<header>
-  <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
-    <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
-    <ul>
-      <li>
-        <a href="/bewerbung1/verteiler/uebersicht">Zuordnung</a>
-      </li>
-      <li>
-        <a href="https://keycloak.cs.hhu.de/auth/realms/MOPS/protocol/openid-connect/logout?redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fbewerbung1%2F">Logout</a>
-      </li>
-    </ul>
-  </nav>
-</header>
 
-<main th:fragment="bodycontent">
-  <div class="container pt-3">
-    <div class="col-12 shadow p-3 mb-5 bg-light rounded">
-      <h1>Übersicht</h1>
-      <div class="card border-dark">
-        <table class="table">
-          <tbody>
-          <tr>
-            <th scope="row">Nicht verteilte Bewerbungen</th>
-            <td th:text="${anzahlOffeneBewerbungen}">0</td>
-            <td><a href="/bewerbung1/verteiler/uebersicht/offene" class="btn"
-                   th:classappend="${anzeigeModus == 'offene'} ? btn-primary : btn-outline-primary">Alle Anzeigen</a></td>
-          </tr>
-          <tr>
-            <th scope="row">Verteilte Bewerbungen</th>
-            <td th:text="${anzahlZugewieseneBewerbungen}">0</td>
-            <td><a href="/bewerbung1/verteiler/uebersicht/verteilte" class="btn"
-                   th:classappend="${anzeigeModus == 'verteilte'} ? btn-primary : btn-outline-primary">Alle Anzeigen</a></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="container pt-3">
+        <div class="col-12 shadow p-3 mb-5 bg-light rounded">
+        <h1>Übersicht</h1>
+        <div class="card border-dark">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th scope="row">Nicht verteilte Bewerbungen</th>
+                    <td th:text="${anzahlOffeneBewerbungen}">0</td>
+                    <td><button type="button" class="btn btn-light">Alle Anzeigen</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">Verteilte Bewerbungen</th>
+                    <td th:text="${anzahlZugewieseneBewerbungen}">0</td>
+                    <td><a href="/bewerbung1/verteiler/uebersicht/verteilte" class="btn btn-light">Alle Anzeigen</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
     </div>
-  </div>
 
   <div class="container pt-3">
     <div class="col-12 shadow p-3 mb-4 bg-light rounded">
