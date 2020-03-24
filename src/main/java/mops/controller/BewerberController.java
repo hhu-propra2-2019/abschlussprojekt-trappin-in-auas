@@ -1,12 +1,8 @@
 package mops.controller;
 
-import mops.domain.database.dto.*;
 import mops.domain.models.*;
 import mops.services.BewerberService;
 import mops.services.ModulService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
