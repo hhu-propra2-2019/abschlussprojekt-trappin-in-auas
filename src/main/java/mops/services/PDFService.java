@@ -28,7 +28,6 @@ public class PDFService {
         else {
         String path = "../../../resources/static/323_Antrag_Beschaeftigung_wiss_Hilfskraefte_mit_BA.pdf";
         return path;
-
         }
 
 
@@ -68,7 +67,7 @@ public class PDFService {
             field = pDAcroForm.getField("Staatsangehörigkeit");
             field.setValue(bewerberDTO.getPersonalien().getNationalitaet());
             field = pDAcroForm.getField("Anschrift (Straße)");
-            field.setValue(bewerberDTO.getPersonalien().getAdresse().getStraße());
+            field.setValue(bewerberDTO.getPersonalien().getAdresse().getStrasse());
             field = pDAcroForm.getField("Anschrift (Hausnummer)");
             field.setValue(bewerberDTO.getPersonalien().getAdresse().getHausnummer());
             field = pDAcroForm.getField("Anschrift (PLZ)");
@@ -134,7 +133,7 @@ public class PDFService {
             field = pDAcroForm.getField("Staatsangehörigkeit");
             field.setValue(bewerberDTO.getPersonalien().getNationalitaet());
             field = pDAcroForm.getField("Anschrift (Straße)");
-            field.setValue(bewerberDTO.getPersonalien().getAdresse().getStraße());
+            field.setValue(bewerberDTO.getPersonalien().getAdresse().getStrasse());
             field = pDAcroForm.getField("Anschrift (Hausnummer)");
             field.setValue(bewerberDTO.getPersonalien().getAdresse().getHausnummer());
             field = pDAcroForm.getField("Anschrift (PLZ)");
@@ -158,10 +157,13 @@ public class PDFService {
             field.setValue("On");
             field = pDAcroForm.getField("Bemerkung zum Antrag1");
             field.setValue(bewerberDTO.getKarriere().getArbeitserfahrung() + "/n" + bewerberDTO.getPraeferenzen().getKommentar() + "/n" + bewerberDTO.getPraeferenzen().getEinschraenkungen());
-
+            /*
             field = pDAcroForm.getField("Schilderung der auszuübenden Tätigkeit");
             field.setValue(bewerberDTO.getPraeferenzen().getBerufModul().getBeruf().toString());
 
+             */
+            //String string = "";
+            //for ()
 
 
 

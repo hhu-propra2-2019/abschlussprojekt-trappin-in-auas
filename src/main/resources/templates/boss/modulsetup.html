@@ -1,44 +1,68 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-    th:replace="~{mopslayout :: html(name='name', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+      th:replace="~{mopslayout :: html(name='name', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
 
 <head>
-    <meta charset="utf-8">
-    <title>main</title>
-    <th:block th:fragment="headcontent">
-    </th:block>
+  <meta charset="utf-8">
+  <title>main</title>
+  <th:block th:fragment="headcontent">
+  </th:block>
 </head>
 
 
 <body>
-    <header>
-        <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
-            <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
-        </nav>
-    </header>
-    <main th:fragment="bodycontent">
-        <!-- Restlichen Inhalt hier einfügen! -->
+<header>
+  <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
+    <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
+  </nav>
+</header>
+<main th:fragment="bodycontent">
+  <!-- Restlichen Inhalt hier einfügen! -->
 
-        <div class="container">
-            <h3>Modulsetup</h3>
-            <form>
-                <div class="form-group">
-                    <label>Modulbezeichnung</label>
-                    <input type="text" class="form-control col-sm-10" placeholder="Z.B.: Programmierung" />
-                </div>
-                <div class="form-group">
-                    <label>Dozent</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control col-sm-4" placeholder="Dozentkennung" />
-                        <input type="text" class="form-control col-sm-6" placeholder="Dozentname" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Modul hinzufuegen</button>
-                </div>
-            </form>
+
+  <div class="d-flex p-2">
+    <h3 class="p-2 w-100">Modulübersicht</h3>
+  </div>
+  <div class="container">
+
+
+    <div class="row">
+      <div class ="card col-sm" style="width: 18rem;" th:each="modul : ${modulListe}">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${modul.modulName}" >Programmierung</h5>
+          <p class="card-text" th:text="${modul.dozent.dozentName}">Conrad213</p>
+          <form method="POST" th:action="@{/bewerbung1/boss/delete}">
+            <input type="hidden" name="modulName" th:value="${modul.modulName}">
+            <button type="submit" class="btn btn-primary">Entfernen</button>
+          </form>
         </div>
-    </main>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <h3>Modulsetup</h3>
+    <form method="POST" th:action="@{/bewerbung1/boss/postmodule}" th:object="${modul}">
+      <div class="form-group">
+        <label>Modulbezeichnung</label>
+        <input type="text" class="form-control col-sm-10" placeholder="Z.B.: Programmierung" th:field="*{modulName}"/>
+      </div>
+      <div class="form-group">
+        <label>Dozent</label>
+        <!--<div class="input-group">-->
+          <input type="text" class="form-control col-sm-4" placeholder="Dozentname" th:field="*{dozent.dozentName}" />
+          <input type="text" class="form-control col-sm-4" placeholder="Dozentmail" th:field="*{dozent.dozentMail}" />
+        <!--</div>-->
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Modul hinzufuegen</button>
+      </div>
+    </form>
+  </div>
+
+
+</main>
 </body>
 
 </html>

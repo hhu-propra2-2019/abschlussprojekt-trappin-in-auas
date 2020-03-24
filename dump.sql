@@ -141,7 +141,7 @@ CREATE TABLE public.personalien (
     id bigint NOT NULL,
     plz character varying(255),
     hausnummer character varying(255),
-    "straße" character varying(255),
+    "strasse" character varying(255),
     wohnort character varying(255),
     wohnstadt character varying(255),
     alter integer NOT NULL,
@@ -224,7 +224,7 @@ COPY public.modul_auswahl (id, modul, prioritaet, praeferenzen_max_wunsch_stunde
 -- Data for Name: personalien; Type: TABLE DATA; Schema: public; Owner: trapper
 --
 
-COPY public.personalien (id, plz, hausnummer, "straße", wohnort, wohnstadt, alter, geburtsdatum, geburtsort, name, nationalitaet, unikennung, vorname) FROM stdin;
+COPY public.personalien (id, plz, hausnummer, "strasse", wohnort, wohnstadt, alter, geburtsdatum, geburtsort, name, nationalitaet, unikennung, vorname) FROM stdin;
 \.
 
 

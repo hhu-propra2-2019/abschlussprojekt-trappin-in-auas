@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +17,8 @@ public class Personalien {
     private String unikennung;
     private String name;
     private String vorname;
-    
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date geburtsdatum;
 
     private int alter;

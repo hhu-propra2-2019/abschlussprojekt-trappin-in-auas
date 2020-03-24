@@ -10,10 +10,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Table(name = "personalien")
 @Entity
+@NoArgsConstructor
 public class PersonalienDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,4 +35,15 @@ public class PersonalienDTO {
     private String geburtsort;
     private String nationalitaet;
 
+    public PersonalienDTO(AdresseDTO adresse, String unikennung, String name, String vorname,
+        Date geburtsdatum, int alter, String geburtsort, String nationalitaet) {
+        this.adresse = adresse;
+        this.unikennung = unikennung;
+        this.name = name;
+        this.vorname = vorname;
+        this.geburtsdatum = geburtsdatum;
+        this.alter = alter;
+        this.geburtsort = geburtsort;
+        this.nationalitaet = nationalitaet;
+    }
 }

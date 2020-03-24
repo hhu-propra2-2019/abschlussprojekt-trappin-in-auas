@@ -1,18 +1,34 @@
 package mops.domain.repositories;
 
 import java.util.List;
-import mops.domain.models.lehrstuhl.Modul;
+
+import javax.transaction.Transactional;
+import mops.domain.database.dto.ModulDTO;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ModulRepository extends CrudRepository<Modul, Long> {
+@Repository
+public interface ModulRepository extends CrudRepository<ModulDTO, Long> {
 
-  Modul findModulById(Long id);
+  ModulDTO findModulById(Long id);
 
-  List<Modul> findAll();
+  List<ModulDTO> findAll();
+
+  @Query("select m from ModulDTO m where m.modulName=?1")
+  ModulDTO findModulByModulName(String ModulName);
 
   @Override
-  <S extends Modul> S save(S entity);
+  <S extends ModulDTO> S save(S entity);
 
   @Override
-  <S extends Modul> Iterable<S> saveAll(Iterable<S> entities);
+  <S extends ModulDTO> Iterable<S> saveAll(Iterable<S> entities);
+
+  List<ModulDTO> findByModulNameAndDozentMail(String modul, String dozentMail);
+
+  @Transactional
+  @Modifying
+  @Query("delete from ModulDTO m  where m.modulName  = ?1")
+  void deleteModulByName(String modulName);
 }

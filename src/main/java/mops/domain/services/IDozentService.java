@@ -1,13 +1,9 @@
 package mops.domain.services;
 
-import java.util.List;
-import mops.domain.models.lehrstuhl.Dozent;
+import mops.domain.repositories.ModulRepository;
+import mops.services.DTOService;
+import mops.services.DozentPraeferenzService;
 
 public interface IDozentService {
-
-  void add(Dozent dozent);
-
-  List<Dozent> findAll();
-
-
+  public void fuegePraeferenzHinzu(String bewerber, String dozent, int praeferenz);
 }

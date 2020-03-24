@@ -2,6 +2,7 @@ package mops.bewerbung1;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
+import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 
 import java.util.Set;
 import mops.authentication.account.AccountManager;
@@ -35,7 +36,7 @@ class AccountManagerTest {
     when(principal.getKeycloakSecurityContext()).thenReturn(securityContext);
 
     AccountManager manager = new AccountManager();
-    Set<String> roles = Sets.newSet("ROLE_orga");
+    Set<String> roles = Sets.newSet(ROLE_ORGA);
     Account account1 = new Account("Nachname, Vorname", "vorname.nachname@abc.org", "PICTURE", roles);
     Account account2 = manager.parseFrom(principal, roles);
 
