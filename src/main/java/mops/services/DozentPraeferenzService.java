@@ -31,7 +31,17 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
       BewerberDTO bewerberDTO = bewerberService
           .findBewerberByKennung(dozentPraeferenzDTO.getBewerber());
 
-      bewerberDTO.getDozentPraeferenz().add(dozentPraeferenzDTO);
+      List<DozentPraeferenzDTO> existierndeBewertung = bewerberDTO.getDozentPraeferenz()
+          .stream()
+          .filter(x -> x.getDozentMail().equals(dozentPraeferenzDTO.getDozentMail()))
+          .collect(Collectors.toList());
+
+      if(existierndeBewertung.isEmpty() ){
+        bewerberDTO.getDozentPraeferenz().add(dozentPraeferenzDTO);
+      }
+      else {
+        existierndeBewertung.get(0).setPraeferenz(dozentPraeferenzDTO.getPraeferenz());
+      }
       bewerberRepository.save(bewerberDTO);
 
     }
