@@ -2,6 +2,10 @@ package mops.bewerbung1.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,5 +40,12 @@ public class KeycloakRoleServiceTest {
   @Test
   public void dozentRedirectPfad(){
     assertEquals(keycloakRoleService.getRedirect("orga"), "/dozent");
+  }
+
+  @Test
+  public void highestPrivilege(){
+    Set<String> tokenRoles = Stream.of("studentin", "orga", "verteiler", "setup").collect(Collectors.toSet());
+
+    assertEquals(keycloakRoleService.getHighestPrivilegeRedirect(tokenRoles), "/setup");
   }
 }
