@@ -45,18 +45,10 @@ public class DozentController {
     model.addAttribute("bearbeitetCount", bearbeitet.size());
     model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
-    model.addAttribute(bewerberAttribute, meineBewerber);
+    model.addAttribute(bewerberAttribute, nichtBearbeitet);
 
     model.addAttribute("anzeigeModus", "uebersicht");
     return "dozent/dozent";
-  }
-
-  @Secured({ ROLE_ORGA })
-  @PostMapping("/addPreference")
-  public String addPreference(Model model, KeycloakAuthenticationToken token, int praeferenz, String dozentKennung,
-      String bewerberKennung) {
-    dozentPraeferenzService.addPraeferenz(new DozentPraeferenz(dozentKennung, bewerberKennung, praeferenz));
-    return "redirect:./uebersicht";
   }
 
   @Secured({ ROLE_ORGA })
@@ -89,6 +81,14 @@ public class DozentController {
 
     model.addAttribute("anzeigeModus", "vorgemerkte");
     return "dozent/dozent";
+  }
+
+  @Secured({ ROLE_ORGA })
+  @PostMapping("/addPreference")
+  public String addPreference(Model model, KeycloakAuthenticationToken token, int praeferenz, String dozentKennung,
+                              String bewerberKennung) {
+    dozentPraeferenzService.addPraeferenz(new DozentPraeferenz(dozentKennung, bewerberKennung, praeferenz));
+    return "redirect:./uebersicht";
   }
 
   @Secured({ ROLE_ORGA })

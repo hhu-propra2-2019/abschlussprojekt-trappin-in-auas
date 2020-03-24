@@ -22,13 +22,13 @@
   <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
     <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
     <ul>
-      <li>
+      <li th:classappend="${anzeigeModus == 'uebersicht'} ? active">
         <a th:href="@{./uebersicht}">Übersicht</a>
       </li>
-      <li>
+      <li th:classappend="${anzeigeModus == 'offene'} ? active">
         <a th:href="@{./unbearbeitete}">Offene Bewerbungen</a>
       </li>
-      <li>
+      <li th:classappend="${anzeigeModus == 'vorgemerkte'} ? active">
         <a th:href="@{./bearbeitete}">Vorgemerkte Bewerbungen</a>
       </li>
       <li>
@@ -71,7 +71,7 @@
     </div>
   </div>
 
-  <div class="container pt-3">
+  <div class="container pt-3" th:if="${bewerber.size() > 0}">
     <div class="col-12 shadow p-3 mb-4 bg-light rounded">
       <div class="card-columns">
 
