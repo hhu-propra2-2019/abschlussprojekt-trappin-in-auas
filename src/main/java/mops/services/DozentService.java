@@ -26,13 +26,13 @@ public class DozentService implements IDozentService {
 
   public List<Bewerber> getBewerbungenMitPraeferenz(List<Bewerber> alleBewerber, String dozent) {
     return alleBewerber.stream()
-        .filter(x -> dozentPraeferenzService.getDozentPraeferenz(x.getErstelltVon(), dozent) > -1)
+        .filter(x -> dozentPraeferenzService.getDozentPraeferenz(x.getKennung(), dozent) > -1)
         .collect(Collectors.toList());
   }
 
   public List<Bewerber> getBewerbungenOhnePraeferenz(List<Bewerber> alleBewerber, String dozent) {
     return alleBewerber.stream()
-        .filter(x -> dozentPraeferenzService.getDozentPraeferenz(x.getErstelltVon(), dozent) <= -1)
+        .filter(x -> dozentPraeferenzService.getDozentPraeferenz(x.getKennung(), dozent) <= -1)
         .collect(Collectors.toList());
   }
 }

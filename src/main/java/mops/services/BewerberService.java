@@ -1,12 +1,11 @@
 package mops.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import mops.domain.database.dto.BewerberDTO;
-import mops.domain.database.dto.ModulAuswahlDTO;
-import mops.domain.models.Bewerber;
-import mops.domain.models.Dozent;
+import mops.domain.database.dto.*;
+import mops.domain.models.*;
 
 import org.springframework.stereotype.Service;
 
@@ -26,11 +25,22 @@ public class BewerberService implements IBewerberService {
     this.modelService = modelService;
   }
 
+  public Bewerber initialiseBewerber(){
+    Bewerber b = new Bewerber(new Karriere(), new Personalien(), new Praeferenzen());
+    b.getPraeferenzen().setModulAuswahl(new ArrayList<>()); // avoid list beeing null errors
+    b.getPraeferenzen().getModulAuswahl().add(new ModulAuswahl());
+    return b;
+  }
+
   @Override
   public void addBewerber(Bewerber b) {
     BewerberDTO bewerberDTO = mappingService.load(b);
-    System.out.println("bewerberDTO erstellt:");
-    System.out.println(bewerberDTO);
+    bewerberRepository.save(bewerberDTO);
+  }
+
+  public void addBewerber(Bewerber b, String kennung) {
+    b.setKennung(kennung);
+    BewerberDTO bewerberDTO = mappingService.load(b);
     bewerberRepository.save(bewerberDTO);
   }
 
