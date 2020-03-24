@@ -36,7 +36,7 @@ public class DTOService implements IDTOService {
   }
 
   public ModulAuswahlDTO load(ModulAuswahl modulAuswahl) {
-    return new ModulAuswahlDTO(load(modulAuswahl.getModul()), modulAuswahl.getPrioritaet(),modulAuswahl.getNote(), modulAuswahl.Beruf());
+    return new ModulAuswahlDTO(load(modulAuswahl.getModul()), modulAuswahl.getPrioritaet(),modulAuswahl.getNote(), modulAuswahl.getBeruf());
   }
 
   public AdresseDTO load(Adresse adresse){
@@ -75,8 +75,8 @@ public class DTOService implements IDTOService {
     List<VerteilungDTO> verteiltAn = (bewerber.getVerteiltAn() == null) ? null : load(bewerber.getVerteiltAn());
     List<DozentPraeferenzDTO> dozentPraeferenz = (bewerber.getDozentPraeferenz() == null) ? null : loadDozentPraeferenzList(bewerber.getDozentPraeferenz());
     BewerberDTO bewerberDTO = new BewerberDTO(load(bewerber.getPersonalien()), load(bewerber.getKarriere()),
-        load(bewerber.getPraeferenzen()), verteiltAn);
-    bewerberDTO.setErstelltVon(bewerber.getKennung());
+        load(bewerber.getPraeferenzen()), verteiltAn, dozentPraeferenz);
+    bewerberDTO.setKennung(bewerber.getKennung());
     return bewerberDTO;
   }
 
