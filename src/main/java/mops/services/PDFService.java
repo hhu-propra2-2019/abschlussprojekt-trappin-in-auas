@@ -1,214 +1,131 @@
 package mops.services;
-
-
-import mops.domain.database.dto.BewerberDTO;
 import mops.domain.models.*;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
-
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
-
 import java.io.File;
 
-
+import org.springframework.stereotype.Service;
+@SuppressWarnings("PMD.UnusedLocalVariable")
+@Service
 public class PDFService {
+  /*
+  for (PDField field2 : pDAcroForm.getFields()){
+    System.out.println(field2.getFullyQualifiedName());
+  }
+  */
 
-      /* for (PDField field2 : pDAcroForm.getFields()){
-                System.out.println(field2.getFullyQualifiedName());
-            }*/ //spuckt alle titelfelder aus
-
-
-
-    public String filedirectory(BewerberDTO bewerberDTO) throws Exception {
-        if(bewerberDTO.getKarriere().getFachAbschluss() == null) {
-            String path = "../../../resources/static/321_Antrag_Beschaeftigung_stud_Hilfskraefte.pdf";
-            return path;
-        }
-        else {
-            String path = "../../../resources/static/323_Antrag_Beschaeftigung_wiss_Hilfskraefte_mit_BA.pdf";
-            return path;
-        }
-
-
-
-
+  public String filedirectory(Bewerber bewerber) {
+    if(bewerber.getKarriere().getFachAbschluss() == null) {
+      return "../../../resources/static/321_Antrag_Beschaeftigung_stud_Hilfskraefte.pdf";
     }
-
-
-
-
-    public void fillStudentHilfskraft(BewerberDTO bewerberDTO,String filedirectory) throws Exception {
-
-        PDDocument pDDocument = PDDocument.load(new File(filedirectory));
-        try {
-            if (pDDocument.isEncrypted()) {
-                try {
-                    pDDocument.setAllSecurityToBeRemoved(true);
-                } catch (Exception e) {
-                    throw new Exception("The document is encrypted, and we can't decrypt it.", e);
-                }
-            }
-
-            PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
-
-
-            //befuellen der datei
-            PDField field = pDAcroForm.getField("Vorname");
-            field.setValue(bewerberDTO.getPersonalien().getVorname());
-            field = pDAcroForm.getField("Name");
-            field.setValue(bewerberDTO.getPersonalien().getName());
-            field = pDAcroForm.getField("Geburtsdatum");
-            field.setValue(bewerberDTO.getPersonalien().getGeburtsdatum().toString());
-            field = pDAcroForm.getField("Staatsangehörigkeit");
-            field.setValue(bewerberDTO.getPersonalien().getNationalitaet());
-            field = pDAcroForm.getField("Anschrift (Straße)");
-            field.setValue(bewerberDTO.getPersonalien().getAdresse().getStrasse());
-            field = pDAcroForm.getField("Anschrift (Hausnummer)");
-            field.setValue(bewerberDTO.getPersonalien().getAdresse().getHausnummer());
-            field = pDAcroForm.getField("Anschrift (PLZ)");
-            field.setValue(bewerberDTO.getPersonalien().getAdresse().getPLZ());
-            field = pDAcroForm.getField("Anschrift (ORT)");
-            field.setValue(bewerberDTO.getPersonalien().getAdresse().getWohnort());
-
-            field = pDAcroForm.getField("Vertragsart");
-            field.setValue(pruefeVertragsart(bewerberDTO));
-
-            field = pDAcroForm.getField("Stunden");
-            field.setValue(bewerberDTO.getPraeferenzen().getMinWunschStunden() + " - " + bewerberDTO.getPraeferenzen().getMaxWunschStunden());
-            field = pDAcroForm.getField("Immatrikulation");
-            field.setValue(pruefeStatus(bewerberDTO));
-            field = pDAcroForm.getField("Studiengang");
-            field.setValue(bewerberDTO.getKarriere().getImmartikulationsStatus().getFachrichtung());
-
-            field = pDAcroForm.getField("Bemerkung zum Antrag");
-            field.setValue("On");
-            field = pDAcroForm.getField("Bemerkung zum Antrag1");
-            field.setValue(bewerberDTO.getKarriere().getArbeitserfahrung() + "/n" + bewerberDTO.getPraeferenzen().getKommentar() + "/n" + bewerberDTO.getPraeferenzen().getEinschraenkungen());
-
-            //Speichern der Datei
-            pDDocument.save("../../../resources/static/output.pdf");
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        } finally{
-            pDDocument.close();
-        }
-
-
-
+    else {
+      return "../../../resources/static/323_Antrag_Beschaeftigung_wiss_Hilfskraefte_mit_BA.pdf";
     }
+  }
 
-
-
-    public void fillWissenHilfskraft(BewerberDTO bewerberDTO, String filedirectory) throws Exception {
-        PDDocument pDDocument = PDDocument.load(new File(filedirectory));
-        try {
-
-            if (pDDocument.isEncrypted()) {
-                try {
-                    pDDocument.setAllSecurityToBeRemoved(true);
-                } catch (Exception e) {
-                    throw new Exception("The document is encrypted, and we can't decrypt it.", e);
-                }
-            }
-            PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
-
-
-
-            //befuellen der Datei
-            PDField field = pDAcroForm.getField("Vorname");
-            field.setValue(bewerberDTO.getPersonalien().getVorname());
-            field = pDAcroForm.getField("Name");
-            field.setValue(bewerberDTO.getPersonalien().getName());
-            field = pDAcroForm.getField("Geburtsdatum");
-            field.setValue(bewerberDTO.getPersonalien().getGeburtsdatum().toString());
-            field = pDAcroForm.getField("Staatsangehörigkeit");
-            field.setValue(bewerberDTO.getPersonalien().getNationalitaet());
-            field = pDAcroForm.getField("Anschrift (Straße)");
-            field.setValue(bewerberDTO.getPersonalien().getAdresse().getStrasse());
-            field = pDAcroForm.getField("Anschrift (Hausnummer)");
-            field.setValue(bewerberDTO.getPersonalien().getAdresse().getHausnummer());
-            field = pDAcroForm.getField("Anschrift (PLZ)");
-            field.setValue(bewerberDTO.getPersonalien().getAdresse().getPLZ());
-            field = pDAcroForm.getField("Anschrift (ORT)");
-            field.setValue(bewerberDTO.getPersonalien().getAdresse().getWohnort());
-
-
-            field = pDAcroForm.getField("Vertragsart");
-            field.setValue(pruefeVertragsart(bewerberDTO));
-
-
-            field = pDAcroForm.getField("Stunden");
-            field.setValue(bewerberDTO.getPraeferenzen().getMinWunschStunden() + " - " + bewerberDTO.getPraeferenzen().getMaxWunschStunden());
-            field = pDAcroForm.getField("Immatrikulation");
-            field.setValue(pruefeStatus(bewerberDTO));
-            field = pDAcroForm.getField("Studiengang");
-            field.setValue(bewerberDTO.getKarriere().getImmartikulationsStatus().getFachrichtung());
-
-            field = pDAcroForm.getField("Bemerkung zum Antrag");
-            field.setValue("On");
-            field = pDAcroForm.getField("Bemerkung zum Antrag1");
-            field.setValue(bewerberDTO.getKarriere().getArbeitserfahrung() + "/n" + bewerberDTO.getPraeferenzen().getKommentar() + "/n" + bewerberDTO.getPraeferenzen().getEinschraenkungen());
-            /*
-            field = pDAcroForm.getField("Schilderung der auszuübenden Tätigkeit");
-            field.setValue(bewerberDTO.getPraeferenzen().getBerufModul().getBeruf().toString());
-
-             */
-            //String string = "";
-            //for ()
-
-
-
-
-
-            //Speichern der Datei
-            pDDocument.save("../../../resources/static//output2.pdf");
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        }finally{
-            pDDocument.close();
-        }
-
-
+  public void checkEncryption(PDDocument pdDocument, String fileDirectory) throws Exception {
+    if (pdDocument.isEncrypted()) {
+      try {
+        pdDocument.setAllSecurityToBeRemoved(true);
+      } catch (Exception e) {
+        throw new Exception("The document is encrypted, and we can't decrypt it.", e);
+      }
     }
+  }
 
-
-
-
-    public String pruefeStatus(BewerberDTO bewerberDTO){
-        if(bewerberDTO.getKarriere().getImmartikulationsStatus().isStatus() == true){
-            return "On";
+  public void fillPDF(Bewerber bewerber, String fileDirectory) throws Exception {
+    try (PDDocument pDDocument = PDDocument.load(new File(fileDirectory))) {
+      try {
+        checkEncryption(pDDocument, fileDirectory);
+        loadPDFFelder(bewerber, pDDocument);
+      } catch (Exception e) {
+        e.printStackTrace();
+      } finally {
+        if (hatAbschluss(bewerber)) {
+          pDDocument.save("../../../resources/static//output2.pdf");
+        } else {
+          pDDocument.save("../../../resources/static//output.pdf");
         }
-        return "Off";
-
-
+        pDDocument.close();
+      }
     }
+  }
+  public void loadPDFFelder(Bewerber bewerber, PDDocument pdDocument) throws Exception{
+    PDAcroForm pDAcroForm = pdDocument.getDocumentCatalog().getAcroForm();
 
+    PDField field = pDAcroForm.getField("Vorname");
+    field.setValue(bewerber.getPersonalien().getVorname());
+    field = pDAcroForm.getField("Name");
+    field.setValue(bewerber.getPersonalien().getName());
+    field = pDAcroForm.getField("Geburtsdatum");
+    field.setValue(bewerber.getPersonalien().getGeburtsdatum().toString());
+    field = pDAcroForm.getField("Staatsangehörigkeit");
+    field.setValue(bewerber.getPersonalien().getNationalitaet());
+    field = pDAcroForm.getField("Anschrift (Straße)");
+    field.setValue(bewerber.getPersonalien().getAdresse().getStrasse());
+    field = pDAcroForm.getField("Anschrift (Hausnummer)");
+    field.setValue(bewerber.getPersonalien().getAdresse().getHausnummer());
+    field = pDAcroForm.getField("Anschrift (PLZ)");
+    field.setValue(bewerber.getPersonalien().getAdresse().getPLZ());
+    field = pDAcroForm.getField("Anschrift (ORT)");
+    field.setValue(bewerber.getPersonalien().getAdresse().getWohnort());
 
-    public String pruefeVertragsart(BewerberDTO bewerberDTO) {
-        if (bewerberDTO.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.WEITERBESCHAEFTIGUNG){
+    field = pDAcroForm.getField("Vertragsart");
+    field.setValue(pruefeVertragsart(bewerber));
 
-            return "Weiterbeschäftigung";
+    field = pDAcroForm.getField("Stunden");
+    field.setValue(
+        bewerber.getPraeferenzen().getMinWunschStunden() + " - " + bewerber.getPraeferenzen()
+            .getMaxWunschStunden());
+    field = pDAcroForm.getField("Immatrikulation");
+    field.setValue(pruefeStatus(bewerber));
+    field = pDAcroForm.getField("Studiengang");
+    field.setValue(bewerber.getKarriere().getImmartikulationsStatus().getFachrichtung());
 
+    field = pDAcroForm.getField("Bemerkung zum Antrag");
+    field.setValue("On");
+    field = pDAcroForm.getField("Bemerkung zum Antrag1");
+    field.setValue(
+        bewerber.getKarriere().getArbeitserfahrung() + "/n" + bewerber.getPraeferenzen()
+            .getKommentar() + "/n" + bewerber.getPraeferenzen().getEinschraenkungen());
 
-        }
-        else if(bewerberDTO.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.NEUEINSTIEG){
-
-            return "Einstellung";
-
-        }
-
-        else{
-
-            return "Off";
-        }
-
+    if(hatAbschluss(bewerber)) {
+      field = pDAcroForm.getField("Schilderung der auszuübenden Tätigkeit");
+      field.setValue(berufModul(bewerber));
     }
+  }
 
+  public boolean hatAbschluss(Bewerber bewerber) {
+    return bewerber.getKarriere().getFachAbschluss() != null;
+  }
+
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
+  public String berufModul(Bewerber bewerber){
+    String berufModul = "";
+    for (ModulAuswahl modulAuswahl : bewerber.getPraeferenzen().getModulAuswahl()) {
+      berufModul =
+          berufModul + " " + modulAuswahl.getModul().getModulName() + ": " + modulAuswahl.getBeruf().toString()
+              + "\n";
+    }
+    return berufModul;
+  }
+
+  public String pruefeStatus(Bewerber bewerber){
+    if(bewerber.getKarriere().getImmartikulationsStatus().isStatus()){
+      return "On";
+    }
+    return "Off";
+  }
+
+  public String pruefeVertragsart(Bewerber bewerber) {
+    if (bewerber.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.WEITERBESCHAEFTIGUNG){
+      return "Weiterbeschäftigung";
+    }
+    else if(bewerber.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.NEUEINSTIEG){
+      return "Einstellung";
+    } else{
+      return "Off";
+    }
+  }
 }
