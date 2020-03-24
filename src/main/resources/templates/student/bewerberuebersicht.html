@@ -25,8 +25,7 @@
 
 
   <main th:fragment="bodycontent" style="background-color: #EAEAEA; padding: 2%">
-
-    <div class="container col-12 shadow p-3 mb-5 bg-light rounded">
+    <div class="container col-12 shadow p-3 mb-5 bg-light rounded" th:unless="${bewerbungExists}">
       <h1>Bewerbungsübersicht</h1>
       <p class="row" style="margin-left: 0rem;">
         Scheinbar hast du noch keine offene bewerbung. 
@@ -36,6 +35,19 @@
       </p>
       <div class="row justify-content-end" style="margin-right: 0rem;">
         <a th:href="@{./bewerber/bewerbung}" class="btn btn-primary">Bewerben</a>
+      </div>
+    </div>
+
+    <div class="container col-12 shadow p-3 mb-5 bg-light rounded" th:if="${bewerbungExists}">
+      <h1>Bewerbungsübersicht</h1>
+      <p class="row" style="margin-left: 0rem;">
+        Du hast eine offene Bewerbung. 
+      </p>
+      <p class="row" style="margin-left: 0rem;">
+        Du kannst diese editieren solange sie nicht von den korrektoren eingesehen wurde indem du auf folgenden button klickst
+      </p>
+      <div class="row justify-content-end" style="margin-right: 0rem;">
+        <a th:href="@{./editieren}" class="btn btn-primary">Editieren</a>
       </div>
     </div>
   </main>

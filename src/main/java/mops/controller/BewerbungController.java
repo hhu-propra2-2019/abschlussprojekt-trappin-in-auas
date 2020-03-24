@@ -5,7 +5,6 @@ import static mops.authentication.account.keycloak.KeycloakRoles.*;
 import java.util.Set;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,18 +31,6 @@ public class BewerbungController {
   public String mainpage(Model model, KeycloakAuthenticationToken token) {
     Set<String> tokenRoles = token.getAccount().getRoles();
     return "redirect:/bewerbung1"+keycloakRoleService.getHighestPrivilegeRedirect(tokenRoles);
-  }
-
-  /**
-   * Students dashboard. Login as "studentin" required.
-   * @param model injected, Model for Thymeleaf interaction
-   * @param token injected, present, if user is logged in
-   * @return studentMainpage html template
-   */
-  @GetMapping("/student")
-  @Secured(ROLE_STUDENT)
-  public String getStudentMainpage(Model model, KeycloakAuthenticationToken token) {
-    return "student/studentMainpage";
   }
 
   /**
