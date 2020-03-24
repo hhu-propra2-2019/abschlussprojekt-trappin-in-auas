@@ -40,7 +40,7 @@ public class BossController {
   public String getModule(Model m, KeycloakAuthenticationToken token) {
     m.addAttribute("modul", new Modul());
     m.addAttribute("modulListe", modulService.findAllModule());
-    return "./modulsetup";
+    return "boss/modulsetup";
   }
 
   /**

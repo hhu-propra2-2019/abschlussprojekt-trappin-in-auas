@@ -15,6 +15,8 @@ public class BewerberDTO {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
+
   private String kennung;
 
   @OneToOne(cascade = CascadeType.ALL)
@@ -30,7 +32,7 @@ public class BewerberDTO {
   private PraeferenzenDTO praeferenzen;
 
   @OneToMany(cascade = CascadeType.ALL)
-  @JoinColumn(name = "bewerber", referencedColumnName = "kennung")
+  @JoinColumn(name = "bewerber", referencedColumnName = "id")
   private List<VerteilungDTO> verteiltAn;
 
   public BewerberDTO(PersonalienDTO personalien, KarriereDTO karriere, PraeferenzenDTO praeferenzen,

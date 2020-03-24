@@ -44,6 +44,6 @@ public class BewerberController {
   @Secured({ "ROLE_studentin" })
   public String bewirbabschicken(Model model, Bewerber bewerber, KeycloakAuthenticationToken token) {
     bewerberService.addBewerber(bewerber, token.getName());
-    return "redirect:./";
+    return "redirect:./bewerbung";
   }
 }

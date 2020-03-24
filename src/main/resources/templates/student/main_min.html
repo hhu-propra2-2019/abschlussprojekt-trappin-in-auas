@@ -66,7 +66,7 @@
 
   <main th:fragment="bodycontent" style="background-color: #EAEAEA; padding: 2%">
 
-    <form th:action="@{/bewirbabschicken}" method="POST">
+    <form th:action="@{./bewerbungabschicken}" method="POST">
       <div class="container">
         <h1>Bewerbungsformular</h1>
       </div>
@@ -80,9 +80,6 @@
           <label for="nachnameinput">
             Nachname:</label>
           <input type="text" class="form-control" required th:field="*{name}" maxlength="30" />
-
-          <label>Uni-Kennung:</label>
-          <input type="text" class="form-control" required th:field="*{unikennung}" maxlength="30" />
 
           <label>Geburtsdatum und Alter:</label>
           <div class="input-group">
