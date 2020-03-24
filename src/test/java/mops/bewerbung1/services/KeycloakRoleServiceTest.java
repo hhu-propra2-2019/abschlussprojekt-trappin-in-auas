@@ -24,28 +24,28 @@ public class KeycloakRoleServiceTest {
 
   @Test
   public void studentRedirectPfad(){
-    assertEquals(keycloakRoleService.getRedirect("studentin"), "/bewerber");
+    assertEquals("/bewerber", keycloakRoleService.getRedirect("studentin"));
   }
 
   @Test
   public void verteilerRedirectPfad(){
-    assertEquals(keycloakRoleService.getRedirect("verteiler"), "/verteiler");
+    assertEquals("/verteiler", keycloakRoleService.getRedirect("verteiler"));
   }
 
   @Test
   public void setupRedirectPfad(){
-    assertEquals(keycloakRoleService.getRedirect("setup"), "/setup");
+    assertEquals("/setup", keycloakRoleService.getRedirect("setup"));
   }
 
   @Test
   public void dozentRedirectPfad(){
-    assertEquals(keycloakRoleService.getRedirect("orga"), "/dozent");
+    assertEquals("/dozent", keycloakRoleService.getRedirect("orga"));
   }
 
   @Test
   public void highestPrivilege(){
     Set<String> tokenRoles = Stream.of("studentin", "orga", "verteiler", "setup").collect(Collectors.toSet());
 
-    assertEquals(keycloakRoleService.getHighestPrivilegeRedirect(tokenRoles), "/setup");
+    assertEquals("/setup", keycloakRoleService.getHighestPrivilegeRedirect(tokenRoles));
   }
 }
