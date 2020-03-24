@@ -84,7 +84,7 @@ public class BewerberService implements IBewerberService {
   }
 
   private boolean modulAuswahlContainsDozent(List<ModulAuswahlDTO> auswahlDTO, String dozentKennung){
-    return auswahlDTO.stream().anyMatch(x -> x.getModul().getDozentMail().equals(dozentKennung));
+    return auswahlDTO.stream().anyMatch(x -> x.getModul().getDozentName().equals(dozentKennung));
   }
 
   

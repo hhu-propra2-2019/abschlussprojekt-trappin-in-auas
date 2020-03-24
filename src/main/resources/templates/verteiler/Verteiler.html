@@ -46,13 +46,13 @@
             <th scope="row">Nicht verteilte Bewerbungen</th>
             <td th:text="${anzahlOffeneBewerbungen}">0</td>
             <td><a href="/bewerbung1/verteiler/uebersicht/offene" class="btn"
-                   th:classappend="${anzeige == 0} ? btn-primary : btn-outline-primary">Alle Anzeigen</a></td>
+                   th:classappend="${anzeigeModus == 'offene'} ? btn-primary : btn-outline-primary">Alle Anzeigen</a></td>
           </tr>
           <tr>
             <th scope="row">Verteilte Bewerbungen</th>
             <td th:text="${anzahlZugewieseneBewerbungen}">0</td>
             <td><a href="/bewerbung1/verteiler/uebersicht/verteilte" class="btn"
-                   th:classappend="${anzeige == 1} ? btn-primary : btn-outline-primary">Alle Anzeigen</a></td>
+                   th:classappend="${anzeigeModus == 'verteilte'} ? btn-primary : btn-outline-primary">Alle Anzeigen</a></td>
           </tr>
           </tbody>
         </table>
@@ -68,9 +68,8 @@
             <h5 th:text="${bewerber.personalien.vorname + ' ' + bewerber.personalien.name}">Vorname Nachname</h5>
           </div>
 
-          <td th:switch="${anzeige}">
-
-            <div class="card-body" th:case="'0'">
+          <td>
+            <div class="card-body" th:if="${anzeigeModus} eq 'uebersicht' or ${anzeigeModus} eq 'offene'">
               <h5>Bewerberpräferenzen:</h5>
               <ul>
                 <li th:each="praeferenz : ${bewerber.praeferenzen.modulAuswahl}"
@@ -82,12 +81,12 @@
               <p class="card-text">- Datenbank Prio = 2</p>
               <p class="card-text">- ProPra2 Prio = 1</p>
               <p>
-                <button type="button" class="btn btn-light btn-block">Bewerbungsansicht</button>
+                <a th:href="@{/bewerbung1/verteiler/details/{kennung}(kennung=${bewerber.kennung})}" class="btn btn-light btn-block">Detailansicht</a>
               </p>
               <h6>Fach zuteilen:</h6>
 
               <form method="POST" th:action="@{/bewerbung1/verteiler/verteile}">
-                <input type="hidden" name="bewerberKennung" th:value="${bewerber.personalien.unikennung}">
+                <input type="hidden" name="bewerberKennung" th:value="${bewerber.kennung}">
 
                 <p>
                   <select class="form-control" id="exampleFormControlSelect2" name="modulName">
@@ -102,7 +101,7 @@
               </form>
             </div>
 
-            <div class="card-body" th:case="'1'">
+            <div class="card-body" th:if="${anzeigeModus} eq 'verteilte'">
               <h7>Bewerberpräferenzen:</h7>
               <ul>
                 <li th:each="praeferenz : ${bewerber.praeferenzen.modulAuswahl}"
@@ -119,8 +118,16 @@
 
               <h5>Zugewiesen an:</h5>
               <ul>
-                <li th:each="dozent : ${bewerber.verteiltAn}" th:text="${dozent.dozentName}"></li>
+                <li th:each="dozent : ${bewerber.verteiltAn}">
+                  <p th:text="${dozent.dozentName}"></p>
+                  <form method="POST" th:action="@{/bewerbung1/verteiler/verteilungentfernen}">
+                    <input type="hidden" name="bewerber" th:value="${bewerber.kennung}" />
+                    <input type="hidden" name="dozentMail" th:value="${dozent.dozentMail}" />
+                    <button type="submit" class="btn btn-danger">Zuordnung entfernen</button>
+                  </form>
+                </li>
               </ul>
+
             </div>
           </td>
         </div>
