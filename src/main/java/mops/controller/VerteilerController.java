@@ -90,7 +90,7 @@ public class VerteilerController {
   @GetMapping("/details/{kennung}")
   public String detailansicht(Model model, @PathVariable String kennung) {
     model.addAttribute("bewerber", bewerberService.findBewerberByKennung(kennung));
-    return "";
+    return "bewerbungsdetails/details";
   }
 
   @Secured(ROLE_VERTEILER)
