@@ -3,6 +3,7 @@ package mops.domain.database.dto;
 import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mops.domain.models.Beruf;
 
 
 @Data
@@ -20,9 +21,14 @@ public class ModulAuswahlDTO {
     private int prioritaet;
     private double note;
 
-    public ModulAuswahlDTO(ModulDTO modul, int prioritaet) {
+    @Enumerated(EnumType.STRING)
+    private Beruf beruf;
+
+    public ModulAuswahlDTO(ModulDTO modul, int prioritaet, double note, Beruf beruf) {
         this.modul = modul;
         this.prioritaet = prioritaet;
+        this.note = note;
+        this.beruf = beruf;
     }
 
 }

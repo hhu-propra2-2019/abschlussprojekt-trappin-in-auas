@@ -1,6 +1,7 @@
 package mops.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import mops.domain.database.dto.ModulDTO;
 import mops.domain.models.Modul;
@@ -14,11 +15,14 @@ public class ModulService implements IModulService {
 
   private transient ModulRepository modulRepository;
 
+  @Autowired
   private transient ModelService modelService;
 
-  public ModulService(ModulRepository modulRepository, ModelService modelService) {
+  @Autowired
+  private transient DTOService dtoService;
+
+  public ModulService(ModulRepository modulRepository) {
     this.modulRepository = modulRepository;
-    this.modelService = modelService;
   }
 
   /**
@@ -27,7 +31,7 @@ public class ModulService implements IModulService {
    */
 
   public void addModul(Modul modul) {
-    modulRepository.save(modelService.loadModulDTO(modul));
+    modulRepository.save(dtoService.load(modul));
   }
 
   @Override
@@ -36,24 +40,18 @@ public class ModulService implements IModulService {
   }
 
   /**
-   * Gibt Modul mit gegebener Id zurück
-   * @param id id des Moduls
-   * @return Modul mit id
-   */
-  @Override
-  public ModulDTO findModulById(Long id) {
-    return modulRepository.findModulById(id);
-  }
-
-  /**
    * Listet alle Module in der Datenbank auf
    * @return Liste mit allen Modulen
    */
   @Override
-  public List<ModulDTO> findAllModule() {
-    return modulRepository.findAll();
+  public List<Modul> findAllModule() {
+    return modelService.loadModulList(modulRepository.findAll());
   }
 
+
+  public Modul findModulByModulName(String ModulName){
+    return modelService.loadModul(modulRepository.findModulByModulName(ModulName));
+  }
 
   public void deleteModulByName(String modulName) {
     modulRepository.deleteModulByName(modulName);

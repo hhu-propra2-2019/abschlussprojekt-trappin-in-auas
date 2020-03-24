@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
 
+import mops.domain.services.IModelService;
 import org.springframework.stereotype.Service;
 
-import mops.domain.services.IModelService;
 
 @Service
 public class ModelService implements IModelService {
@@ -26,12 +26,26 @@ public class ModelService implements IModelService {
       bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()));
   }
 
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis") // Fix gradle bug: False positive
+  // https://github.com/pmd/pmd/issues/387
+  public List<Bewerber> loadBewerberList(List<BewerberDTO> bewerberDTOList) {
+    List<Bewerber> bewerberList = new LinkedList<>();
+    for (BewerberDTO bewerberDTO : bewerberDTOList) {
+      bewerberList.add(load(bewerberDTO));
+    }
+    return bewerberList;
+  }
+
+
   public Dozent load(VerteilungDTO verteilungDTO){
     return new Dozent(verteilungDTO.getDozentKennung(), verteilungDTO.getDozentName());
   }
 
   @Override
   public Karriere load(KarriereDTO karriereDTO) {
+    if(karriereDTO == null){
+      return null;
+    }
     return new Karriere(karriereDTO.getArbeitserfahrung(), load(karriereDTO.getImmartikulationsStatus()),
         load(karriereDTO.getFachAbschluss()));
   }
@@ -47,13 +61,16 @@ public class ModelService implements IModelService {
 
   @Override
   public ModulAuswahl load(ModulAuswahlDTO modulAuswahlDTO) {
+    if(modulAuswahlDTO == null){
+      return null;
+    }
     return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(),
-        modulAuswahlDTO.getNote());
+        modulAuswahlDTO.getNote(), modulAuswahlDTO.getBeruf());
   }
 
   @Override
   public Personalien load(PersonalienDTO pDTO) {
-    if (pDTO == null) {
+    if(pDTO == null){
       return null;
     }
     Adresse adresse = loadAdresse(pDTO);
@@ -61,35 +78,21 @@ public class ModelService implements IModelService {
         pDTO.getAlter(), pDTO.getGeburtsort(), pDTO.getNationalitaet());
   }
 
-  public ModulAuswahl loadModulAuswahl(ModulAuswahlDTO modulAuswahlDTO) {
-    return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(),
-        modulAuswahlDTO.getNote());
-  }
-
   public Adresse loadAdresse(PersonalienDTO personalienDTO) {
     return new Adresse(personalienDTO.getAdresse().getPLZ(), personalienDTO.getAdresse().getWohnort(),
-        personalienDTO.getAdresse().getStraße(), personalienDTO.getAdresse().getHausnummer());
-  }
-
-  public BerufModul loadBerufModul(BerufModulDTO berufModulDTO) {
-    return new BerufModul(berufModulDTO.getBeruf(), loadModul(berufModulDTO.getModul()));
-
+        personalienDTO.getAdresse().getStrasse(), personalienDTO.getAdresse().getHausnummer());
   }
 
   @Override
   public Praeferenzen load(PraeferenzenDTO pDTO) {
     List<ModulAuswahl> modulAuswahl = pDTO.getModulAuswahl().stream().map(this::load).collect(Collectors.toList());
     return new Praeferenzen(pDTO.getMaxWunschStunden(), pDTO.getMinWunschStunden(), modulAuswahl, pDTO.getKommentar(),
-        pDTO.getEinstiegTyp(), pDTO.getEinschraenkungen(), loadBerufModul(pDTO.getBerufModul()),
+        pDTO.getEinstiegTyp(), pDTO.getEinschraenkungen(),
         pDTO.getTutorenSchulungTeilnahme());
   }
 
   public Modul loadModul(ModulDTO modulDTO) {
-    return new Modul(modulDTO.getModul(), new Dozent(modulDTO.getDozentMail(), modulDTO.getDozentName()));
-  }
-
-  public ModulDTO loadModulDTO(Modul modul) {
-    return new ModulDTO(modul.getModulName(), modul.getDozent().getDozentMail(), modul.getDozent().getDozentName());
+    return new Modul(modulDTO.getModulName(), new Dozent(modulDTO.getDozentMail(), modulDTO.getDozentName()));
   }
 
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis") // Fix gradle bug: False positive

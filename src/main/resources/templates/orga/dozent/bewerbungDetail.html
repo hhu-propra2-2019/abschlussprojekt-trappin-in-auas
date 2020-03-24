@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Bewerbungs-Einsicht</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="cards.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 shadow p-3 mb-5 bg-light rounded">
+        <h1>Bewerber-Einsicht</h1>
+        <ul>
+          <div>
+            <h3>Persönliche Daten:</h3>
+            <p th:text="${bewerber.personalien.vorname}">Vorname: </p>
+            <p th:text="variable">Nachname: </p>
+            <p th:text="variable">Uni-Kennung: </p>
+            <p th:text="variable">Geburtsdatum und Alter: </p>
+
+            <hr>
+
+            <h4>Adresse:</h4>
+            <p th:text="variable">Straße: </p>
+            <p th:text="variable">Postleitzahl: </p>
+            <p th:text="variable">Wohnort: </p>
+
+          </div>
+        </ul>
+      </div>
+
+      <div class="col-12 shadow p-3 mb-5 bg-light rounded">
+        <ul>
+          <h3>Gewünschte Fächer:</h3>
+          <tr th:each="auswahl, itemStat : *{modulAuswahl}">
+            <td><span th:text="${itemStat}"> Fach </span></td>
+          </tr>
+
+          <hr>
+
+          <h3>Art der Beschäftigung:</h3>
+          <p th:text="variable">Neueinstellung: </p>
+
+          <hr>
+
+          <h3>Anzahl der Stunden</h3>
+          <p th:text="variable">Minimum: und Maximum: an Arbeitsstunden </p>
+
+          <hr>
+
+          <h3>Einschränkungen</h3>
+          <!-- Falls keine Behinderung existiert: "Keine." Anzeigen -->
+          <tr th:if="${value.empty}">
+            <td colspan="2"> Keine. </td>
+          </tr>
+          <tr th:if="${value}">
+            Behinderung
+          </tr>
+
+          <hr>
+
+          <h3>Haben sie bereits eine Tutorenschulung absolviert?</h3>
+          <p th:text="variable">Ich möchte an der Tutorenschulung teilnehmen. </p>
+
+          <hr>
+
+          <h3>Ihr Reiz Korrektor zu werden und Herrausforderungen:</h3>
+          <p th:text="variable"> Ihr Text. </p>
+
+          <hr>
+
+          <h3>Einschränkungen</h3>
+          <!-- Falls keine Behinderung existiert: "Keine." Anzeigen -->
+          <tr th:if="${value.empty}">
+            <td colspan="2"> Nicht immatrikuliert </td>
+          </tr>
+          <tr th:if="${value}">
+            Fach
+          </tr>
+
+          <hr>
+
+          <h3>Bisherige Erfahrungen, Schulung und Nachricht an uns:</h3>
+          <p th:text="variable"> Ihr Text. </p>
+
+          <hr>
+
+          <h3>Was ist ihr bisher höchster Uni-Abschluss</h3>
+          <p th:text="variable"> Ihr Text. </p>
+          <p th:text="variable"> Fach </p>
+          <p th:text="variable"> Uni </p>
+
+
+        </ul>
+      </div>
+
+
+    </div>
+  </div>
+</div>
