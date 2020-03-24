@@ -31,7 +31,7 @@
         <div class="card-body">
           <h5 class="card-title" th:text="${modul.modulName}" >Programmierung</h5>
           <p class="card-text" th:text="${modul.dozent.dozentName}">Conrad213</p>
-          <form method="POST" th:action="@{/bewerbung1/boss/delete}">
+          <form method="POST" th:action="@{/bewerbung1/setup/delete}">
             <input type="hidden" name="modulName" th:value="${modul.modulName}">
             <button type="submit" class="btn btn-primary">Entfernen</button>
           </form>
@@ -43,7 +43,7 @@
 
   <div class="container">
     <h3>Modulsetup</h3>
-    <form method="POST" th:action="@{./postmodule}" th:object="${modul}">
+    <form method="POST" th:action="@{postmodule}" th:object="${modul}">
       <div class="form-group">
         <label>Modulbezeichnung</label>
         <input type="text" class="form-control col-sm-10" placeholder="Z.B.: Programmierung" th:field="*{modulName}"/>
