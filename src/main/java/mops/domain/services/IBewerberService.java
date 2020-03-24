@@ -3,6 +3,7 @@ package mops.domain.services;
 import java.util.List;
 
 import mops.domain.database.dto.BewerberDTO;
+import mops.domain.database.dto.ModulAuswahlDTO;
 import mops.domain.models.Bewerber;
 import mops.domain.models.Dozent;
 
@@ -16,4 +17,7 @@ public interface IBewerberService {
     void verteile(String kennung, Dozent dozent);
     List<BewerberDTO> findAlleVerteilteBewerber(List<BewerberDTO> alleBewerber);
     List<Bewerber> findBewerberFuerDozent(String dozentKennung);
+    List<BewerberDTO> findVerteilt();
+    List<BewerberDTO> findNichtVerteilt();
+
 }
