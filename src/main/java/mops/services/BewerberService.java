@@ -41,6 +41,12 @@ public class BewerberService implements IBewerberService {
   public void addBewerber(Bewerber b, String kennung) {
     b.setKennung(kennung);
     BewerberDTO bewerberDTO = mappingService.load(b);
+    BewerberDTO zuFindenderBewerber = bewerberRepository.findBewerberByKennung(kennung);
+
+    if(zuFindenderBewerber != null){
+      bewerberDTO.setId(zuFindenderBewerber.getId());
+    }
+
     bewerberRepository.save(bewerberDTO);
   }
 
@@ -87,5 +93,17 @@ public class BewerberService implements IBewerberService {
     return auswahlDTO.stream().anyMatch(x -> x.getModul().getDozentMail().equals(dozentKennung));
   }
 
+  public Bewerber findBewerberModelByKennung(String kennung) {
+    return modelService.load(bewerberRepository.findBewerberByKennung(kennung));
+  }
+
+  public Bewerber initialiseEditBewerber(String kennung){
+    Bewerber b = modelService.load(bewerberRepository.findBewerberByKennung(kennung));
+    return (b == null) ? new Bewerber(new Karriere(), new Personalien(), new Praeferenzen()) : b;
+  }
+
+  public boolean bewerbungExists(String kennung) {
+    return findBewerberModelByKennung(kennung) != null;
+  }
   
 }

@@ -2,6 +2,10 @@ package mops.bewerbung1.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,21 +24,28 @@ public class KeycloakRoleServiceTest {
 
   @Test
   public void studentRedirectPfad(){
-    assertEquals(keycloakRoleService.getRedirect("studentin"), "/bewerber");
+    assertEquals("/bewerber", keycloakRoleService.getRedirect("studentin"));
   }
 
   @Test
   public void verteilerRedirectPfad(){
-    assertEquals(keycloakRoleService.getRedirect("verteiler"), "/verteiler");
+    assertEquals("/verteiler", keycloakRoleService.getRedirect("verteiler"));
   }
 
   @Test
   public void setupRedirectPfad(){
-    assertEquals(keycloakRoleService.getRedirect("setup"), "/setup");
+    assertEquals("/setup", keycloakRoleService.getRedirect("setup"));
   }
 
   @Test
   public void dozentRedirectPfad(){
-    assertEquals(keycloakRoleService.getRedirect("orga"), "/dozent");
+    assertEquals("/dozent", keycloakRoleService.getRedirect("orga"));
+  }
+
+  @Test
+  public void highestPrivilege(){
+    Set<String> tokenRoles = Stream.of("studentin", "orga", "verteiler", "setup").collect(Collectors.toSet());
+
+    assertEquals("/setup", keycloakRoleService.getHighestPrivilegeRedirect(tokenRoles));
   }
 }

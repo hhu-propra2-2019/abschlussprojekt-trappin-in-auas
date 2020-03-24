@@ -3,7 +3,6 @@ package mops.controller;
 import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 
 import java.util.List;
-import mops.domain.database.dto.BewerberDTO;
 import mops.domain.models.Bewerber;
 import mops.domain.models.DozentPraeferenz;
 import mops.services.BewerberService;
@@ -17,7 +16,6 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,7 +35,7 @@ public class DozentController {
   @Autowired
   private transient ModelService modelService;
 
-  private transient final String bewerberAttribute = "bewerber";
+  private static final String BEWERBER_ATTRIBUTE = "bewerber";
 
   @Secured({ ROLE_ORGA })
   @GetMapping("/uebersicht")
@@ -50,9 +48,15 @@ public class DozentController {
     model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
     model.addAttribute(bewerberAttribute, nichtBearbeitet);
+    return "orga/dozent/ubersicht";
+  }
 
-    model.addAttribute("anzeigeModus", "uebersicht");
-    return "dozent/dozent";
+  @Secured({ ROLE_ORGA })
+  @PostMapping("/addPreference")
+  public String addPreference(Model model, KeycloakAuthenticationToken token, int praeferenz, String dozentKennung,
+      String bewerberKennung) {
+    dozentPraeferenzService.addPraeferenz(new DozentPraeferenz(dozentKennung, bewerberKennung, praeferenz));
+    return "redirect:./uebersicht";
   }
 
   @Secured({ ROLE_ORGA })

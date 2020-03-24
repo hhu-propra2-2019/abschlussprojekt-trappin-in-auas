@@ -4,7 +4,6 @@ import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_BOSS;
 
 import mops.services.DTOService;
 import mops.domain.models.Modul;
-import mops.services.ModelService;
 import mops.services.ModulService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/bewerbung1/boss")
+@RequestMapping("/bewerbung1/setup")
 public class BossController {
 
   @Autowired
   private transient ModulService modulService;
-
-  @Autowired
-  private transient ModelService mappingService;
 
   @Autowired
   private transient DTOService dtoService;
@@ -36,7 +32,7 @@ public class BossController {
    * @return modulesetup html template
    */
   @Secured(ROLE_BOSS)
-  @GetMapping("/modules")
+  @GetMapping("")
   public String getModule(Model m, KeycloakAuthenticationToken token) {
     m.addAttribute("modul", new Modul());
     m.addAttribute("modulListe", modulService.findAllModule());
@@ -54,7 +50,7 @@ public class BossController {
   @PostMapping("/postmodule")
   public String addModule(Model m, KeycloakAuthenticationToken token, Modul modul) {
     modulService.addModul(dtoService.load(modul));
-    return "redirect:./modules";
+    return "redirect:.";
   }
 
   /**
@@ -68,8 +64,7 @@ public class BossController {
   @PostMapping("/delete")
   public String deleteModule(Model m, KeycloakAuthenticationToken token,
       @RequestParam String modulName) {
-    System.out.println(modulName);
     modulService.deleteModulByName(modulName);
-    return "redirect:./modules";
+    return "redirect:.";
   }
 }

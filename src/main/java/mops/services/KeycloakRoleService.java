@@ -2,6 +2,7 @@ package mops.services;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,21 @@ public class KeycloakRoleService {
 
   public String getRedirect(String role){
     return roleRedirect.get(role);
+  }
+
+  public String getHighestPrivilegeRedirect(Set<String> tokenRoles) {
+    if(tokenRoles.contains("setup")){
+      return getRedirect("setup");
+    }
+    if(tokenRoles.contains("verteiler")){
+      return getRedirect("verteiler");
+    }
+    if(tokenRoles.contains("orga")){
+      return getRedirect("orga");
+    }
+    if(tokenRoles.contains("studentin")){
+      return getRedirect("studentin");
+    }
+    return "";
   }
 }
