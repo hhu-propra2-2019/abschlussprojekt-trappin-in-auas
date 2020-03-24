@@ -35,7 +35,7 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
       bewerberRepository.save(bewerberDTO);
 
     }
-    catch (NullPointerException e){
+    catch (Exception e) {
       return;
     }
 
@@ -47,6 +47,7 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
   }
 
   @Override
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
   public void deletePraeferenz(String bewerber, String dozentMail) {
     BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(bewerber);
     List<DozentPraeferenzDTO> matching = getMatchingDozentPraeferenz(bewerber, dozentMail);
@@ -76,6 +77,7 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
     return true;
   }
 
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
   private List<DozentPraeferenzDTO> getMatchingDozentPraeferenz(String bewerber, String dozentMail){
     BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(bewerber);
     List<DozentPraeferenzDTO> matching;
@@ -84,7 +86,7 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
           bewerberDTO.getDozentPraeferenz().stream()
               .filter(d -> d.getBewerber().equals(bewerber) && d.getDozentMail().equals(dozentMail))
               .collect(Collectors.toList());
-    }catch (NullPointerException e){
+    } catch (Exception e) {
       matching = Collections.emptyList();
     }
 
