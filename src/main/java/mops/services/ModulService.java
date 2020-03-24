@@ -1,6 +1,7 @@
 package mops.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import mops.domain.database.dto.ModulDTO;
 import mops.domain.models.Modul;
@@ -20,6 +21,7 @@ public class ModulService implements IModulService {
 
   public ModulService(ModulRepository modulRepository) {
     this.modulRepository = modulRepository;
+    this.modelService = modelService;
   }
 
   /**

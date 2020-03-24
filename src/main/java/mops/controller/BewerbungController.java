@@ -22,7 +22,7 @@ public class BewerbungController {
    * @return redirect to specific html template or error page
    */
   @GetMapping("")
-  @Secured({ROLE_ORGA, ROLE_STUDENT})
+  @Secured({ROLE_ORGA, ROLE_STUDENT, ROLE_BOSS, ROLE_VERTEILER})
   public String mainpage(Model model, KeycloakAuthenticationToken token) {
     Set<String> tokenRole = token.getAccount().getRoles();
 
