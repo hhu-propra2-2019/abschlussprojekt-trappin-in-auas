@@ -42,12 +42,14 @@
                 <tr>
                   <th scope="row">Nicht verteilte Bewerbungen</th>
                   <td th:text="${anzahlOffeneBewerbungen}">0</td>
-                  <td><button type="button" class="btn btn-light">Alle Anzeigen</button></td>
+                  <td><a href="/bewerbung1/verteiler/uebersicht/offene" class="btn"
+                              th:classappend="${anzeigeModus == 'offene'} ? btn-primary : btn-outline-primary">Alle Anzeigen</a>button</td>
                 </tr>
                 <tr>
                   <th scope="row">Verteilte Bewerbungen</th>
                   <td th:text="${anzahlZugewieseneBewerbungen}">0</td>
-                  <td><a href="/bewerbung1/verteiler/uebersicht/verteilte" class="btn btn-light">Alle Anzeigen</a></td>
+                  <td><a href="/bewerbung1/verteiler/uebersicht/verteilte" class="btn"
+                         th:classappend="${anzeigeModus == 'verteilte'} ? btn-primary : btn-outline-primary">Alle Anzeigen</a></td>
                 </tr>
               </tbody>
           </table>
