@@ -9,23 +9,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PDFService {
+  /*
+  for (PDField field2 : pDAcroForm.getFields()){
+    System.out.println(field2.getFullyQualifiedName());
+  }
+  */
 
-      /* for (PDField field2 : pDAcroForm.getFields()){
-                System.out.println(field2.getFullyQualifiedName());
-            }*/ //spuckt alle titelfelder aus
-
-  public String filedirectory(BewerberDTO bewerberDTO) throws Exception {
-    if(bewerberDTO.getKarriere().getFachAbschluss() == null) {
-      String path = "../../../resources/static/321_Antrag_Beschaeftigung_stud_Hilfskraefte.pdf";
-      return path;
+  public String filedirectory(Bewerber bewerber) {
+    if(bewerber.getKarriere().getFachAbschluss() == null) {
+      return "../../../resources/static/321_Antrag_Beschaeftigung_stud_Hilfskraefte.pdf";
     }
     else {
-      String path = "../../../resources/static/323_Antrag_Beschaeftigung_wiss_Hilfskraefte_mit_BA.pdf";
-      return path;
+      return "../../../resources/static/323_Antrag_Beschaeftigung_wiss_Hilfskraefte_mit_BA.pdf";
     }
   }
 
-  public void fillStudentHilfskraft(BewerberDTO bewerberDTO,String filedirectory) throws Exception {
+  public void fillStudentHilfskraft(Bewerber bewerber,String filedirectory) throws Exception {
     PDDocument pDDocument = PDDocument.load(new File(filedirectory));
     try {
       if (pDDocument.isEncrypted()) {
@@ -38,36 +37,36 @@ public class PDFService {
       PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
       //befuellen der datei
       PDField field = pDAcroForm.getField("Vorname");
-      field.setValue(bewerberDTO.getPersonalien().getVorname());
+      field.setValue(bewerber.getPersonalien().getVorname());
       field = pDAcroForm.getField("Name");
-      field.setValue(bewerberDTO.getPersonalien().getName());
+      field.setValue(bewerber.getPersonalien().getName());
       field = pDAcroForm.getField("Geburtsdatum");
-      field.setValue(bewerberDTO.getPersonalien().getGeburtsdatum().toString());
+      field.setValue(bewerber.getPersonalien().getGeburtsdatum().toString());
       field = pDAcroForm.getField("Staatsangehörigkeit");
-      field.setValue(bewerberDTO.getPersonalien().getNationalitaet());
+      field.setValue(bewerber.getPersonalien().getNationalitaet());
       field = pDAcroForm.getField("Anschrift (Straße)");
-      field.setValue(bewerberDTO.getPersonalien().getAdresse().getStrasse());
+      field.setValue(bewerber.getPersonalien().getAdresse().getStrasse());
       field = pDAcroForm.getField("Anschrift (Hausnummer)");
-      field.setValue(bewerberDTO.getPersonalien().getAdresse().getHausnummer());
+      field.setValue(bewerber.getPersonalien().getAdresse().getHausnummer());
       field = pDAcroForm.getField("Anschrift (PLZ)");
-      field.setValue(bewerberDTO.getPersonalien().getAdresse().getPLZ());
+      field.setValue(bewerber.getPersonalien().getAdresse().getPLZ());
       field = pDAcroForm.getField("Anschrift (ORT)");
-      field.setValue(bewerberDTO.getPersonalien().getAdresse().getWohnort());
+      field.setValue(bewerber.getPersonalien().getAdresse().getWohnort());
 
       field = pDAcroForm.getField("Vertragsart");
-      field.setValue(pruefeVertragsart(bewerberDTO));
+      field.setValue(pruefeVertragsart(bewerber));
 
       field = pDAcroForm.getField("Stunden");
-      field.setValue(bewerberDTO.getPraeferenzen().getMinWunschStunden() + " - " + bewerberDTO.getPraeferenzen().getMaxWunschStunden());
+      field.setValue(bewerber.getPraeferenzen().getMinWunschStunden() + " - " + bewerber.getPraeferenzen().getMaxWunschStunden());
       field = pDAcroForm.getField("Immatrikulation");
-      field.setValue(pruefeStatus(bewerberDTO));
+      field.setValue(pruefeStatus(bewerber));
       field = pDAcroForm.getField("Studiengang");
-      field.setValue(bewerberDTO.getKarriere().getImmartikulationsStatus().getFachrichtung());
+      field.setValue(bewerber.getKarriere().getImmartikulationsStatus().getFachrichtung());
 
       field = pDAcroForm.getField("Bemerkung zum Antrag");
       field.setValue("On");
       field = pDAcroForm.getField("Bemerkung zum Antrag1");
-      field.setValue(bewerberDTO.getKarriere().getArbeitserfahrung() + "/n" + bewerberDTO.getPraeferenzen().getKommentar() + "/n" + bewerberDTO.getPraeferenzen().getEinschraenkungen());
+      field.setValue(bewerber.getKarriere().getArbeitserfahrung() + "/n" + bewerber.getPraeferenzen().getKommentar() + "/n" + bewerber.getPraeferenzen().getEinschraenkungen());
 
       //Speichern der Datei
       pDDocument.save("../../../resources/static/output.pdf");
@@ -78,7 +77,7 @@ public class PDFService {
     }
   }
 
-  public void fillWissenHilfskraft(BewerberDTO bewerberDTO, String filedirectory) throws Exception {
+  public void fillWissenHilfskraft(Bewerber bewerber, String filedirectory) throws Exception {
     PDDocument pDDocument = PDDocument.load(new File(filedirectory));
     try {
       if (pDDocument.isEncrypted()) {
@@ -92,45 +91,46 @@ public class PDFService {
 
       //befuellen der Datei
       PDField field = pDAcroForm.getField("Vorname");
-      field.setValue(bewerberDTO.getPersonalien().getVorname());
+      field.setValue(bewerber.getPersonalien().getVorname());
       field = pDAcroForm.getField("Name");
-      field.setValue(bewerberDTO.getPersonalien().getName());
+      field.setValue(bewerber.getPersonalien().getName());
       field = pDAcroForm.getField("Geburtsdatum");
-      field.setValue(bewerberDTO.getPersonalien().getGeburtsdatum().toString());
+      field.setValue(bewerber.getPersonalien().getGeburtsdatum().toString());
       field = pDAcroForm.getField("Staatsangehörigkeit");
-      field.setValue(bewerberDTO.getPersonalien().getNationalitaet());
+      field.setValue(bewerber.getPersonalien().getNationalitaet());
       field = pDAcroForm.getField("Anschrift (Straße)");
-      field.setValue(bewerberDTO.getPersonalien().getAdresse().getStrasse());
+      field.setValue(bewerber.getPersonalien().getAdresse().getStrasse());
       field = pDAcroForm.getField("Anschrift (Hausnummer)");
-      field.setValue(bewerberDTO.getPersonalien().getAdresse().getHausnummer());
+      field.setValue(bewerber.getPersonalien().getAdresse().getHausnummer());
       field = pDAcroForm.getField("Anschrift (PLZ)");
-      field.setValue(bewerberDTO.getPersonalien().getAdresse().getPLZ());
+      field.setValue(bewerber.getPersonalien().getAdresse().getPLZ());
       field = pDAcroForm.getField("Anschrift (ORT)");
-      field.setValue(bewerberDTO.getPersonalien().getAdresse().getWohnort());
+      field.setValue(bewerber.getPersonalien().getAdresse().getWohnort());
 
 
       field = pDAcroForm.getField("Vertragsart");
-      field.setValue(pruefeVertragsart(bewerberDTO));
+      field.setValue(pruefeVertragsart(bewerber));
 
 
       field = pDAcroForm.getField("Stunden");
-      field.setValue(bewerberDTO.getPraeferenzen().getMinWunschStunden() + " - " + bewerberDTO.getPraeferenzen().getMaxWunschStunden());
+      field.setValue(bewerber.getPraeferenzen().getMinWunschStunden() + " - " + bewerber.getPraeferenzen().getMaxWunschStunden());
       field = pDAcroForm.getField("Immatrikulation");
-      field.setValue(pruefeStatus(bewerberDTO));
+      field.setValue(pruefeStatus(bewerber));
       field = pDAcroForm.getField("Studiengang");
-      field.setValue(bewerberDTO.getKarriere().getImmartikulationsStatus().getFachrichtung());
+      field.setValue(bewerber.getKarriere().getImmartikulationsStatus().getFachrichtung());
 
       field = pDAcroForm.getField("Bemerkung zum Antrag");
       field.setValue("On");
       field = pDAcroForm.getField("Bemerkung zum Antrag1");
-      field.setValue(bewerberDTO.getKarriere().getArbeitserfahrung() + "/n" + bewerberDTO.getPraeferenzen().getKommentar() + "/n" + bewerberDTO.getPraeferenzen().getEinschraenkungen());
-            /*
-            field = pDAcroForm.getField("Schilderung der auszuübenden Tätigkeit");
-            field.setValue(bewerberDTO.getPraeferenzen().getBerufModul().getBeruf().toString());
+      field.setValue(bewerber.getKarriere().getArbeitserfahrung() + "/n" + bewerber.getPraeferenzen().getKommentar() + "/n" + bewerber.getPraeferenzen().getEinschraenkungen());
 
-             */
-      //String string = "";
-      //for ()
+      String berufModul = "";
+      for (ModulAuswahl m: bewerber.getPraeferenzen().getModulAuswahl()){
+        berufModul = berufModul + " " + m.getModul().getModulName() + ": " + m.getBeruf().toString() + "\n";
+      }
+
+      field = pDAcroForm.getField("Schilderung der auszuübenden Tätigkeit");
+      field.setValue(berufModul);
 
       //Speichern der Datei
       pDDocument.save("../../../resources/static//output2.pdf");
@@ -141,18 +141,18 @@ public class PDFService {
     }
   }
 
-  public String pruefeStatus(BewerberDTO bewerberDTO){
-    if(bewerberDTO.getKarriere().getImmartikulationsStatus().isStatus()){
+  public String pruefeStatus(Bewerber bewerber){
+    if(bewerber.getKarriere().getImmartikulationsStatus().isStatus()){
       return "On";
     }
     return "Off";
   }
 
-  public String pruefeVertragsart(BewerberDTO bewerberDTO) {
-    if (bewerberDTO.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.WEITERBESCHAEFTIGUNG){
+  public String pruefeVertragsart(Bewerber bewerber) {
+    if (bewerber.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.WEITERBESCHAEFTIGUNG){
       return "Weiterbeschäftigung";
     }
-    else if(bewerberDTO.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.NEUEINSTIEG){
+    else if(bewerber.getPraeferenzen().getEinstiegTyp() == EinstiegTyp.NEUEINSTIEG){
       return "Einstellung";
     } else{
       return "Off";
