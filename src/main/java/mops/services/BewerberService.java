@@ -29,9 +29,6 @@ public class BewerberService implements IBewerberService {
   @Override
   public void addBewerber(Bewerber b) {
     BewerberDTO bewerberDTO = mappingService.load(b);
-    System.out.println("bewerberDTO erstellt:");
-    System.out.println(bewerberDTO);
-    System.out.println(b);
     bewerberRepository.save(bewerberDTO);
   }
 

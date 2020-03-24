@@ -156,5 +156,5 @@ public class BewerberServiceTest {
     assertEquals(bewerberDTOList.size(), 2);
     assertEquals(verteilteBewerber.size(), 1);
   }
-  
+
 }
