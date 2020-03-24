@@ -10,6 +10,7 @@ import mops.services.BewerberService;
 import mops.services.DozentPraeferenzService;
 import mops.services.DozentService;
 
+import mops.services.ModelService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -32,6 +33,9 @@ public class DozentController {
 
   @Autowired
   private transient DozentPraeferenzService dozentPraeferenzService;
+
+  @Autowired
+  private transient ModelService modelService;
 
   private transient final String bewerberAttribute = "bewerber";
 
@@ -92,10 +96,11 @@ public class DozentController {
   }
 
   @Secured({ ROLE_ORGA })
-  @GetMapping("/uebersicht/detail")
+  @GetMapping("/details/{kennung}")
   public String detailAnsicht(Model model, KeycloakAuthenticationToken token, @PathVariable String kennung) {
-    BewerberDTO bewerber = bewerberService.findBewerberByKennung(kennung);
+    BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(kennung);
+    Bewerber bewerber = modelService.load(bewerberDTO);
     model.addAttribute(bewerberAttribute, bewerber);
-    return "";
+    return "bewerbungsdetails/details";
   }
 }
