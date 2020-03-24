@@ -49,7 +49,7 @@ public class BewerberController {
   @GetMapping("/editieren")
   @Secured({ ROLE_STUDENT })
   public String editieren(Model model, KeycloakAuthenticationToken token) {
-    model.addAttribute("bewerber", bewerberService.findBewerberModelByKennung(token.getName()));
+    model.addAttribute("bewerber", bewerberService.initialiseEditBewerber(token.getName()));
     model.addAttribute("existingmodule", modulService.findAllModule());
     return "student/main_min";
   }

@@ -97,6 +97,11 @@ public class BewerberService implements IBewerberService {
     return modelService.load(bewerberRepository.findBewerberByKennung(kennung));
   }
 
+  public Bewerber initialiseEditBewerber(String kennung){
+    Bewerber b = modelService.load(bewerberRepository.findBewerberByKennung(kennung));
+    return (b == null) ? new Bewerber(new Karriere(), new Personalien(), new Praeferenzen()) : b;
+  }
+
   public boolean bewerbungExists(String kennung) {
     return findBewerberModelByKennung(kennung) != null;
   }
