@@ -41,7 +41,7 @@
 <main th:fragment="bodycontent">
   <div class="container pt-3">
     <div class="col-12 shadow p-3 mb-5 bg-light rounded">
-      <h1>Übersicht</h1>
+      <h1>Bewerbungen</h1>
       <div class="card shadow p-3 mb-5 bg-light rounded">
         <table class="table">
           <tbody>
@@ -51,7 +51,7 @@
               <td>
                 <a th:href="@{./unbearbeitete}" class="btn"
                      th:classappend="${anzeigeModus == 'offene'} ? btn-primary : btn-outline-primary">
-                Offene Anzeigen
+                  Anzeigen
               </a>
               </td>
             </tr>
@@ -61,7 +61,7 @@
               <td>
                 <a th:href="@{./bearbeitete}" class="btn"
                    th:classappend="${anzeigeModus == 'vorgemerkte'} ? btn-primary : btn-outline-primary">
-                  Vorgemerkte Anzeigen
+                  Anzeigen
                 </a>
               </td>
             </tr>
@@ -80,9 +80,7 @@
             <h5 th:text="${bewerbung.personalien.vorname + ' ' + bewerbung.personalien.name}">Vorname Nachname</h5>
           </div>
 
-
           <div class="card-body" th:if="${anzeigeModus} eq 'uebersicht' or ${anzeigeModus} eq 'offene'">
-            <p class="card-text">
             <div class="h5">Bewerberpräferenzen:</div>
 
             <ul class="list-group" th:each="praeferenz : ${bewerbung.praeferenzen.modulAuswahl}">
@@ -93,10 +91,11 @@
             </ul>
 
             <div class="btn-group btn-block pt-3">
-              <button type="button" class="btn btn-primary btn-block">Bewerbungsansicht</button>
+              <a th:href="@{/bewerbung1/dozent/details/{kennung}(kennung=${bewerbung.kennung})}"
+                 class="btn btn-outline-primary btn-block">Detailansicht</a>
             </div>
 
-            <div class="h6 pt-3">Priorität wählen:</div>
+            <div class="h5 pt-3">Priorität wählen</div>
             <form method="POST" th:action="@{./addPreference}">
               <p>
                 <select th:name="praeferenz" class="form-control">
@@ -118,7 +117,7 @@
 
           <div class="card-body" th:if="${anzeigeModus} eq 'vorgemerkte'">
             <p class="card-text">
-            <div class="h5">Bewerberpräferenzen:</div>
+            <div class="h5">Bewerberpräferenzen</div>
 
             <ul class="list-group" th:each="praeferenz : ${bewerbung.praeferenzen.modulAuswahl}">
               <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -128,10 +127,11 @@
             </ul>
 
             <div class="btn-group btn-block pt-3">
-              <button type="button" class="btn btn-primary btn-block">Bewerbungsansicht</button>
+              <a th:href="@{/bewerbung1/dozent/details/{kennung}(kennung=${bewerbung.kennung})}"
+                 class="btn btn-outline-primary btn-block">Detailansicht</a>
             </div>
 
-            <div class="h6 pt-3">Gewählte Priorität</div>
+            <div class="h5 pt-3">Gewählte Priorität</div>
             <div th:each="pref : ${bewerbung.dozentPraeferenz}">
             <form method="POST" th:action="@{./addPreference}" th:if="${pref.dozentKennung} eq ${me}">
               <p>
