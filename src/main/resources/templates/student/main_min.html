@@ -12,7 +12,8 @@
 
       function disableInput(inputid, txt) {
         var txtIn = document.getElementById(inputid);
-        txtIn.value = txt;
+        txtIn.placeholder = txt;
+        txtIn.value = "";
         txtIn.disabled = !txtIn.disabled;
       }
 

@@ -50,4 +50,12 @@ public class ModulService implements IModulService {
   public void deleteModulByName(String modulName) {
     modulRepository.deleteModulByName(modulName);
   }
+
+  public boolean modulExists(Modul modul) {
+    List<ModulDTO> module = modulRepository.findByModulNameAndDozentMail(modul.getModulName(), modul.getDozent().getDozentMail());
+    if(module != null){
+      return module.size() > 0;
+    }
+    return false;
+  }
 }
