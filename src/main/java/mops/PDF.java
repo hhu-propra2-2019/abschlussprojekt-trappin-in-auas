@@ -1,5 +1,6 @@
 package mops;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -27,17 +28,17 @@ public class PDF {
     Bewerber b = new Bewerber();
     Personalien personalien = new Personalien();
     personalien.setAlter(18);
-    try{
-    personalien.setGeburtsdatum(
-        Date.from(new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).parse("31.05.1999").toInstant()));
-    } catch (Exception e){
+    try {
+      personalien.setGeburtsdatum(
+          Date.from(new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).parse("31.05.1999").toInstant()));
+    } catch (Exception e) {
       System.out.println("Geburtsdatum falsches Format");
     }
     personalien.setGeburtsort("Duesseldorf");
-    personalien.setName("Winkler");
+    personalien.setName("Der Marrokaner");
     personalien.setNationalitaet("Deutschland");
     personalien.setUnikennung("mawin125");
-    personalien.setVorname("Marvin");
+    personalien.setVorname("Oussama");
     personalien.setAdresse(new Adresse("40235", "Duesseldorf", "Porschestraße", "17"));
 
     Praeferenzen praeferenzen = new Praeferenzen();
@@ -68,8 +69,6 @@ public class PDF {
 
     PDFService pdfService = new PDFService();
     pdfService.fileDirectory(b);
-    pdfService.fillPDF(b,pdfService.fileDirectory(b));
-    
-
+    pdfService.fillPDF(b, pdfService.fileDirectory(b));
   }
 }

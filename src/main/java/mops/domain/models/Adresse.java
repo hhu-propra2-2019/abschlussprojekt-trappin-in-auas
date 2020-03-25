@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Adresse {
     private String PLZ;
-    private String wohnOrt;
+    private String wohnort;
     private String strasse;
     private String hausnummer;
 
     public Adresse(String PLZ, String wohnOrt, String strasse, String hausnummer) {
         this.PLZ = PLZ;
-        this.wohnOrt = wohnOrt;
+        this.wohnort = wohnOrt;
         this.strasse = strasse;
         this.hausnummer = hausnummer;
     }
