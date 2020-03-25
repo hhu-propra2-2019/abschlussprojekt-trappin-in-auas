@@ -19,7 +19,7 @@ public class Bewerber {
   private List<Dozent> verteiltAn;
   private List<DozentPraeferenz> dozentPraeferenz;
 
-  public Bewerber(Karriere karriere, Personalien personalien, Praeferenzen praeferenzen){
+  public Bewerber(Karriere karriere, Personalien personalien, Praeferenzen praeferenzen) {
     this.karriere = karriere;
     this.personalien = personalien;
     this.praeferenzen = praeferenzen;

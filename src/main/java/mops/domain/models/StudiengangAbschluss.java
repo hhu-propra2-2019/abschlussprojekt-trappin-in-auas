@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudiengangAbschluss {
-    private String studiengang;
-    private String abschluss;
-    private String uni;
+  private String studiengang;
+  private String abschluss;
+  private String uni;
 }
