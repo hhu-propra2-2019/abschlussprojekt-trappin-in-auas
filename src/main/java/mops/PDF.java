@@ -26,6 +26,7 @@ import mops.services.PDFService;
 public class PDF {
   public static void main(String[] args) throws Exception {
     Bewerber b = new Bewerber();
+    b.setKennung("mawin125");
     Personalien personalien = new Personalien();
     personalien.setAlter(18);
     try {
@@ -37,7 +38,6 @@ public class PDF {
     personalien.setGeburtsort("Duesseldorf");
     personalien.setName("Der Marrokaner");
     personalien.setNationalitaet("Deutschland");
-    personalien.setUnikennung("mawin125");
     personalien.setVorname("Oussama");
     personalien.setAdresse(new Adresse("40235", "Duesseldorf", "Porschestraße", "17"));
 

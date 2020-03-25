@@ -40,7 +40,7 @@ public class DTOService implements IDTOService {
   }
 
   public AdresseDTO load(Adresse adresse){
-    return new AdresseDTO(adresse.getPLZ(),adresse.getWohnOrt(),adresse.getStrasse(),adresse.getHausnummer());
+    return new AdresseDTO(adresse.getPLZ(),adresse.getWohnort(),adresse.getStrasse(),adresse.getHausnummer());
 
   }
 
