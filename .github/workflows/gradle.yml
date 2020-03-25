@@ -1,4 +1,4 @@
-name: Docker-Compose & Gradle checks
+name: Gradle checks
 
 on: pull_request
 
