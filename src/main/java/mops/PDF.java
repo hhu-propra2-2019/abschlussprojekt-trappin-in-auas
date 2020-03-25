@@ -1,5 +1,7 @@
 package mops;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,8 +67,9 @@ public class PDF {
     b.setKarriere(karriere);
 
     PDFService pdfService = new PDFService();
-
-      pdfService.fillPDF(b);
+    pdfService.fileDirectory(b);
+    pdfService.fillPDF(b,pdfService.fileDirectory(b));
+    
 
   }
 }

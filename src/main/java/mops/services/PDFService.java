@@ -13,10 +13,10 @@ public class PDFService implements IPDFService {
 
   public String fileDirectory(Bewerber bewerber) {
     if(bewerber.getKarriere().getFachAbschluss() == null) {
-      return "../../../resources/static/studentische_Hilfskraft.pdf";
+      return "/home/acno/Schreibtisch/Propra2/Praktikum/abschlussprojekt-trappin-in-auas/src/main/resources/static/studentische_Hilfskraft.pdf";
     }
     else {
-      return "../../../resources/static/wissenschaftliche_Hilfskraft.pdf";
+      return "/home/acno/Schreibtisch/Propra2/Praktikum/abschlussprojekt-trappin-in-auas/src/main/resources/static/wissenschaftliche_Hilfskraft.pdf";
     }
   }
 
@@ -30,8 +30,8 @@ public class PDFService implements IPDFService {
     }
   }
 
-  public void fillPDF(Bewerber bewerber) throws Exception {
-    PDDocument pDDocument = PDDocument.load(new File(fileDirectory(bewerber)));
+  public void fillPDF(Bewerber bewerber, String file) throws Exception {
+    PDDocument pDDocument = PDDocument.load(new File(file));
     System.out.println("PDF geladen");
       try {
       System.out.println("versuche zu fuellen");
@@ -42,9 +42,9 @@ public class PDFService implements IPDFService {
         e.printStackTrace();
       } finally {
         if (hatAbschluss(bewerber)) {
-          pDDocument.save("./resources/static/output2.pdf");
+          pDDocument.save("/home/acno/Schreibtisch/Propra2/Praktikum/abschlussprojekt-trappin-in-auas/src/main/resources/static/output2.pdf");
         } else {
-          pDDocument.save("./resources/static/output.pdf");
+          pDDocument.save("/home/acno/~/Schreibtisch/Propra2/Praktikum/abschlussprojekt-trappin-in-auas/src/main/resources/static/output.pdf");
         }
         pDDocument.close();
       }
@@ -67,6 +67,8 @@ public class PDFService implements IPDFService {
     field = pDAcroForm.getField("Staatsangehörigkeit");
     field.setValue(bewerber.getPersonalien().getNationalitaet());
     System.out.println(field);
+    field = pDAcroForm.getField("Geburtsort");
+    field.setValue(bewerber.getPersonalien().getGeburtsort());
 
     field = pDAcroForm.getField("Anschrift (Straße)");
     field.setValue(bewerber.getPersonalien().getAdresse().getStrasse());
@@ -74,9 +76,10 @@ public class PDFService implements IPDFService {
     field.setValue(bewerber.getPersonalien().getAdresse().getHausnummer());
     field = pDAcroForm.getField("Anschrift (PLZ)");
     field.setValue(bewerber.getPersonalien().getAdresse().getPLZ());
-    field = pDAcroForm.getField("Anschrift (ORT)");
-    field.setValue(bewerber.getPersonalien().getAdresse().getWohnort());
-
+    System.out.println(field);
+    field = pDAcroForm.getField("Anschrift (Ort)");
+    field.setValue(bewerber.getPersonalien().getAdresse().getWohnOrt());
+    System.out.println(field);
     field = pDAcroForm.getField("Vertragsart");
     field.setValue(pruefeVertragsart(bewerber));
 
