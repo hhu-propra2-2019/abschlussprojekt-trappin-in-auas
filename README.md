@@ -15,6 +15,11 @@ Aktuell wird man von der Webseite des Instituts auf eine Ilias-Umfrage weitergel
 - Verteilerfunktion für einen Organisator
 - Dozenten sehen Bewerber, die ihnen vorgeschlagen wurden
 
+##
+Das SCS kann mit dem folgenden Befehl gestartet werden:
+```
+docker-compose up
+```
 
 ## Projektdokumentation
 
