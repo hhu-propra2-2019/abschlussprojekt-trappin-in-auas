@@ -6,8 +6,6 @@ import mops.domain.services.IZyklusDirigentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.logging.Logger;
-
 @Service
 public class ZyklusDirigentService implements IZyklusDirigentService {
 
