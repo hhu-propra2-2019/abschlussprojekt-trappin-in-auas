@@ -1,6 +1,5 @@
 package mops.domain.models;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ImmartikulationsStatus {
-    private boolean status;
-    private String fachrichtung;
+  private boolean status;
+  private String fachrichtung;
 }
