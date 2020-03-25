@@ -72,11 +72,14 @@ public class BewerberServiceTest {
     Bewerber bewerber1 = new Bewerber(karriere, personalien, praeferenzen);
     BewerberDTO bewerberDTO1 = dtoService.load(bewerber1);
     bewerberService.addBewerber(bewerber1);
-
-//    List<BewerberDTO> bewerberDTOList = bewerberService.findAlleBewerber();
     when(bewerberRepository.findAll()).thenReturn(Arrays.asList(bewerberDTO1));
+    List<BewerberDTO> bewerberDTOList = bewerberService.findAlleBewerber();
+    System.out.println(bewerberDTO1);
+    System.out.println(bewerberDTOList.get(0));
+
+
 //    assertNotNull(bewerberDTOList);
-    assertEquals(bewerberDTO1.getPersonalien().getVorname(), bewerber1.getPersonalien().getVorname());
+    assertEquals(bewerberDTOList.get(0).getPersonalien().getVorname(), bewerber1.getPersonalien().getVorname());
 
   }
 /*
