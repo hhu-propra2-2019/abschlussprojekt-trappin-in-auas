@@ -11,16 +11,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class PDFService implements IPDFService {
 
-  public String filedirectory(Bewerber bewerber) {
+  public String fileDirectory(Bewerber bewerber) {
     if(bewerber.getKarriere().getFachAbschluss() == null) {
-      return "../../../resources/static/321_Antrag_Beschaeftigung_stud_Hilfskraefte.pdf";
+      return "../../../resources/static/studentische_Hilfskraft.pdf";
     }
     else {
-      return "../../../resources/static/323_Antrag_Beschaeftigung_wiss_Hilfskraefte_mit_BA.pdf";
+      return "../../../resources/static/wissenschaftliche_Hilfskraft.pdf";
     }
   }
 
-  public void checkEncryption(PDDocument pdDocument, String fileDirectory) throws Exception {
+  public void checkEncryption(PDDocument pdDocument) throws Exception {
     if (pdDocument.isEncrypted()) {
       try {
         pdDocument.setAllSecurityToBeRemoved(true);
@@ -30,34 +30,44 @@ public class PDFService implements IPDFService {
     }
   }
 
-  public void fillPDF(Bewerber bewerber, String fileDirectory) throws Exception {
-    try (PDDocument pDDocument = PDDocument.load(new File(fileDirectory))) {
+  public void fillPDF(Bewerber bewerber) throws Exception {
+    PDDocument pDDocument = PDDocument.load(new File(fileDirectory(bewerber)));
+    System.out.println("PDF geladen");
       try {
-        checkEncryption(pDDocument, fileDirectory);
+      System.out.println("versuche zu fuellen");
+        checkEncryption(pDDocument);
         loadPDFFelder(bewerber, pDDocument);
+
       } catch (Exception e) {
         e.printStackTrace();
       } finally {
         if (hatAbschluss(bewerber)) {
-          pDDocument.save("../../../resources/static/output2.pdf");
+          pDDocument.save("./resources/static/output2.pdf");
         } else {
-          pDDocument.save("../../../resources/static/output.pdf");
+          pDDocument.save("./resources/static/output.pdf");
         }
         pDDocument.close();
       }
     }
-  }
+
   public void loadPDFFelder(Bewerber bewerber, PDDocument pdDocument) throws Exception{
     PDAcroForm pDAcroForm = pdDocument.getDocumentCatalog().getAcroForm();
 
     PDField field = pDAcroForm.getField("Vorname");
     field.setValue(bewerber.getPersonalien().getVorname());
+    System.out.println(field);
     field = pDAcroForm.getField("Name");
     field.setValue(bewerber.getPersonalien().getName());
+    System.out.println(field);
+
     field = pDAcroForm.getField("Geburtsdatum");
     field.setValue(bewerber.getPersonalien().getGeburtsdatum().toString());
+    System.out.println(field);
+
     field = pDAcroForm.getField("Staatsangehörigkeit");
     field.setValue(bewerber.getPersonalien().getNationalitaet());
+    System.out.println(field);
+
     field = pDAcroForm.getField("Anschrift (Straße)");
     field.setValue(bewerber.getPersonalien().getAdresse().getStrasse());
     field = pDAcroForm.getField("Anschrift (Hausnummer)");

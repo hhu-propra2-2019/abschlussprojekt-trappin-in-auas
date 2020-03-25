@@ -1,9 +1,7 @@
 package mops.controller;
 
-import mops.domain.models.Bewerber;
 import mops.services.BewerberService;
 import mops.services.PDFService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +22,8 @@ public class PDFController {
 
 
   @GetMapping("/anzeigen")
-  public String anzeigenPDF(Model m, Bewerber bewerber){
-    return "pdf/pdfUebersicht";
+  public String anzeigenPDF(Model m, String bewerberKennung){
+
+    return "wiss_Hilfskraft";
   }
 }
