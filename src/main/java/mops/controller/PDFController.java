@@ -23,7 +23,8 @@ public class PDFController {
 
   @GetMapping("/anzeigen")
   public String anzeigenPDF(Model m, String bewerberKennung){
-
+    //String pdfpath = pdf.generate();
+    //return ressourceapizeug(pdfpath)
     return "wiss_Hilfskraft";
   }
 }
