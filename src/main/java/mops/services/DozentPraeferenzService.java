@@ -21,51 +21,56 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
   private transient DTOService dtoService;
 
   @Autowired
+  private transient ZyklusDirigentService zyklusDirigentService;
+
+  @Autowired
   private transient BewerberRepository bewerberRepository;
 
 
   @Override
   public void addPraeferenz(DozentPraeferenzDTO dozentPraeferenzDTO) {
-    try {
-      BewerberDTO bewerberDTO = bewerberService
-          .findBewerberByKennung(dozentPraeferenzDTO.getBewerber());
+    if (zyklusDirigentService.getDozentenPhase()) {
+      try {
+        BewerberDTO bewerberDTO = bewerberService
+                .findBewerberByKennung(dozentPraeferenzDTO.getBewerber());
 
-      List<DozentPraeferenzDTO> existierndeBewertung = bewerberDTO.getDozentPraeferenz()
-          .stream()
-          .filter(x -> x.getDozentMail().equals(dozentPraeferenzDTO.getDozentMail()))
-          .collect(Collectors.toList());
+        List<DozentPraeferenzDTO> existierndeBewertung = bewerberDTO.getDozentPraeferenz()
+                .stream()
+                .filter(x -> x.getDozentMail().equals(dozentPraeferenzDTO.getDozentMail()))
+                .collect(Collectors.toList());
 
-      if(existierndeBewertung.isEmpty() ){
-        bewerberDTO.getDozentPraeferenz().add(dozentPraeferenzDTO);
+        if (existierndeBewertung.isEmpty()) {
+          bewerberDTO.getDozentPraeferenz().add(dozentPraeferenzDTO);
+        } else {
+          existierndeBewertung.get(0).setPraeferenz(dozentPraeferenzDTO.getPraeferenz());
+        }
+        bewerberRepository.save(bewerberDTO);
+
+      } catch (Exception e) {
+        return;
       }
-      else {
-        existierndeBewertung.get(0).setPraeferenz(dozentPraeferenzDTO.getPraeferenz());
-      }
-      bewerberRepository.save(bewerberDTO);
-
     }
-    catch (Exception e) {
-      return;
-    }
-
   }
 
   public void addPraeferenz(DozentPraeferenz dozentPraeferenz) {
-    DozentPraeferenzDTO dozentPraeferenzDTO = dtoService.load(dozentPraeferenz);
-    addPraeferenz(dozentPraeferenzDTO);
+    if (zyklusDirigentService.getDozentenPhase()) {
+      DozentPraeferenzDTO dozentPraeferenzDTO = dtoService.load(dozentPraeferenz);
+      addPraeferenz(dozentPraeferenzDTO);
+    }
   }
 
   @Override
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
   public void deletePraeferenz(String bewerber, String dozentMail) {
-    BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(bewerber);
-    List<DozentPraeferenzDTO> matching = getMatchingDozentPraeferenz(bewerber, dozentMail);
+    if (zyklusDirigentService.getDozentenPhase()) {
+      BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(bewerber);
+      List<DozentPraeferenzDTO> matching = getMatchingDozentPraeferenz(bewerber, dozentMail);
 
-    if(!matching.isEmpty()){
-      bewerberDTO.getDozentPraeferenz().removeAll(matching);
-      bewerberRepository.save(bewerberDTO);
+      if (!matching.isEmpty()) {
+        bewerberDTO.getDozentPraeferenz().removeAll(matching);
+        bewerberRepository.save(bewerberDTO);
+      }
     }
-
   }
 
   @Override
