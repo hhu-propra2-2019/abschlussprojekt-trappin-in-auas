@@ -1,5 +1,6 @@
 package mops.services;
 
+import java.io.IOException;
 import mops.domain.models.*;
 import mops.domain.services.IPDFService;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -37,23 +38,24 @@ public class PDFService implements IPDFService {
     }
   }
 
-  public void fillPDF(Bewerber bewerber, String file) throws Exception {
-    PDDocument pDDocument = PDDocument.load(new File(file));
-    System.out.println("PDF geladen");
-    try {
-      System.out.println("versuche zu fuellen");
-      checkEncryption(pDDocument);
-      loadPDFFelder(bewerber, pDDocument);
+  public void fillPDF(Bewerber bewerber, String file)  {
+    try{
+      PDDocument pDDocument = PDDocument.load(new File(file));
+      System.out.println("PDF geladen");
+      try {
+        System.out.println("versuche zu fuellen");
+        checkEncryption(pDDocument);
+        loadPDFFelder(bewerber, pDDocument);
 
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      if (hatAbschluss(bewerber)) {
-        pDDocument.save(PDF_PATH + "/output/output_"+bewerber.getPersonalien().getName()+".pdf");
-      } else {
-        pDDocument.save(PDF_PATH + "/output/output.pdf");
+      } catch (Exception e) {
+        e.printStackTrace();
+      } finally {
+        pDDocument.save(PDF_PATH + "/output/output_"+ bewerber.getPersonalien().getName()+
+            "_"+ bewerber.getPersonalien().getVorname()+ ".pdf");
+        pDDocument.close();
       }
-      pDDocument.close();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 

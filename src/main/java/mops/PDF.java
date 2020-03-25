@@ -37,7 +37,6 @@ public class PDF {
     personalien.setGeburtsort("Duesseldorf");
     personalien.setName("Der Marrokaner");
     personalien.setNationalitaet("Deutschland");
-    personalien.setUnikennung("mawin125");
     personalien.setVorname("Oussama");
     personalien.setAdresse(new Adresse("40235", "Duesseldorf", "Porschestraße", "17"));
 
@@ -66,6 +65,7 @@ public class PDF {
     b.setPersonalien(personalien);
     b.setPraeferenzen(praeferenzen);
     b.setKarriere(karriere);
+    b.setKennung("mawin125");
 
     PDFService pdfService = new PDFService();
     pdfService.fileDirectory(b);
