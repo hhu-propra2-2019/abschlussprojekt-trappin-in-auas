@@ -2,7 +2,6 @@ package mops.bewerbung1.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -20,7 +19,6 @@ import mops.services.DTOService;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -52,7 +50,7 @@ public class DTOServiceTest {
     AdresseDTO adresseDTO = dtoService.load(adresse);
 
     assertEquals(adresse.getPLZ(),adresseDTO.getPLZ());
-    assertEquals(adresse.getWohnort(),adresseDTO.getWohnort());
+    assertEquals(adresse.getWohnOrt(),adresseDTO.getWohnort());
     assertEquals(adresse.getStrasse(),adresseDTO.getStrasse());
     assertEquals(adresse.getHausnummer(),adresseDTO.getHausnummer());
   }
@@ -80,7 +78,7 @@ public class DTOServiceTest {
     PersonalienDTO pDTO = dtoService.load(p);
 
     assertEquals(adresse.getPLZ(),pDTO.getAdresse().getPLZ());
-    assertEquals(adresse.getWohnort(),pDTO.getAdresse().getWohnort());
+    assertEquals(adresse.getWohnOrt(),pDTO.getAdresse().getWohnort());
     assertEquals(adresse.getStrasse(),pDTO.getAdresse().getStrasse());
     assertEquals(adresse.getHausnummer(),pDTO.getAdresse().getHausnummer());
     assertEquals(geburtsDatum,pDTO.getGeburtsdatum());
