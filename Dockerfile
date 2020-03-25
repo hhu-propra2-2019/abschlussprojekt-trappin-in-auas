@@ -6,4 +6,4 @@ RUN gradle bootJar
 FROM openjdk:11-jre-slim
 RUN mkdir /app
 COPY --from=build /home/gradle/src/build/libs/*.jar /app/bewerbung1.jar
-ENTRYPOINT ["java", "-jar", "app/bewerbung1.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "app/bewerbung1.jar"]
