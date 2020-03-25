@@ -62,7 +62,7 @@ public class BewerberController {
   public String bewirbabschicken(Model model, @Valid Bewerber bewerber, BindingResult result, KeycloakAuthenticationToken token) {
     if(result.hasErrors()){
       System.out.println(result.getAllErrors());
-      return "redirect:/bewerbung1/bewerber";
+      return "redirect:/bewerbung1/bewerber/bewerbung";
     }
     bewerberService.addBewerber(bewerber, token.getName());
     return "redirect:/bewerbung1/bewerber";

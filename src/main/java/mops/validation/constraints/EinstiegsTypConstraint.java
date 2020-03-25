@@ -9,14 +9,14 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import mops.validation.ImmatrikulationsStatusValidator;
+import mops.validation.EinstiegsTypValidator;
 
 @Documented
-@Constraint(validatedBy = ImmatrikulationsStatusValidator.class)
-@Target({ ElementType.TYPE })
+@Constraint(validatedBy = EinstiegsTypValidator.class)
+@Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ImmatrikulationsStatusConstraint {
-  String message() default "Ungültige Immatrikulation";
+public @interface EinstiegsTypConstraint {
+  String message() default "Ungültiger Einstiegstyp";
 
   Class<?>[] groups() default {};
 

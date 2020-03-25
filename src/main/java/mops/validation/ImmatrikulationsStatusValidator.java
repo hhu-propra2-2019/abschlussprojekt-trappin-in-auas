@@ -12,7 +12,7 @@ public class ImmatrikulationsStatusValidator implements ConstraintValidator<Imma
 
   @Override
   public boolean isValid(ImmartikulationsStatus status, ConstraintValidatorContext context) {
-    if(status.isStatus()){
+    if(!status.isStatus()){ //status is inverted at first
       return !status.getFachrichtung().isBlank();
     }
     return true;
