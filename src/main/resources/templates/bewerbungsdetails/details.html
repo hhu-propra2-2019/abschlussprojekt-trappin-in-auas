@@ -73,24 +73,26 @@
               <td>Arbeitserfahrung</td>
               <td th:text="${bewerber.karriere.arbeitserfahrung}"></td>
             </tr>
-            <tr>
-              <td>Abschluss</td>
-              <td th:text="${bewerber.karriere.fachAbschluss.abschluss}"></td>
-            </tr>
-            <tr>
-              <td>in Studiengang</td>
-              <td th:text="${bewerber.karriere.fachAbschluss.studiengang}"></td>
-            </tr>
-            <tr>
-              <td>an Universität</td>
-              <td th:text="${bewerber.karriere.fachAbschluss.uni}"></td>
-            </tr>
+            <div th:if="${bewerber.karriere.fachAbschluss.abschluss != ''}">
+              <tr>
+                <td>Abschluss</td>
+                <td th:text="${bewerber.karriere.fachAbschluss.abschluss}"></td>
+              </tr>
+              <tr>
+                <td>in Studiengang</td>
+                <td th:text="${bewerber.karriere.fachAbschluss.studiengang}"></td>
+              </tr>
+              <tr>
+                <td>an Universität</td>
+                <td th:text="${bewerber.karriere.fachAbschluss.uni}"></td>
+              </tr>
+            </div>
             <tr>
               <td>Immatrikulationsstatus</td>
-              <td th:if="${bewerber.karriere.immartikulationsStatus.status == true}">immatrikuliert</td>
-              <td th:if="${bewerber.karriere.immartikulationsStatus.status == false}">nicht immatrikuliert</td>
+              <td th:if="${bewerber.karriere.immartikulationsStatus.status == false}">immatrikuliert</td>
+              <td th:if="${bewerber.karriere.immartikulationsStatus.status == true}">nicht immatrikuliert</td>
             </tr>
-            <tr th:if="${bewerber.karriere.immartikulationsStatus.status == true}">
+            <tr th:if="${bewerber.karriere.immartikulationsStatus.status == false}">
               <td>in Studiengang</td>
               <td th:text="${bewerber.karriere.immartikulationsStatus.fachrichtung}"></td>
             </tr>
