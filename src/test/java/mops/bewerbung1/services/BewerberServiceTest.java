@@ -10,7 +10,6 @@ import mops.services.DTOService;
 import mops.services.ModelService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.*;
@@ -253,20 +252,20 @@ public class BewerberServiceTest {
     List<Dozent> verteiltAn = new LinkedList<Dozent>();
     verteiltAn.add(new Dozent("aa","bb"));
 
-    Adresse adresse2 = new Adresse("40474", "Duesseldorf", "Amsterdamer Strasse", "2");
-    Date geburtsdatum2 = new Date(2000, Calendar.JANUARY, 2);
-    Personalien personalien2 = new Personalien(adresse2, "jomu100", "Mueller", "John", geburtsdatum2, 20, "Deutschland", "Deutsch");
+    Adresse adresse2 = new Adresse("40474", "Duesseldorf", "Uerdinger Strasse", "3");
+    Date geburtsdatum2 = new Date(2001, Calendar.JANUARY, 4);
+    Personalien personalien2 = new Personalien(adresse2, "kafi100", "Fischer", "Karl", geburtsdatum2, 20, "Deutschland", "Deutsch");
 
     ImmartikulationsStatus immartikulationsStatus2 = new ImmartikulationsStatus(true, "Informatik");
     StudiengangAbschluss studiengangAbschluss2 = new StudiengangAbschluss("Informatik", "Bachelor", "HHU");
-    Karriere karriere2 = new Karriere("bei Apple Store gearbeitet.", immartikulationsStatus2, studiengangAbschluss2);
+    Karriere karriere2 = new Karriere("keine.", immartikulationsStatus2, studiengangAbschluss2);
 
     Modul modul1_2 = new Modul("propra2" , new Dozent( "jens@hhu.de","Jens Bendisposto"));
     Modul modul2_2 = new Modul("Aldat", new Dozent( "stephan@hhu.de", "Stephan Mueller"));
     Modul modul3_2 = new Modul("RDB", new Dozent("shoetner@hhu.de" ,"Michael Schoetner"));
 
-    ModulAuswahl modulAuswahl1_2 = new ModulAuswahl(modul1_2, 2, 2.0);
-    ModulAuswahl modulAuswahl2_2 = new ModulAuswahl(modul2_2, 1, 1.7);
+    ModulAuswahl modulAuswahl1_2 = new ModulAuswahl(modul1_2, 3, 2.0);
+    ModulAuswahl modulAuswahl2_2 = new ModulAuswahl(modul2_2, 1, 1.0);
     ModulAuswahl modulAuswahl3_2 = new ModulAuswahl(modul3_2, 3, 2.3);
     List<ModulAuswahl> modulAuswahlList2 = new LinkedList<ModulAuswahl>();
     modulAuswahlList2.add(modulAuswahl1_2);
@@ -323,7 +322,54 @@ public class BewerberServiceTest {
     Bewerber bewerber1 = new Bewerber(karriere, personalien, praeferenzen, "Golov", verteiltAn);
 
     bewerberService.addBewerber(bewerber1);
-    List<Bewerber> bewerberFuerDozent = bewerberService.findBewerberFuerDozent("aa");
-    assertEquals(bewerberFuerDozent.size(), 1);
+    BewerberDTO bewerberDTO1 = dtoService.load(bewerber1);
+    when(bewerberRepository.findAll()).thenReturn(Arrays.asList(bewerberDTO1));
+    List<BewerberDTO> bewerberDTOList = bewerberService.findAlleBewerber();
+    List<Bewerber> bewerberFuerDozent = bewerberService.findBewerberFuerDozent("stephan@hhu.de");
+    assertEquals(bewerberDTOList.get(0).getPersonalien().getUnikennung(), "jomu100");
+    assertEquals(bewerberFuerDozent.get(0).getPersonalien().getUnikennung(), "jomu100");
+  }
+
+  @Test
+  public void verteileTest(){
+    Adresse adresse = new Adresse("40474", "Duesseldorf", "Amsterdamer Strasse", "2");
+    Date geburtsdatum = new Date(2000, Calendar.JANUARY, 2);
+    Personalien personalien = new Personalien(adresse, "jomu100", "Mueller", "John", geburtsdatum, 20, "Deutschland", "Deutsch");
+
+    ImmartikulationsStatus immartikulationsStatus = new ImmartikulationsStatus(true, "Informatik");
+    StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik", "Bachelor", "HHU");
+    Karriere karriere = new Karriere("bei Apple Store gearbeitet.", immartikulationsStatus, studiengangAbschluss);
+
+    Modul modul1 = new Modul("propra2" , new Dozent( "jens@hhu.de","Jens Bendisposto"));
+    Modul modul2 = new Modul("Aldat", new Dozent( "stephan@hhu.de", "Stephan Mueller"));
+    Modul modul3 = new Modul("RDB", new Dozent("shoetner@hhu.de" ,"Michael Schoetner"));
+
+    ModulAuswahl modulAuswahl1 = new ModulAuswahl(modul1, 2, 2.0);
+    ModulAuswahl modulAuswahl2 = new ModulAuswahl(modul2, 1, 1.7);
+    ModulAuswahl modulAuswahl3 = new ModulAuswahl(modul3, 3, 2.3);
+    List<ModulAuswahl> modulAuswahlList = new LinkedList<ModulAuswahl>();
+    modulAuswahlList.add(modulAuswahl1);
+    modulAuswahlList.add(modulAuswahl2);
+    modulAuswahlList.add(modulAuswahl3);
+
+    BerufModul berufModul = new BerufModul(Beruf.Tutor, modul1);
+
+    Praeferenzen praeferenzen = new Praeferenzen(6, 8, modulAuswahlList, "No Comment", EinstiegTyp.NEUEINSTIEG, "Keine", berufModul, TutorenSchulungTeilnahme.TEILNAHME);
+    List<Dozent> verteiltAn = new LinkedList<Dozent>();
+    Bewerber bewerber1 = new Bewerber(karriere, personalien, praeferenzen, "Golov", verteiltAn);
+    Dozent dozent = new Dozent("jens@hhu.de","Jens Bendisposto");
+    String id = "jomu100";
+
+    bewerberService.addBewerber(bewerber1);
+    BewerberDTO bewerberDTO1 = dtoService.load(bewerber1);
+    when(bewerberRepository.findAll()).thenReturn(Arrays.asList(bewerberDTO1));
+    when(bewerberRepository.findById(id)).thenReturn(Optional.of(bewerberDTO1));
+    when(bewerberRepository.save(bewerberDTO1)).thenReturn(bewerberDTO1);
+    List<BewerberDTO> bewerberDTOList = bewerberService.findAlleBewerber();
+
+    bewerberService.verteile(id, dozent);
+
+    assertEquals(bewerberDTOList.get(0).getPersonalien().getUnikennung(), "jomu100");
+    assertEquals(bewerberDTOList.get(0).getVerteiltAn().get(0).getDozentKennung(), "jens@hhu.de");
   }
 }

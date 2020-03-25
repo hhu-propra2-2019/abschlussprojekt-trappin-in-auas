@@ -1,6 +1,7 @@
 package mops.domain.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import mops.domain.database.dto.BewerberDTO;
 import org.springframework.data.repository.CrudRepository;
@@ -18,4 +19,7 @@ public interface BewerberRepository extends CrudRepository<BewerberDTO, String> 
 
     List<BewerberDTO> findByVerteiltAnIsNull();
     List<BewerberDTO> findByVerteiltAnIsNotNull();
+
+    @Override
+    Optional<BewerberDTO> findById(String s);
 }
