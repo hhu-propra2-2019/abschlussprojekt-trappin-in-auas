@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class ZyklusDirigentService implements IZyklusDirigentService {
 
   @Autowired
-  private ZyklusDirigentRepository repo;
+  private transient ZyklusDirigentRepository repo;
 
   @Override
   public boolean getVerteilerPhase() {
