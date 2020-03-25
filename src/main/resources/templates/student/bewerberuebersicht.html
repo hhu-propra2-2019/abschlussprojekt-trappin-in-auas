@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{mopslayout :: html(name='bewerbung1', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+
+<head>
+  <meta charset="utf-8">
+  <title>main</title>
+
+  <th:block th:fragment="headcontent">
+  </th:block>
+</head>
+
+
+<body>
+  <header>
+    <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
+      <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
+      <ul>
+        <li>
+          <a href="#">test1</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <main th:fragment="bodycontent" style="background-color: #EAEAEA; padding: 2%">
+    <div class="container col-12 shadow p-3 mb-5 bg-light rounded" th:unless="${bewerbungExists}">
+      <h1>Bewerbungsübersicht</h1>
+      <p class="row" style="margin-left: 0rem;">
+        Scheinbar hast du noch keine offene bewerbung. 
+      </p>
+      <p class="row" style="margin-left: 0rem;">
+        Du kannst dich als Korrektor und/oder Tutor bewerben indem du auf folgenden button klickst
+      </p>
+      <div class="row justify-content-end" style="margin-right: 0rem;">
+        <a th:href="@{./bewerber/bewerbung}" class="btn btn-primary">Bewerben</a>
+      </div>
+    </div>
+
+    <div class="container col-12 shadow p-3 mb-5 bg-light rounded" th:if="${bewerbungExists}">
+      <h1>Bewerbungsübersicht</h1>
+      <p class="row" style="margin-left: 0rem;">
+        Du hast eine offene Bewerbung. 
+      </p>
+      <p class="row" style="margin-left: 0rem;">
+        Du kannst diese editieren solange sie nicht von den korrektoren eingesehen wurde indem du auf folgenden button klickst
+      </p>
+      <div class="row justify-content-end" style="margin-right: 0rem;">
+        <a th:href="@{./editieren}" class="btn btn-primary">Editieren</a>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

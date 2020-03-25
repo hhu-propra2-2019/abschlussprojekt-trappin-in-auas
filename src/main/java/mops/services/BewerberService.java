@@ -1,12 +1,11 @@
 package mops.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import mops.domain.database.dto.BewerberDTO;
-import mops.domain.database.dto.ModulAuswahlDTO;
-import mops.domain.models.Bewerber;
-import mops.domain.models.Dozent;
+import mops.domain.database.dto.*;
+import mops.domain.models.*;
 
 import org.springframework.stereotype.Service;
 
@@ -26,15 +25,33 @@ public class BewerberService implements IBewerberService {
     this.modelService = modelService;
   }
 
+  public Bewerber initialiseBewerber(){
+    Bewerber b = new Bewerber(new Karriere(), new Personalien(), new Praeferenzen());
+    b.getPraeferenzen().setModulAuswahl(new ArrayList<>()); // avoid list beeing null errors
+    b.getPraeferenzen().getModulAuswahl().add(new ModulAuswahl());
+    return b;
+  }
+
   @Override
   public void addBewerber(Bewerber b) {
     BewerberDTO bewerberDTO = mappingService.load(b);
     bewerberRepository.save(bewerberDTO);
   }
 
+  public void addBewerber(Bewerber b, String kennung) {
+    b.setKennung(kennung);
+    BewerberDTO bewerberDTO = mappingService.load(b);
+    BewerberDTO zuFindenderBewerber = bewerberRepository.findBewerberByKennung(kennung);
+
+    if(zuFindenderBewerber != null){
+      bewerberDTO.setId(zuFindenderBewerber.getId());
+    }
+    bewerberRepository.save(bewerberDTO);
+  }
+
   @Override
   public BewerberDTO findBewerberByKennung(String kennung) {
-    return bewerberRepository.findById(kennung).get();
+    return bewerberRepository.findBewerberByKennung(kennung);
   }
 
   public List<BewerberDTO> findAlleBewerber() {
@@ -47,7 +64,7 @@ public class BewerberService implements IBewerberService {
   }
 
   public void verteile(String kennung, Dozent dozent) {
-    BewerberDTO b = bewerberRepository.findById(kennung).get();
+    BewerberDTO b = findBewerberByKennung(kennung);
     b.getVerteiltAn().add(mappingService.load(dozent));
     bewerberRepository.save(b);
   }
@@ -56,12 +73,12 @@ public class BewerberService implements IBewerberService {
     return alleBewerber.stream().filter(x -> x.getVerteiltAn() != null).collect(Collectors.toList());
   }
 
-  public List<BewerberDTO> findNichtVerteilt() {
-    return bewerberRepository.findByVerteiltAnIsNull();
+  public List<Bewerber> findNichtVerteilt() {
+    return modelService.loadBewerberList(  bewerberRepository.findBewerberDTOBByVerteiltAnIsNull() );
   }
 
-  public List<BewerberDTO> findVerteilt() {
-    return bewerberRepository.findByVerteiltAnIsNotNull();
+  public List<Bewerber> findVerteilt() {
+    return modelService.loadBewerberList(  bewerberRepository.findByVerteiltAnIsNotNull()  );
   }
 
   public List<Bewerber> findBewerberFuerDozent(String dozentKennung) {
@@ -75,5 +92,17 @@ public class BewerberService implements IBewerberService {
     return auswahlDTO.stream().anyMatch(x -> x.getModul().getDozentMail().equals(dozentKennung));
   }
 
+  public Bewerber findBewerberModelByKennung(String kennung) {
+    return modelService.load(bewerberRepository.findBewerberByKennung(kennung));
+  }
+
+  public Bewerber initialiseEditBewerber(String kennung){
+    Bewerber b = modelService.load(bewerberRepository.findBewerberByKennung(kennung));
+    return (b == null) ? new Bewerber(new Karriere(), new Personalien(), new Praeferenzen()) : b;
+  }
+
+  public boolean bewerbungExists(String kennung) {
+    return findBewerberModelByKennung(kennung) != null;
+  }
   
 }

@@ -8,7 +8,6 @@ import org.bouncycastle.math.raw.Mod;
 public interface IDTOService {
     ModulDTO load(Modul modul);
     ModulAuswahlDTO load(ModulAuswahl modulAuswahl);
-    BerufModulDTO load(BerufModul berufModul);
     AdresseDTO load(Adresse adresse);
     ImmartikulationsStatusDTO load(ImmartikulationsStatus immartikulationsStatus);
     StudiengangAbschlussDTO load(StudiengangAbschluss studiengangAbschluss);

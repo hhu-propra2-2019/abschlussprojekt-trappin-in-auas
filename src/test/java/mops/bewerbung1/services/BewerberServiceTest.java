@@ -10,7 +10,10 @@ import mops.services.DTOService;
 import mops.services.ModelService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 
 import java.util.*;
 
@@ -20,6 +23,7 @@ import static org.mockito.Mockito.when;
 
 
 @SpringBootTest
+
 public class BewerberServiceTest {
 
   private transient IBewerberService bewerberService;

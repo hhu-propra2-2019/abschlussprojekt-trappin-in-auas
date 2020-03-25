@@ -18,13 +18,30 @@ public class ModelService implements IModelService {
   }
 
   public Bewerber load(BewerberDTO bewerberDTO){
+    if(bewerberDTO == null){
+      return null;
+    }
     return new Bewerber(
       load(bewerberDTO.getKarriere()), 
       load(bewerberDTO.getPersonalien()),
       load(bewerberDTO.getPraeferenzen()), 
-      bewerberDTO.getErstelltVon(),
-      bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()));
+      bewerberDTO.getKennung(),
+      bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()),
+      bewerberDTO.getDozentPraeferenz().stream().map(x -> load(x)).collect(Collectors.toList())
+    );
+
   }
+
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis") // Fix gradle bug: False positive
+  // https://github.com/pmd/pmd/issues/387
+  public List<Bewerber> loadBewerberList(List<BewerberDTO> bewerberDTOList) {
+    List<Bewerber> bewerberList = new LinkedList<>();
+    for (BewerberDTO bewerberDTO : bewerberDTOList) {
+      bewerberList.add(load(bewerberDTO));
+    }
+    return bewerberList;
+  }
+
 
   public Dozent load(VerteilungDTO verteilungDTO){
     return new Dozent(verteilungDTO.getDozentKennung(), verteilungDTO.getDozentName());
@@ -54,8 +71,7 @@ public class ModelService implements IModelService {
       return null;
     }
     return new ModulAuswahl(loadModul(modulAuswahlDTO.getModul()), modulAuswahlDTO.getPrioritaet(),
-        modulAuswahlDTO.getNote());
-
+        modulAuswahlDTO.getNote(), modulAuswahlDTO.getBeruf());
   }
 
   @Override
@@ -64,7 +80,7 @@ public class ModelService implements IModelService {
       return null;
     }
     Adresse adresse = loadAdresse(pDTO);
-    return new Personalien(adresse, pDTO.getUnikennung(), pDTO.getName(), pDTO.getVorname(), pDTO.getGeburtsdatum(),
+    return new Personalien(adresse, pDTO.getName(), pDTO.getVorname(), pDTO.getGeburtsdatum(),
         pDTO.getAlter(), pDTO.getGeburtsort(), pDTO.getNationalitaet());
   }
 
@@ -73,16 +89,11 @@ public class ModelService implements IModelService {
         personalienDTO.getAdresse().getStrasse(), personalienDTO.getAdresse().getHausnummer());
   }
 
-  public BerufModul loadBerufModul(BerufModulDTO berufModulDTO) {
-    return new BerufModul(berufModulDTO.getBeruf(), loadModul(berufModulDTO.getModul()));
-
-  }
-
   @Override
   public Praeferenzen load(PraeferenzenDTO pDTO) {
     List<ModulAuswahl> modulAuswahl = pDTO.getModulAuswahl().stream().map(this::load).collect(Collectors.toList());
     return new Praeferenzen(pDTO.getMaxWunschStunden(), pDTO.getMinWunschStunden(), modulAuswahl, pDTO.getKommentar(),
-        pDTO.getEinstiegTyp(), pDTO.getEinschraenkungen(), loadBerufModul(pDTO.getBerufModul()),
+        pDTO.getEinstiegTyp(), pDTO.getEinschraenkungen(),
         pDTO.getTutorenSchulungTeilnahme());
   }
 
@@ -100,4 +111,11 @@ public class ModelService implements IModelService {
     return modulist;
   }
 
+  @Override
+  public DozentPraeferenz load(DozentPraeferenzDTO dozentPraeferenzDTO) {
+    return new DozentPraeferenz(
+        dozentPraeferenzDTO.getDozentMail(),
+        dozentPraeferenzDTO.getBewerber(),
+        dozentPraeferenzDTO.getPraeferenz());
+  }
 }

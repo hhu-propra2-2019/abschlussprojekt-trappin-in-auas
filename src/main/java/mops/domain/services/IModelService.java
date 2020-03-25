@@ -12,4 +12,5 @@ public interface IModelService {
     Modul loadModul(ModulDTO modulDTO);
     StudiengangAbschluss load(StudiengangAbschlussDTO fachAbschluss);
     List<Modul> loadModulList(List<ModulDTO> dtoList);
+    DozentPraeferenz load(DozentPraeferenzDTO dozentPraeferenzDTO);
 }

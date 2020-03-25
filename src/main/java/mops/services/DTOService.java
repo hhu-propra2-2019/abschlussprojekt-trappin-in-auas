@@ -3,10 +3,12 @@ package mops.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
+import mops.domain.repositories.ModulRepository;
 import mops.domain.services.IDTOService;
 
 
@@ -15,19 +17,26 @@ public class DTOService implements IDTOService {
   /*
    * Mapping Models -> DTO Für Bewerbungsbogen -> Datenbank
    */
+  @Autowired
+  private transient ModulRepository modulRepository;
 
+  public DTOService(){
 
-  public ModulDTO load(Modul modul){
-    return new ModulDTO(modul.getModulName(),modul.getDozent().getDozentName(),modul.getDozent().getDozentMail());
+  }
 
+  public DTOService(ModulRepository modulRepository){
+    this.modulRepository = modulRepository;
+  }
+
+  public ModulDTO load(Modul modul) {
+    List<ModulDTO> modulDTOs = modulRepository.findByModulNameAndDozentMail(modul.getModulName(),
+        modul.getDozent().getDozentMail());
+    return (modulDTOs.size() > 0) ? modulDTOs.get(0)
+        : new ModulDTO(modul.getModulName(), modul.getDozent().getDozentName(), modul.getDozent().getDozentMail());
   }
 
   public ModulAuswahlDTO load(ModulAuswahl modulAuswahl) {
-    return new ModulAuswahlDTO(load(modulAuswahl.getModul()), modulAuswahl.getPrioritaet(),modulAuswahl.getNote());
-  }
-
-  public BerufModulDTO load(BerufModul berufModul) {
-    return new BerufModulDTO(berufModul.getBeruf(), load(berufModul.getModul()));
+    return new ModulAuswahlDTO(load(modulAuswahl.getModul()), modulAuswahl.getPrioritaet(),modulAuswahl.getNote(), modulAuswahl.getBeruf());
   }
 
   public AdresseDTO load(Adresse adresse){
@@ -46,7 +55,7 @@ public class DTOService implements IDTOService {
   }
 
   public PersonalienDTO load(Personalien personalien) {
-    return new PersonalienDTO(load(personalien.getAdresse()), personalien.getUnikennung(), personalien.getName(),
+    return new PersonalienDTO(load(personalien.getAdresse()), personalien.getName(),
         personalien.getVorname(), personalien.getGeburtsdatum(), personalien.getAlter(), personalien.getGeburtsort(),
         personalien.getNationalitaet());
   }
@@ -59,14 +68,15 @@ public class DTOService implements IDTOService {
   public PraeferenzenDTO load(Praeferenzen praeferenzen) {
     return new PraeferenzenDTO(praeferenzen.getMinWunschStunden(), praeferenzen.getMaxWunschStunden(),
         loadList(praeferenzen), praeferenzen.getKommentar(), praeferenzen.getEinstiegTyp(),
-        praeferenzen.getEinschraenkungen(), load(praeferenzen.getBerufModul()),
-        praeferenzen.getTutorenSchulungTeilnahme());
+        praeferenzen.getEinschraenkungen(), praeferenzen.getTutorenSchulungTeilnahme());
   }
 
   public BewerberDTO load(Bewerber bewerber) {
     List<VerteilungDTO> verteiltAn = (bewerber.getVerteiltAn() == null) ? null : load(bewerber.getVerteiltAn());
+    List<DozentPraeferenzDTO> dozentPraeferenz = (bewerber.getDozentPraeferenz() == null) ? null : loadDozentPraeferenzList(bewerber.getDozentPraeferenz());
     BewerberDTO bewerberDTO = new BewerberDTO(load(bewerber.getPersonalien()), load(bewerber.getKarriere()),
-        load(bewerber.getPraeferenzen()), verteiltAn);
+        load(bewerber.getPraeferenzen()), verteiltAn, dozentPraeferenz);
+    bewerberDTO.setKennung(bewerber.getKennung());
     return bewerberDTO;
   }
 
@@ -78,11 +88,16 @@ public class DTOService implements IDTOService {
     return verteiltAn.stream().map(x -> load(x)).collect(Collectors.toList());
   }
 
+  private List<DozentPraeferenzDTO> loadDozentPraeferenzList(List<DozentPraeferenz> dozentPraeferenzs){
+    return  dozentPraeferenzs.stream().map(x -> load(x)).collect(Collectors.toList());
+  }
+
   public List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen) {
     return praeferenzen.getModulAuswahl().stream().map(this::load).collect(Collectors.toList());
   }
 
   public DozentPraeferenzDTO load(DozentPraeferenz dPraeferenz) {
-    return new DozentPraeferenzDTO(dPraeferenz.getBewerberKennung(), dPraeferenz.getDozentKennung(), dPraeferenz.getPraeferenz());
+    return new DozentPraeferenzDTO(dPraeferenz.getBewerberKennung(), dPraeferenz.getDozentKennung(),
+        dPraeferenz.getPraeferenz());
   }
 }
