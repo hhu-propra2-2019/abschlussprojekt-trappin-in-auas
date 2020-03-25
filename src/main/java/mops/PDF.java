@@ -26,6 +26,7 @@ import mops.services.PDFService;
 public class PDF {
   public static void main(String[] args) throws Exception {
     Bewerber b = new Bewerber();
+    b.setKennung("mawin125");
     Personalien personalien = new Personalien();
     personalien.setAlter(18);
     try {

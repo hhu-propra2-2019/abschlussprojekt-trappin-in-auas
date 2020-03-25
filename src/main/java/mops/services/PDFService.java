@@ -3,17 +3,17 @@ package mops.services;
 import java.io.IOException;
 import mops.domain.models.*;
 import mops.domain.services.IPDFService;
+import java.io.File;
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
-import java.io.File;
-import java.nio.file.Path;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import org.springframework.stereotype.Service;
+
+import mops.domain.models.Bewerber;
+import mops.domain.models.EinstiegTyp;
+import mops.domain.models.ModulAuswahl;
+import mops.domain.services.IPDFService;
 
 @SuppressWarnings("PMD.UnusedLocalVariable")
 @Service
@@ -38,6 +38,7 @@ public class PDFService implements IPDFService {
     }
   }
 
+  @SuppressWarnings("PMD.CloseResource")
   public void fillPDF(Bewerber bewerber, String file)  {
     try{
       PDDocument pDDocument = PDDocument.load(new File(file));
@@ -86,7 +87,7 @@ public class PDFService implements IPDFService {
     field.setValue(bewerber.getPersonalien().getAdresse().getPLZ());
     System.out.println(field);
     field = pDAcroForm.getField("Anschrift (Ort)");
-    field.setValue(bewerber.getPersonalien().getAdresse().getWohnort());
+    field.setValue(bewerber.getPersonalien().getAdresse().getWohnOrt());
     System.out.println(field);
     field = pDAcroForm.getField("Vertragsart");
     field.setValue(pruefeVertragsart(bewerber));
