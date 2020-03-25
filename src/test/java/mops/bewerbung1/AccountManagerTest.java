@@ -13,9 +13,14 @@ import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.representations.IDToken;
 import org.mockito.Mockito;
 import org.mockito.internal.util.collections.Sets;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+
 @SpringBootTest
+
 class AccountManagerTest {
 
   transient KeycloakPrincipal principal;

@@ -12,10 +12,14 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.mockito.internal.util.collections.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+
 class AuthenticationManagerTest {
 
   @Autowired
