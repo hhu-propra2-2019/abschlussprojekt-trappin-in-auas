@@ -14,7 +14,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Personalien {
 
   private Adresse adresse;
-  private String unikennung;
   private String name;
   private String vorname;
 

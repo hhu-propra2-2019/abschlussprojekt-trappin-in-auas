@@ -59,7 +59,6 @@ public class ModelServiceTest {
     personalienDTO.setName("Wick");
     personalienDTO.setNationalitaet("Terminator");
     personalienDTO.setVorname("John");
-    personalienDTO.setUnikennung("johwi200");
 
     Personalien personalien = modelService.load(personalienDTO);
 
@@ -78,7 +77,6 @@ public class ModelServiceTest {
     assertEquals(personalienDTO.getGeburtsort(), personalien.getGeburtsort());
     assertEquals(personalienDTO.getName(), personalien.getName());
     assertEquals(personalienDTO.getNationalitaet(), personalien.getNationalitaet());
-    assertEquals(personalienDTO.getUnikennung(), personalien.getUnikennung());
     assertEquals(personalienDTO.getVorname(), personalien.getVorname());
   }
 

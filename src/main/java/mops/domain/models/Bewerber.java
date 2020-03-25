@@ -15,6 +15,13 @@ public class Bewerber {
   private Personalien personalien;
   private Praeferenzen praeferenzen;
 
-  private String erstelltVon;
+  private String kennung;
   private List<Dozent> verteiltAn;
+  private List<DozentPraeferenz> dozentPraeferenz;
+
+  public Bewerber(Karriere karriere, Personalien personalien, Praeferenzen praeferenzen) {
+    this.karriere = karriere;
+    this.personalien = personalien;
+    this.praeferenzen = praeferenzen;
+  }
 }

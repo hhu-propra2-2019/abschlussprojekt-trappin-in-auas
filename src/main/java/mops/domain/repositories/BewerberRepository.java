@@ -20,9 +20,8 @@ public interface BewerberRepository extends CrudRepository<BewerberDTO, String> 
     @Override
     <S extends BewerberDTO> Iterable<S> saveAll(Iterable<S> entities);
 
-    @Query("select b from BewerberDTO b where b.personalien.unikennung=?1")
+    @Query("select b from BewerberDTO b where b.kennung=?1")
     BewerberDTO findBewerberByKennung(String kenung);
-
 
     List<BewerberDTO> findBewerberDTOBByVerteiltAnIsNull();
 

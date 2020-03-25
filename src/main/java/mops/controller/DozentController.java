@@ -3,6 +3,7 @@ package mops.controller;
 import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 
 import java.util.List;
+
 import mops.domain.database.dto.BewerberDTO;
 import mops.domain.models.Bewerber;
 import mops.domain.models.DozentPraeferenz;
@@ -10,6 +11,7 @@ import mops.services.BewerberService;
 import mops.services.DozentPraeferenzService;
 import mops.services.DozentService;
 
+import mops.services.ModelService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -33,7 +35,10 @@ public class DozentController {
   @Autowired
   private transient DozentPraeferenzService dozentPraeferenzService;
 
-  private transient final String bewerberAttribute = "bewerber";
+  @Autowired
+  private transient ModelService modelService;
+
+  private static final String BEWERBER_ATTRIBUTE = "bewerber";
 
   @Secured({ ROLE_ORGA })
   @GetMapping("/uebersicht")
@@ -45,16 +50,9 @@ public class DozentController {
     model.addAttribute("bearbeitetCount", bearbeitet.size());
     model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
-    model.addAttribute(bewerberAttribute, meineBewerber);
-    return "orga/dozent/ubersicht";
-  }
-
-  @Secured({ ROLE_ORGA })
-  @PostMapping("/addPreference")
-  public String addPreference(Model model, KeycloakAuthenticationToken token, int praeferenz, String dozentKennung,
-      String bewerberKennung) {
-    dozentPraeferenzService.addPraeferenz(new DozentPraeferenz(dozentKennung, bewerberKennung, praeferenz));
-    return "redirect:./uebersicht";
+    model.addAttribute(BEWERBER_ATTRIBUTE, nichtBearbeitet);
+    model.addAttribute("anzeigeModus", "uebersicht");
+    return "dozent/dozent";
   }
 
   @Secured({ ROLE_ORGA })
@@ -67,8 +65,10 @@ public class DozentController {
     model.addAttribute("bearbeitetCount", bearbeitet.size());
     model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
-    model.addAttribute(bewerberAttribute, nichtBearbeitet);
-    return "orga/dozent/ubersicht";
+    model.addAttribute(BEWERBER_ATTRIBUTE, nichtBearbeitet);
+
+    model.addAttribute("anzeigeModus", "offene");
+    return "dozent/dozent";
   }
 
   @Secured({ ROLE_ORGA })
@@ -81,15 +81,26 @@ public class DozentController {
     model.addAttribute("bearbeitetCount", bearbeitet.size());
     model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
-    model.addAttribute(bewerberAttribute, bearbeitet);
-    return "orga/dozent/ubersicht";
+    model.addAttribute(BEWERBER_ATTRIBUTE, bearbeitet);
+
+    model.addAttribute("anzeigeModus", "vorgemerkte");
+    return "dozent/dozent";
   }
 
   @Secured({ ROLE_ORGA })
-  @GetMapping("/uebersicht/detail")
+  @PostMapping("/addPreference")
+  public String addPreference(Model model, KeycloakAuthenticationToken token, int praeferenz, String dozentKennung,
+                              String bewerberKennung) {
+    dozentPraeferenzService.addPraeferenz(new DozentPraeferenz(dozentKennung, bewerberKennung, praeferenz));
+    return "redirect:./uebersicht";
+  }
+
+  @Secured({ ROLE_ORGA })
+  @GetMapping("/details/{kennung}")
   public String detailAnsicht(Model model, KeycloakAuthenticationToken token, @PathVariable String kennung) {
-    BewerberDTO bewerber = bewerberService.findBewerberByKennung(kennung);
-    model.addAttribute(bewerberAttribute, bewerber);
-    return "";
+    BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(kennung);
+    Bewerber bewerber = modelService.load(bewerberDTO);
+    model.addAttribute(BEWERBER_ATTRIBUTE, bewerber);
+    return "bewerbungsdetails/details";
   }
 }

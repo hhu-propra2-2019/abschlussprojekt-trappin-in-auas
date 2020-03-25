@@ -6,10 +6,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Modul {
-    private String modulName;
-    private Dozent dozent;
+  private String modulName;
+  private Dozent dozent;
 
-    public Modul() {
-        this.dozent = new Dozent();
-    }
+  public Modul() {
+    this.dozent = new Dozent();
+  }
 }

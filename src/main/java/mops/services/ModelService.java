@@ -18,12 +18,18 @@ public class ModelService implements IModelService {
   }
 
   public Bewerber load(BewerberDTO bewerberDTO){
+    if(bewerberDTO == null){
+      return null;
+    }
     return new Bewerber(
       load(bewerberDTO.getKarriere()), 
       load(bewerberDTO.getPersonalien()),
       load(bewerberDTO.getPraeferenzen()), 
-      bewerberDTO.getErstelltVon(),
-      bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()));
+      bewerberDTO.getKennung(),
+      bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()),
+      bewerberDTO.getDozentPraeferenz().stream().map(x -> load(x)).collect(Collectors.toList())
+    );
+
   }
 
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis") // Fix gradle bug: False positive
@@ -74,7 +80,7 @@ public class ModelService implements IModelService {
       return null;
     }
     Adresse adresse = loadAdresse(pDTO);
-    return new Personalien(adresse, pDTO.getUnikennung(), pDTO.getName(), pDTO.getVorname(), pDTO.getGeburtsdatum(),
+    return new Personalien(adresse, pDTO.getName(), pDTO.getVorname(), pDTO.getGeburtsdatum(),
         pDTO.getAlter(), pDTO.getGeburtsort(), pDTO.getNationalitaet());
   }
 
@@ -105,4 +111,11 @@ public class ModelService implements IModelService {
     return modulist;
   }
 
+  @Override
+  public DozentPraeferenz load(DozentPraeferenzDTO dozentPraeferenzDTO) {
+    return new DozentPraeferenz(
+        dozentPraeferenzDTO.getDozentMail(),
+        dozentPraeferenzDTO.getBewerber(),
+        dozentPraeferenzDTO.getPraeferenz());
+  }
 }
