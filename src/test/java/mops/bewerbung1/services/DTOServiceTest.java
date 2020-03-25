@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+
+import mops.bewerbung1.testutils.ModelDTOCompare;
 import mops.domain.database.dto.AdresseDTO;
 import mops.domain.database.dto.BewerberDTO;
 import mops.domain.database.dto.KarriereDTO;
@@ -35,35 +37,30 @@ public class DTOServiceTest {
 
   private transient IDTOService dtoService;
   private transient ModulRepository modulRepo;
+  private transient ModelDTOCompare modelDTOCompare;
 
   @BeforeEach
   void setUp(){
     modulRepo = mock(ModulRepository.class);
     dtoService = new DTOService(modulRepo);
+    modelDTOCompare = new ModelDTOCompare();
   }
 
 
   @Test
   public void adresseZuAdresseDTO(){
     Adresse adresse = new Adresse("40233","Berlin","Magnumstr","16a");
-
     AdresseDTO adresseDTO = dtoService.load(adresse);
 
-    assertEquals(adresse.getPLZ(),adresseDTO.getPLZ());
-    assertEquals(adresse.getWohnOrt(),adresseDTO.getWohnort());
-    assertEquals(adresse.getStrasse(),adresseDTO.getStrasse());
-    assertEquals(adresse.getHausnummer(),adresseDTO.getHausnummer());
+    modelDTOCompare.compare(adresse, adresseDTO);
   }
 
   @Test
   public void modulZuModulDTO(){
     Modul modul = new Modul("Propra", new Dozent("propra@cshhu.de","Bendi"));
-
     ModulDTO modulDTO = dtoService.load(modul);
 
-    assertEquals(modul.getModulName(), modulDTO.getModulName());
-    assertEquals(modul.getDozent().getDozentMail(), modulDTO.getDozentMail());
-    assertEquals(modul.getModulName(), modulDTO.getModulName());
+    modelDTOCompare.compare(modul, modulDTO);
   }
 
   @Test
@@ -77,34 +74,18 @@ public class DTOServiceTest {
 
     PersonalienDTO pDTO = dtoService.load(p);
 
-    assertEquals(adresse.getPLZ(),pDTO.getAdresse().getPLZ());
-    assertEquals(adresse.getWohnOrt(),pDTO.getAdresse().getWohnort());
-    assertEquals(adresse.getStrasse(),pDTO.getAdresse().getStrasse());
-    assertEquals(adresse.getHausnummer(),pDTO.getAdresse().getHausnummer());
-    assertEquals(geburtsDatum,pDTO.getGeburtsdatum());
-    assertEquals(p.getName(),pDTO.getName());
-    assertEquals(p.getVorname(),pDTO.getVorname());
-    assertEquals(p.getAlter(),pDTO.getAlter());
-    assertEquals(p.getGeburtsort(),pDTO.getGeburtsort());
-    assertEquals(p.getNationalitaet(),pDTO.getNationalitaet());
+    modelDTOCompare.compare(p, pDTO);
   }
 
   @Test
   public void karriereZuKarriereDTO(){
     ImmartikulationsStatus immartikulationsStatus = new ImmartikulationsStatus(true,"KI");
     StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor","HHU");
+    
     Karriere karriere = new Karriere("keine",immartikulationsStatus,studiengangAbschluss);
-
     KarriereDTO karriereDTO = dtoService.load(karriere);
 
-    assertEquals(karriereDTO.getArbeitserfahrung(),karriere.getArbeitserfahrung());
-    assertEquals(karriereDTO.getImmartikulationsStatus().isStatus(),
-        karriere.getImmartikulationsStatus().isStatus());
-    assertEquals(karriereDTO.getImmartikulationsStatus().getFachrichtung(),
-        karriere.getImmartikulationsStatus().getFachrichtung());
-    assertEquals(karriereDTO.getFachAbschluss().getStudiengang(),karriere.getFachAbschluss().getStudiengang());
-    assertEquals(karriereDTO.getFachAbschluss().getAbschluss(),karriere.getFachAbschluss().getAbschluss());
-    assertEquals(karriereDTO.getFachAbschluss().getUni(),karriere.getFachAbschluss().getUni());
+    modelDTOCompare.compare(karriere, karriereDTO);
   }
 
   @Test
@@ -128,27 +109,7 @@ public class DTOServiceTest {
     PraeferenzenDTO praeferenzenDTO = dtoService.load(praeferenzen);
     assertNotNull(praeferenzen);
 
-    assertEquals(praeferenzenDTO.getMinWunschStunden(), praeferenzen.getMinWunschStunden());
-    assertEquals(praeferenzenDTO.getMaxWunschStunden(), praeferenzen.getMaxWunschStunden());
-    assertEquals(praeferenzenDTO.getKommentar(), praeferenzen.getKommentar());
-    assertEquals(praeferenzenDTO.getEinstiegTyp(), praeferenzen.getEinstiegTyp());
-    assertEquals(praeferenzenDTO.getEinschraenkungen(), praeferenzen.getEinschraenkungen());
-
-    assertEquals(praeferenzenDTO.getModulAuswahl().get(0).getBeruf(), praeferenzen.getModulAuswahl().get(0).getBeruf());
-    assertEquals(praeferenzenDTO.getTutorenSchulungTeilnahme(), praeferenzen.getTutorenSchulungTeilnahme());
-
-    assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getPrioritaet(),
-        praeferenzen.getModulAuswahl().get(1).getPrioritaet());
-    assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getNote(),
-        praeferenzen.getModulAuswahl().get(1).getNote());
-    assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getModul().getModulName(),
-        praeferenzen.getModulAuswahl().get(1).getModul().getModulName());
-    assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getModul().getDozentName(),
-        praeferenzen.getModulAuswahl().get(1).getModul().getDozent().getDozentName());
-    assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getModul().getDozentMail(),
-        praeferenzen.getModulAuswahl().get(1).getModul().getDozent().getDozentMail());
-    assertEquals(praeferenzenDTO.getModulAuswahl().get(1).getModul().getDozentMail(),
-        praeferenzen.getModulAuswahl().get(1).getModul().getDozent().getDozentMail());
+    modelDTOCompare.compare(praeferenzen, praeferenzenDTO);
   }
 
   @Test
@@ -196,6 +157,7 @@ public class DTOServiceTest {
     assertNotNull(bewerberDTO.getPersonalien());
     assertNotNull(bewerberDTO.getKarriere());
     
+    modelDTOCompare.compare(b, bewerberDTO);
   }
 
 }
