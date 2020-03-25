@@ -14,9 +14,9 @@ public class KeycloakRoleService {
   public KeycloakRoleService(){
     roleRedirect = new HashMap<>();
     roleRedirect.put("studentin", "/bewerber");
-    roleRedirect.put("verteiler", "/verteiler");
+    roleRedirect.put("verteiler", "/verteiler/uebersicht");
     roleRedirect.put("setup", "/setup");
-    roleRedirect.put("orga", "/dozent");
+    roleRedirect.put("orga", "/dozent/uebersicht");
   }
 
   public String getRedirect(String role){

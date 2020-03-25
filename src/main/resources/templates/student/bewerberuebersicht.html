@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-  th:replace="~{mopslayout :: html(name='bewerbung1', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+      th:replace="~{mopslayout :: html(name='bewerbung1', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
 
 <head>
   <meta charset="utf-8">
@@ -12,23 +12,30 @@
 
 
 <body>
-  <header>
-    <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
-      <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
-      <ul>
-        <li>
-          <a href="#">test1</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+<header>
+  <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
+    <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
+    <ul>
+      <li>
+        <a href="#">test1</a>
+      </li>
+    </ul>
+  </nav>
+</header>
 
+<main th:fragment="bodycontent">
 
-  <main th:fragment="bodycontent" style="background-color: #EAEAEA; padding: 2%">
+  <div class="container pt-3" th:unless="${verteilerPhase}">
+    <div class="alert alert-warning">
+      Aktuell können Sie sich nicht bewerben. Bitte informieren Sie sich über die Bewerbungszeiträume!
+    </div>
+  </div>
+
+  <div th:if="${verteilerPhase}">
     <div class="container col-12 shadow p-3 mb-5 bg-light rounded" th:unless="${bewerbungExists}">
       <h1>Bewerbungsübersicht</h1>
       <p class="row" style="margin-left: 0rem;">
-        Scheinbar hast du noch keine offene bewerbung. 
+        Scheinbar hast du noch keine offene bewerbung.
       </p>
       <p class="row" style="margin-left: 0rem;">
         Du kannst dich als Korrektor und/oder Tutor bewerben indem du auf folgenden button klickst
@@ -41,16 +48,18 @@
     <div class="container col-12 shadow p-3 mb-5 bg-light rounded" th:if="${bewerbungExists}">
       <h1>Bewerbungsübersicht</h1>
       <p class="row" style="margin-left: 0rem;">
-        Du hast eine offene Bewerbung. 
+        Du hast eine offene Bewerbung.
       </p>
       <p class="row" style="margin-left: 0rem;">
-        Du kannst diese editieren solange sie nicht von den korrektoren eingesehen wurde indem du auf folgenden button klickst
+        Du kannst diese editieren solange sie nicht von den korrektoren eingesehen wurde indem du auf folgenden button
+        klickst
       </p>
       <div class="row justify-content-end" style="margin-right: 0rem;">
         <a th:href="@{./editieren}" class="btn btn-primary">Editieren</a>
       </div>
     </div>
-  </main>
+  </div>
+</main>
 </body>
 
 </html>
