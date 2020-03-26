@@ -68,7 +68,7 @@ public class BewerberService implements IBewerberService {
   }
 
   public void verteile(String kennung, Dozent dozent) {
-    BewerberDTO b = findBewerberByKennung(kennung);
+    BewerberDTO b = bewerberRepository.findBewerberByKennung(kennung);
     b.getVerteiltAn().add(mappingService.load(dozent));
     bewerberRepository.save(b);
   }

@@ -47,7 +47,16 @@ public class BewerberServiceTest {
 
   private void addBewerberDTOMock(List<BewerberDTO> pseudoDatenbank){
     doAnswer(invocation -> {
-      pseudoDatenbank.add((BewerberDTO) invocation.getArguments()[0]);
+      BewerberDTO bewerberDTO = (BewerberDTO) invocation.getArguments()[0];
+      if(pseudoDatenbank.stream().anyMatch(x -> x.getKennung().equals(bewerberDTO.getKennung()))){
+        BewerberDTO gefundene = pseudoDatenbank.stream().filter(x -> x.getKennung().equals(bewerberDTO.getKennung())).findFirst().get();
+        gefundene.setDozentPraeferenz(bewerberDTO.getDozentPraeferenz());
+        gefundene.setKarriere(bewerberDTO.getKarriere());
+        gefundene.setPersonalien(bewerberDTO.getPersonalien());
+        gefundene.setPraeferenzen(bewerberDTO.getPraeferenzen());
+        gefundene.setVerteiltAn(bewerberDTO.getVerteiltAn());
+      }
+      pseudoDatenbank.add(bewerberDTO);
       return null;
     }).when(bewerberRepository).save(any(BewerberDTO.class));
   }
@@ -138,6 +147,7 @@ public class BewerberServiceTest {
 
     Bewerber bewerber2 = modelGenerator.generateBewerber();
     bewerber2.getPraeferenzen().setModulAuswahl(modulAuswahlList1);
+    bewerber2.setKennung("spezialkennung");
 
     addBewerberDTOMock(alleBewerbungen);
     when(bewerberRepository.findAll()).thenReturn(alleBewerbungen);
