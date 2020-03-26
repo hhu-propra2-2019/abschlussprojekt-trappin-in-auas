@@ -6,6 +6,8 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
+import org.hibernate.annotations.Cascade;
+
 import lombok.*;
 import mops.validation.constraints.EinstiegsTypConstraint;
 

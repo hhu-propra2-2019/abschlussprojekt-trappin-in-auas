@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
 
@@ -66,7 +68,10 @@ public class BewerberService implements IBewerberService {
   }
 
   public void verteile(String kennung, Dozent dozent) {
+    System.out.println("finding bewerber mit kennung: " + kennung);
     BewerberDTO b = findBewerberByKennung(kennung);
+    System.out.println("Verteile bewerber:");
+    System.out.println(b);
     b.getVerteiltAn().add(mappingService.load(dozent));
     bewerberRepository.save(b);
   }
@@ -105,6 +110,10 @@ public class BewerberService implements IBewerberService {
 
   public boolean bewerbungExists(String kennung) {
     return findBewerberModelByKennung(kennung) != null;
+  }
+
+  public void removeBewerber(Bewerber bewerber) {
+    bewerberRepository.delete(mappingService.load(bewerber));
   }
 
 }

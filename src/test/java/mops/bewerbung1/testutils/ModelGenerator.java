@@ -21,13 +21,13 @@ public class ModelGenerator {
    * @return Bewerber with nested random attributes
    */
   public Bewerber generateBewerber() {
-    // karriere, personalien, praeferenzen, kennung, verteiltAn, dozentPraeferenz
     Bewerber bewerber = new Bewerber();
     bewerber.setKarriere(generateKarriere());
     bewerber.setPersonalien(generatePersonalien());
     bewerber.setPraeferenzen(generatePraeferenz());
 
     bewerber.setKennung(kennungen.get((int) (Math.random() * kennungen.size())));
+    System.out.println("generated bewerber with kennung: "+ bewerber.getKennung());
     return bewerber;
   }
 

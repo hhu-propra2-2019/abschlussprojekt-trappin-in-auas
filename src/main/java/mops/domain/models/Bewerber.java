@@ -23,7 +23,6 @@ public class Bewerber {
   @Valid
   private Praeferenzen praeferenzen;
 
-  @NotBlank
   private String kennung;
   
   private List<Dozent> verteiltAn;
