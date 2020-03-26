@@ -10,9 +10,7 @@ import java.util.LinkedList;
 import java.util.Locale;
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
-import mops.domain.services.IDTOService;
 import mops.domain.services.IModelService;
-import mops.services.DTOService;
 import mops.services.ModelService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,12 +27,10 @@ import java.util.List;
 
 public class ModelServiceTest {
 
-  private transient IDTOService dtoService;
   private transient IModelService modelService;
 
   @BeforeEach
   void setUp() {
-    dtoService = new DTOService();
     modelService = new ModelService();
   }
 
@@ -103,13 +99,13 @@ public class ModelServiceTest {
 
         Karriere karriere = modelService.load(karriereDTO);
         StudiengangAbschluss studiengangAbschluss = karriere.getFachAbschluss();
-        ImmartikulationsStatus immartikulationsStatus = karriere.getImmartikulationsStatus();
+        ImmatrikulationsStatus immatrikulationsStatus = karriere.getImmatrikulationsStatus();
         assertNotNull(karriere);
 
 
         assertEquals(karriereDTO.getArbeitserfahrung(), karriere.getArbeitserfahrung());
-        assertEquals(immartikulationsStatusDTO.getFachrichtung(), immartikulationsStatus.getFachrichtung());
-        assertEquals(immartikulationsStatusDTO.isStatus(), immartikulationsStatus.isStatus());
+        assertEquals(immartikulationsStatusDTO.getFachrichtung(), immatrikulationsStatus.getFachrichtung());
+        assertEquals(immartikulationsStatusDTO.isStatus(), immatrikulationsStatus.isStatus());
         assertEquals(studiengangAbschlussDTO.getStudiengang(), studiengangAbschluss.getStudiengang());
         assertEquals(studiengangAbschlussDTO.getUni(), studiengangAbschluss.getUni());
         assertEquals(studiengangAbschlussDTO.getAbschluss(), studiengangAbschluss.getAbschluss());

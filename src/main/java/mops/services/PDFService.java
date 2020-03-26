@@ -1,5 +1,8 @@
 package mops.services;
 
+import java.io.IOException;
+import mops.domain.models.*;
+import mops.domain.services.IPDFService;
 import java.io.File;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -10,7 +13,7 @@ import org.springframework.stereotype.Service;
 import mops.domain.models.Bewerber;
 import mops.domain.models.EinstiegTyp;
 import mops.domain.models.ModulAuswahl;
-import mops.domain.services.IPDFService;
+
 
 @SuppressWarnings("PMD.UnusedLocalVariable")
 @Service
@@ -36,23 +39,23 @@ public class PDFService implements IPDFService {
   }
 
   @SuppressWarnings("PMD.CloseResource")
-  public void fillPDF(Bewerber bewerber, String file) throws Exception {
-    PDDocument pDDocument = PDDocument.load(new File(file));
-    System.out.println("PDF geladen");
-    try {
-      System.out.println("versuche zu fuellen");
-      checkEncryption(pDDocument);
-      loadPDFFelder(bewerber, pDDocument);
+  public void fillPDF(Bewerber bewerber, String file)  {
+    try{
+      PDDocument pDDocument = PDDocument.load(new File(file));
+      try {
+        System.out.println("versuche zu fuellen");
+        checkEncryption(pDDocument);
+        loadPDFFelder(bewerber, pDDocument);
 
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      if (hatAbschluss(bewerber)) {
-        pDDocument.save(PDF_PATH + "/output/output_" + bewerber.getPersonalien().getName() + ".pdf");
-      } else {
-        pDDocument.save(PDF_PATH + "/output/output.pdf");
+      } catch (Exception e) {
+        e.printStackTrace();
+      } finally {
+        pDDocument.save(PDF_PATH + "/output/output_"+ bewerber.getPersonalien().getName()+
+            "_"+ bewerber.getPersonalien().getVorname()+ ".pdf");
+        pDDocument.close();
       }
-      pDDocument.close();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 
@@ -61,40 +64,31 @@ public class PDFService implements IPDFService {
 
     PDField field = pDAcroForm.getField("Vorname");
     field.setValue(bewerber.getPersonalien().getVorname());
-    System.out.println(field);
-
-    System.out.println(field);
-
+    field = pDAcroForm.getField("Name");
+    field.setValue(bewerber.getPersonalien().getName());
     field = pDAcroForm.getField("Geburtsdatum");
     field.setValue(bewerber.getPersonalien().getGeburtsdatum().toString());
-    System.out.println(field);
-
     field = pDAcroForm.getField("Staatsangehörigkeit");
     field.setValue(bewerber.getPersonalien().getNationalitaet());
-    System.out.println(field);
     field = pDAcroForm.getField("Geburtsort");
     field.setValue(bewerber.getPersonalien().getGeburtsort());
-
     field = pDAcroForm.getField("Anschrift (Straße)");
     field.setValue(bewerber.getPersonalien().getAdresse().getStrasse());
     field = pDAcroForm.getField("Anschrift (Hausnummer)");
     field.setValue(bewerber.getPersonalien().getAdresse().getHausnummer());
     field = pDAcroForm.getField("Anschrift (PLZ)");
     field.setValue(bewerber.getPersonalien().getAdresse().getPLZ());
-    System.out.println(field);
     field = pDAcroForm.getField("Anschrift (Ort)");
     field.setValue(bewerber.getPersonalien().getAdresse().getWohnOrt());
-    System.out.println(field);
     field = pDAcroForm.getField("Vertragsart");
     field.setValue(pruefeVertragsart(bewerber));
-
     field = pDAcroForm.getField("Stunden");
     field.setValue(
         bewerber.getPraeferenzen().getMinWunschStunden() + " - " + bewerber.getPraeferenzen().getMaxWunschStunden());
     field = pDAcroForm.getField("Immatrikulation");
     field.setValue(pruefeStatus(bewerber));
     field = pDAcroForm.getField("Studiengang");
-    field.setValue(bewerber.getKarriere().getImmartikulationsStatus().getFachrichtung());
+    field.setValue(bewerber.getKarriere().getImmatrikulationsStatus().getFachrichtung());
 
     field = pDAcroForm.getField("Bemerkung zum Antrag");
     field.setValue("On");
@@ -123,7 +117,7 @@ public class PDFService implements IPDFService {
   }
 
   public String pruefeStatus(Bewerber bewerber) {
-    if (bewerber.getKarriere().getImmartikulationsStatus().isStatus()) {
+    if (bewerber.getKarriere().getImmatrikulationsStatus().isStatus()) {
       return "On";
     }
     return "Off";

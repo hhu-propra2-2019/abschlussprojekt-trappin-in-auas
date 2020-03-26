@@ -1,7 +1,6 @@
 package mops.services;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import mops.domain.database.dto.ModulDTO;
 import mops.domain.models.Modul;
@@ -13,21 +12,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class ModulService implements IModulService {
 
-  @Autowired
   private transient ModulRepository modulRepository;
 
   @Autowired
   private transient ModelService modelService;
 
+  @Autowired
+  private transient DTOService dtoService;
+
   public ModulService(ModulRepository modulRepository, ModelService modelService) {
     this.modulRepository = modulRepository;
-    this.modelService = modelService;
   }
 
   /**
    * Fuegt Modul in die Datenbank hinzu
+   * 
    * @param modul Zu speicherndes Modul
    */
+
+  public void addModul(Modul modul) {
+    modulRepository.save(dtoService.load(modul));
+  }
+
   @Override
   public void addModul(ModulDTO modul) {
     modulRepository.save(modul);
@@ -35,6 +41,7 @@ public class ModulService implements IModulService {
 
   /**
    * Listet alle Module in der Datenbank auf
+   * 
    * @return Liste mit allen Modulen
    */
   @Override
@@ -42,8 +49,7 @@ public class ModulService implements IModulService {
     return modelService.loadModulList(modulRepository.findAll());
   }
 
-
-  public Modul findModulByModulName(String ModulName){
+  public Modul findModulByModulName(String ModulName) {
     return modelService.loadModul(modulRepository.findModulByModulName(ModulName));
   }
 
@@ -52,8 +58,9 @@ public class ModulService implements IModulService {
   }
 
   public boolean modulExists(Modul modul) {
-    List<ModulDTO> module = modulRepository.findByModulNameAndDozentMail(modul.getModulName(), modul.getDozent().getDozentMail());
-    if(module != null){
+    List<ModulDTO> module = modulRepository.findByModulNameAndDozentMail(modul.getModulName(),
+        modul.getDozent().getDozentMail());
+    if (module != null) {
       return module.size() > 0;
     }
     return false;

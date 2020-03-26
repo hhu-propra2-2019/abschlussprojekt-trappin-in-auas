@@ -58,6 +58,13 @@ public class BewerberController {
     return "student/main_min";
   }
 
+  @GetMapping("/ex")
+  @Secured({ ROLE_STUDENT })
+  public String ex(Model model, KeycloakAuthenticationToken token){
+    model.addAttribute("bewerber", bewerberService.initialiseEditBewerber(token.getName()));
+    return "orga/dozent/bewerbungDetail";
+  }
+
   @GetMapping("/editieren")
   @Secured({ ROLE_STUDENT })
   public String editieren(Model model, KeycloakAuthenticationToken token) {

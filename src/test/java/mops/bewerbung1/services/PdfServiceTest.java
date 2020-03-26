@@ -16,7 +16,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static jdk.vm.ci.code.CodeUtil.M;
 import static org.mockito.Mockito.mock;
 
 //ToDo aber erst wenn pdf fertig ist. Unser Ziel ist es die check methode zu überpruefen.
@@ -73,14 +72,14 @@ public class PdfServiceTest {
 
     @Test
     public void pruefeImmaStatus(){
-        karriere.setImmartikulationsStatus(new ImmartikulationsStatus(true, "Informatik"));
+        karriere.setImmatrikulationsStatus(new ImmatrikulationsStatus(true, "Informatik"));
         b.setKarriere(karriere);
         Assert.assertEquals("On",pdfService.pruefeStatus(b));
     }
 
     @Test
     public void pruefeKeinImmaStatus(){
-        karriere.setImmartikulationsStatus(new ImmartikulationsStatus(false, ""));
+        karriere.setImmatrikulationsStatus(new ImmatrikulationsStatus(false, ""));
         b.setKarriere(karriere);
         String status = pdfService.pruefeStatus(b);
         Assert.assertEquals("Off",status);

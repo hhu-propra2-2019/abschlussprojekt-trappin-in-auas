@@ -7,7 +7,6 @@ import mops.services.*;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,26 +19,24 @@ public class VerteilerController {
 
   private transient BewerberService bewerberService;
   private transient ModulService modulService;
-  private transient ModelService modelService;
   private transient DozentPraeferenzService dozentPraeferenzService;
   private transient ZyklusDirigentService zyklusDirigentService;
   private transient VerteilerService verteilerService;
 
-  public VerteilerController(BewerberService bewerberService, ModulService modulService, ModelService modelService,
-                             DozentPraeferenzService dozentPraeferenzService, ZyklusDirigentService zyklusDirigentService, VerteilerService verteilerService) {
+  public VerteilerController(BewerberService bewerberService, ModulService modulService,
+      DozentPraeferenzService dozentPraeferenzService, ZyklusDirigentService zyklusDirigentService, VerteilerService verteilerService) {
     this.bewerberService = bewerberService;
     this.modulService = modulService;
-    this.modelService = modelService;
     this.dozentPraeferenzService = dozentPraeferenzService;
     this.zyklusDirigentService = zyklusDirigentService;
     this.verteilerService = verteilerService;
   }
-    
+
   @Secured(ROLE_VERTEILER)
   @GetMapping("/uebersicht")
   public String verteilen(Model model, KeycloakAuthenticationToken token) {
-    List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
-    List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
+    List<Bewerber> offeneBewerbungen = bewerberService.findAlleNichtVerteilteBewerber();
+    List<Bewerber> zugewieseneBewerbungen = bewerberService.findAlleVerteilteBewerber();
     List<Bewerber> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
 
     model.addAttribute("anzahlOffeneBewerbungen", offeneBewerbungen.size());
@@ -61,8 +58,8 @@ public class VerteilerController {
   @Secured(ROLE_VERTEILER)
   @GetMapping("/verteilte")
   public String showVerteilteBewerber(Model model, KeycloakAuthenticationToken token) {
-    List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
-    List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
+    List<Bewerber> offeneBewerbungen = bewerberService.findAlleNichtVerteilteBewerber();
+    List<Bewerber> zugewieseneBewerbungen = bewerberService.findAlleVerteilteBewerber();
 
     model.addAttribute("anzahlOffeneBewerbungen", offeneBewerbungen.size());
     model.addAttribute("anzahlZugewieseneBewerbungen", zugewieseneBewerbungen.size());
@@ -78,12 +75,11 @@ public class VerteilerController {
     return "verteiler/verteiler";
   }
 
-
   @Secured(ROLE_VERTEILER)
   @GetMapping("/offene")
   public String showOffeneBewerber(Model model, KeycloakAuthenticationToken token) {
-    List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
-    List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
+    List<Bewerber> offeneBewerbungen = bewerberService.findAlleNichtVerteilteBewerber();
+    List<Bewerber> zugewieseneBewerbungen = bewerberService.findAlleVerteilteBewerber();
 
     model.addAttribute("anzahlOffeneBewerbungen", offeneBewerbungen.size());
     model.addAttribute("anzahlZugewieseneBewerbungen", zugewieseneBewerbungen.size());

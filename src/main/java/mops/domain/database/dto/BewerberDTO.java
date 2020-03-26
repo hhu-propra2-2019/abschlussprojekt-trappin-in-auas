@@ -3,6 +3,7 @@ package mops.domain.database.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -33,11 +34,11 @@ public class BewerberDTO {
 
   @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "bewerber", referencedColumnName = "id")
-  private List<VerteilungDTO> verteiltAn;
+  private List<VerteilungDTO> verteiltAn = new LinkedList<>();
 
   @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "bewerberpreaf", referencedColumnName = "id")
-  private List<DozentPraeferenzDTO> dozentPraeferenz;
+  private List<DozentPraeferenzDTO> dozentPraeferenz = new LinkedList<>();
 
   public BewerberDTO(PersonalienDTO personalien, KarriereDTO karriere, PraeferenzenDTO praeferenzen,
       List<VerteilungDTO> verteiltAn, List<DozentPraeferenzDTO> dozentPraeferenz) {

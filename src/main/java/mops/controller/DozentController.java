@@ -4,7 +4,6 @@ import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 
 import java.util.List;
 
-import mops.domain.database.dto.BewerberDTO;
 import mops.domain.models.Bewerber;
 import mops.domain.models.DozentPraeferenz;
 import mops.services.*;
@@ -31,9 +30,6 @@ public class DozentController {
 
   @Autowired
   private transient DozentPraeferenzService dozentPraeferenzService;
-
-  @Autowired
-  private transient ModelService modelService;
 
   @Autowired
   private transient ZyklusDirigentService zyklusDirigentService;
@@ -97,7 +93,7 @@ public class DozentController {
   @Secured({ ROLE_ORGA })
   @PostMapping("/addPreference")
   public String addPreference(Model model, KeycloakAuthenticationToken token, int praeferenz, String dozentKennung,
-                              String bewerberKennung) {
+      String bewerberKennung) {
     dozentPraeferenzService.addPraeferenz(new DozentPraeferenz(dozentKennung, bewerberKennung, praeferenz));
     return "redirect:./uebersicht";
   }
@@ -105,8 +101,7 @@ public class DozentController {
   @Secured({ ROLE_ORGA })
   @GetMapping("/details/{kennung}")
   public String detailAnsicht(Model model, KeycloakAuthenticationToken token, @PathVariable String kennung) {
-    BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(kennung);
-    Bewerber bewerber = modelService.load(bewerberDTO);
+    Bewerber bewerber = bewerberService.findBewerberByKennung(kennung);
     model.addAttribute(BEWERBER_ATTRIBUTE, bewerber);
     model.addAttribute("phase", zyklusDirigentService.getDozentenPhase());
     return "bewerbungsdetails/details";

@@ -1,10 +1,10 @@
 package mops.domain.services;
 
 
-import mops.domain.database.dto.DozentPraeferenzDTO;
+import mops.domain.models.DozentPraeferenz;
 
 public interface IDozentPraeferenzService {
-  void addPraeferenz(DozentPraeferenzDTO dozentPraeferenzDTO);
+  void addPraeferenz(DozentPraeferenz dozentPraeferenz);
 
   void deletePraeferenz(String bewerber, String dozentMail);
 

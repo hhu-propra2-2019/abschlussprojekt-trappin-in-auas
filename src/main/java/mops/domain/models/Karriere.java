@@ -16,7 +16,7 @@ public class Karriere {
   private String arbeitserfahrung;
 
   @Valid
-  private ImmartikulationsStatus immartikulationsStatus;
+  private ImmatrikulationsStatus immatrikulationsStatus;
 
   @Valid
   private StudiengangAbschluss fachAbschluss;
