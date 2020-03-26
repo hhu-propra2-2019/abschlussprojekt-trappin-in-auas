@@ -66,11 +66,11 @@
     </div>
   </div>
 
-  <div class="container pt3" style=" position: sticky; top:29px; z-index: 10"  th:if="${verteilerPhase}">
+  <div class="container pt3" style="position: sticky; top:29px; z-index: 10"  th:if="${verteilerPhase}">
     <div class="col-12 shadow p-3 mb-5 bg-light rounded">
       <div class="card-body">
         <table class="table table-bordered">
-          <thead class="thead-dark">
+          <thead class="thead-light">
             <tr>
               <th scope="col" th:each="modulName : ${modulMitZugewiesende}" th:text="${modulName.modul.modulName}" style="font-weight: bolder"></th>
             </tr>
