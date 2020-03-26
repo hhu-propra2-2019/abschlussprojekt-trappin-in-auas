@@ -4,7 +4,6 @@ import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 
 import mops.domain.database.dto.BewerberDTO;
 import mops.domain.models.Bewerber;
-import mops.domain.repositories.BewerberRepository;
 import mops.domain.services.IBewerberService;
 import mops.services.BewerberService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;

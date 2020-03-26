@@ -7,7 +7,6 @@ import mops.services.*;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,19 +19,17 @@ public class VerteilerController {
 
   private transient BewerberService bewerberService;
   private transient ModulService modulService;
-  private transient ModelService modelService;
   private transient DozentPraeferenzService dozentPraeferenzService;
   private transient ZyklusDirigentService zyklusDirigentService;
 
-  public VerteilerController(BewerberService bewerberService, ModulService modulService, ModelService modelService,
-                             DozentPraeferenzService dozentPraeferenzService, ZyklusDirigentService zyklusDirigentService) {
+  public VerteilerController(BewerberService bewerberService, ModulService modulService,
+      DozentPraeferenzService dozentPraeferenzService, ZyklusDirigentService zyklusDirigentService) {
     this.bewerberService = bewerberService;
     this.modulService = modulService;
-    this.modelService = modelService;
     this.dozentPraeferenzService = dozentPraeferenzService;
     this.zyklusDirigentService = zyklusDirigentService;
   }
-    
+
   @Secured(ROLE_VERTEILER)
   @GetMapping("/uebersicht")
   public String verteilen(Model model, KeycloakAuthenticationToken token) {
@@ -73,7 +70,6 @@ public class VerteilerController {
 
     return "verteiler/verteiler";
   }
-
 
   @Secured(ROLE_VERTEILER)
   @GetMapping("/offene")

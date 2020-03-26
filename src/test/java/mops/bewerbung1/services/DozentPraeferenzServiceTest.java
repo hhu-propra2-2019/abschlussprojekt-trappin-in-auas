@@ -1,10 +1,7 @@
 package mops.bewerbung1.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
-import mops.domain.database.dto.DozentPraeferenzDTO;
 import mops.domain.models.DozentPraeferenz;
 import mops.domain.services.IDozentPraeferenzService;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +29,7 @@ public class DozentPraeferenzServiceTest {
     addDozentPraeferenz = new DozentPraeferenz(DOZENT_MAIL, BEWERBER, PRAEFERENZ);
     dozentPraeferenzService.deletePraeferenz(BEWERBER, DOZENT_MAIL);
   }
-  
+
   @Test
   public void readPraeferenzFromDb(){
     dozentPraeferenzService.addPraeferenz(addDozentPraeferenz);
