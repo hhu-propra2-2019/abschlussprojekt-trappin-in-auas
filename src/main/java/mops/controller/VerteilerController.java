@@ -21,13 +21,15 @@ public class VerteilerController {
   private transient ModulService modulService;
   private transient DozentPraeferenzService dozentPraeferenzService;
   private transient ZyklusDirigentService zyklusDirigentService;
+  private transient VerteilerService verteilerService;
 
   public VerteilerController(BewerberService bewerberService, ModulService modulService,
-      DozentPraeferenzService dozentPraeferenzService, ZyklusDirigentService zyklusDirigentService) {
+      DozentPraeferenzService dozentPraeferenzService, ZyklusDirigentService zyklusDirigentService, VerteilerService verteilerService) {
     this.bewerberService = bewerberService;
     this.modulService = modulService;
     this.dozentPraeferenzService = dozentPraeferenzService;
     this.zyklusDirigentService = zyklusDirigentService;
+    this.verteilerService = verteilerService;
   }
 
   @Secured(ROLE_VERTEILER)
@@ -47,6 +49,8 @@ public class VerteilerController {
     model.addAttribute("verteilerPhase", zyklusDirigentService.getVerteilerPhase());
     model.addAttribute("dozentPhase", zyklusDirigentService.getDozentenPhase());
     model.addAttribute("bewerberPhase", zyklusDirigentService.getBewerbungsPhase());
+
+    model.addAttribute("modulMitZugewiesende", verteilerService.getListModulMitAnzahlVerteilten(modulService.findAllModule()));
 
     return "verteiler/verteiler";
   }
@@ -68,6 +72,9 @@ public class VerteilerController {
     model.addAttribute("dozentPhase", zyklusDirigentService.getDozentenPhase());
     model.addAttribute("bewerberPhase", zyklusDirigentService.getBewerbungsPhase());
 
+    model.addAttribute("modulMitZugewiesende", verteilerService.getListModulMitAnzahlVerteilten(modulService.findAllModule()));
+
+
     return "verteiler/verteiler";
   }
 
@@ -87,6 +94,9 @@ public class VerteilerController {
     model.addAttribute("verteilerPhase", zyklusDirigentService.getVerteilerPhase());
     model.addAttribute("dozentPhase", zyklusDirigentService.getDozentenPhase());
     model.addAttribute("bewerberPhase", zyklusDirigentService.getBewerbungsPhase());
+
+    model.addAttribute("modulMitZugewiesende", verteilerService.getListModulMitAnzahlVerteilten(modulService.findAllModule()));
+
 
     return "verteiler/verteiler";
   }
