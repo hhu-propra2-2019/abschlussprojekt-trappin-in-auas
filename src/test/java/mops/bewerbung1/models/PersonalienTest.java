@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class PersonalienTest {
     Personalien p = modelGenerator.generatePersonalien();
     String geburtsdatumString = "29/01/1999";
     try {
-      Date geburtsdatum = new SimpleDateFormat("dd/MM/yyyy").parse(geburtsdatumString);
+      Date geburtsdatum = new SimpleDateFormat("dd/MM/yyyy", Locale.GERMANY).parse(geburtsdatumString);
       p.setGeburtsdatum(geburtsdatum);
     } catch (ParseException e) {
       // TODO Auto-generated catch block

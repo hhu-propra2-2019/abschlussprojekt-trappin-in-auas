@@ -36,10 +36,12 @@ public class Personalien {
   public void setGeburtsdatum(Date geburtsdatum){
     this.geburtsdatum = geburtsdatum;
 
-    LocalDate today = LocalDate.now();
-    LocalDate birthday = geburtsdatum.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    
-    this.alter = Period.between(birthday, today).getYears();
+    if(geburtsdatum != null){
+      LocalDate today = LocalDate.now();
+      LocalDate birthday = geburtsdatum.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+      
+      this.alter = Period.between(birthday, today).getYears();
+    }
   }
 
   private int alter;
