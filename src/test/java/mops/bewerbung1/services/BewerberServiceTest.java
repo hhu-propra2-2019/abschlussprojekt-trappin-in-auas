@@ -50,11 +50,7 @@ public class BewerberServiceTest {
       BewerberDTO bewerberDTO = (BewerberDTO) invocation.getArguments()[0];
       if(pseudoDatenbank.stream().anyMatch(x -> x.getKennung().equals(bewerberDTO.getKennung()))){
         BewerberDTO gefundene = pseudoDatenbank.stream().filter(x -> x.getKennung().equals(bewerberDTO.getKennung())).findFirst().get();
-        gefundene.setDozentPraeferenz(bewerberDTO.getDozentPraeferenz());
-        gefundene.setKarriere(bewerberDTO.getKarriere());
-        gefundene.setPersonalien(bewerberDTO.getPersonalien());
-        gefundene.setPraeferenzen(bewerberDTO.getPraeferenzen());
-        gefundene.setVerteiltAn(bewerberDTO.getVerteiltAn());
+        pseudoDatenbank.remove(gefundene);
       }
       pseudoDatenbank.add(bewerberDTO);
       return null;
