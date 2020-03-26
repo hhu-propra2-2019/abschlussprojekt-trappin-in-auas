@@ -26,10 +26,10 @@ import static org.mockito.Mockito.mock;
 
 public class PdfServiceTest {
     private static final String PDF_PATH = "./src/main/resources/static/";
-    private Bewerber b;
-    private Karriere karriere;
-    private Praeferenzen praeferenzen;
-    private PDFService pdfService;
+    private transient Bewerber b;
+    private transient Karriere karriere;
+    private transient Praeferenzen praeferenzen;
+    private transient PDFService pdfService;
 
     @BeforeEach
     public void setUp(){
