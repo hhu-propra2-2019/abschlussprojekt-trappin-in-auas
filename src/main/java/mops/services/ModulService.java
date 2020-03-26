@@ -29,7 +29,7 @@ public class ModulService implements IModulService {
    * falls diese noch nicht existiert
    * @param modul Zu speicherndes Modul
    */
-
+  @Override
   public void addModul(Modul modul) {
     if(!modulExists(modul)){
       modulRepository.save(dtoService.load(modul));
