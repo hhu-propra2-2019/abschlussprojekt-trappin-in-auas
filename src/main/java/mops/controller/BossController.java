@@ -22,9 +22,6 @@ public class BossController {
   @Autowired
   private transient ModulService modulService;
 
-  @Autowired
-  private transient DTOService dtoService;
-
   /**
    * Modul list for boss. Login as "Boss" required.
    * @param m injected, Model for Thymeleaf interaction
@@ -49,8 +46,8 @@ public class BossController {
   @Secured(ROLE_BOSS)
   @PostMapping("/postmodule")
   public String addModule(Model m, KeycloakAuthenticationToken token, Modul modul) {
-    modulService.addModul(dtoService.load(modul));
-    return "redirect:.";
+    modulService.addModul(modul);
+    return "redirect:/bewerbung1/setup/";
   }
 
   /**
@@ -65,6 +62,21 @@ public class BossController {
   public String deleteModule(Model m, KeycloakAuthenticationToken token,
       @RequestParam String modulName) {
     modulService.deleteModulByName(modulName);
-    return "redirect:.";
+    return "redirect:/bewerbung1/setup/";
+  }
+
+  /**
+   * delete all module. Login as "Boss" required.
+   * @param m injected, Model for Thymeleaf interaction
+   * @param token injected, present, if user is logged in
+   * @param modulName String, for delete query
+   * @return redirect to modules
+   */
+  @Secured(ROLE_BOSS)
+  @PostMapping("/delete")
+  public String wipeAll(Model m, KeycloakAuthenticationToken token,
+      @RequestParam String modulName) {
+    modulService.deleteAll();
+    return "redirect:/bewerbung1/setup/";
   }
 }

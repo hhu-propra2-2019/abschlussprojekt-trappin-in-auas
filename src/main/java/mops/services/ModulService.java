@@ -26,17 +26,14 @@ public class ModulService implements IModulService {
 
   /**
    * Fuegt Modul in die Datenbank hinzu
-   * 
+   * falls diese noch nicht existiert
    * @param modul Zu speicherndes Modul
    */
 
   public void addModul(Modul modul) {
-    modulRepository.save(dtoService.load(modul));
-  }
-
-  @Override
-  public void addModul(ModulDTO modul) {
-    modulRepository.save(modul);
+    if(!modulExists(modul)){
+      modulRepository.save(dtoService.load(modul));
+    }
   }
 
   /**
@@ -49,14 +46,40 @@ public class ModulService implements IModulService {
     return modelService.loadModulList(modulRepository.findAll());
   }
 
-  public Modul findModulByModulName(String ModulName) {
-    return modelService.loadModul(modulRepository.findModulByModulName(ModulName));
+  /**
+   * Findet ein Modul in der Datenbank mit dem vorgegebenen Namen
+   * @param modulName Name des zu findenden Moduls
+   * @return Gefundenes Modul als Model-Objekt oder null
+   */
+  @Override
+  public Modul findModulByModulName(String modulName) {
+    return modelService.loadModul(modulRepository.findModulByModulName(modulName));
   }
 
+  /**
+   * Löscht ein Modul mit vorgegebenen Namen
+   * @param modulName Name des zu löschendes Modul
+   */
+  @Override
   public void deleteModulByName(String modulName) {
     modulRepository.deleteModulByName(modulName);
   }
 
+  /**
+   * Löscht alle module aus der Datenbank
+   * praktisch bei Semesterstart
+   */
+  @Override
+  public void deleteAll(){
+    modulRepository.deleteAll();
+  }
+
+  /**
+   * Prüft ob ein ModulDTO zum angegebenen Modul model in der Datenbank existiert
+   * @param modul Modul model zu welchem nach einem ModulDTO geprüft wird
+   * @return true wenn es ein ModulDTO zum angegebenen Modul model gibt
+   */
+  @Override
   public boolean modulExists(Modul modul) {
     List<ModulDTO> module = modulRepository.findByModulNameAndDozentMail(modul.getModulName(),
         modul.getDozent().getDozentMail());
