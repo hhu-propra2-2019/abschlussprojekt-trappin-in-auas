@@ -26,111 +26,86 @@ import static org.mockito.Mockito.mock;
 
 public class PdfServiceTest {
     private static final String PDF_PATH = "./src/main/resources/static/";
+    private Bewerber b;
+    private Karriere karriere;
+    private Praeferenzen praeferenzen;
+    private PDFService pdfService;
+
+    @BeforeEach
+    public void setUp(){
+        b = new Bewerber();
+        karriere = new Karriere();
+        praeferenzen = new Praeferenzen();
+        pdfService = new PDFService();
+    }
 
     @Test
     public void checkFileDirecoryWissHilfsKraft(){
-        //arrange
-        Bewerber b = new Bewerber();
-        Karriere karriere = new Karriere();
-        karriere.setArbeitserfahrung("Viel");
         karriere.setFachAbschluss(new StudiengangAbschluss("Informatik", "Bachelor", "HHU"));
         b.setKarriere(karriere);
-        //Act
-        PDFService pdfService = new PDFService();
         String pdffile = pdfService.fileDirectory(b);
-        //Assert
         Assert.assertEquals(PDF_PATH + "wissenschaftliche_Hilfskraft.pdf",pdffile);
     }
 
     @Test
     public void checkFileDirecoryStudHilfsKraft(){
-        //arrange
-        Bewerber b = new Bewerber();
-        Karriere karriere = new Karriere();
-        karriere.setArbeitserfahrung("Viel");
         karriere.setFachAbschluss(null);
         b.setKarriere(karriere);
-        //Act
-        PDFService pdfService = new PDFService();
         String pdffile = pdfService.fileDirectory(b);
-        //Assert
         Assert.assertEquals(PDF_PATH + "studentische_Hilfskraft.pdf",pdffile);
     }
 
     @Test
     public void pruefeKeinAbschluss(){
-        Bewerber b = new Bewerber();
-        Karriere karriere = new Karriere();
-        karriere.setArbeitserfahrung("Viel");
         karriere.setFachAbschluss(null);
         b.setKarriere(karriere);
-        PDFService pdfService = new PDFService();
         boolean status = pdfService.hatAbschluss(b);
         Assert.assertEquals(false,status);
     }
 
     @Test
     public void pruefeAbschluss(){
-        Bewerber b = new Bewerber();
-        Karriere karriere = new Karriere();
-        karriere.setArbeitserfahrung("Viel");
         karriere.setFachAbschluss(new StudiengangAbschluss("Informatik", "Bachelor", "HHU"));
         b.setKarriere(karriere);
-        PDFService pdfService = new PDFService();
         boolean status = pdfService.hatAbschluss(b);
         Assert.assertEquals(true,status);
     }
 
     @Test
     public void pruefeImmaStatus(){
-        Bewerber b = new Bewerber();
-        Karriere karriere = new Karriere();
         karriere.setImmartikulationsStatus(new ImmartikulationsStatus(true, "Informatik"));
         b.setKarriere(karriere);
-        PDFService pdfService = new PDFService();
         Assert.assertEquals("On",pdfService.pruefeStatus(b));
     }
 
     @Test
     public void pruefeKeinImmaStatus(){
-        Bewerber b = new Bewerber();
-        Karriere karriere = new Karriere();
         karriere.setImmartikulationsStatus(new ImmartikulationsStatus(false, ""));
         b.setKarriere(karriere);
-        PDFService pdfService = new PDFService();
         String status = pdfService.pruefeStatus(b);
         Assert.assertEquals("Off",status);
     }
 
     @Test
     public void pruefeVertragsart1(){
-        Bewerber b = new Bewerber();
-        Praeferenzen praeferenzen = new Praeferenzen();
         praeferenzen.setEinstiegTyp(EinstiegTyp.NEUEINSTIEG);
         b.setPraeferenzen(praeferenzen);
-        PDFService pdfService = new PDFService();
         String vertragsart = pdfService.pruefeVertragsart(b);
         Assert.assertEquals("Einstellung",vertragsart);
     }
 
     @Test
     public void pruefeVertragsart2(){
-        Bewerber b = new Bewerber();
-        Praeferenzen praeferenzen = new Praeferenzen();
         praeferenzen.setEinstiegTyp(EinstiegTyp.WEITERBESCHAEFTIGUNG);
         b.setPraeferenzen(praeferenzen);
-        PDFService pdfService = new PDFService();
         String vertragsart = pdfService.pruefeVertragsart(b);
         Assert.assertEquals("Weiterbeschäftigung",vertragsart);
     }
 
     @Test
     public void pruefeVertragsart3(){
-        Bewerber b = new Bewerber();
-        Praeferenzen praeferenzen = new Praeferenzen();
         praeferenzen.setEinstiegTyp(EinstiegTyp.WIEDEREINSTIEG);
         b.setPraeferenzen(praeferenzen);
-        PDFService pdfService = new PDFService();
         String vertragsart = pdfService.pruefeVertragsart(b);
         Assert.assertEquals("Off",vertragsart);
     }

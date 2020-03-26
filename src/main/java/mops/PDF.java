@@ -46,9 +46,9 @@ public class PDF {
     propraModul.setModulName("ProPra");
     propraModul.setDozent(new Dozent("jens@hhu.de", "jens"));
 
-    praeferenzen.setEinschraenkungen("Keine");
+
     praeferenzen.setEinstiegTyp(EinstiegTyp.NEUEINSTIEG);
-    praeferenzen.setKommentar("Ich mag ProPra");
+
     praeferenzen.setMaxWunschStunden(14);
     praeferenzen.setMinWunschStunden(7);
 
