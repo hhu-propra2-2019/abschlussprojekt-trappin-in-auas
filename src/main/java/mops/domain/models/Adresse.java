@@ -1,5 +1,7 @@
 package mops.domain.models;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,15 +9,23 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Adresse {
-    private String PLZ;
-    private String wohnOrt;
-    private String strasse;
-    private String hausnummer;
 
-    public Adresse(String PLZ, String wohnOrt, String strasse, String hausnummer) {
-        this.PLZ = PLZ;
-        this.wohnOrt = wohnOrt;
-        this.strasse = strasse;
-        this.hausnummer = hausnummer;
-    }
+  @NotBlank
+  private String PLZ;
+
+  @NotBlank
+  private String wohnOrt;
+
+  @NotBlank
+  private String strasse;
+
+  @NotNull //keine ahnung ob es adressen ohne hausnummer gibt
+  private String hausnummer;
+
+  public Adresse(String PLZ, String wohnort, String strasse, String hausnummer) {
+    this.PLZ = PLZ;
+    this.wohnOrt = wohnort;
+    this.strasse = strasse;
+    this.hausnummer = hausnummer;
+  }
 }
