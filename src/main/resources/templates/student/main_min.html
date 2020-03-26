@@ -55,9 +55,7 @@
           <a href="/bewerbung1/bewerber">Übersicht</a>
         </li>
         <li>
-          <form th:action="@{/logout}" method="post">
-            <button type="submit">Logout</button>
-          </form>
+          <a href="/logout">Logout</a>
         </li>
       </ul>
     </nav>
@@ -84,8 +82,9 @@
             <label for="nachnameinput">
               Nachname:</label>
             <input type="text" class="form-control" required th:field="*{name}" maxlength="30" th:errorclass="is-invalid"/>
-            <span class="text-danger" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"
+            <span class="text-danger" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></span>
           </div>
+
           <label>Geburtsdatum und Alter:</label>
           <div class="input-group">
             <input type="date" class="form-control" required th:field="*{geburtsdatum}" />
