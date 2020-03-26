@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{mopslayout :: html(name='Bewe^rbung', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+  th:replace="~{mopslayout :: html(name='Bewe^rbung', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
 
 <head>
   <meta charset="utf-8">
@@ -47,48 +47,48 @@
 
 
 <body>
-<header>
-  <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
-    <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
-    <ul>
-      <li>
-        <a href="/bewerbung1/bewerber">Übersicht</a>
-      </li>
-      <li>
-        <a href="/logout">Logout</a>
-      </li>
-    </ul>
-  </nav>
-</header>
+  <header>
+    <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
+      <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
+      <ul>
+        <li>
+          <a href="/bewerbung1/bewerber">Übersicht</a>
+        </li>
+        <li>
+          <a href="/logout">Logout</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
 
-<main th:fragment="bodycontent" style="background-color: #EAEAEA; padding: 2%">
+  <main th:fragment="bodycontent" style="background-color: #EAEAEA; padding: 2%">
 
-  <form th:action="@{./bewerbungabschicken}" method="POST">
-    <div class="container">
-      <h1>Bewerbungsformular</h1>
-    </div>
+    <form th:action="@{./bewerbungabschicken}" method="POST">
+      <div class="container">
+        <h1>Bewerbungsformular</h1>
+      </div>
 
-    <div class="container" th:object="${bewerber.personalien}">
-      <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
-        <h3>Persönliche Daten:</h3>
-        <div class="form-group">
-          <label for="vornameinput">Vorname:</label>
-          <input type="text" class="form-control" required th:field="*{vorname}" maxlength="30" th:errorclass="is-invalid"/>
-          <span class="text-danger" th:errors="*{vorname}" th:if="${#fields.hasErrors('vorname')}"></span>
+      <div class="container" th:object="${bewerber.personalien}">
+        <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
+          <h3>Persönliche Daten:</h3>
+          <div class="form-group">
+            <label for="vornameinput">Vorname:</label>
+            <input type="text" class="form-control" th:field="*{vorname}" maxlength="30" th:errorclass="is-invalid" />
+            <span class="text-danger" th:errors="*{vorname}" th:if="${#fields.hasErrors('vorname')}"></span>
         </div>
 
         <div class="form-group">
           <label for="nachnameinput">
             Nachname:</label>
-          <input type="text" class="form-control" required th:field="*{name}" maxlength="30" th:errorclass="is-invalid"/>
+          <input type="text" class="form-control" th:field="*{name}" maxlength="30" th:errorclass="is-invalid"/>
           <span class="text-danger" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></span>
         </div>
 
         <div class="form-group">
-          <label>Geburtsdatum und Alter:</label>
-          <div class="input-group">
-            <input type="date" class="form-control" required th:field="*{geburtsdatum}" th:errorclass="is-invalid"/>
+          <label>Geburtsdatum:</label>
+          <div class="form-group">
+            <input type="date" class="form-control" th:field="*{geburtsdatum}" th:errorclass="is-invalid"/>
             <span class="text-danger" th:errors="*{geburtsdatum}" th:if="${#fields.hasErrors('geburtsdatum')}"></span>
           </div>
         </div>
@@ -96,11 +96,12 @@
 
         <div class="form-group">
           <label>Geburtsort:</label>
-          <input type="text" class="form-control " required th:field="*{geburtsort}" th:errorclass="is-invalid"/>
+          <input type="text" class="form-control" th:field="*{geburtsort}" th:errorclass="is-invalid"/>
           <span class="text-danger" th:errors="*{geburtsort}" th:if="${#fields.hasErrors('geburtsort')}"></span>
-
+        </div> 
+        <div class="form-group">
           <label>Staatsangehörigkeit:</label>
-          <input type="text" id="nationalitaetinput" required class="form-control " th:field="*{nationalitaet}" th:errorclass="is-invalid"/>
+          <input type="text" id="nationalitaetinput" class="form-control " th:field="*{nationalitaet}" th:errorclass="is-invalid"/>
           <span class="text-danger" th:errors="*{nationalitaet}" th:if="${#fields.hasErrors('nationalitaet')}"></span>
         </div>
       </div>
@@ -113,18 +114,22 @@
           Straße:
         </label>
         <div class="input-group">
-          <input type="text" class="form-control" required th:field="*{adresse.strasse}" th:errorclass="is-invalid"/>
-          <input type="text" class="form-control col-sm-2" required th:field="*{adresse.hausnummer}" placeholder="Hausnummer" th:errorclass="is-invalid"/>
-          <span class="text-danger" th:errors="*{adresse.hausnummer}" th:if="${#fields.hasErrors('adresse.hausnummer')}"></span>
-          <span class="text-danger" th:errors="*{adresse.strasse}" th:if="${#fields.hasErrors('adresse.strasse')}"></span>
+          <input type="text" class="form-control" th:field="*{adresse.strasse}" th:errorclass="is-invalid"/>
+          <input type="text" class="form-control col-sm-2" th:field="*{adresse.hausnummer}" placeholder="Hausnummer" th:errorclass="is-invalid"/>
         </div>
-        <label>Postleitzahl:</label>
-        <input type="text" class="form-control " required th:field="*{adresse.PLZ}" th:errorclass="is-invalid"/>
-        <span class="text-danger" th:errors="*{adresse.PLZ}" th:if="${#fields.hasErrors('adresse.PLZ')}"></span>
-
+        <span class="text-danger" th:errors="*{adresse.hausnummer}" th:if="${#fields.hasErrors('adresse.hausnummer')}"></span>
+        <span class="text-danger" th:errors="*{adresse.strasse}" th:if="${#fields.hasErrors('adresse.strasse')}"></span>
+        
+        <div class="form-group">
+          <label>Postleitzahl:</label>
+          <input type="text" class="form-control" th:field="*{adresse.PLZ}" th:errorclass="is-invalid"/>
+          <span class="text-danger" th:errors="*{adresse.PLZ}" th:if="${#fields.hasErrors('adresse.PLZ')}"></span>
+        </div>
+        <div class="form-group">
         <label>Wohnort:</label>
-        <input type="text" class="form-control " required th:field="*{adresse.wohnOrt}" th:errorclass="is-invalid"/>
+        <input type="text" class="form-control" th:field="*{adresse.wohnOrt}" th:errorclass="is-invalid"/>
         <span class="text-danger" th:errors="*{adresse.wohnOrt}" th:if="${#fields.hasErrors('adresse.wohnOrt')}"></span>
+      </div>
       </div>
     </div>
 
@@ -175,7 +180,7 @@
               <input type="number" class="form-control col-sm-4" step="0.01" min="1.00" max="5.00"
                      th:field="*{modulAuswahl[__${itemStat.index}__].note}" placeholder="Bestanden mit...">
             </div>
-          </div>
+      </div>
         </div>
         <button class="btn btn-success" type="button" onclick="addZuBewerbendesModul()">+</button>
       </div>
@@ -220,17 +225,22 @@
         Wie viele Stunden möchten Sie mindestens und maximal pro Woche arbeiten?
 
         <div class="input-group">
-          <input type="number" class="form-control col-sm-6" th:field="*{minWunschStunden}" required
+          <input type="number" class="form-control col-sm-6" th:field="*{minWunschStunden}"
                  placeholder="7-17 Minimum" pattern="^(?:[1-9]|1[0-7])$" th:errorclass="is-invalid"/>
-          <span class="text-danger" th:errors="*{minWunschStunden}" th:if="${#fields.hasErrors('minWunschStunden')}"></span>
+         
 
-          <input type="number" class="form-control col-sm-6" th:field="*{maxWunschStunden}" required
+          <input type="number" class="form-control col-sm-6" th:field="*{maxWunschStunden}"
                  placeholder="7-17 Maximum" pattern="^(?:[1-9]|1[0-7])$" th:errorclass="is-invalid"/>
-          <span class="text-danger" th:errors="*{maxWunschStunden}" th:if="${#fields.hasErrors('maxWunschStunden')}"></span>
         </div>
-        <h3>Haben Sie Einschränkungen bzgl. der von Ihnen gewünschten Tätigkeiten?</h3>
-        <input type="text" class="form-control " th:field="*{einschraenkungen}" th:errorclass="is-invalid">
-        <span class="text-danger" th:errors="*{einschraenkungen}" th:if="${#fields.hasErrors('einschraenkungen')}"></span>
+        <div class="form-group row">
+          <span class="text-danger col-sm-6" th:errors="*{minWunschStunden}" th:if="${#fields.hasErrors('minWunschStunden')}"></span>
+          <span class="text-danger col-sm-6" th:errors="*{maxWunschStunden}" th:if="${#fields.hasErrors('maxWunschStunden')}"></span>
+        </div>
+        <div class="form-group">
+          <h3>Haben Sie Einschränkungen bzgl. der von Ihnen gewünschten Tätigkeiten?</h3>
+          <input type="text" class="form-control " th:field="*{einschraenkungen}" th:errorclass="is-invalid">
+          <span class="text-danger" th:errors="*{einschraenkungen}" th:if="${#fields.hasErrors('einschraenkungen')}"></span>
+        </div>
       </div>
 
       <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
@@ -239,29 +249,30 @@
           Wenn ja, wird diese voraussichtlich kurz vor Semesterbeginn
           stattﬁnden. </h3>
         <div class="form-check">
-          <label class="form-check-label">
+          
             <input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
-                   th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).TEILNAHME}" name="IDPro" />
-            Ich möchte an der Tutorenschulung teilnehmen.
-          </label>
+                   th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).TEILNAHME}" th:errorclass="is-invalid" id="teiln" />
+                   <label class="form-check-label" for="teiln">Ich möchte an der Tutorenschulung teilnehmen.</label>
         </div>
         <div class="form-check">
-          <label class="form-check-label">
+          
             <input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
-                   th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).NICHTTEILNAHME}" name="IDProg" />
-            Ich habe bereits an der Tutorenschulung teilgenommen und möchte
-            daher nicht erneut
-            teilnehmen.
-          </label>
+                   th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).NICHTTEILNAHME}" th:errorclass="is-invalid" id="nichtteil" />
+                   <label class="form-check-label" for="nichtteil">
+                    Ich habe bereits an der Tutorenschulung teilgenommen und möchte
+                    daher nicht erneut
+                    teilnehmen.
+                  </label>
         </div>
         <div class="form-check">
-          <label class="form-check-label">
+          
             <input type="radio" class="form-check-input" th:field="*{tutorenSchulungTeilnahme}"
-                   th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).TEILGENOMMEN}" name="IDProg" />
-            Ich möchte nicht an der Tutorenschulung teilnehmen.
-          </label>
+                   th:value="${T(mops.domain.models.TutorenSchulungTeilnahme).TEILGENOMMEN}" th:errorclass="is-invalid" id="teilgenommen" />
+                   <label class="form-check-label" for="teilgenommen">
+                    Ich möchte nicht an der Tutorenschulung teilnehmen.
+                  </label>
         </div>
-
+        <span class="text-danger" th:errors="*{tutorenSchulungTeilnahme}" th:if="${#fields.hasErrors('tutorenSchulungTeilnahme')}"></span>
       </div>
 
       <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
@@ -284,7 +295,7 @@
         <h3>Für welches Fach sind Sie derzeit an der HHU immatrikuliert?</h3>
         <input type="text" class="form-control" id="immatrikuliertText"
                th:field="*{immatrikulationsStatus.fachrichtung}" th:errorclass="is-invalid"/>
-        <span class="text-danger" th:errors="*{immatrikulationsStatus.fachrichtung}" th:if="${#fields.hasErrors('immartikualtionsStatus.fachrichtung')}"></span>
+        <span class="text-danger" th:errors="*{immatrikulationsStatus.fachrichtung}" th:if="${#fields.hasErrors('immatrikulationsStatus.fachrichtung')}"></span>
         <div class="form-check">
           <label>
             <input type="checkbox" class="form-check-input"
@@ -326,12 +337,16 @@
           <option th:value="'Anderes'">Anderes</option>
           <option th:value="null">Kein Uni-Abschluss</option>
         </select>
-        <label>Fach:</label>
-        <input type="text" class="form-control " th:field="*{fachAbschluss.studiengang}" th:errorclass="is-invalid"/>
-        <label>Uni:</label>
-        <input type="text" class="form-control " value="HHU" th:field="*{fachAbschluss.uni}" th:errorclass="is-invalid"/>
-        <span class="text-danger" th:errors="*{fachAbschluss.studiengang}" th:if="${#fields.hasErrors('fachAbschluss.studiengang')}"></span>
-        <span class="text-danger" th:errors="*{fachAbschluss.uni}" th:if="${#fields.hasErrors('fachAbschluss.uni')}"></span>
+        <div class="form-group">
+          <label>Fach:</label>
+          <input type="text" class="form-control " th:field="*{fachAbschluss.studiengang}" th:errorclass="is-invalid"/>
+          <span class="text-danger" th:errors="*{fachAbschluss.studiengang}" th:if="${#fields.hasErrors('fachAbschluss.studiengang')}"></span>
+        </div>
+        <div class="form-group">
+          <label>Uni:</label>
+          <input type="text" class="form-control " value="HHU" th:field="*{fachAbschluss.uni}" th:errorclass="is-invalid"/>
+          <span class="text-danger" th:errors="*{fachAbschluss.uni}" th:if="${#fields.hasErrors('fachAbschluss.uni')}"></span>
+        </div>
       </div>
     </div>
 

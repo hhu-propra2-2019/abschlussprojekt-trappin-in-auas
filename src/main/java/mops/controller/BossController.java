@@ -64,6 +64,18 @@ public class BossController {
     modulService.deleteModulByName(modulName);
     return "redirect:/bewerbung1/setup/";
   }
+  
+  /**
+   * stopover page to prevent accidental modul wipe
+   * here the user is promped to confirm his wipe or to go back
+   * @param token injected, present, if user is logged in
+   * @return confirm wipe page
+   */
+  @Secured(ROLE_BOSS)
+  @GetMapping("/confirmclear")
+  public String confirmClearPage(KeycloakAuthenticationToken token){
+    return "boss/confirmclear";
+  }
 
   /**
    * delete all module. Login as "Boss" required.
@@ -73,7 +85,7 @@ public class BossController {
    * @return redirect to modules
    */
   @Secured(ROLE_BOSS)
-  @PostMapping("/delete")
+  @PostMapping("/deleteall")
   public String wipeAll(Model m, KeycloakAuthenticationToken token,
       @RequestParam String modulName) {
     modulService.deleteAll();
