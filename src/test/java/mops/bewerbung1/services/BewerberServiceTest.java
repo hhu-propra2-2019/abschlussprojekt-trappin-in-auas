@@ -13,11 +13,15 @@ import mops.services.ModelService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -37,8 +41,8 @@ public class BewerberServiceTest {
   @BeforeEach
   void setUp() {
     ModulDTO propra1DTO = new ModulDTO("Propra I", "Jens Bendisposto", "jens@hhu.de");
-    ModulDTO propra2DTO = new ModulDTO("Propra I", "Jens Bendisposto", "jens@hhu.de");
-    ModulDTO propra3DTO = new ModulDTO("Propra I", "Jens Bendisposto", "jens@hhu.de");
+    ModulDTO propra2DTO = new ModulDTO("Propra II", "Jens Bendisposto", "jens@hhu.de");
+    ModulDTO propra3DTO = new ModulDTO("Programmierung", "Stefan Harmeling", "stefan@hhu.de");
     List<ModulDTO> offeneModule = Arrays.asList(propra1DTO, propra2DTO, propra3DTO);
 
     this.dtoService = new DTOService(modulRepository);
@@ -58,22 +62,41 @@ public class BewerberServiceTest {
     }
   }
 
+  private void addBewerberDTOMock(List<BewerberDTO> pseudoDatenbank){
+    doAnswer(invocation -> {
+      pseudoDatenbank.add((BewerberDTO) invocation.getArguments()[0]);
+      return null;
+    }).when(bewerberRepository).save(any(BewerberDTO.class));
+  }
+
+  private void removeBewerberDTOMock(List<BewerberDTO> pseudoDatenbank) {
+    doAnswer(invocation -> {
+      pseudoDatenbank.remove((BewerberDTO) invocation.getArguments()[0]);
+      return null;
+    }).when(bewerberRepository).delete(any(BewerberDTO.class));
+  }
+
   @Test
   public void findAlleBewerberTest() {
+    List<BewerberDTO> alleBewerber = new LinkedList<>();
+    
     List<ModulAuswahl> modulAuswahlList1 = new LinkedList<ModulAuswahl>();
 
-    Bewerber bewerber1 = modelGenerator.generateBewerber();
-    bewerber1.getPraeferenzen().setModulAuswahl(modulAuswahlList1);
-    bewerber1.getPersonalien().setVorname("John");
+    Bewerber bewerber = modelGenerator.generateBewerber();
+    bewerber.getPraeferenzen().setModulAuswahl(modulAuswahlList1);
+    bewerber.getPersonalien().setVorname("John");
 
-    bewerberService.addBewerber(bewerber1);
+    addBewerberDTOMock(alleBewerber);
+    when(bewerberRepository.findAll()).thenReturn(alleBewerber);
+    
+    bewerberService.addBewerber(bewerber);
     List<BewerberDTO> bewerberDTOList = bewerberService.findAlleBewerber();
 
     assertNotNull(bewerberDTOList);
-    assertEquals(true, bewerberDTOList.size() > 0);
-
-    bewerberService.removeBewerber(bewerber1);
+    assertEquals(1, bewerberDTOList.size());
   }
+
+  
 
   @Test
   public void findNichtVerteilteBewerberTest() {
