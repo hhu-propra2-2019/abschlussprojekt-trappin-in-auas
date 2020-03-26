@@ -3,7 +3,6 @@ package mops.domain.models;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

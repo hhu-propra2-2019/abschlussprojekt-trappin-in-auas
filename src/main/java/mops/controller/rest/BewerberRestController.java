@@ -3,7 +3,7 @@ package mops.controller.rest;
 import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 
 import mops.domain.database.dto.BewerberDTO;
-import mops.domain.repositories.BewerberRepository;
+import mops.domain.models.Bewerber;
 import mops.domain.services.IBewerberService;
 import mops.services.BewerberService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
@@ -20,14 +20,9 @@ import java.util.List;
 public class BewerberRestController {
     //TODO: Crud operations for applications
     
-    //currently not in use
-
-    private transient BewerberRepository bewerberRepository;
-
     private transient IBewerberService bewerberService;
 
-    public BewerberRestController(BewerberRepository bewerberRepository, BewerberService bewerberService){
-        this.bewerberRepository = bewerberRepository;
+    public BewerberRestController(BewerberService bewerberService){
         this.bewerberService = bewerberService;
     }
 
@@ -42,7 +37,7 @@ public class BewerberRestController {
 
     @GetMapping(path = "/allebewerbungen", produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured(ROLE_ORGA)
-    public List<BewerberDTO> allebewerbungen(){
+    public List<Bewerber> allebewerbungen(){
         System.out.println("getting all applications");
         return bewerberService.findAlleBewerber();
     }

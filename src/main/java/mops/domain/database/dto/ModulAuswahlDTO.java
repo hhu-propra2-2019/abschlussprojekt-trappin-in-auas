@@ -18,6 +18,7 @@ public class ModulAuswahlDTO {
     
     @OneToOne(cascade = CascadeType.ALL)
     private ModulDTO modul;
+    
     private int prioritaet;
     private double note;
 

@@ -1,7 +1,6 @@
 package mops.services;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import mops.domain.database.dto.ModulDTO;
 import mops.domain.models.Modul;
@@ -26,6 +25,7 @@ public class ModulService implements IModulService {
 
   /**
    * Fuegt Modul in die Datenbank hinzu
+   * 
    * @param modul Zu speicherndes Modul
    */
   @Override
@@ -35,6 +35,7 @@ public class ModulService implements IModulService {
 
   /**
    * Listet alle Module in der Datenbank auf
+   * 
    * @return Liste mit allen Modulen
    */
   @Override
@@ -42,8 +43,7 @@ public class ModulService implements IModulService {
     return modelService.loadModulList(modulRepository.findAll());
   }
 
-
-  public Modul findModulByModulName(String ModulName){
+  public Modul findModulByModulName(String ModulName) {
     return modelService.loadModul(modulRepository.findModulByModulName(ModulName));
   }
 
@@ -52,8 +52,9 @@ public class ModulService implements IModulService {
   }
 
   public boolean modulExists(Modul modul) {
-    List<ModulDTO> module = modulRepository.findByModulNameAndDozentMail(modul.getModulName(), modul.getDozent().getDozentMail());
-    if(module != null){
+    List<ModulDTO> module = modulRepository.findByModulNameAndDozentMail(modul.getModulName(),
+        modul.getDozent().getDozentMail());
+    if (module != null) {
       return module.size() > 0;
     }
     return false;

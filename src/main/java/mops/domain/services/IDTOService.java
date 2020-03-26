@@ -3,7 +3,6 @@ package mops.domain.services;
 import java.util.List;
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
-import org.bouncycastle.math.raw.Mod;
 
 public interface IDTOService {
     ModulDTO load(Modul modul);
