@@ -43,10 +43,5 @@ public class PDFController {
     pdfService.fillPDF(bewerber,path);
     return new FileSystemResource(path);
   }
-
-  //TODO pdf-templates können eigentlich entfernt werden , einige TODOs in einem template
-  @GetMapping("/anzeigen")
-  public String showPDF(Model m){
-    return "pdfUebersicht";
-  }
+  
 }
