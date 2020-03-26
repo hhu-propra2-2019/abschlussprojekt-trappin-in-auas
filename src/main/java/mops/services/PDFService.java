@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import mops.domain.models.Bewerber;
 import mops.domain.models.EinstiegTyp;
 import mops.domain.models.ModulAuswahl;
-import mops.domain.services.IPDFService;
+
 
 @SuppressWarnings("PMD.UnusedLocalVariable")
 @Service
@@ -42,7 +42,6 @@ public class PDFService implements IPDFService {
   public void fillPDF(Bewerber bewerber, String file)  {
     try{
       PDDocument pDDocument = PDDocument.load(new File(file));
-      System.out.println("PDF geladen");
       try {
         System.out.println("versuche zu fuellen");
         checkEncryption(pDDocument);
@@ -67,34 +66,22 @@ public class PDFService implements IPDFService {
     field.setValue(bewerber.getPersonalien().getVorname());
     field = pDAcroForm.getField("Name");
     field.setValue(bewerber.getPersonalien().getName());
-
-    System.out.println(field);
-
-    System.out.println(field);
-
     field = pDAcroForm.getField("Geburtsdatum");
     field.setValue(bewerber.getPersonalien().getGeburtsdatum().toString());
-    System.out.println(field);
-
     field = pDAcroForm.getField("Staatsangehörigkeit");
     field.setValue(bewerber.getPersonalien().getNationalitaet());
-    System.out.println(field);
     field = pDAcroForm.getField("Geburtsort");
     field.setValue(bewerber.getPersonalien().getGeburtsort());
-
     field = pDAcroForm.getField("Anschrift (Straße)");
     field.setValue(bewerber.getPersonalien().getAdresse().getStrasse());
     field = pDAcroForm.getField("Anschrift (Hausnummer)");
     field.setValue(bewerber.getPersonalien().getAdresse().getHausnummer());
     field = pDAcroForm.getField("Anschrift (PLZ)");
     field.setValue(bewerber.getPersonalien().getAdresse().getPLZ());
-    System.out.println(field);
     field = pDAcroForm.getField("Anschrift (Ort)");
     field.setValue(bewerber.getPersonalien().getAdresse().getWohnOrt());
-    System.out.println(field);
     field = pDAcroForm.getField("Vertragsart");
     field.setValue(pruefeVertragsart(bewerber));
-
     field = pDAcroForm.getField("Stunden");
     field.setValue(
         bewerber.getPraeferenzen().getMinWunschStunden() + " - " + bewerber.getPraeferenzen().getMaxWunschStunden());
