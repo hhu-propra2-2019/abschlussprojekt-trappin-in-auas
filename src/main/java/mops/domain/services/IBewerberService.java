@@ -19,5 +19,5 @@ public interface IBewerberService {
     List<Bewerber> findBewerberFuerDozent(String dozentKennung);
     List<Bewerber> findVerteilt();
     List<Bewerber> findNichtVerteilt();
-
+    boolean bewerbungExists(String kennung);
 }
