@@ -48,7 +48,6 @@ public class VerteilerController {
 
     model.addAttribute("anzeigeModus", "uebersicht");
     model.addAttribute("verteilerPhase", zyklusDirigentService.getVerteilerPhase());
-    System.out.println(zyklusDirigentService.getVerteilerPhase());
     model.addAttribute("dozentPhase", zyklusDirigentService.getDozentenPhase());
     model.addAttribute("bewerberPhase", zyklusDirigentService.getBewerbungsPhase());
 
