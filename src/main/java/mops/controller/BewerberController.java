@@ -2,6 +2,10 @@ package mops.controller;
 
 import static mops.authentication.account.keycloak.KeycloakRoles.*;
 
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+
 import mops.domain.models.*;
 import mops.services.BewerberService;
 import mops.services.ModulService;
@@ -11,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,8 +61,12 @@ public class BewerberController {
 
   @PostMapping("/bewerbungabschicken")
   @Secured({ ROLE_STUDENT })
-  public String bewirbabschicken(Model model, Bewerber bewerber, KeycloakAuthenticationToken token) {
+  public String bewirbabschicken(Model model, @Valid Bewerber bewerber, BindingResult result, KeycloakAuthenticationToken token) {
+    if(result.hasErrors()){
+      System.out.println(result.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.toList()));
+      return "redirect:/bewerbung1/bewerber/bewerbung";
+    }
     bewerberService.addBewerber(bewerber, token.getName());
-    return "redirect:./";
+    return "redirect:/bewerbung1/bewerber";
   }
 }
