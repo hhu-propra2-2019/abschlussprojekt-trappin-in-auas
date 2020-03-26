@@ -171,7 +171,7 @@ public class BewerberServiceTest {
     assertEquals(2, bewerberDTOList.size());
     assertEquals(1, verteilteBewerber.size());
   }
-
+/*
   @Test
   public void findNichtVerteiltTest() {
     Adresse adresse1 = new Adresse("40474", "Duesseldorf", "Amsterdamer Strasse", "2");
@@ -194,6 +194,7 @@ public class BewerberServiceTest {
     Praeferenzen praeferenzen1 = new Praeferenzen(6, 8, modulAuswahlList1, "No Comment", EinstiegTyp.NEUEINSTIEG,
         "Keine", TutorenSchulungTeilnahme.TEILNAHME);
     Bewerber bewerber1 = new Bewerber(karriere1, personalien1, praeferenzen1);
+    bewerber1.setVerteiltAn(Arrays.asList(new Dozent("Jens Bendisposto", "jens@hhu.de")));
 
     Adresse adresse2 = new Adresse("40474", "Duesseldorf", "Opladener Strasse", "11");
     Date geburtsdatum2 = new Date(2001, Calendar.JANUARY, 23);
