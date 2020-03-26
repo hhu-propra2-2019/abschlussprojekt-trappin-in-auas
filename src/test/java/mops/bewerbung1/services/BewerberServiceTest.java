@@ -78,10 +78,10 @@ public class BewerberServiceTest {
     when(bewerberRepository.findAll()).thenReturn(alleBewerber);
     
     bewerberService.addBewerber(bewerber);
-    List<BewerberDTO> bewerberDTOList = bewerberService.findAlleBewerber();
+    List<Bewerber> bewerberList = bewerberService.findAlleBewerber();
 
-    assertNotNull(bewerberDTOList);
-    assertEquals(1, bewerberDTOList.size());
+    assertNotNull(bewerberList);
+    assertEquals(1, bewerberList.size());
   }
 
   @Test
@@ -97,10 +97,10 @@ public class BewerberServiceTest {
       bewerberService.addBewerber(b);
     }
 
-    List<BewerberDTO> bewerberDTOList = bewerberService.findAlleBewerber();
+    List<Bewerber> bewerberList = bewerberService.findAlleBewerber();
 
-    assertNotNull(bewerberDTOList);
-    assertEquals(10, bewerberDTOList.size());
+    assertNotNull(bewerberList);
+    assertEquals(10, bewerberList.size());
   }
 
   @Test
@@ -158,10 +158,10 @@ public class BewerberServiceTest {
     bewerberService.verteile(bewerber1.getKennung(),
         bewerber1.getPraeferenzen().getModulAuswahl().get(0).getModul().getDozent());
 
-    List<BewerberDTO> bewerberDTOList = bewerberService.findAlleBewerber();
-    List<BewerberDTO> nichtVerteilteBewerber = bewerberService.findAlleNichtVerteilteBewerber(bewerberDTOList);
+    List<Bewerber> bewerberList = bewerberService.findAlleBewerber();
+    List<Bewerber> nichtVerteilteBewerber = bewerberService.findAlleNichtVerteilteBewerber(bewerberList);
 
-    assertEquals(2, bewerberDTOList.size());
+    assertEquals(2, bewerberList.size());
     assertEquals(1, nichtVerteilteBewerber.size());
   }
 
@@ -241,7 +241,7 @@ public class BewerberServiceTest {
     List<Bewerber> bewerberList = bewerberService.findAlleBewerber();
     List<Bewerber> verteilteBewerber = bewerberService.findVerteilt();
 
-    assertEquals(2, bewerberDTOList.size());
+    assertEquals(2, bewerberList.size());
     assertEquals(1, verteilteBewerber.size());
   }
 }

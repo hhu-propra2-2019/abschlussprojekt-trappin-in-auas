@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
-
 import mops.domain.database.dto.*;
 import mops.domain.models.*;
 
@@ -64,9 +62,8 @@ public class BewerberService implements IBewerberService {
   }
 
   @Override
-  public List<Bewerber> findAlleNichtVerteilteBewerber(List<BewerberDTO> alleBewerber) {
-    return alleBewerber.stream().filter(x -> x.getVerteiltAn() == null || x.getVerteiltAn().size() == 0)
-        .map(x -> modelService.load(x)).collect(Collectors.toList());
+  public List<Bewerber> findAlleNichtVerteilteBewerber(List<Bewerber> alleBewerber) {
+    return alleBewerber.stream().filter(x -> x.getVerteiltAn() == null || x.getVerteiltAn().size() == 0).collect(Collectors.toList());
   }
 
   public void verteile(String kennung, Dozent dozent) {
@@ -75,9 +72,8 @@ public class BewerberService implements IBewerberService {
     bewerberRepository.save(b);
   }
 
-  public List<Bewerber> findAlleVerteilteBewerber(List<BewerberDTO> alleBewerber) {
-    return alleBewerber.stream().filter(x -> x.getVerteiltAn() != null && x.getVerteiltAn().size() !=0)
-    .map(x -> modelService.load(x)).collect(Collectors.toList());
+  public List<Bewerber> findAlleVerteilteBewerber(List<Bewerber> alleBewerber) {
+    return alleBewerber.stream().filter(x -> x.getVerteiltAn() != null && x.getVerteiltAn().size() !=0).collect(Collectors.toList());
   }
 
   public List<Bewerber> findNichtVerteilt() {

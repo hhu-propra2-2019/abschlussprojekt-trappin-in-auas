@@ -27,39 +27,28 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
   @Autowired
   private transient BewerberRepository bewerberRepository;
 
-  @Autowired
-  private ModelService modelService;
-
-
   @Override
-  public void addPraeferenz(DozentPraeferenzDTO dozentPraeferenzDTO) {
+  public void addPraeferenz(DozentPraeferenz dozentPraeferenz) {
     if (zyklusDirigentService.getDozentenPhase()) {
       try {
-        BewerberDTO bewerberDTO = bewerberService
-                .findBewerberByKennung(dozentPraeferenzDTO.getBewerber());
+        Bewerber bewerber = bewerberService
+                .findBewerberByKennung(dozentPraeferenz.getBewerberKennung());
 
-        List<DozentPraeferenzDTO> existierndeBewertung = bewerberDTO.getDozentPraeferenz()
+        List<DozentPraeferenz> existierndeBewertung = bewerber.getDozentPraeferenz()
                 .stream()
-                .filter(x -> x.getDozentMail().equals(dozentPraeferenzDTO.getDozentMail()))
+                .filter(x -> x.getDozentKennung().equals(dozentPraeferenz.getDozentKennung()))
                 .collect(Collectors.toList());
 
         if (existierndeBewertung.isEmpty()) {
-          bewerberDTO.getDozentPraeferenz().add(dozentPraeferenzDTO);
+          bewerber.getDozentPraeferenz().add(dozentPraeferenz);
         } else {
-          existierndeBewertung.get(0).setPraeferenz(dozentPraeferenzDTO.getPraeferenz());
+          existierndeBewertung.get(0).setPraeferenz(dozentPraeferenz.getPraeferenz());
         }
-        bewerberRepository.save(bewerberDTO);
+        bewerberRepository.save(dtoService.load(bewerber));
 
       } catch (Exception e) {
         return;
       }
-    }
-  }
-
-  public void addPraeferenz(DozentPraeferenz dozentPraeferenz) {
-    if (zyklusDirigentService.getDozentenPhase()) {
-      DozentPraeferenzDTO dozentPraeferenzDTO = dtoService.load(dozentPraeferenz);
-      addPraeferenz(dozentPraeferenzDTO);
     }
   }
 

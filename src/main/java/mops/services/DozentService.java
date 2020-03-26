@@ -11,17 +11,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class DozentService implements IDozentService {
   private transient DozentPraeferenzService dozentPraeferenzService;
-  private transient DTOService dtoService;
 
-  public DozentService(DozentPraeferenzService dozentPraeferenzService, DTOService dtoService) {
+  public DozentService(DozentPraeferenzService dozentPraeferenzService) {
     this.dozentPraeferenzService = dozentPraeferenzService;
-    this.dtoService = dtoService;
   }
 
   @Override
   public void fuegePraeferenzHinzu(String bewerber, String dozent, int praeferenz){
     DozentPraeferenz dPraeferenz = new DozentPraeferenz(dozent, bewerber, praeferenz);
-    dozentPraeferenzService.addPraeferenz(dtoService.load(dPraeferenz));
+    dozentPraeferenzService.addPraeferenz(dPraeferenz);
   }
 
   public List<Bewerber> getBewerbungenMitPraeferenz(List<Bewerber> alleBewerber, String dozent) {
