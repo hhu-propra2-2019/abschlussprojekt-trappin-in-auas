@@ -1,5 +1,8 @@
 package mops.domain.models;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Karriere {
 
-    private String arbeitserfahrung;
-    private ImmartikulationsStatus immartikulationsStatus;
-    private StudiengangAbschluss fachAbschluss;
-    
+  @Size(min = 30)
+  private String arbeitserfahrung;
+
+  @Valid
+  private ImmartikulationsStatus immartikulationsStatus;
+
+  @Valid
+  private StudiengangAbschluss fachAbschluss;
+
 }

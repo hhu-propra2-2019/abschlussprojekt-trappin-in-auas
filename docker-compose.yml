@@ -6,5 +6,15 @@ services:
       - ./sql/db/env/database.env
     volumes:
       - ./sql/db/entrypoint:/docker-entrypoint-initdb.d/
+    expose:
+      - 5432
+
+  bewerbung1-spring-boot-app:
+    build: .
+    container_name: 'bewerbung1-SB-app'
+    depends_on:
+      - database
     ports:
-      - "5432:5432"
+      - 8080:8080
+    links:
+      - database

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{mopslayout :: html(name='Korrektorenbewerbung', title='Detailansicht', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+<html lang="en" th:replace="~{mopslayout :: html(name='Korrektorenbewerbung', title='Detailansicht', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <title>Korrektorenbewerbung</title>
   <th:block th:fragment="headcontent">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -23,111 +23,123 @@
       <li>
         <a th:href="@{../uebersicht}">Zurück zur Übersicht</a>
       </li>
+      <li>
+        <a href="/logout">Logout</a>
+      </li>
     </ul>
   </nav>
 </header>
+
 <main th:fragment="bodycontent">
+  <div class="container pt-3" th:unless="${phase}">
+    <div class="alert alert-warning">
+      Aktuell können Sie keine Bewerbungen einsehen. Bitte informieren Sie sich über die Bewerbungszeiträume!
+    </div>
+  </div>
+
+  <div th:if="${phase}">
   <div class="h2" th:text="${bewerber.personalien.vorname + ' ' + bewerber.personalien.name}"></div>
-  <div class="container pt-3">
-    <div class="col-12 shadow p-3 mb-4 bg-light rounded">
-      <div class="card-deck">
-        <div class="card shadow p-0 mb-4 bg-light rounded">
-          <div class="card-header font-weight-bold text-left">
-            <div class="h4">
-              Personalien
+    <div class="container pt-3">
+      <div class="col-12 shadow p-3 mb-4 bg-light rounded">
+        <div class="card-columns">
+          <div class="card shadow p-0 mb-4 bg-light rounded">
+            <div class="card-header font-weight-bold text-left">
+              <div class="h4">
+                Personalien
+              </div>
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <tr>
+                  <td>Alter</td>
+                  <td th:text="${bewerber.personalien.alter}"></td>
+                </tr>
+                <tr>
+                  <td>Geburtsort</td>
+                  <td th:text="${bewerber.personalien.geburtsort}"></td>
+                </tr>
+                <tr>
+                  <td>Nationalität</td>
+                  <td th:text="${bewerber.personalien.nationalitaet}"></td>
+                </tr>
+                <tr>
+                  <td>Wohnort</td>
+                  <td th:text="${bewerber.personalien.adresse.wohnOrt}"></td>
+                </tr>
+              </table>
             </div>
           </div>
-          <div class="card-body">
-            <table class="table">
-              <tr>
-                <td>Alter</td>
-                <td th:text="${bewerber.personalien.alter}"></td>
-              </tr>
-              <tr>
-                <td>Geburtsort</td>
-                <td th:text="${bewerber.personalien.geburtsort}"></td>
-              </tr>
-              <tr>
-                <td>Nationalität</td>
-                <td th:text="${bewerber.personalien.nationalitaet}"></td>
-              </tr>
-              <tr>
-                <td>Wohnort</td>
-                <td th:text="${bewerber.personalien.adresse.wohnort}"></td>
-              </tr>
-            </table>
 
+
+          <div class="card shadow p-0 mb-4 bg-light rounded">
+            <div class="card-header font-weight-bold text-left">
+              <div class="h4">
+                Karriere
+              </div>
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <tr>
+                  <td>Arbeitserfahrung</td>
+                  <td th:text="${bewerber.karriere.arbeitserfahrung}"></td>
+                </tr>
+                <tr>
+                  <td>Abschluss</td>
+                  <td th:text="${bewerber.karriere.fachAbschluss.abschluss}"></td>
+                </tr>
+                <tr>
+                  <td>in Studiengang</td>
+                  <td th:text="${bewerber.karriere.fachAbschluss.studiengang}"></td>
+                </tr>
+                <tr>
+                  <td>an Universität</td>
+                  <td th:text="${bewerber.karriere.fachAbschluss.uni}"></td>
+                </tr>
+                <tr>
+                  <td>Immatrikulationsstatus</td>
+                  <td th:if="${bewerber.karriere.immartikulationsStatus.status == true}">immatrikuliert</td>
+                  <td th:if="${bewerber.karriere.immartikulationsStatus.status == false}">nicht immatrikuliert</td>
+                </tr>
+                <tr th:if="${bewerber.karriere.immartikulationsStatus.status == true}">
+                  <td>in Studiengang</td>
+                  <td th:text="${bewerber.karriere.immartikulationsStatus.fachrichtung}"></td>
+                </tr>
+
+              </table>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="card shadow p-0 mb-4 bg-light rounded">
-        <div class="card-header font-weight-bold text-left">
-          <div class="h4">
-            Karriere
+          <div class="card shadow p-0 mb-4 bg-light rounded">
+            <div class="card-header font-weight-bold text-left">
+              <div class="h4">
+                Präferenzen
+              </div>
+            </div>
+            <div class="card-body">
+              <ul class="list-group" th:each="praeferenz : ${bewerber.praeferenzen.modulAuswahl}">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <th:block th:text="${praeferenz.modul.modulName}"/>
+                  <span class="badge badge-primary badge-pill" th:text="${praeferenz.prioritaet}">22</span>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="card-body">
-          <table class="table">
-            <tr>
-              <td>Arbeitserfahrung</td>
-              <td th:text="${bewerber.karriere.arbeitserfahrung}"></td>
-            </tr>
-            <tr>
-              <td>Abschluss</td>
-              <td th:text="${bewerber.karriere.fachAbschluss.abschluss}"></td>
-            </tr>
-            <tr>
-              <td>in Studiengang</td>
-              <td th:text="${bewerber.karriere.fachAbschluss.studiengang}"></td>
-            </tr>
-            <tr>
-              <td>an Universität</td>
-              <td th:text="${bewerber.karriere.fachAbschluss.uni}"></td>
-            </tr>
-            <tr>
-              <td>Immatrikulationsstatus</td>
-              <td th:if="${bewerber.karriere.immartikulationsStatus.status == true}">immatrikuliert</td>
-              <td th:if="${bewerber.karriere.immartikulationsStatus.status == false}">nicht immatrikuliert</td>
-            </tr>
-            <tr th:if="${bewerber.karriere.immartikulationsStatus.status == true}">
-              <td>in Studiengang</td>
-              <td th:text="${bewerber.karriere.immartikulationsStatus.fachrichtung}"></td>
-            </tr>
 
-          </table>
-        </div>
-      </div>
-
-      <div class="card shadow p-0 mb-4 bg-light rounded">
-        <div class="card-header font-weight-bold text-left">
-          <div class="h4">
-            Präferenzen
+          <div class="card shadow p-0 mb-4 bg-light rounded" th:if="${bewerber.dozentPraeferenz.size() > 0}">
+            <div class="card-header font-weight-bold text-left">
+              <div class="h4">
+                Dozentenpräferenzen
+              </div>
+            </div>
+            <div class="card-body">
+              <ul class="list-group" th:each="pref : ${bewerber.dozentPraeferenz}">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <th:block th:text="${pref.dozentKennung}"/>
+                  <span class="badge badge-primary badge-pill" th:text="${pref.praeferenz}">23</span>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="card-body">
-          <ul class="list-group" th:each="praeferenz : ${bewerber.praeferenzen.modulAuswahl}">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <th:block th:text="${praeferenz.modul.modulName}"/>
-              <span class="badge badge-primary badge-pill" th:text="${praeferenz.prioritaet}">22</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="card shadow p-0 mb-4 bg-light rounded" th:if="${bewerber.dozentPraeferenz.size() > 0}">
-        <div class="card-header font-weight-bold text-left">
-          <div class="h4">
-            Dozentenpräferenzen
-          </div>
-        </div>
-        <div class="card-body">
-          <ul class="list-group" th:each="pref : ${bewerber.dozentPraeferenz}">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <th:block th:text="${pref.dozentKennung}"/>
-              <span class="badge badge-primary badge-pill" th:text="${pref.praeferenz}">23</span>
-            </li>
-          </ul>
         </div>
       </div>
     </div>

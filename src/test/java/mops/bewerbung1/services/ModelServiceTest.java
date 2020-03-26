@@ -70,7 +70,7 @@ public class ModelServiceTest {
     assertEquals(adresseDTO.getHausnummer(), adresse.getHausnummer());
     assertEquals(adresseDTO.getPLZ(), adresse.getPLZ());
     assertEquals(adresseDTO.getStrasse(), adresse.getStrasse());
-    assertEquals(adresseDTO.getWohnort(), adresse.getWohnort());
+    assertEquals(adresseDTO.getWohnort(), adresse.getWohnOrt());
 
     assertEquals(personalienDTO.getAlter(), personalien.getAlter());
     assertEquals(personalienDTO.getGeburtsdatum(), personalien.getGeburtsdatum());

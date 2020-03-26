@@ -25,7 +25,7 @@ public class BewerberService implements IBewerberService {
     this.modelService = modelService;
   }
 
-  public Bewerber initialiseBewerber(){
+  public Bewerber initialiseBewerber() {
     Bewerber b = new Bewerber(new Karriere(), new Personalien(), new Praeferenzen());
     b.getPraeferenzen().setModulAuswahl(new ArrayList<>()); // avoid list beeing null errors
     b.getPraeferenzen().getModulAuswahl().add(new ModulAuswahl());
@@ -40,10 +40,12 @@ public class BewerberService implements IBewerberService {
 
   public void addBewerber(Bewerber b, String kennung) {
     b.setKennung(kennung);
+    //because status checkbox is inverted
+    b.getKarriere().getImmartikulationsStatus().setStatus(!b.getKarriere().getImmartikulationsStatus().isStatus());
     BewerberDTO bewerberDTO = mappingService.load(b);
     BewerberDTO zuFindenderBewerber = bewerberRepository.findBewerberByKennung(kennung);
 
-    if(zuFindenderBewerber != null){
+    if (zuFindenderBewerber != null) {
       bewerberDTO.setId(zuFindenderBewerber.getId());
     }
 
@@ -75,21 +77,21 @@ public class BewerberService implements IBewerberService {
   }
 
   public List<Bewerber> findNichtVerteilt() {
-    return modelService.loadBewerberList(  bewerberRepository.findBewerberDTOBByVerteiltAnIsNull() );
+    return modelService.loadBewerberList(bewerberRepository.findBewerberDTOBByVerteiltAnIsNull());
   }
 
   public List<Bewerber> findVerteilt() {
-    return modelService.loadBewerberList(  bewerberRepository.findByVerteiltAnIsNotNull()  );
+    return modelService.loadBewerberList(bewerberRepository.findByVerteiltAnIsNotNull());
   }
 
   public List<Bewerber> findBewerberFuerDozent(String dozentKennung) {
     List<BewerberDTO> alleBewerber = findAlleBewerber();
     return alleBewerber.stream()
-    .filter(x -> modulAuswahlContainsDozent(x.getPraeferenzen().getModulAuswahl(), dozentKennung))
-    .map(x -> modelService.load(x)).collect(Collectors.toList());
+        .filter(x -> modulAuswahlContainsDozent(x.getPraeferenzen().getModulAuswahl(), dozentKennung))
+        .map(x -> modelService.load(x)).collect(Collectors.toList());
   }
 
-  private boolean modulAuswahlContainsDozent(List<ModulAuswahlDTO> auswahlDTO, String dozentKennung){
+  private boolean modulAuswahlContainsDozent(List<ModulAuswahlDTO> auswahlDTO, String dozentKennung) {
     return auswahlDTO.stream().anyMatch(x -> x.getModul().getDozentMail().equals(dozentKennung));
   }
 
@@ -97,7 +99,7 @@ public class BewerberService implements IBewerberService {
     return modelService.load(bewerberRepository.findBewerberByKennung(kennung));
   }
 
-  public Bewerber initialiseEditBewerber(String kennung){
+  public Bewerber initialiseEditBewerber(String kennung) {
     Bewerber b = modelService.load(bewerberRepository.findBewerberByKennung(kennung));
     return (b == null) ? new Bewerber(new Karriere(), new Personalien(), new Praeferenzen()) : b;
   }
@@ -105,5 +107,5 @@ public class BewerberService implements IBewerberService {
   public boolean bewerbungExists(String kennung) {
     return findBewerberModelByKennung(kennung) != null;
   }
-  
+
 }

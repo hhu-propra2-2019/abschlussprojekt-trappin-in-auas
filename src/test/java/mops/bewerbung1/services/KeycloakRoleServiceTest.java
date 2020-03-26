@@ -29,7 +29,7 @@ public class KeycloakRoleServiceTest {
 
   @Test
   public void verteilerRedirectPfad(){
-    assertEquals("/verteiler", keycloakRoleService.getRedirect("verteiler"));
+    assertEquals("/verteiler/uebersicht", keycloakRoleService.getRedirect("verteiler"));
   }
 
   @Test
@@ -39,7 +39,7 @@ public class KeycloakRoleServiceTest {
 
   @Test
   public void dozentRedirectPfad(){
-    assertEquals("/dozent", keycloakRoleService.getRedirect("orga"));
+    assertEquals("/dozent/uebersicht", keycloakRoleService.getRedirect("orga"));
   }
 
   @Test
