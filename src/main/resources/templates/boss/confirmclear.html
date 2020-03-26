@@ -38,7 +38,7 @@
   <main th:fragment="bodycontent">
 
     <div class="container pt-3">
-      <div class="col-12 shadow p-3 mb-5 bg-light rounded">
+      <div class="col-12 shadow p-3 mb-5 bg-light rounded text-center">
         <h1>Sicher dass du alle Module entfernen willst?</h1>
       </div>
     </div>
@@ -46,9 +46,9 @@
     <div class="container pt-3">
       <div class="col-12 shadow p-3 mb-4 bg-light rounded">
         <form method="POST" action="/bewerbung1/setup/deleteall">
-          <div class="btn-group">
-            <a href="/bewerbung1/setup/" class="col"><button class="btn btn-success">Nein, zurück zur Übersicht</button></a>
-            <button class="btn btn-danger col">Ja ich bin sicher!</button>
+          <div class="btn-group" style="display:flex;">
+            <button href="/bewerbung1/setup/" class="btn btn-success">Nein, zurück zur Übersicht</button>
+            <button class="btn btn-danger">Ja ich bin sicher!</button>
           </div>
         </form>
       </div>
