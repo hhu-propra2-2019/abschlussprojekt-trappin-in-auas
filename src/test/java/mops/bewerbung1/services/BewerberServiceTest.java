@@ -92,7 +92,9 @@ public class BewerberServiceTest {
     when(bewerberRepository.findAll()).thenReturn(alleBewerber);
     
     for(int i = 0; i < 10; i++){
-      bewerberService.addBewerber(modelGenerator.generateBewerber());
+      Bewerber b = modelGenerator.generateBewerber();
+      b.setKennung("unique"+i);
+      bewerberService.addBewerber(b);
     }
 
     List<BewerberDTO> bewerberDTOList = bewerberService.findAlleBewerber();
