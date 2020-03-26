@@ -38,7 +38,7 @@ public class PDFController {
    * @param bewerber needed for PDFoutput
    * @return starts Download
    */
-  @RequestMapping(value = "/download", method = RequestMethod.GET)
+  @RequestMapping(value = "/download", method = RequestMethod.POST)
   @Secured(ROLE_VERTEILER)
   @ResponseBody
   public FileSystemResource downloadPDF(Model m, Bewerber bewerber, KeycloakAuthenticationToken token){
