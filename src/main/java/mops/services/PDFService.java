@@ -33,7 +33,7 @@ public class PDFService implements IPDFService {
   }
 
   public String fileDirectory(Bewerber bewerber) {
-    if (bewerber.getKarriere().getFachAbschluss().getAbschluss() == null) {
+    if (bewerber.getKarriere().getFachAbschluss() == null) {
       return PDF_PATH + "studentische_Hilfskraft.pdf";
     } else {
       return PDF_PATH + "wissenschaftliche_Hilfskraft.pdf";
