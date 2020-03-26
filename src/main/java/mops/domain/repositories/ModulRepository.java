@@ -1,6 +1,7 @@
 package mops.domain.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import mops.domain.database.dto.ModulDTO;
@@ -26,6 +27,8 @@ public interface ModulRepository extends CrudRepository<ModulDTO, Long> {
   <S extends ModulDTO> Iterable<S> saveAll(Iterable<S> entities);
 
   List<ModulDTO> findByModulNameAndDozentMail(String modul, String dozentMail);
+
+  Optional<ModulDTO> findByModulName(String modulName);
 
   @Transactional
   @Modifying

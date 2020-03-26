@@ -2,16 +2,23 @@ package mops.controller;
 
 import static mops.authentication.account.keycloak.KeycloakRoles.*;
 
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+
 import mops.domain.models.*;
 import mops.services.BewerberService;
 import mops.services.ModulService;
 
+import mops.services.ZyklusDirigentService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,6 +32,9 @@ public class BewerberController {
   @Autowired
   private transient ModulService modulService;
 
+  @Autowired
+  private transient ZyklusDirigentService zyklusDirigentService;
+
   /**
    * Students dashboard. Login as "studentin" required.
    * @param model injected, Model for Thymeleaf interaction
@@ -35,6 +45,7 @@ public class BewerberController {
   @Secured({ ROLE_STUDENT })
   public String index(Model model, KeycloakAuthenticationToken token) {
     model.addAttribute("bewerbungExists", bewerberService.bewerbungExists(token.getName()));
+    model.addAttribute("bewerberPhase", zyklusDirigentService.getBewerbungsPhase());
     return "student/bewerberuebersicht";
   }
 
@@ -56,8 +67,12 @@ public class BewerberController {
 
   @PostMapping("/bewerbungabschicken")
   @Secured({ ROLE_STUDENT })
-  public String bewirbabschicken(Model model, Bewerber bewerber, KeycloakAuthenticationToken token) {
+  public String bewirbabschicken(Model model, @ModelAttribute @Valid Bewerber bewerber, BindingResult result, KeycloakAuthenticationToken token) {
+    if(result.hasErrors()){
+      System.out.println(result.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.toList()));
+      return "student/main_min";
+    }
     bewerberService.addBewerber(bewerber, token.getName());
-    return "redirect:./";
+    return "redirect:/bewerbung1/bewerber";
   }
 }
