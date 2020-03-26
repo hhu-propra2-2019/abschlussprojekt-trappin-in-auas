@@ -10,6 +10,7 @@ import mops.domain.models.*;
 import mops.services.BewerberService;
 import mops.services.ModulService;
 
+import mops.services.ZyklusDirigentService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -30,6 +31,9 @@ public class BewerberController {
   @Autowired
   private transient ModulService modulService;
 
+  @Autowired
+  private transient ZyklusDirigentService zyklusDirigentService;
+
   /**
    * Students dashboard. Login as "studentin" required.
    * @param model injected, Model for Thymeleaf interaction
@@ -40,6 +44,7 @@ public class BewerberController {
   @Secured({ ROLE_STUDENT })
   public String index(Model model, KeycloakAuthenticationToken token) {
     model.addAttribute("bewerbungExists", bewerberService.bewerbungExists(token.getName()));
+    model.addAttribute("bewerberPhase", zyklusDirigentService.getBewerbungsPhase());
     return "student/bewerberuebersicht";
   }
 
