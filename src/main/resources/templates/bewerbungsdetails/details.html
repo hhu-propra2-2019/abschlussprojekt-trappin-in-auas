@@ -24,13 +24,6 @@
         <a th:href="@{../uebersicht}">Zurück zur Übersicht</a>
       </li>
       <li>
-        <form method="POST" target="_blank" th:action="@{/pdf/download/{kennung}(kennung=${bewerber.kennung})}">
-          <button type="submit" class="btn btn-primary">
-            PDF herunterladen
-          </button>
-        </form>
-      </li>
-      <li>
         <a href="/logout">Logout</a>
       </li>
     </ul>
@@ -45,7 +38,18 @@
   </div>
 
   <div th:if="${phase}">
-  <div class="h2" th:text="${bewerber.personalien.vorname + ' ' + bewerber.personalien.name}"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <div class="h2 align-self-start" th:text="${bewerber.personalien.vorname + ' ' + bewerber.personalien.name}"></div>
+        </div>
+        <div class="col-sm">
+          <form method="POST" th:action="@{/pdf/download/{kennung}(kennung=${bewerber.kennung})}">
+            <button class="btn btn-outline-danger align-self-end" type="submit">PDF herunterladen</button>
+          </form>
+        </div>
+      </div>
+    </div>
     <div class="container">
         <div class="card-columns row">
           <div class="card bg-light rounded col-xl-6 vw-100">
@@ -146,7 +150,7 @@
             </div>
           </div>
 
-          <div class="card bg-light rounded col-xl-6 vw-100">
+          <div class="card bg-light rounded col-xl-6 vw-100" th:if="${bewerber.verteiltAn.size() > 0}">
             <div class="card-header bg-light text-left">
               <div class="h4">
                 Zugewiesen an
