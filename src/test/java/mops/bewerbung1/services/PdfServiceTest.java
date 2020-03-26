@@ -9,6 +9,7 @@ import mops.services.PDFService;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.mockito.Mock;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +26,10 @@ import static org.mockito.Mockito.mock;
 
 public class PdfServiceTest {
     private static final String PDF_PATH = "./src/main/resources/static/";
+
+    @Mock
+    private transient BewerberRepository bewerberRepository;
+
     private transient Bewerber b;
     private transient Karriere karriere;
     private transient Praeferenzen praeferenzen;

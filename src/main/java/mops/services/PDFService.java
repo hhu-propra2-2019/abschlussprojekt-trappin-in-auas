@@ -1,6 +1,7 @@
 package mops.services;
 
 import java.io.IOException;
+import mops.domain.database.dto.BewerberDTO;
 import mops.domain.models.*;
 import mops.domain.services.IPDFService;
 import java.io.File;
@@ -8,6 +9,7 @@ import java.io.File;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mops.domain.models.Bewerber;
@@ -19,6 +21,16 @@ import mops.domain.models.ModulAuswahl;
 @Service
 public class PDFService implements IPDFService {
   private static final String PDF_PATH = "./src/main/resources/static/";
+
+  @Autowired
+  private transient BewerberService bewerberService;
+
+  @Autowired
+  private transient ModelService modelService;
+
+  public Bewerber getBewerber(String kennung){
+    return bewerberService.findBewerberByKennung(kennung);
+  }
 
   public String fileDirectory(Bewerber bewerber) {
     if (bewerber.getKarriere().getFachAbschluss() == null) {
@@ -39,7 +51,7 @@ public class PDFService implements IPDFService {
   }
 
   @SuppressWarnings("PMD.CloseResource")
-  public void fillPDF(Bewerber bewerber, String file)  {
+  public String fillPDF(Bewerber bewerber, String file)  {
     try{
       PDDocument pDDocument = PDDocument.load(new File(file));
       try {
@@ -50,13 +62,14 @@ public class PDFService implements IPDFService {
       } catch (Exception e) {
         e.printStackTrace();
       } finally {
-        pDDocument.save(PDF_PATH + "/output/output_"+ bewerber.getPersonalien().getName()+
-            "_"+ bewerber.getPersonalien().getVorname()+ ".pdf");
+        pDDocument.save(PDF_PATH + "/output/output_" + bewerber.getKennung() + ".pdf");
         pDDocument.close();
       }
     } catch (IOException e) {
       e.printStackTrace();
     }
+    return PDF_PATH + "/output/output_"+ bewerber.getPersonalien().getName()+
+        "_"+ bewerber.getPersonalien().getVorname()+ ".pdf";
   }
 
   public void loadPDFFelder(Bewerber bewerber, PDDocument pdDocument) throws Exception {

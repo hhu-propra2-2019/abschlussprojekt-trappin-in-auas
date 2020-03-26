@@ -3,18 +3,20 @@ package mops.controller;
 import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_VERTEILER;
 
-import javax.annotation.security.RolesAllowed;
+import org.springframework.http.MediaType;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import javax.servlet.http.HttpServletResponse;
 import mops.domain.models.Bewerber;
 import mops.services.BewerberService;
 import mops.services.PDFService;
-import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -31,18 +33,21 @@ public class PDFController {
   }
   /**
    * delete module. Login as "Boss" required.
-   * @param m injected, Model for Thymeleaf interaction
-   * @param token injected, present, if user is logged in
-   * @param bewerber needed for PDFoutput
    * @return starts Download
    */
-  @RequestMapping(value = "/download", method = RequestMethod.POST)
+  @PostMapping(value = "/download/{kennung}" , produces = MediaType.APPLICATION_PDF_VALUE)
   @Secured({ROLE_VERTEILER,ROLE_ORGA})
   @ResponseBody
-  public FileSystemResource downloadPDF(Model m, Bewerber bewerber, KeycloakAuthenticationToken token){
-    String path = pdfService.fileDirectory(bewerber);
-    pdfService.fillPDF(bewerber,path);
-    return new FileSystemResource(path);
+  public InputStreamResource downloadPDF(@PathVariable("kennung") String kennung,
+      HttpServletResponse response) throws FileNotFoundException {
+
+    Bewerber bewerber = pdfService.getBewerber(kennung);
+    String fileDirectory = pdfService.fileDirectory(bewerber);
+    String path = pdfService.fillPDF(bewerber, fileDirectory);
+    
+    response.setContentType("application/pdf");
+    response.setHeader("Content-Disposition", "attachment; filename=\"output_" + kennung + ".pdf\"");
+    return new InputStreamResource(new FileInputStream(path));
   }
 
 }
