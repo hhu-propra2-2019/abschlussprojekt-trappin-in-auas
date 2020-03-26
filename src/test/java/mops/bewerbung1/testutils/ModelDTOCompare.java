@@ -57,12 +57,12 @@ public class ModelDTOCompare {
 
   public void compare(Karriere karriere, KarriereDTO karriereDTO) {
     compare(karriere.getFachAbschluss(), karriereDTO.getFachAbschluss());
-    compare(karriere.getImmartikulationsStatus(), karriereDTO.getImmartikulationsStatus());
+    compare(karriere.getImmatrikulationsStatus(), karriereDTO.getImmartikulationsStatus());
 
     assertEquals(karriere.getArbeitserfahrung(), karriereDTO.getArbeitserfahrung());
   }
 
-  public void compare(ImmartikulationsStatus immartikulationsStatus,
+  public void compare(ImmatrikulationsStatus immartikulationsStatus,
       ImmartikulationsStatusDTO immartikulationsStatusDTO) {
     assertEquals(immartikulationsStatus.getFachrichtung(), immartikulationsStatusDTO.getFachrichtung());
     assertEquals(immartikulationsStatus.isStatus(), immartikulationsStatusDTO.isStatus());

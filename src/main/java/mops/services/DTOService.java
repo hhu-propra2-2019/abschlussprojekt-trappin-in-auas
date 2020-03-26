@@ -45,7 +45,7 @@ public class DTOService implements IDTOService {
 
   }
 
-  public ImmartikulationsStatusDTO load(ImmartikulationsStatus imStatus) {
+  public ImmartikulationsStatusDTO load(ImmatrikulationsStatus imStatus) {
     return new ImmartikulationsStatusDTO(imStatus.isStatus(), imStatus.getFachrichtung());
   }
 
@@ -62,7 +62,7 @@ public class DTOService implements IDTOService {
   }
 
   public KarriereDTO load(Karriere karriere) {
-    return new KarriereDTO(karriere.getArbeitserfahrung(), load(karriere.getImmartikulationsStatus()),
+    return new KarriereDTO(karriere.getArbeitserfahrung(), load(karriere.getImmatrikulationsStatus()),
         load(karriere.getFachAbschluss()));
   }
 

@@ -96,7 +96,7 @@ public class ModelGenerator {
     Karriere karriere = new Karriere();
     karriere.setArbeitserfahrung(arbeitserfahrungen.get((int) (Math.random() * arbeitserfahrungen.size())));
     karriere.setFachAbschluss(generateAbschluss());
-    karriere.setImmartikulationsStatus(generateImmatrikulation());
+    karriere.setImmatrikulationsStatus(generateImmatrikulation());
     return karriere;
   }
 
@@ -105,8 +105,8 @@ public class ModelGenerator {
    * 
    * @return ImmartikulationsStatus with random attributes
    */
-  public ImmartikulationsStatus generateImmatrikulation() {
-    ImmartikulationsStatus status = new ImmartikulationsStatus();
+  public ImmatrikulationsStatus generateImmatrikulation() {
+    ImmatrikulationsStatus status = new ImmatrikulationsStatus();
     status.setFachrichtung("random fachrichtung");
     status.setStatus(Math.random() > 0.5);
     return status;
