@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -66,10 +67,10 @@ public class BewerberController {
 
   @PostMapping("/bewerbungabschicken")
   @Secured({ ROLE_STUDENT })
-  public String bewirbabschicken(Model model, @Valid Bewerber bewerber, BindingResult result, KeycloakAuthenticationToken token) {
+  public String bewirbabschicken(Model model, @ModelAttribute @Valid Bewerber bewerber, BindingResult result, KeycloakAuthenticationToken token) {
     if(result.hasErrors()){
       System.out.println(result.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.toList()));
-      return "redirect:/bewerbung1/bewerber/bewerbung";
+      return "student/main_min";
     }
     bewerberService.addBewerber(bewerber, token.getName());
     return "redirect:/bewerbung1/bewerber";
