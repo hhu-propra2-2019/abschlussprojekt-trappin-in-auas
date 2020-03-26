@@ -1,5 +1,6 @@
 ### CUSTOM ENTRIES ###
 lombok.config
+/src/main/resources/static/output/
 
 # Created by https://www.gitignore.io/api/code,java,linux,macos,gradle,windows,eclipse,java-web,intellij+all
 # Edit at https://www.gitignore.io/?templates=code,java,linux,macos,gradle,windows,eclipse,java-web,intellij+all
