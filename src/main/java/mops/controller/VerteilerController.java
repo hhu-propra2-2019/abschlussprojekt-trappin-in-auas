@@ -94,7 +94,8 @@ public class VerteilerController {
   @Secured(ROLE_VERTEILER)
   @GetMapping("/details/{kennung}")
   public String detailansicht(Model model, @PathVariable String kennung) {
-    model.addAttribute("bewerber", bewerberService.findBewerberByKennung(kennung));
+    model.addAttribute("bewerber", bewerberService.findBewerberModelByKennung(kennung));
+    model.addAttribute("phase", zyklusDirigentService.getVerteilerPhase());
     return "bewerbungsdetails/details";
   }
 
