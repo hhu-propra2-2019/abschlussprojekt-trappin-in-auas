@@ -1,5 +1,6 @@
 package mops.controller;
 
+import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_VERTEILER;
 
 import javax.annotation.security.RolesAllowed;
@@ -36,7 +37,7 @@ public class PDFController {
    * @return starts Download
    */
   @RequestMapping(value = "/download", method = RequestMethod.POST)
-  @Secured(ROLE_VERTEILER)
+  @Secured({ROLE_VERTEILER,ROLE_ORGA})
   @ResponseBody
   public FileSystemResource downloadPDF(Model m, Bewerber bewerber, KeycloakAuthenticationToken token){
     String path = pdfService.fileDirectory(bewerber);
