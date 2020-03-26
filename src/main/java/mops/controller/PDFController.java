@@ -30,7 +30,7 @@ public class PDFController {
   }
 
   //TODO -Bewerber filtern(vlt per Kennung), - Form im Verteiler hinzufuegen(soll Button sein mit redirect an /pdf/downlaod)
-
+  //TODO target=_blank
   /**
    * delete module. Login as "Boss" required.
    * @param m injected, Model for Thymeleaf interaction
@@ -49,8 +49,6 @@ public class PDFController {
 
   }
   //TODO pdf-templates können eigentlich entfernt werden , einige TODOs in einem template
-  //PDF muss auch nicht mehr embedded werden.
-  //PDF muss nicht mehr angezeigt werden, da Download möglich ist
   @GetMapping("/anzeigen")
   public String showPDF(Model m){
     return "pdfUebersicht";

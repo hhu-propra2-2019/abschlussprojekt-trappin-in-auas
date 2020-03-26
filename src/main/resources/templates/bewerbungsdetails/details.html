@@ -24,7 +24,7 @@
         <a th:href="@{../uebersicht}">Zurück zur Übersicht</a>
       </li>
       <li>
-        <form method="POST" th:action="@{/pdf/download}" th:object="${bewerber}">
+        <form method="POST" target="_blank" th:action="@{/pdf/download}" th:object="${bewerber}">
           <button type="submit">
             PDF herunterladen
           </button>
