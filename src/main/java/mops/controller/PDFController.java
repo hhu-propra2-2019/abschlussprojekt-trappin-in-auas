@@ -45,8 +45,6 @@ public class PDFController {
     String fileDirectory = pdfService.fileDirectory(bewerber);
     String path = pdfService.fillPDF(bewerber, fileDirectory);
     
-    //String fileName = path.replace("./src/main/resources/static/output//", "");
-
     response.setContentType("application/pdf");
     response.setHeader("Content-Disposition", "attachment; filename=\"output_" + kennung + ".pdf\"");
     return new InputStreamResource(new FileInputStream(path));
