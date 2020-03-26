@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{mopslayout :: html(name='name', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>dozentseite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <title>main</title>
+  <th:block th:fragment="headcontent">
+  </th:block>
+</head>
+
+
+<body>
+  <header>
+    <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
+      <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
+      <ul>
+        <li>
+          <a href="/bewerbung1/bewerber">Übersicht</a>
+        </li>
+        <li>
+          <a href="/logout">Logout</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main th:fragment="bodycontent">
+
+    <div class="container pt-3">
+      <div class="col-12 shadow p-3 mb-5 bg-light rounded text-center">
+        <h1>Sicher dass du alle Module entfernen willst?</h1>
+      </div>
+    </div>
+
+    <div class="container pt-3">
+      <div class="col-12 shadow p-3 mb-4 bg-light rounded">
+        <form method="POST" action="/bewerbung1/setup/deleteall">
+          <div class="btn-group" style="display:flex;">
+            <button href="/bewerbung1/setup/" class="btn btn-success">Nein, zurück zur Übersicht</button>
+            <button class="btn btn-danger">Ja ich bin sicher!</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+</body>
+
+</html>

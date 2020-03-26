@@ -29,10 +29,12 @@ public class Praeferenzen {
   private String kommentar;
 
   @EinstiegsTypConstraint
+  @NotNull
   private EinstiegTyp einstiegTyp;
 
   private String einschraenkungen;
 
+  @NotNull
   private TutorenSchulungTeilnahme tutorenSchulungTeilnahme;
 
 }
