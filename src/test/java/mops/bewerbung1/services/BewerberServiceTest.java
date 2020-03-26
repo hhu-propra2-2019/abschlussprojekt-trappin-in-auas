@@ -40,26 +40,9 @@ public class BewerberServiceTest {
 
   @BeforeEach
   void setUp() {
-    ModulDTO propra1DTO = new ModulDTO("Propra I", "Jens Bendisposto", "jens@hhu.de");
-    ModulDTO propra2DTO = new ModulDTO("Propra II", "Jens Bendisposto", "jens@hhu.de");
-    ModulDTO propra3DTO = new ModulDTO("Programmierung", "Stefan Harmeling", "stefan@hhu.de");
-    List<ModulDTO> offeneModule = Arrays.asList(propra1DTO, propra2DTO, propra3DTO);
-
     this.dtoService = new DTOService(modulRepository);
     this.bewerberService = new BewerberService(bewerberRepository, dtoService, modelService);
     this.modelGenerator = new ModelGenerator();
-
-    when(modulRepository.findAll()).thenReturn(offeneModule);
-    initModulReturns(offeneModule);
-  }
-
-  private void initModulReturns(List<ModulDTO> modulDTOs) {
-    for (ModulDTO modulDTO : modulDTOs) {
-      when(modulRepository.findByModulName(modulDTO.getModulName())).thenReturn(Optional.of(modulDTO));
-      when(modulRepository.findByModulNameAndDozentMail(modulDTO.getModulName(), modulDTO.getDozentMail()))
-          .thenReturn(modulDTOs.stream().filter(x -> x.getModulName().equals(modulDTO.getModulName())
-              && x.getDozentMail().equals(modulDTO.getDozentMail())).collect(Collectors.toList()));
-    }
   }
 
   private void addBewerberDTOMock(List<BewerberDTO> pseudoDatenbank){
@@ -96,15 +79,31 @@ public class BewerberServiceTest {
     assertEquals(1, bewerberDTOList.size());
   }
 
-  
+  @Test
+  public void removeBewerberTest() {
+    List<BewerberDTO> alleBewerber = new LinkedList<>();
+    
+    List<ModulAuswahl> modulAuswahlList1 = new LinkedList<ModulAuswahl>();
+
+    Bewerber bewerber = modelGenerator.generateBewerber();
+    bewerber.getPraeferenzen().setModulAuswahl(modulAuswahlList1);
+
+    addBewerberDTOMock(alleBewerber);
+    when(bewerberRepository.findAll()).thenReturn(alleBewerber);
+    removeBewerberDTOMock(alleBewerber);
+
+    bewerberService.addBewerber(bewerber);
+
+    assertEquals(1, alleBewerber.size());
+
+    bewerberService.removeBewerber(bewerber);
+
+    assertEquals(0, alleBewerber.size());
+  }
 
   @Test
   public void findNichtVerteilteBewerberTest() {
-    Modul modul1 = modelGenerator.generateModul();
-    Modul modul2 = modelGenerator.generateModul();
-    modulRepository.save(dtoService.load(modul1));
-    modulRepository.save(dtoService.load(modul2));
-
+    
     List<ModulAuswahl> modulAuswahlList1 = new LinkedList<ModulAuswahl>();
     modulAuswahlList1.add(new ModulAuswahl(modul1, 2, 2.3, Beruf.Korrektor));
     modulAuswahlList1.add(new ModulAuswahl(modul1, 4, 1.7, Beruf.Korrektor));
@@ -130,10 +129,6 @@ public class BewerberServiceTest {
 
     assertEquals(2, bewerberDTOList.size());
     assertEquals(1, nichtVerteilteBewerber.size());
-
-    bewerberService.removeBewerber(bewerber1);
-    bewerberService.removeBewerber(bewerber2);
-
   }
 
   @Test
