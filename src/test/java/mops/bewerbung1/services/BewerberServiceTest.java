@@ -159,10 +159,12 @@ public class BewerberServiceTest {
         bewerber1.getPraeferenzen().getModulAuswahl().get(0).getModul().getDozent());
 
     List<BewerberDTO> bewerberDTOList = bewerberService.findAlleBewerber();
-    //List<BewerberDTO> nichtVerteilteBewerber = bewerberService.findAlleNichtVerteilteBewerber(bewerberDTOList);
+    List<BewerberDTO> nichtVerteilteBewerber = bewerberService.findAlleNichtVerteilteBewerber(bewerberDTOList);
 
+    System.out.println(bewerberDTOList.get(0));
+    System.out.println(bewerberDTOList.get(1));
     assertEquals(2, bewerberDTOList.size());
-    //assertEquals(1, nichtVerteilteBewerber.size());
+    assertEquals(1, nichtVerteilteBewerber.size());
   }
 
   @Test

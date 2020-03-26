@@ -64,7 +64,7 @@ public class BewerberService implements IBewerberService {
 
   @Override
   public List<BewerberDTO> findAlleNichtVerteilteBewerber(List<BewerberDTO> alleBewerber) {
-    return alleBewerber.stream().filter(x -> x.getVerteiltAn() == null).collect(Collectors.toList());
+    return alleBewerber.stream().filter(x -> x.getVerteiltAn() == null || x.getVerteiltAn().size() == 0 ).collect(Collectors.toList());
   }
 
   public void verteile(String kennung, Dozent dozent) {
