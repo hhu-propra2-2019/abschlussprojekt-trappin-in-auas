@@ -1,5 +1,6 @@
 package mops.services;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,7 +62,7 @@ public class DTOService implements IDTOService {
   }
 
   public KarriereDTO load(Karriere karriere) {
-    return new KarriereDTO(karriere.getArbeitserfahrung(), load(karriere.getImmartikulationsStatus()),
+    return new KarriereDTO(karriere.getArbeitserfahrung(), load(karriere.getImmatrikulationsStatus()),
         load(karriere.getFachAbschluss()));
   }
 
@@ -72,7 +73,7 @@ public class DTOService implements IDTOService {
   }
 
   public BewerberDTO load(Bewerber bewerber) {
-    List<VerteilungDTO> verteiltAn = (bewerber.getVerteiltAn() == null) ? null : load(bewerber.getVerteiltAn());
+    List<VerteilungDTO> verteiltAn = (bewerber.getVerteiltAn() == null) ? new LinkedList<>() : load(bewerber.getVerteiltAn());
     List<DozentPraeferenzDTO> dozentPraeferenz = (bewerber.getDozentPraeferenz() == null) ? null : loadDozentPraeferenzList(bewerber.getDozentPraeferenz());
     BewerberDTO bewerberDTO = new BewerberDTO(load(bewerber.getPersonalien()), load(bewerber.getKarriere()),
         load(bewerber.getPraeferenzen()), verteiltAn, dozentPraeferenz);

@@ -54,6 +54,7 @@ public class BewerberController {
   public String bewirb(Model model, KeycloakAuthenticationToken token) {
     model.addAttribute("bewerber", bewerberService.initialiseBewerber());
     model.addAttribute("existingmodule", modulService.findAllModule());
+    System.out.println("Module: " + modulService.findAllModule());
     return "student/main_min";
   }
 
@@ -77,9 +78,11 @@ public class BewerberController {
   public String bewirbabschicken(Model model, @ModelAttribute @Valid Bewerber bewerber, BindingResult result, KeycloakAuthenticationToken token) {
     if(result.hasErrors()){
       System.out.println(result.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.toList()));
+      System.out.println(result.getAllErrors().stream().map(x -> x.getObjectName()).collect(Collectors.toList()));
+      model.addAttribute("existingmodule", modulService.findAllModule());
       return "student/main_min";
     }
     bewerberService.addBewerber(bewerber, token.getName());
-    return "redirect:/bewerbung1/bewerber";
+    return "student/vielenDank";
   }
 }

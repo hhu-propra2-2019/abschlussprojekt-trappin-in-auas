@@ -3,7 +3,6 @@ package mops.domain.models;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +22,6 @@ public class Bewerber {
   @Valid
   private Praeferenzen praeferenzen;
 
-  @NotBlank
   private String kennung;
   
   private List<Dozent> verteiltAn;

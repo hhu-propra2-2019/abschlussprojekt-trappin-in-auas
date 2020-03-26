@@ -40,53 +40,48 @@ public class BewerberService implements IBewerberService {
 
   public void addBewerber(Bewerber b, String kennung) {
     b.setKennung(kennung);
-    //because status checkbox is inverted
-    b.getKarriere().getImmartikulationsStatus().setStatus(!b.getKarriere().getImmartikulationsStatus().isStatus());
+    // because status checkbox is inverted
+    b.getKarriere().getImmatrikulationsStatus().setStatus(!b.getKarriere().getImmatrikulationsStatus().isStatus());
     BewerberDTO bewerberDTO = mappingService.load(b);
     BewerberDTO zuFindenderBewerber = bewerberRepository.findBewerberByKennung(kennung);
 
     if (zuFindenderBewerber != null) {
       bewerberDTO.setId(zuFindenderBewerber.getId());
     }
-
     bewerberRepository.save(bewerberDTO);
   }
 
   @Override
-  public BewerberDTO findBewerberByKennung(String kennung) {
-    return bewerberRepository.findBewerberByKennung(kennung);
-  }
-
-  public List<BewerberDTO> findAlleBewerber() {
-    return bewerberRepository.findAll();
+  public Bewerber findBewerberByKennung(String kennung) {
+    return modelService.load(bewerberRepository.findBewerberByKennung(kennung));
   }
 
   @Override
-  public List<BewerberDTO> findAlleNichtVerteilteBewerber(List<BewerberDTO> alleBewerber) {
-    return alleBewerber.stream().filter(x -> x.getVerteiltAn() == null).collect(Collectors.toList());
+  public List<Bewerber> findAlleBewerber() {
+    List<BewerberDTO> bewerberDTOs = bewerberRepository.findAll();
+    System.out.println(bewerberDTOs);
+    return bewerberDTOs.stream().map(x -> modelService.load(x)).collect(Collectors.toList());
+  }
+
+  @Override
+  public List<Bewerber> findAlleNichtVerteilteBewerber() {
+    return bewerberRepository.findAll().stream().map(x -> modelService.load(x))
+        .filter(x -> x.getVerteiltAn() == null || x.getVerteiltAn().size() == 0).collect(Collectors.toList());
   }
 
   public void verteile(String kennung, Dozent dozent) {
-    BewerberDTO b = findBewerberByKennung(kennung);
+    BewerberDTO b = bewerberRepository.findBewerberByKennung(kennung);
     b.getVerteiltAn().add(mappingService.load(dozent));
     bewerberRepository.save(b);
   }
 
-  public List<BewerberDTO> findAlleVerteilteBewerber(List<BewerberDTO> alleBewerber) {
-    return alleBewerber.stream().filter(x -> x.getVerteiltAn() != null).collect(Collectors.toList());
-  }
-
-  public List<Bewerber> findNichtVerteilt() {
-    return modelService.loadBewerberList(bewerberRepository.findBewerberDTOBByVerteiltAnIsNull());
-  }
-
-  public List<Bewerber> findVerteilt() {
-    return modelService.loadBewerberList(bewerberRepository.findByVerteiltAnIsNotNull());
+  public List<Bewerber> findAlleVerteilteBewerber() {
+    return bewerberRepository.findAll().stream().map(x -> modelService.load(x))
+        .filter(x -> x.getVerteiltAn() != null && x.getVerteiltAn().size() != 0).collect(Collectors.toList());
   }
 
   public List<Bewerber> findBewerberFuerDozent(String dozentKennung) {
-    List<BewerberDTO> alleBewerber = findAlleBewerber();
-    return alleBewerber.stream()
+    return bewerberRepository.findAll().stream()
         .filter(x -> modulAuswahlContainsDozent(x.getPraeferenzen().getModulAuswahl(), dozentKennung))
         .map(x -> modelService.load(x)).collect(Collectors.toList());
   }
@@ -106,6 +101,10 @@ public class BewerberService implements IBewerberService {
 
   public boolean bewerbungExists(String kennung) {
     return findBewerberModelByKennung(kennung) != null;
+  }
+
+  public void removeBewerber(Bewerber bewerber) {
+    bewerberRepository.delete(mappingService.load(bewerber));
   }
 
 }

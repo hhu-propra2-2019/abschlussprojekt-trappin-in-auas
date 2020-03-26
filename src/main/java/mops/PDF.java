@@ -58,7 +58,7 @@ public class PDF {
     Karriere karriere = new Karriere();
     karriere.setArbeitserfahrung("Viel");
     karriere.setFachAbschluss(new StudiengangAbschluss("Informatik", "Bachelor", "HHU"));
-    karriere.setImmartikulationsStatus(new ImmatrikulationsStatus(true, "Informatik"));
+    karriere.setImmatrikulationsStatus(new ImmatrikulationsStatus(true, "Informatik"));
 
     b.setPersonalien(personalien);
     b.setPraeferenzen(praeferenzen);

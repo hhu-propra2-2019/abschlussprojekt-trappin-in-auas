@@ -23,4 +23,4 @@ docker-compose up
 
 ## Projektdokumentation
 
-[Dokumentation](https://github.com/hhu-propra2/abschlussprojekt-trappin-in-auas/blob/docs/docs/documentation.md) nach [arc42-Vorlage](https://arc42.org/)
+[Dokumentation](/docs/documentation.md) nach [arc42-Vorlage](https://arc42.org/)
