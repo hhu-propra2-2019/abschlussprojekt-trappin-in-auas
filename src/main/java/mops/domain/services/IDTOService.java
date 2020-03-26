@@ -8,7 +8,7 @@ public interface IDTOService {
     ModulDTO load(Modul modul);
     ModulAuswahlDTO load(ModulAuswahl modulAuswahl);
     AdresseDTO load(Adresse adresse);
-    ImmartikulationsStatusDTO load(ImmartikulationsStatus immartikulationsStatus);
+    ImmartikulationsStatusDTO load(ImmatrikulationsStatus immatrikulationsStatus);
     StudiengangAbschlussDTO load(StudiengangAbschluss studiengangAbschluss);
     List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen);
     KarriereDTO load(Karriere karriere);

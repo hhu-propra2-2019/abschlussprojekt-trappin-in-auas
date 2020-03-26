@@ -99,13 +99,13 @@ public class ModelServiceTest {
 
         Karriere karriere = modelService.load(karriereDTO);
         StudiengangAbschluss studiengangAbschluss = karriere.getFachAbschluss();
-        ImmartikulationsStatus immartikulationsStatus = karriere.getImmartikulationsStatus();
+        ImmatrikulationsStatus immatrikulationsStatus = karriere.getImmatrikulationsStatus();
         assertNotNull(karriere);
 
 
         assertEquals(karriereDTO.getArbeitserfahrung(), karriere.getArbeitserfahrung());
-        assertEquals(immartikulationsStatusDTO.getFachrichtung(), immartikulationsStatus.getFachrichtung());
-        assertEquals(immartikulationsStatusDTO.isStatus(), immartikulationsStatus.isStatus());
+        assertEquals(immartikulationsStatusDTO.getFachrichtung(), immatrikulationsStatus.getFachrichtung());
+        assertEquals(immartikulationsStatusDTO.isStatus(), immatrikulationsStatus.isStatus());
         assertEquals(studiengangAbschlussDTO.getStudiengang(), studiengangAbschluss.getStudiengang());
         assertEquals(studiengangAbschlussDTO.getUni(), studiengangAbschluss.getUni());
         assertEquals(studiengangAbschlussDTO.getAbschluss(), studiengangAbschluss.getAbschluss());

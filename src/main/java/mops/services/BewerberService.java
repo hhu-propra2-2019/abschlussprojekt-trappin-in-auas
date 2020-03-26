@@ -41,7 +41,7 @@ public class BewerberService implements IBewerberService {
   public void addBewerber(Bewerber b, String kennung) {
     b.setKennung(kennung);
     // because status checkbox is inverted
-    b.getKarriere().getImmartikulationsStatus().setStatus(!b.getKarriere().getImmartikulationsStatus().isStatus());
+    b.getKarriere().getImmatrikulationsStatus().setStatus(!b.getKarriere().getImmatrikulationsStatus().isStatus());
     BewerberDTO bewerberDTO = mappingService.load(b);
     BewerberDTO zuFindenderBewerber = bewerberRepository.findBewerberByKennung(kennung);
 

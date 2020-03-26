@@ -12,15 +12,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class ModulService implements IModulService {
 
-  @Autowired
   private transient ModulRepository modulRepository;
 
   @Autowired
   private transient ModelService modelService;
 
+  @Autowired
+  private transient DTOService dtoService;
+
   public ModulService(ModulRepository modulRepository, ModelService modelService) {
     this.modulRepository = modulRepository;
-    this.modelService = modelService;
   }
 
   /**
@@ -28,6 +29,11 @@ public class ModulService implements IModulService {
    * 
    * @param modul Zu speicherndes Modul
    */
+
+  public void addModul(Modul modul) {
+    modulRepository.save(dtoService.load(modul));
+  }
+
   @Override
   public void addModul(ModulDTO modul) {
     modulRepository.save(modul);

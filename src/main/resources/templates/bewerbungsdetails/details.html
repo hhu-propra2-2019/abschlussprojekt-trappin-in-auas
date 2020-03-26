@@ -104,12 +104,12 @@
                 </tr>
                 <tr>
                   <td>Immatrikulationsstatus</td>
-                  <td th:if="${bewerber.karriere.immartikulationsStatus.status == true}">immatrikuliert</td>
-                  <td th:if="${bewerber.karriere.immartikulationsStatus.status == false}">nicht immatrikuliert</td>
+                  <td th:if="${bewerber.karriere.immatrikulationsStatus.status == true}">immatrikuliert</td>
+                  <td th:if="${bewerber.karriere.immatrikulationsStatus.status == false}">nicht immatrikuliert</td>
                 </tr>
-                <tr th:if="${bewerber.karriere.immartikulationsStatus.status == true}">
+                <tr th:if="${bewerber.karriere.immatrikulationsStatus.status == true}">
                   <td>in Studiengang</td>
-                  <td th:text="${bewerber.karriere.immartikulationsStatus.fachrichtung}"></td>
+                  <td th:text="${bewerber.karriere.immatrikulationsStatus.fachrichtung}"></td>
                 </tr>
 
               </table>
