@@ -70,8 +70,8 @@
         <div class="form-group col-12 shadow p-3 mb-5 bg-light rounded">
           <h3>Persönliche Daten:</h3>
           <label for="vornameinput">Vorname:</label>
-          <input type="text" class="form-control" required th:field="*{vorname}" maxlength="30" />
-
+          <input type="text" class="form-control" required th:field="*{vorname}" maxlength="30" th:errorclass="is-invalid"/>
+          <span class="text-danger" th:errors="*{vorname}" th:if="${#fields.hasErrors('vorname')}"></span>
           <label for="nachnameinput">
             Nachname:</label>
           <input type="text" class="form-control" required th:field="*{name}" maxlength="30" />
