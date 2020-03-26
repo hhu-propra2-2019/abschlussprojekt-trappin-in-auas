@@ -46,10 +46,10 @@
 
   <div th:if="${phase}">
   <div class="h2" th:text="${bewerber.personalien.vorname + ' ' + bewerber.personalien.name}"></div>
-    <div class="container pt-3">
-      <div class="col-12 shadow p-3 mb-4 bg-light rounded">
-        <div class="card-columns">
-          <div class="card shadow p-0 mb-4 bg-light rounded">
+    <div class="container">
+      <div class="shadow mb-4 bg-light rounded">
+        <div class="card-deck row">
+          <div class="card shadow bg-light rounded col-md-6">
             <div class="card-header font-weight-bold text-left">
               <div class="h4">
                 Personalien
@@ -78,7 +78,7 @@
           </div>
 
 
-          <div class="card shadow p-0 mb-4 bg-light rounded">
+          <div class="card shadow bg-light rounded col-md-6">
             <div class="card-header font-weight-bold text-left">
               <div class="h4">
                 Karriere
@@ -116,7 +116,7 @@
             </div>
           </div>
 
-          <div class="card shadow p-0 mb-4 bg-light rounded">
+          <div class="card shadow bg-light rounded col-md-6">
             <div class="card-header font-weight-bold text-left">
               <div class="h4">
                 Präferenzen
@@ -132,7 +132,7 @@
             </div>
           </div>
 
-          <div class="card shadow p-0 mb-4 bg-light rounded" th:if="${bewerber.dozentPraeferenz.size() > 0}">
+          <div class="card shadow bg-light rounded col-md-6" th:if="${bewerber.dozentPraeferenz.size() > 0}">
             <div class="card-header font-weight-bold text-left">
               <div class="h4">
                 Dozentenpräferenzen

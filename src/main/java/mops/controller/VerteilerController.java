@@ -48,6 +48,7 @@ public class VerteilerController {
 
     model.addAttribute("anzeigeModus", "uebersicht");
     model.addAttribute("verteilerPhase", zyklusDirigentService.getVerteilerPhase());
+    System.out.println(zyklusDirigentService.getVerteilerPhase());
     model.addAttribute("dozentPhase", zyklusDirigentService.getDozentenPhase());
     model.addAttribute("bewerberPhase", zyklusDirigentService.getBewerbungsPhase());
 
@@ -98,7 +99,8 @@ public class VerteilerController {
   @Secured(ROLE_VERTEILER)
   @GetMapping("/details/{kennung}")
   public String detailansicht(Model model, @PathVariable String kennung) {
-    model.addAttribute("bewerber", bewerberService.findBewerberByKennung(kennung));
+    model.addAttribute("bewerber", bewerberService.findBewerberModelByKennung(kennung));
+    model.addAttribute("phase", zyklusDirigentService.getVerteilerPhase());
     return "bewerbungsdetails/details";
   }
 
