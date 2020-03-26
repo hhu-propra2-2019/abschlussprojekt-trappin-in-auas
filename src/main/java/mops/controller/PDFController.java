@@ -43,12 +43,12 @@ public class PDFController {
 
     Bewerber bewerber = pdfService.getBewerber(kennung);
     String fileDirectory = pdfService.fileDirectory(bewerber);
-    String path = pdfService.fillPDF(bewerber,fileDirectory);
+    String path = pdfService.fillPDF(bewerber, fileDirectory);
     
     //String fileName = path.replace("./src/main/resources/static/output//", "");
 
     response.setContentType("application/pdf");
-    response.setHeader("Content-Disposition", "attachment; filename=\"output_studentin_Studentin.pdf\"");
+    response.setHeader("Content-Disposition", "attachment; filename=\"output_" + kennung + ".pdf\"");
     return new InputStreamResource(new FileInputStream(path));
   }
 

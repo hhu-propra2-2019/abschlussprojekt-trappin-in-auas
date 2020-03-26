@@ -62,8 +62,7 @@ public class PDFService implements IPDFService {
       } catch (Exception e) {
         e.printStackTrace();
       } finally {
-        pDDocument.save(PDF_PATH + "/output/output_"+ bewerber.getPersonalien().getName()+
-            "_"+ bewerber.getPersonalien().getVorname()+ ".pdf");
+        pDDocument.save(PDF_PATH + "/output/output_" + bewerber.getKennung() + ".pdf");
         pDDocument.close();
       }
     } catch (IOException e) {
