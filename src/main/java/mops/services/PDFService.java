@@ -68,8 +68,7 @@ public class PDFService implements IPDFService {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return PDF_PATH + "/output/output_"+ bewerber.getPersonalien().getName()+
-        "_"+ bewerber.getPersonalien().getVorname()+ ".pdf";
+    return PDF_PATH + "/output/output_"+ bewerber.getKennung() + ".pdf";
   }
 
   public void loadPDFFelder(Bewerber bewerber, PDDocument pdDocument) throws Exception {
