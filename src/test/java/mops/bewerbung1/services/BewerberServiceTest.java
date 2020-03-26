@@ -13,17 +13,17 @@ import mops.services.ModelService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @SpringBootTest
 public class BewerberServiceTest {
 
@@ -40,6 +40,7 @@ public class BewerberServiceTest {
 
   @BeforeEach
   void setUp() {
+    this.modelService = new ModelService();
     this.dtoService = new DTOService(modulRepository);
     this.bewerberService = new BewerberService(bewerberRepository, dtoService, modelService);
     this.modelGenerator = new ModelGenerator();
@@ -159,7 +160,7 @@ public class BewerberServiceTest {
         bewerber1.getPraeferenzen().getModulAuswahl().get(0).getModul().getDozent());
 
     List<Bewerber> bewerberList = bewerberService.findAlleBewerber();
-    List<Bewerber> nichtVerteilteBewerber = bewerberService.findAlleNichtVerteilteBewerber(bewerberList);
+    List<Bewerber> nichtVerteilteBewerber = bewerberService.findAlleNichtVerteilteBewerber();
 
     assertEquals(2, bewerberList.size());
     assertEquals(1, nichtVerteilteBewerber.size());
@@ -198,48 +199,8 @@ public class BewerberServiceTest {
     bewerberService.verteile(bewerber1.getKennung(),
             bewerber1.getPraeferenzen().getModulAuswahl().get(0).getModul().getDozent());
 
-    List<BewerberDTO> bewerberDTOList = bewerberService.findAlleBewerber();
-    List<BewerberDTO> verteilteBewerber = bewerberService.findAlleVerteilteBewerber(bewerberDTOList);
-
-    assertEquals(2, bewerberDTOList.size());
-    assertEquals(1, verteilteBewerber.size());
-  }
-
-  @Test
-  public void findAlleVerteilteBewerberModelTest() {
-    List<BewerberDTO> alleBewerbungen = new LinkedList<>();
-
-    Modul modul1 = modelGenerator.generateModul();
-    Modul modul2 = modelGenerator.generateModul();
-
-    List<ModulAuswahl> modulAuswahlList1 = new LinkedList<ModulAuswahl>();
-    modulAuswahlList1.add(new ModulAuswahl(modul1, 2, 2.3, Beruf.Korrektor));
-    modulAuswahlList1.add(new ModulAuswahl(modul1, 4, 1.7, Beruf.Korrektor));
-
-    Bewerber bewerber1 = modelGenerator.generateBewerber();
-    bewerber1.getPraeferenzen().setModulAuswahl(modulAuswahlList1);
-
-    List<ModulAuswahl> modulAuswahlList2 = new LinkedList<ModulAuswahl>();
-    modulAuswahlList2.add(new ModulAuswahl(modul1, 1, 2.7, Beruf.Korrektor));
-    modulAuswahlList2.add(new ModulAuswahl(modul2, 3, 3.0, Beruf.Korrektor));
-
-    Bewerber bewerber2 = modelGenerator.generateBewerber();
-    bewerber2.getPraeferenzen().setModulAuswahl(modulAuswahlList1);
-    bewerber2.setKennung("spezialkennung");
-
-    addBewerberDTOMock(alleBewerbungen);
-    when(bewerberRepository.findAll()).thenReturn(alleBewerbungen);
-    doAnswer(i -> alleBewerbungen.stream().filter(x -> x.getKennung().equals(i.getArguments()[0])).findFirst().get())
-            .when(bewerberRepository).findBewerberByKennung(any(String.class));
-
-    bewerberService.addBewerber(bewerber1);
-    bewerberService.addBewerber(bewerber2);
-
-    bewerberService.verteile(bewerber1.getKennung(),
-            bewerber1.getPraeferenzen().getModulAuswahl().get(0).getModul().getDozent());
-
     List<Bewerber> bewerberList = bewerberService.findAlleBewerber();
-    List<Bewerber> verteilteBewerber = bewerberService.findVerteilt();
+    List<Bewerber> verteilteBewerber = bewerberService.findAlleVerteilteBewerber();
 
     assertEquals(2, bewerberList.size());
     assertEquals(1, verteilteBewerber.size());

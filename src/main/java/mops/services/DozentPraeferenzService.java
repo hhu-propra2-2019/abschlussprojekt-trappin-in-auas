@@ -3,8 +3,6 @@ package mops.services;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import mops.domain.database.dto.BewerberDTO;
-import mops.domain.database.dto.DozentPraeferenzDTO;
 import mops.domain.models.Bewerber;
 import mops.domain.models.DozentPraeferenz;
 import mops.domain.repositories.BewerberRepository;
@@ -31,13 +29,10 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
   public void addPraeferenz(DozentPraeferenz dozentPraeferenz) {
     if (zyklusDirigentService.getDozentenPhase()) {
       try {
-        Bewerber bewerber = bewerberService
-                .findBewerberByKennung(dozentPraeferenz.getBewerberKennung());
+        Bewerber bewerber = bewerberService.findBewerberByKennung(dozentPraeferenz.getBewerberKennung());
 
-        List<DozentPraeferenz> existierndeBewertung = bewerber.getDozentPraeferenz()
-                .stream()
-                .filter(x -> x.getDozentKennung().equals(dozentPraeferenz.getDozentKennung()))
-                .collect(Collectors.toList());
+        List<DozentPraeferenz> existierndeBewertung = bewerber.getDozentPraeferenz().stream()
+            .filter(x -> x.getDozentKennung().equals(dozentPraeferenz.getDozentKennung())).collect(Collectors.toList());
 
         if (existierndeBewertung.isEmpty()) {
           bewerber.getDozentPraeferenz().add(dozentPraeferenz);
@@ -70,7 +65,7 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
   public Integer getDozentPraeferenz(String bewerber, String dozentMail) {
     List<DozentPraeferenz> matching = getMatchingDozentPraeferenz(bewerber, dozentMail);
 
-    if(matching.isEmpty()){
+    if (matching.isEmpty()) {
       return -1;
     }
     return matching.get(0).getPraeferenz();
@@ -78,7 +73,7 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
 
   @Override
   public boolean alreadyConfirmed(String bewerber, String dozentMail) {
-    if(getDozentPraeferenz(bewerber, dozentMail) == -1){
+    if (getDozentPraeferenz(bewerber, dozentMail) == -1) {
       return false;
     }
     return true;
@@ -89,10 +84,9 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
     Bewerber bewerber = bewerberService.findBewerberByKennung(kennung);
     List<DozentPraeferenz> matching;
     try {
-      matching =
-          bewerber.getDozentPraeferenz().stream()
-              .filter(d -> d.getBewerberKennung().equals(kennung) && d.getDozentKennung().equals(dozentKennung))
-              .collect(Collectors.toList());
+      matching = bewerber.getDozentPraeferenz().stream()
+          .filter(d -> d.getBewerberKennung().equals(kennung) && d.getDozentKennung().equals(dozentKennung))
+          .collect(Collectors.toList());
     } catch (Exception e) {
       matching = Collections.emptyList();
     }

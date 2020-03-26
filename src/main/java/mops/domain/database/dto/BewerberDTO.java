@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 
 @Data
 @Entity

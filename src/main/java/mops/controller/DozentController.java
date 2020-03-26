@@ -105,8 +105,7 @@ public class DozentController {
   @Secured({ ROLE_ORGA })
   @GetMapping("/details/{kennung}")
   public String detailAnsicht(Model model, KeycloakAuthenticationToken token, @PathVariable String kennung) {
-    BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(kennung);
-    Bewerber bewerber = modelService.load(bewerberDTO);
+    Bewerber bewerber = bewerberService.findBewerberByKennung(kennung);
     model.addAttribute(BEWERBER_ATTRIBUTE, bewerber);
     model.addAttribute("phase", zyklusDirigentService.getDozentenPhase());
     return "bewerbungsdetails/details";

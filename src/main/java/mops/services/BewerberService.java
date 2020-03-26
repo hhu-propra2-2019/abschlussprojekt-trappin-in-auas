@@ -40,7 +40,7 @@ public class BewerberService implements IBewerberService {
 
   public void addBewerber(Bewerber b, String kennung) {
     b.setKennung(kennung);
-    //because status checkbox is inverted
+    // because status checkbox is inverted
     b.getKarriere().getImmartikulationsStatus().setStatus(!b.getKarriere().getImmartikulationsStatus().isStatus());
     BewerberDTO bewerberDTO = mappingService.load(b);
     BewerberDTO zuFindenderBewerber = bewerberRepository.findBewerberByKennung(kennung);
@@ -58,12 +58,15 @@ public class BewerberService implements IBewerberService {
 
   @Override
   public List<Bewerber> findAlleBewerber() {
-    return bewerberRepository.findAll().stream().map(x-> modelService.load(x)).collect(Collectors.toList());
+    List<BewerberDTO> bewerberDTOs = bewerberRepository.findAll();
+    System.out.println(bewerberDTOs);
+    return bewerberDTOs.stream().map(x -> modelService.load(x)).collect(Collectors.toList());
   }
 
   @Override
-  public List<Bewerber> findAlleNichtVerteilteBewerber(List<Bewerber> alleBewerber) {
-    return alleBewerber.stream().filter(x -> x.getVerteiltAn() == null || x.getVerteiltAn().size() == 0).collect(Collectors.toList());
+  public List<Bewerber> findAlleNichtVerteilteBewerber() {
+    return bewerberRepository.findAll().stream().map(x -> modelService.load(x))
+        .filter(x -> x.getVerteiltAn() == null || x.getVerteiltAn().size() == 0).collect(Collectors.toList());
   }
 
   public void verteile(String kennung, Dozent dozent) {
@@ -72,16 +75,9 @@ public class BewerberService implements IBewerberService {
     bewerberRepository.save(b);
   }
 
-  public List<Bewerber> findAlleVerteilteBewerber(List<Bewerber> alleBewerber) {
-    return alleBewerber.stream().filter(x -> x.getVerteiltAn() != null && x.getVerteiltAn().size() !=0).collect(Collectors.toList());
-  }
-
-  public List<Bewerber> findNichtVerteilt() {
-    return modelService.loadBewerberList(bewerberRepository.findBewerberDTOBByVerteiltAnIsNull());
-  }
-
-  public List<Bewerber> findVerteilt() {
-    return modelService.loadBewerberList(bewerberRepository.findByVerteiltAnIsNotNull());
+  public List<Bewerber> findAlleVerteilteBewerber() {
+    return bewerberRepository.findAll().stream().map(x -> modelService.load(x))
+        .filter(x -> x.getVerteiltAn() != null && x.getVerteiltAn().size() != 0).collect(Collectors.toList());
   }
 
   public List<Bewerber> findBewerberFuerDozent(String dozentKennung) {

@@ -36,8 +36,8 @@ public class VerteilerController {
   @Secured(ROLE_VERTEILER)
   @GetMapping("/uebersicht")
   public String verteilen(Model model, KeycloakAuthenticationToken token) {
-    List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
-    List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
+    List<Bewerber> offeneBewerbungen = bewerberService.findAlleNichtVerteilteBewerber();
+    List<Bewerber> zugewieseneBewerbungen = bewerberService.findAlleVerteilteBewerber();
     List<Bewerber> offeneBewerbungenPreview = offeneBewerbungen.stream().limit(5).collect(Collectors.toList());
 
     model.addAttribute("anzahlOffeneBewerbungen", offeneBewerbungen.size());
@@ -57,8 +57,8 @@ public class VerteilerController {
   @Secured(ROLE_VERTEILER)
   @GetMapping("/verteilte")
   public String showVerteilteBewerber(Model model, KeycloakAuthenticationToken token) {
-    List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
-    List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
+    List<Bewerber> offeneBewerbungen = bewerberService.findAlleNichtVerteilteBewerber();
+    List<Bewerber> zugewieseneBewerbungen = bewerberService.findAlleVerteilteBewerber();
 
     model.addAttribute("anzahlOffeneBewerbungen", offeneBewerbungen.size());
     model.addAttribute("anzahlZugewieseneBewerbungen", zugewieseneBewerbungen.size());
@@ -78,8 +78,8 @@ public class VerteilerController {
   @Secured(ROLE_VERTEILER)
   @GetMapping("/offene")
   public String showOffeneBewerber(Model model, KeycloakAuthenticationToken token) {
-    List<Bewerber> offeneBewerbungen = bewerberService.findNichtVerteilt();
-    List<Bewerber> zugewieseneBewerbungen = bewerberService.findVerteilt();
+    List<Bewerber> offeneBewerbungen = bewerberService.findAlleNichtVerteilteBewerber();
+    List<Bewerber> zugewieseneBewerbungen = bewerberService.findAlleVerteilteBewerber();
 
     model.addAttribute("anzahlOffeneBewerbungen", offeneBewerbungen.size());
     model.addAttribute("anzahlZugewieseneBewerbungen", zugewieseneBewerbungen.size());

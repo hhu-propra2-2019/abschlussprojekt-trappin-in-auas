@@ -17,19 +17,16 @@ public class ModelService implements IModelService {
 
   }
 
-  public Bewerber load(BewerberDTO bewerberDTO){
-    if(bewerberDTO == null){
+  public Bewerber load(BewerberDTO bewerberDTO) {
+    if (bewerberDTO == null) {
       return null;
     }
-    return new Bewerber(
-      load(bewerberDTO.getKarriere()), 
-      load(bewerberDTO.getPersonalien()),
-      load(bewerberDTO.getPraeferenzen()), 
-      bewerberDTO.getKennung(),
-      bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()),
-      bewerberDTO.getDozentPraeferenz().stream().map(x -> load(x)).collect(Collectors.toList())
-    );
+    List<DozentPraeferenz> dPref = (bewerberDTO.getDozentPraeferenz() == null) ? new LinkedList<>()
+        : bewerberDTO.getDozentPraeferenz().stream().map(x -> load(x)).collect(Collectors.toList());
 
+    return new Bewerber(load(bewerberDTO.getKarriere()), load(bewerberDTO.getPersonalien()),
+        load(bewerberDTO.getPraeferenzen()), bewerberDTO.getKennung(),
+        bewerberDTO.getVerteiltAn().stream().map(x -> load(x)).collect(Collectors.toList()), dPref);
   }
 
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis") // Fix gradle bug: False positive
