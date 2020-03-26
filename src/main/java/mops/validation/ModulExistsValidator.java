@@ -12,7 +12,7 @@ import mops.validation.constraints.ModulExistsConstraint;
 public class ModulExistsValidator implements ConstraintValidator<ModulExistsConstraint, Modul> {
 
   @Autowired
-  private ModulService modulService;
+  private transient ModulService modulService;
 
   public void initialize(ModulExistsConstraint constraintAnnotation) {
   }

@@ -24,7 +24,7 @@ public class Adresse {
 
   public Adresse(String PLZ, String wohnort, String strasse, String hausnummer) {
     this.PLZ = PLZ;
-    this.wohnort = wohnort;
+    this.wohnOrt = wohnort;
     this.strasse = strasse;
     this.hausnummer = hausnummer;
   }
