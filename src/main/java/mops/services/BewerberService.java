@@ -68,10 +68,7 @@ public class BewerberService implements IBewerberService {
   }
 
   public void verteile(String kennung, Dozent dozent) {
-    System.out.println("finding bewerber mit kennung: " + kennung);
     BewerberDTO b = findBewerberByKennung(kennung);
-    System.out.println("Verteile bewerber:");
-    System.out.println(b);
     b.getVerteiltAn().add(mappingService.load(dozent));
     bewerberRepository.save(b);
   }

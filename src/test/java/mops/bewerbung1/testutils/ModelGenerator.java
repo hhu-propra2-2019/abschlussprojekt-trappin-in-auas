@@ -44,6 +44,7 @@ public class ModelGenerator {
     pref.setMinWunschStunden((int) (Math.random() * 10) + 7);
     pref.setMaxWunschStunden((int) (Math.random() * 10) + 7);
     pref.setTutorenSchulungTeilnahme(TutorenSchulungTeilnahme.TEILGENOMMEN);
+    pref.setModulAuswahl(new LinkedList<>());
     return pref;
   }
 
