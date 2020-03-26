@@ -29,8 +29,7 @@ public class PDFService implements IPDFService {
   private transient ModelService modelService;
 
   public Bewerber getBewerber(String kennung){
-    BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(kennung);
-    return modelService.load(bewerberDTO);
+    return bewerberService.findBewerberByKennung(kennung);
   }
 
   public String fileDirectory(Bewerber bewerber) {
