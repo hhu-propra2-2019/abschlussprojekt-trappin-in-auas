@@ -46,6 +46,7 @@ public class BewerberServiceTest {
     this.modelGenerator = new ModelGenerator();
   }
 
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
   private void addBewerberDTOMock(List<BewerberDTO> pseudoDatenbank){
     doAnswer(invocation -> {
       BewerberDTO bewerberDTO = (BewerberDTO) invocation.getArguments()[0];
@@ -58,6 +59,7 @@ public class BewerberServiceTest {
     }).when(bewerberRepository).save(any(BewerberDTO.class));
   }
 
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
   private void removeBewerberDTOMock(List<BewerberDTO> pseudoDatenbank) {
     doAnswer(invocation -> {
       pseudoDatenbank.remove((BewerberDTO) invocation.getArguments()[0]);
