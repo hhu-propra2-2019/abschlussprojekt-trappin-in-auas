@@ -25,13 +25,13 @@
 
 <main th:fragment="bodycontent">
 
-  <div class="container pt-3" th:unless="${verteilerPhase}">
+  <div class="container pt-3" th:unless="${bewerberPhase}">
     <div class="alert alert-warning">
       Aktuell können Sie sich nicht bewerben. Bitte informieren Sie sich über die Bewerbungszeiträume!
     </div>
   </div>
 
-  <div th:if="${verteilerPhase}">
+  <div th:if="${bewerberPhase}">
     <div class="container col-12 shadow p-3 mb-5 bg-light rounded" th:unless="${bewerbungExists}">
       <h1>Bewerbungsübersicht</h1>
       <p class="row" style="margin-left: 0rem;">
