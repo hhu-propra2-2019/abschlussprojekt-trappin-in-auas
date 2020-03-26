@@ -14,6 +14,8 @@ services:
     container_name: 'bewerbung1-SB-app'
     depends_on:
       - database
+    env_file:
+      - ./sql/db/env/database.env
     ports:
       - 8080:8080
     links:

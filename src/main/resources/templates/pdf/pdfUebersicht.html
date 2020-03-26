@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{mopslayout :: html(name='name', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+<head>
+  <meta charset="UTF-8">
+  <title>PDF-Dokument</title>
+</head>
+<body>
+<embed th:src="${meinStringPath}"  width="100%" height="600px" />
+</body>
+</html>

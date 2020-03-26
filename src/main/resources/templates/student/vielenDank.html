@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{mopslayout :: html(name='Name des Subsystems', title='Optional: Tabtitel', headcontent=~{:: headcontent}, navigation=~{:: navigation}, bodycontent=~{:: bodycontent})}">
+<head>
+  <meta charset="utf-8">
+  <title>Name des Subsystems</title>
+  <th:block th:fragment="headcontent">
+    <!-- Links, Skripts, Styles hier einfügen! -->
+  </th:block>
+</head>
+<body>
+<header>
+  <nav class="navigation navigation-secondary" is="mops-navigation" th:fragment="navigation">
+    <ul>
+      <li>
+        <a href="/logout">Logout</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<main th:fragment="bodycontent">
+  <div class="container">
+    <div class="text-center">
+      <div class="alert alert-success" role="alert">
+        <div class="text-center">
+          <h4 class="alert-heading">Danke!</h4>
+        </div>
+        <hr>
+        <div class="text-center">Sie haben die Bewerbung erfolgreich eingereicht.</div>
+        <div class="text-center">Wir melden uns sobald wie m&#246;glich.</div>
+        <div>
+          <a href="/bewerbung1/" class="btn btn-primary">Zurück zur Übersicht</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
