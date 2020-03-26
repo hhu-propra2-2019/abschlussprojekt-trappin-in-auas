@@ -1,10 +1,8 @@
 package mops.bewerbung1.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
-import mops.domain.database.dto.DozentPraeferenzDTO;
+import mops.domain.models.DozentPraeferenz;
 import mops.domain.services.IDozentPraeferenzService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -21,40 +19,20 @@ public class DozentPraeferenzServiceTest {
   private transient final String BEWERBER = "bewerber";
   private transient final String DOZENT_MAIL = "dozentMail";
   private transient final int PRAEFERENZ = 3;
-  transient DozentPraeferenzDTO addDozentPraeferenzDTO;
+  transient DozentPraeferenz addDozentPraeferenz;
 
   @Autowired
   private transient IDozentPraeferenzService dozentPraeferenzService;
 
   @BeforeEach
   public void buildDTO(){
-    addDozentPraeferenzDTO = new DozentPraeferenzDTO(BEWERBER, DOZENT_MAIL, PRAEFERENZ);
+    addDozentPraeferenz = new DozentPraeferenz(DOZENT_MAIL, BEWERBER, PRAEFERENZ);
     dozentPraeferenzService.deletePraeferenz(BEWERBER, DOZENT_MAIL);
   }
 
-
-
-
-/*
-  @Disabled //DozentPraeferenzRepo wird nicht mehr genutzt
-  @Test
-  public void addDozentPraeverenz(){
-    DozentPraeferenzRepo dozentPraeferenzRepoMock = mock(DozentPraeferenzRepo.class);
-    IDozentPraeferenzService serviceWithMockRepo = new DozentPraeferenzService(dozentPraeferenzRepoMock);
-    DozentPraeferenzDTO dozentPraeferenzDTO = new DozentPraeferenzDTO("bewerber","dozentMail", 3);
-
-    serviceWithMockRepo.addPraeferenz(dozentPraeferenzDTO);
-
-    verify(dozentPraeferenzRepoMock, times(1)).save(dozentPraeferenzDTO);
-  }
-  */
-
-
-
-
   @Test
   public void readPraeferenzFromDb(){
-    dozentPraeferenzService.addPraeferenz(addDozentPraeferenzDTO);
+    dozentPraeferenzService.addPraeferenz(addDozentPraeferenz);
     int dozentPraeferenz = dozentPraeferenzService.getDozentPraeferenz(BEWERBER, DOZENT_MAIL);
 
     assertThat(dozentPraeferenz).isEqualTo(PRAEFERENZ);
@@ -63,7 +41,7 @@ public class DozentPraeferenzServiceTest {
 
   @Test
   public void deletePraeferenzFromDb(){
-    dozentPraeferenzService.addPraeferenz(addDozentPraeferenzDTO);
+    dozentPraeferenzService.addPraeferenz(addDozentPraeferenz);
     dozentPraeferenzService.deletePraeferenz(BEWERBER, DOZENT_MAIL);
     Integer readDozentPraeferenzDTO = dozentPraeferenzService.getDozentPraeferenz(BEWERBER, DOZENT_MAIL);
 
@@ -72,7 +50,7 @@ public class DozentPraeferenzServiceTest {
 
   @Test
   public void testBooleanAlreadyConfirmed_true(){
-    dozentPraeferenzService.addPraeferenz(addDozentPraeferenzDTO);
+    dozentPraeferenzService.addPraeferenz(addDozentPraeferenz);
     boolean alreadyConfirmed = dozentPraeferenzService.alreadyConfirmed(BEWERBER, DOZENT_MAIL);
 
     assertThat(alreadyConfirmed).isEqualTo(true);
@@ -80,7 +58,7 @@ public class DozentPraeferenzServiceTest {
 
   @Test
   public void testBooleanAlreadyConfirmed_false(){
-    dozentPraeferenzService.addPraeferenz(addDozentPraeferenzDTO);
+    dozentPraeferenzService.addPraeferenz(addDozentPraeferenz);
     boolean alreadyConfirmed = dozentPraeferenzService.alreadyConfirmed("andererBewerber", DOZENT_MAIL);
 
     assertThat(alreadyConfirmed).isEqualTo(false);

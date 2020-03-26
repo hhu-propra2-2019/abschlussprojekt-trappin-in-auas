@@ -103,7 +103,7 @@ public class PDFService implements IPDFService {
     field = pDAcroForm.getField("Immatrikulation");
     field.setValue(pruefeStatus(bewerber));
     field = pDAcroForm.getField("Studiengang");
-    field.setValue(bewerber.getKarriere().getImmartikulationsStatus().getFachrichtung());
+    field.setValue(bewerber.getKarriere().getImmatrikulationsStatus().getFachrichtung());
 
     field = pDAcroForm.getField("Bemerkung zum Antrag");
     field.setValue("On");
@@ -132,7 +132,7 @@ public class PDFService implements IPDFService {
   }
 
   public String pruefeStatus(Bewerber bewerber) {
-    if (bewerber.getKarriere().getImmartikulationsStatus().isStatus()) {
+    if (bewerber.getKarriere().getImmatrikulationsStatus().isStatus()) {
       return "On";
     }
     return "Off";

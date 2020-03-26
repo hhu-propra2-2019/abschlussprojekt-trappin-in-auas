@@ -4,18 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import static org.hibernate.type.descriptor.java.JdbcDateTypeDescriptor.DATE_FORMAT;
 
 @Data
 @AllArgsConstructor
@@ -35,7 +33,17 @@ public class Personalien {
   @PastOrPresent
   private Date geburtsdatum;
 
-  @Min(14)
+  public void setGeburtsdatum(Date geburtsdatum){
+    this.geburtsdatum = geburtsdatum;
+
+    if(geburtsdatum != null){
+      LocalDate today = LocalDate.now();
+      LocalDate birthday = geburtsdatum.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+      
+      this.alter = Period.between(birthday, today).getYears();
+    }
+  }
+
   private int alter;
 
   @NotBlank
@@ -43,8 +51,4 @@ public class Personalien {
 
   @NotBlank
   private String nationalitaet;
-
-
-
-
 }
