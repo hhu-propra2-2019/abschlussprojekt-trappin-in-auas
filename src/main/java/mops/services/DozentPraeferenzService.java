@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import mops.domain.database.dto.BewerberDTO;
 import mops.domain.database.dto.DozentPraeferenzDTO;
+import mops.domain.models.Bewerber;
 import mops.domain.models.DozentPraeferenz;
 import mops.domain.repositories.BewerberRepository;
 import mops.domain.services.IDozentPraeferenzService;
@@ -25,6 +26,9 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
 
   @Autowired
   private transient BewerberRepository bewerberRepository;
+
+  @Autowired
+  private ModelService modelService;
 
 
   @Override
@@ -61,21 +65,21 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
 
   @Override
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
-  public void deletePraeferenz(String bewerber, String dozentMail) {
+  public void deletePraeferenz(String kennung, String dozentMail) {
     if (zyklusDirigentService.getDozentenPhase()) {
-      BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(bewerber);
-      List<DozentPraeferenzDTO> matching = getMatchingDozentPraeferenz(bewerber, dozentMail);
+      Bewerber bewerber = bewerberService.findBewerberByKennung(kennung);
+      List<DozentPraeferenz> matching = getMatchingDozentPraeferenz(kennung, dozentMail);
 
       if (!matching.isEmpty()) {
-        bewerberDTO.getDozentPraeferenz().removeAll(matching);
-        bewerberRepository.save(bewerberDTO);
+        bewerber.getDozentPraeferenz().removeAll(matching);
+        bewerberRepository.save(dtoService.load(bewerber));
       }
     }
   }
 
   @Override
   public Integer getDozentPraeferenz(String bewerber, String dozentMail) {
-    List<DozentPraeferenzDTO> matching = getMatchingDozentPraeferenz(bewerber, dozentMail);
+    List<DozentPraeferenz> matching = getMatchingDozentPraeferenz(bewerber, dozentMail);
 
     if(matching.isEmpty()){
       return -1;
@@ -92,21 +96,17 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
   }
 
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
-  private List<DozentPraeferenzDTO> getMatchingDozentPraeferenz(String bewerber, String dozentMail){
-    BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(bewerber);
-    List<DozentPraeferenzDTO> matching;
+  private List<DozentPraeferenz> getMatchingDozentPraeferenz(String kennung, String dozentKennung) {
+    Bewerber bewerber = bewerberService.findBewerberByKennung(kennung);
+    List<DozentPraeferenz> matching;
     try {
       matching =
-          bewerberDTO.getDozentPraeferenz().stream()
-              .filter(d -> d.getBewerber().equals(bewerber) && d.getDozentMail().equals(dozentMail))
+          bewerber.getDozentPraeferenz().stream()
+              .filter(d -> d.getBewerberKennung().equals(kennung) && d.getDozentKennung().equals(dozentKennung))
               .collect(Collectors.toList());
     } catch (Exception e) {
       matching = Collections.emptyList();
     }
-
-
     return matching;
-
   }
-
 }
