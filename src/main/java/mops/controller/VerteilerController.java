@@ -72,6 +72,9 @@ public class VerteilerController {
     model.addAttribute("dozentPhase", zyklusDirigentService.getDozentenPhase());
     model.addAttribute("bewerberPhase", zyklusDirigentService.getBewerbungsPhase());
 
+    model.addAttribute("modulMitZugewiesende", verteilerService.getListModulMitAnzahlVerteilten(modulService.findAllModule()));
+
+
     return "verteiler/verteiler";
   }
 
@@ -91,6 +94,9 @@ public class VerteilerController {
     model.addAttribute("verteilerPhase", zyklusDirigentService.getVerteilerPhase());
     model.addAttribute("dozentPhase", zyklusDirigentService.getDozentenPhase());
     model.addAttribute("bewerberPhase", zyklusDirigentService.getBewerbungsPhase());
+
+    model.addAttribute("modulMitZugewiesende", verteilerService.getListModulMitAnzahlVerteilten(modulService.findAllModule()));
+
 
     return "verteiler/verteiler";
   }
