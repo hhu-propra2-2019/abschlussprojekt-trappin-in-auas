@@ -1,6 +1,7 @@
 package mops.services;
 
 import java.io.IOException;
+import mops.domain.database.dto.BewerberDTO;
 import mops.domain.models.*;
 import mops.domain.services.IPDFService;
 import java.io.File;
@@ -8,6 +9,7 @@ import java.io.File;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mops.domain.models.Bewerber;
@@ -20,8 +22,19 @@ import mops.domain.models.ModulAuswahl;
 public class PDFService implements IPDFService {
   private static final String PDF_PATH = "./src/main/resources/static/";
 
+  @Autowired
+  private transient BewerberService bewerberService;
+
+  @Autowired
+  private transient ModelService modelService;
+
+  public Bewerber getBewerber(String kennung){
+    BewerberDTO bewerberDTO = bewerberService.findBewerberByKennung(kennung);
+    return modelService.load(bewerberDTO);
+  }
+
   public String fileDirectory(Bewerber bewerber) {
-    if (bewerber.getKarriere().getFachAbschluss() == null) {
+    if (bewerber.getKarriere().getFachAbschluss().getAbschluss() == null) {
       return PDF_PATH + "studentische_Hilfskraft.pdf";
     } else {
       return PDF_PATH + "wissenschaftliche_Hilfskraft.pdf";
@@ -39,7 +52,7 @@ public class PDFService implements IPDFService {
   }
 
   @SuppressWarnings("PMD.CloseResource")
-  public void fillPDF(Bewerber bewerber, String file)  {
+  public String fillPDF(Bewerber bewerber, String file)  {
     try{
       PDDocument pDDocument = PDDocument.load(new File(file));
       try {
@@ -57,6 +70,8 @@ public class PDFService implements IPDFService {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    return PDF_PATH + "/output/output_"+ bewerber.getPersonalien().getName()+
+        "_"+ bewerber.getPersonalien().getVorname()+ ".pdf";
   }
 
   public void loadPDFFelder(Bewerber bewerber, PDDocument pdDocument) throws Exception {
