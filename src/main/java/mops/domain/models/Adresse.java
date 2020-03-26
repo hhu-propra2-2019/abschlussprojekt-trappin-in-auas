@@ -14,7 +14,7 @@ public class Adresse {
   private String PLZ;
 
   @NotBlank
-  private String wohnort;
+  private String wohnOrt;
 
   @NotBlank
   private String strasse;

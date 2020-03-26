@@ -38,10 +38,37 @@
   </nav>
 </header>
 
+
+
 <main th:fragment="bodycontent">
+
   <div class="container pt-3">
     <div class="col-12 shadow p-3 mb-5 bg-light rounded">
-      <h1>Bewerbungen</h1>
+      <h3 class="display-4">Aktuelle Phase</h3>
+      <p class="lead">Stellen Sie hier die aktuelle Phase ein</p>
+      <div>
+        <form method="POST" th:action="@{/bewerbung1/verteiler/phasesetzen/bewerbung}" class="btn-group">
+          <button type="submit" class="btn" th:classappend="${bewerberPhase} ? btn-primary : btn-outline-primary">Bewerberphase</button>
+
+          <button type="submit" class="btn" th:classappend="${dozentPhase} ? btn-primary : btn-outline-primary"
+                  th:formaction="@{/bewerbung1/verteiler/phasesetzen/dozent}">Dozentenphase</button>
+
+          <button type="submit" class="btn" th:classappend="${verteilerPhase} ? btn-primary : btn-outline-primary"
+                  th:formaction="@{/bewerbung1/verteiler/phasesetzen/verteiler}">Verteilerphase</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="container pt-3" th:unless="${verteilerPhase}">
+    <div class="alert alert-warning">
+      Aktuell können Sie keine Bewerbungen einsehen. Bitte informieren Sie sich über die Bewerbungszeiträume!
+    </div>
+  </div>
+
+  <div class="container pt-3" th:if="${verteilerPhase}">
+    <div class="col-12 shadow p-3 mb-5 bg-light rounded">
+      <h1 class="display-4">Bewerbungen</h1>
         <div class="card shadow p-3 mb-5 bg-light rounded">
           <table class="table">
             <tbody>
@@ -49,7 +76,7 @@
                 <th scope="row">Nicht verteilte Bewerbungen</th>
                 <td th:text="${anzahlOffeneBewerbungen}">0</td>
                 <td>
-                  <a href="/bewerbung1/verteiler/uebersicht/offene" class="btn"
+                  <a href="/bewerbung1/verteiler/offene" class="btn"
                             th:classappend="${anzeigeModus == 'offene'} ? btn-primary : btn-outline-primary">
                     Anzeigen
                   </a>
@@ -59,7 +86,7 @@
                 <th scope="row">Verteilte Bewerbungen</th>
                 <td th:text="${anzahlZugewieseneBewerbungen}">0</td>
                 <td>
-                  <a href="/bewerbung1/verteiler/uebersicht/verteilte" class="btn"
+                  <a href="/bewerbung1/verteiler/verteilte" class="btn"
                        th:classappend="${anzeigeModus == 'verteilte'} ? btn-primary : btn-outline-primary">
                     Anzeigen
                   </a>

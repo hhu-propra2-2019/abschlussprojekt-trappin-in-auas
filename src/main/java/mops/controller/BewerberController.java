@@ -2,6 +2,8 @@ package mops.controller;
 
 import static mops.authentication.account.keycloak.KeycloakRoles.*;
 
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 
 import mops.domain.models.*;
@@ -61,7 +63,7 @@ public class BewerberController {
   @Secured({ ROLE_STUDENT })
   public String bewirbabschicken(Model model, @Valid Bewerber bewerber, BindingResult result, KeycloakAuthenticationToken token) {
     if(result.hasErrors()){
-      System.out.println(result.getAllErrors().stream().map(x -> x.getDefaultMessage()));
+      System.out.println(result.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.toList()));
       return "redirect:/bewerbung1/bewerber/bewerbung";
     }
     bewerberService.addBewerber(bewerber, token.getName());
