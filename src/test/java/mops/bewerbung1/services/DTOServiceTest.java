@@ -1,7 +1,5 @@
 package mops.bewerbung1.services;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -91,9 +89,9 @@ public class DTOServiceTest {
 
   @Test
   public void karriereZuKarriereDTO(){
-    ImmartikulationsStatus immartikulationsStatus = new ImmartikulationsStatus(true,"KI");
+    ImmatrikulationsStatus immatrikulationsStatus = new ImmatrikulationsStatus(true,"KI");
     StudiengangAbschluss studiengangAbschluss = new StudiengangAbschluss("Informatik","Bachelor","HHU");
-    Karriere karriere = new Karriere("keine",immartikulationsStatus,studiengangAbschluss);
+    Karriere karriere = new Karriere("keine", immatrikulationsStatus,studiengangAbschluss);
 
     KarriereDTO karriereDTO = dtoService.load(karriere);
 
@@ -184,7 +182,7 @@ public class DTOServiceTest {
     Karriere karriere = new Karriere();
     karriere.setArbeitserfahrung("Viel");
     karriere.setFachAbschluss(new StudiengangAbschluss("Informatik", "Bachelor", "HHU"));
-    karriere.setImmartikulationsStatus(new ImmartikulationsStatus(true, "Informatik"));
+    karriere.setImmartikulationsStatus(new ImmatrikulationsStatus(true, "Informatik"));
 
     b.setPersonalien(personalien);
     b.setPraeferenzen(praeferenzen);

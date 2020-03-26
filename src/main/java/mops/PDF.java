@@ -1,8 +1,5 @@
 package mops;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +10,7 @@ import mops.domain.models.Beruf;
 import mops.domain.models.Bewerber;
 import mops.domain.models.Dozent;
 import mops.domain.models.EinstiegTyp;
-import mops.domain.models.ImmartikulationsStatus;
+import mops.domain.models.ImmatrikulationsStatus;
 import mops.domain.models.Karriere;
 import mops.domain.models.Modul;
 import mops.domain.models.ModulAuswahl;
@@ -61,7 +58,7 @@ public class PDF {
     Karriere karriere = new Karriere();
     karriere.setArbeitserfahrung("Viel");
     karriere.setFachAbschluss(new StudiengangAbschluss("Informatik", "Bachelor", "HHU"));
-    karriere.setImmartikulationsStatus(new ImmartikulationsStatus(true, "Informatik"));
+    karriere.setImmartikulationsStatus(new ImmatrikulationsStatus(true, "Informatik"));
 
     b.setPersonalien(personalien);
     b.setPraeferenzen(praeferenzen);

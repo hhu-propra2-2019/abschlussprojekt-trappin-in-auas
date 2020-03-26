@@ -9,7 +9,7 @@ import mops.validation.constraints.ImmatrikulationsStatusConstraint;
 @AllArgsConstructor
 @NoArgsConstructor
 @ImmatrikulationsStatusConstraint
-public class ImmartikulationsStatus {
+public class ImmatrikulationsStatus {
   private boolean status;
   private String fachrichtung;
 }

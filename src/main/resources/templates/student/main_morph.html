@@ -199,12 +199,12 @@
 					<div class="form-group">
 						<h3>Für welches Fach sind Sie derzeit an der HHU immatrikuliert?</h3>
 						<input type="text" class="form-control col-sm-10" id="immatrikuliertText"
-							th:field="*{immartikulationsStatus.fachrichtung}" />
+							th:field="*{immatrikulationsStatus.fachrichtung}" />
 						<div class="form-check">
 							<label>
 								<input type="checkbox" class="form-check-input"
 									onchange="if(this.checked){disableInput('immatrikuliertText', 'Nicht immatrikuliert')}else{disableInput('immatrikuliertText', '')}"
-									th:field="*{immartikulationsStatus.status}">
+									th:field="*{immatrikulationsStatus.status}">
 								Nicht immatrikuliert
 							</label>
 						</div>

@@ -44,7 +44,7 @@ public class DTOService implements IDTOService {
 
   }
 
-  public ImmartikulationsStatusDTO load(ImmartikulationsStatus imStatus) {
+  public ImmartikulationsStatusDTO load(ImmatrikulationsStatus imStatus) {
     return new ImmartikulationsStatusDTO(imStatus.isStatus(), imStatus.getFachrichtung());
   }
 
