@@ -14,6 +14,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
   </th:block>
 </head>
 
@@ -32,7 +34,7 @@
         <a th:href="@{./verteilte}">Verteilte Bewerbungen</a>
       </li>
       <li>
-        <a href="/logout">Logout</a>
+        <a href="https://keycloak.cs.hhu.de/auth/realms/MOPS/protocol/openid-connect/logout?redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fbewerbung1%2F">Logout</a>
       </li>
     </ul>
   </nav>
@@ -58,9 +60,28 @@
     </div>
   </div>
 
-  <div class="container pt-3" th:unless="${verteilerPhase}">
+  <div class="container pt3" th:unless="${verteilerPhase}">
     <div class="alert alert-warning">
       Aktuell können Sie keine Bewerbungen verteilen. Bitte stellen Sie oben die Verteilerphase ein.
+    </div>
+  </div>
+
+  <div class="container pt3" style="position: sticky; top:29px; z-index: 10"  th:if="${verteilerPhase}">
+    <div class="col-12 shadow p-3 mb-5 bg-light rounded">
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col" th:each="modulName : ${modulMitZugewiesende}" th:text="${modulName.modul.modulName}" style="font-weight: bolder"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td th:each="anzahl : ${modulMitZugewiesende}" th:text="${anzahl.anzhalVerteilte}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
