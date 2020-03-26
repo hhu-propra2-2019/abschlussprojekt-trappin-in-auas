@@ -40,7 +40,6 @@ public class BewerberController {
   public String index(Model model, KeycloakAuthenticationToken token) {
     model.addAttribute("bewerbungExists", bewerberService.bewerbungExists(token.getName()));
     model.addAttribute("bewerberPhase", zyklusDirigentService.getBewerbungsPhase());
-    System.out.println("phase: " + zyklusDirigentService.getBewerbungsPhase());
     return "student/bewerberuebersicht";
   }
 
