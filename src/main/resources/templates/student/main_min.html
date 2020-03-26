@@ -89,9 +89,7 @@
           <label>Geburtsdatum und Alter:</label>
           <div class="input-group">
             <input type="date" class="form-control" required th:field="*{geburtsdatum}" th:errorclass="is-invalid"/>
-            <input type="number" class="form-control col-sm-2" placeholder="Alter" required th:field="*{alter}" th:errorclass="is-invalid"/>
             <span class="text-danger" th:errors="*{geburtsdatum}" th:if="${#fields.hasErrors('geburtsdatum')}"></span>
-            <span class="text-danger" th:errors="*{alter}" th:if="${#fields.hasErrors('alter')}"></span>
           </div>
         </div>
 
