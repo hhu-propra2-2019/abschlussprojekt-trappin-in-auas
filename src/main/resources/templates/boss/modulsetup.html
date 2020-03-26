@@ -26,6 +26,9 @@
       <!-- Navigation als ungeordnete Liste mit einfachen Links hier einfügen! -->
       <ul>
         <li>
+          <a href="/bewerbung1/setup/">Übersicht</a>
+        </li>
+        <li>
           <a href="/logout">Logout</a>
         </li>
       </ul>
@@ -42,25 +45,26 @@
     </div>
 
     <div class="container pt-3">
+
       <div class="col-12 shadow p-3 mb-4 bg-light rounded">
         <div class="card-columns">
-
-          <div class="card border-dark" th:each="modul : ${modulListe}">
+          <div th:each="modul : ${modulListe}" class="card shadow p-0 mb-4 bg-light rounded">
             <div class="card-header font-weight-bold text-center">
-              <h5 class="card-title" th:text="${modul.modulName}">Programmierung</h5>
+              <h5 class="card-title h5" th:text="${modul.modulName}">Programmierung</h5>
             </div>
-            <div class="card-body">
-              <div class="card">
-                <p class="card-text" th:text="${modul.dozent.dozentName}">Conrad213</p>
-                <p>
-              </div>
-              <div class="btn-group btn-block">
-                <button type="button" class="btn btn-danger">Löschen</button>
-              </div>
-              </p>
-            </div>
-          </div>
 
+            <div class="card-body">
+              <form method="POST" action="/bewerbung1/setup/delete">
+                <p class="card-text" th:text="${modul.dozent.dozentName}">Conrad213</p>
+                <p class="card-text" th:text="${modul.dozent.dozentMail}">conrad@hhu.de</p>
+              <div class="btn-group btn-block">
+                <input type="hidden" th:value="${modul.modulName}" th:name="modulName">
+                <button type="submit" class="btn btn-danger">Löschen</button>
+              </div>
+              </form>
+            </div>
+
+          </div>
         </div>
       </div>
 
