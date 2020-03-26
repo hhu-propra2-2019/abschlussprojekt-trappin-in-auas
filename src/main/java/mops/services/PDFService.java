@@ -65,6 +65,9 @@ public class PDFService implements IPDFService {
 
     PDField field = pDAcroForm.getField("Vorname");
     field.setValue(bewerber.getPersonalien().getVorname());
+    field = pDAcroForm.getField("Name");
+    field.setValue(bewerber.getPersonalien().getName());
+
     System.out.println(field);
 
     System.out.println(field);

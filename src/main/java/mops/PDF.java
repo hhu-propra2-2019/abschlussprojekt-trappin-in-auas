@@ -36,7 +36,7 @@ public class PDF {
       System.out.println("Geburtsdatum falsches Format");
     }
     personalien.setGeburtsort("Duesseldorf");
-    personalien.setName("Der Marrokaner");
+    personalien.setName("Al Meziani");
     personalien.setNationalitaet("Deutschland");
     personalien.setVorname("Oussama");
     personalien.setAdresse(new Adresse("40235", "Duesseldorf", "Porschestraße", "17"));
