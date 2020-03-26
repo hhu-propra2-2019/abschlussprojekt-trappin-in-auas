@@ -28,9 +28,6 @@ public class PDFController {
     this.pdfService = pdfService;
     this.bewerberService = bewerberService;
   }
-
-  //TODO -Bewerber filtern(vlt per Kennung), - Form im Verteiler hinzufuegen(soll Button sein mit redirect an /pdf/downlaod)
-  //TODO target=_blank
   /**
    * delete module. Login as "Boss" required.
    * @param m injected, Model for Thymeleaf interaction
@@ -42,12 +39,11 @@ public class PDFController {
   @Secured(ROLE_VERTEILER)
   @ResponseBody
   public FileSystemResource downloadPDF(Model m, Bewerber bewerber, KeycloakAuthenticationToken token){
-    //bewerber filtern
-    String filePath = pdfService.fileDirectory(bewerber);
-    pdfService.fillPDF(bewerber,filePath);
-    return new FileSystemResource(filePath);
-
+    String path = pdfService.fileDirectory(bewerber);
+    pdfService.fillPDF(bewerber,path);
+    return new FileSystemResource(path);
   }
+
   //TODO pdf-templates können eigentlich entfernt werden , einige TODOs in einem template
   @GetMapping("/anzeigen")
   public String showPDF(Model m){
