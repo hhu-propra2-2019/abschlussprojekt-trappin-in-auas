@@ -38,8 +38,6 @@
   </nav>
 </header>
 
-
-
 <main th:fragment="bodycontent">
 
   <div class="container pt-3">
@@ -62,7 +60,7 @@
 
   <div class="container pt-3" th:unless="${verteilerPhase}">
     <div class="alert alert-warning">
-      Aktuell können Sie keine Bewerbungen einsehen. Bitte informieren Sie sich über die Bewerbungszeiträume!
+      Aktuell können Sie keine Bewerbungen verteilen. Bitte stellen Sie oben die Verteilerphase ein.
     </div>
   </div>
 
@@ -96,94 +94,94 @@
           </table>
       </div>
     </div>
-  </div>
 
-  <div class="container pt-3" th:if="${anzuzeigende.size() > 0}">
-    <div class="col-12 shadow p-3 mb-4 bg-light rounded">
-      <div class="card-columns">
+    <div class="container pt-3" th:if="${anzuzeigende.size() > 0}">
+      <div class="col-12 shadow p-3 mb-4 bg-light rounded">
+        <div class="card-columns">
 
-        <div class="card shadow p-0 mb-4 bg-light rounded" th:each="bewerber : ${anzuzeigende}">
-          <div class="card-header font-weight-bold text-center">
-            <h5 th:text="${bewerber.personalien.vorname + ' ' + bewerber.personalien.name}">Vorname Nachname</h5>
-          </div>
-
-          <td>
-            <div class="card-body" th:if="${anzeigeModus} eq 'uebersicht' or ${anzeigeModus} eq 'offene'">
-              <div class="h5">Bewerberpräferenzen</div>
-
-              <ul class="list-group" th:each="praeferenz : ${bewerber.praeferenzen.modulAuswahl}">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <th:block th:text="${praeferenz.modul.modulName}" />
-                  <span class="badge badge-primary badge-pill" th:text="${praeferenz.prioritaet}">22</span>
-                </li>
-              </ul>
-
-              <div class="h5 pt-3">Dozentenpräferenzen</div>
-              <ul class="list-group" th:each="dozentenPraeferenz : ${bewerber.dozentPraeferenz}">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <th:block th:text="${dozentenPraeferenz.dozentKennung}" />
-                  <span class="badge badge-primary badge-pill" th:text="${dozentenPraeferenz.praeferenz}">23</span>
-                </li>
-              </ul>
-
-              <div class="btn-group btn-block pt-3">
-                <a th:href="@{/bewerbung1/verteiler/details/{kennung}(kennung=${bewerber.kennung})}"
-                   class="btn btn-outline-primary btn-block">Detailansicht</a>
-              </div>
-
-              <div class="h6 pt-3 label-danger">Modul zuweisen:</div>
-              <form method="POST" th:action="@{/bewerbung1/verteiler/verteile}">
-                <input type="hidden" name="bewerberKennung" th:value="${bewerber.kennung}">
-
-                <div class="separator">
-                  <select class="form-control" id="exampleFormControlSelect2" name="modulName">
-                    <option th:each="einModul : ${alleModule}" th:text="${einModul.modulName}"
-                            th:value="${einModul.modulName}"></option>
-                  </select>
-                </div>
-                <div class="btn-group btn-block pt-3">
-                  <button type="submit" class="btn btn-success">Zuweisen</button>
-                </div>
-              </form>
+          <div class="card shadow p-0 mb-4 bg-light rounded" th:each="bewerber : ${anzuzeigende}">
+            <div class="card-header font-weight-bold text-center">
+              <h5 th:text="${bewerber.personalien.vorname + ' ' + bewerber.personalien.name}">Vorname Nachname</h5>
             </div>
 
-            <div class="card-body" th:if="${anzeigeModus} eq 'verteilte'">
-              <div class="h5">Bewerberpräferenzen</div>
-              <ul class="list-group" th:each="praeferenz : ${bewerber.praeferenzen.modulAuswahl}">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <th:block th:text="${praeferenz.modul.modulName}" />
-                  <span class="badge badge-primary badge-pill" th:text="${praeferenz.prioritaet}">22</span>
-                </li>
-              </ul>
+            <td>
+              <div class="card-body" th:if="${anzeigeModus} eq 'uebersicht' or ${anzeigeModus} eq 'offene'">
+                <div class="h5">Bewerberpräferenzen</div>
 
-              <div class="h5 pt-3">Dozentenpräferenzen</div>
-              <ul class="list-group" th:each="dozentenPraeferenz : ${bewerber.dozentPraeferenz}">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <th:block th:text="${dozentenPraeferenz.dozentKennung}" />
-                  <span class="badge badge-primary badge-pill" th:text="${dozentenPraeferenz.praeferenz}">23</span>
-                </li>
-              </ul>
+                <ul class="list-group" th:each="praeferenz : ${bewerber.praeferenzen.modulAuswahl}">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <th:block th:text="${praeferenz.modul.modulName}" />
+                    <span class="badge badge-primary badge-pill" th:text="${praeferenz.prioritaet}">22</span>
+                  </li>
+                </ul>
 
-              <div class="btn-group btn-block pt-3">
-                <a th:href="@{/bewerbung1/verteiler/details/{kennung}(kennung=${bewerber.kennung})}"
-                   class="btn btn-outline-primary btn-block">Detailansicht</a>
-              </div>
+                <div class="h5 pt-3">Dozentenpräferenzen</div>
+                <ul class="list-group" th:each="dozentenPraeferenz : ${bewerber.dozentPraeferenz}">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <th:block th:text="${dozentenPraeferenz.dozentKennung}" />
+                    <span class="badge badge-primary badge-pill" th:text="${dozentenPraeferenz.praeferenz}">23</span>
+                  </li>
+                </ul>
 
-              <div class="h5 pt-3">Zugewiesen an</div>
-              <div class="list-group" th:each="dozent : ${bewerber.verteiltAn}">
-                <form method="POST" th:action="@{/bewerbung1/verteiler/verteilungentfernen}">
-                  <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    <th:block th:text="${dozent.dozentName}" />
+                <div class="btn-group btn-block pt-3">
+                  <a th:href="@{/bewerbung1/verteiler/details/{kennung}(kennung=${bewerber.kennung})}"
+                     class="btn btn-outline-primary btn-block">Detailansicht</a>
+                </div>
 
-                    <button type="submit" class="btn btn-danger">Entfernen</button>
+                <div class="h6 pt-3 label-danger">Modul zuweisen:</div>
+                <form method="POST" th:action="@{/bewerbung1/verteiler/verteile}">
+                  <input type="hidden" name="bewerberKennung" th:value="${bewerber.kennung}">
 
-                    <input type="hidden" th:value="${bewerber.kennung}" name="bewerber" />
-                    <input type="hidden" th:value="${dozent.dozentMail}" name="dozentMail" />
+                  <div class="separator">
+                    <select class="form-control" id="exampleFormControlSelect2" name="modulName">
+                      <option th:each="einModul : ${alleModule}" th:text="${einModul.modulName}"
+                              th:value="${einModul.modulName}"></option>
+                    </select>
+                  </div>
+                  <div class="btn-group btn-block pt-3">
+                    <button type="submit" class="btn btn-success">Zuweisen</button>
                   </div>
                 </form>
               </div>
-            </div>
-          </td>
+
+              <div class="card-body" th:if="${anzeigeModus} eq 'verteilte'">
+                <div class="h5">Bewerberpräferenzen</div>
+                <ul class="list-group" th:each="praeferenz : ${bewerber.praeferenzen.modulAuswahl}">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <th:block th:text="${praeferenz.modul.modulName}" />
+                    <span class="badge badge-primary badge-pill" th:text="${praeferenz.prioritaet}">22</span>
+                  </li>
+                </ul>
+
+                <div class="h5 pt-3">Dozentenpräferenzen</div>
+                <ul class="list-group" th:each="dozentenPraeferenz : ${bewerber.dozentPraeferenz}">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <th:block th:text="${dozentenPraeferenz.dozentKennung}" />
+                    <span class="badge badge-primary badge-pill" th:text="${dozentenPraeferenz.praeferenz}">23</span>
+                  </li>
+                </ul>
+
+                <div class="btn-group btn-block pt-3">
+                  <a th:href="@{/bewerbung1/verteiler/details/{kennung}(kennung=${bewerber.kennung})}"
+                     class="btn btn-outline-primary btn-block">Detailansicht</a>
+                </div>
+
+                <div class="h5 pt-3">Zugewiesen an</div>
+                <div class="list-group" th:each="dozent : ${bewerber.verteiltAn}">
+                  <form method="POST" th:action="@{/bewerbung1/verteiler/verteilungentfernen}">
+                    <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                      <th:block th:text="${dozent.dozentName}" />
+
+                      <button type="submit" class="btn btn-danger">Entfernen</button>
+
+                      <input type="hidden" th:value="${bewerber.kennung}" name="bewerber" />
+                      <input type="hidden" th:value="${dozent.dozentMail}" name="dozentMail" />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </td>
+          </div>
         </div>
       </div>
     </div>
