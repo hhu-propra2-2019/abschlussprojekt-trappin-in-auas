@@ -74,7 +74,7 @@ public class BewerberService implements IBewerberService {
   }
 
   public List<BewerberDTO> findAlleVerteilteBewerber(List<BewerberDTO> alleBewerber) {
-    return alleBewerber.stream().filter(x -> x.getVerteiltAn() != null).collect(Collectors.toList());
+    return alleBewerber.stream().filter(x -> x.getVerteiltAn() != null && x.getVerteiltAn().size() !=0).collect(Collectors.toList());
   }
 
   public List<Bewerber> findNichtVerteilt() {
