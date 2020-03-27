@@ -95,7 +95,7 @@ public class DozentController {
   public String addPreference(Model model, KeycloakAuthenticationToken token, int praeferenz, String dozentKennung,
       String bewerberKennung) {
     dozentPraeferenzService.addPraeferenz(new DozentPraeferenz(dozentKennung, bewerberKennung, praeferenz));
-    return "redirect:./uebersicht";
+    return "redirect:/bewerbung1/dozent/uebersicht";
   }
 
   @Secured({ ROLE_ORGA })

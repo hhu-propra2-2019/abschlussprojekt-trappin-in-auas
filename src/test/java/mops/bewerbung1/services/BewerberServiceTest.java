@@ -152,7 +152,7 @@ public class BewerberServiceTest {
 
     addBewerberDTOMock(alleBewerbungen);
     when(bewerberRepository.findAll()).thenReturn(alleBewerbungen);
-    doAnswer(i -> alleBewerbungen.stream().filter(x -> x.getKennung().equals(i.getArguments()[0])).findFirst().get())
+    doAnswer(i -> alleBewerbungen.stream().filter(x -> x.getKennung().equals(i.getArguments()[0])).findFirst().orElse(null))
         .when(bewerberRepository).findBewerberByKennung(any(String.class));
 
     bewerberService.addBewerber(bewerber1);
@@ -192,7 +192,7 @@ public class BewerberServiceTest {
 
     addBewerberDTOMock(alleBewerbungen);
     when(bewerberRepository.findAll()).thenReturn(alleBewerbungen);
-    doAnswer(i -> alleBewerbungen.stream().filter(x -> x.getKennung().equals(i.getArguments()[0])).findFirst().get())
+    doAnswer(i -> alleBewerbungen.stream().filter(x -> x.getKennung().equals(i.getArguments()[0])).findFirst().orElse(null))
             .when(bewerberRepository).findBewerberByKennung(any(String.class));
 
     bewerberService.addBewerber(bewerber1);
