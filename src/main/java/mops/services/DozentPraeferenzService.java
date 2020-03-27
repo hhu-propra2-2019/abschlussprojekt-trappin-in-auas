@@ -2,6 +2,7 @@ package mops.services;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import mops.domain.models.Bewerber;
 import mops.domain.models.DozentPraeferenz;
@@ -30,18 +31,20 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
     if (zyklusDirigentService.getDozentenPhase()) {
       try {
         Bewerber bewerber = bewerberService.findBewerberByKennung(dozentPraeferenz.getBewerberKennung());
-
-        List<DozentPraeferenz> existierndeBewertung = bewerber.getDozentPraeferenz().stream()
-            .filter(x -> x.getDozentKennung().equals(dozentPraeferenz.getDozentKennung())).collect(Collectors.toList());
+        
+        Optional<DozentPraeferenz> existierndeBewertung = bewerber.getDozentPraeferenz().stream()
+            .filter(x -> x.getDozentKennung().equals(dozentPraeferenz.getDozentKennung())).findFirst();
 
         if (existierndeBewertung.isEmpty()) {
           bewerber.getDozentPraeferenz().add(dozentPraeferenz);
         } else {
-          existierndeBewertung.get(0).setPraeferenz(dozentPraeferenz.getPraeferenz());
+          existierndeBewertung.get().setPraeferenz(dozentPraeferenz.getPraeferenz());
         }
-        bewerberRepository.save(dtoService.load(bewerber));
+        bewerberService.addBewerber(bewerber);
 
       } catch (Exception e) {
+        System.out.println("try catch did not succeed!!!");
+        e.printStackTrace();
         return;
       }
     }
