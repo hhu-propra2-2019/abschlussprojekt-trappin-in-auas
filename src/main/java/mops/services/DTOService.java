@@ -45,8 +45,8 @@ public class DTOService implements IDTOService {
 
   }
 
-  public ImmartikulationsStatusDTO load(ImmatrikulationsStatus imStatus) {
-    return new ImmartikulationsStatusDTO(imStatus.isStatus(), imStatus.getFachrichtung());
+  public ImmatrikulationsStatusDTO load(ImmatrikulationsStatus imStatus) {
+    return new ImmatrikulationsStatusDTO(imStatus.isStatus(), imStatus.getFachrichtung());
   }
 
   public StudiengangAbschlussDTO load(StudiengangAbschluss studiengangAbschluss){
