@@ -44,7 +44,11 @@
 
   <div class="container pt-3">
     <div class="col-12 shadow p-3 mb-5 bg-light rounded">
-      <h3 class="display-4">Aktuelle Phase</h3>
+      <h4 class="display-4">Aktuelle Phase:
+       <span class="badge badge-pill badge-info" th:if="${bewerberPhase}">Bewerberphase</span>
+       <span class="badge badge-pill badge-info" th:if="${dozentPhase}">Dozentenphase</span>
+       <span class="badge badge-pill badge-info" th:if="${verteilerPhase}">Verteilerphase</span>
+      </h4>
       <p class="lead">Stellen Sie hier die aktuelle Phase ein</p>
       <div>
         <form method="POST" th:action="@{/bewerbung1/verteiler/phasesetzen/bewerbung}" class="btn-group">
@@ -59,7 +63,6 @@
       </div>
     </div>
   </div>
-
   <div class="container pt3" th:unless="${verteilerPhase}">
     <div class="alert alert-warning">
       Aktuell können Sie keine Bewerbungen verteilen. Bitte stellen Sie oben die Verteilerphase ein.
