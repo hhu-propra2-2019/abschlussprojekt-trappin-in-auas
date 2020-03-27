@@ -84,12 +84,3 @@ test {
 		events "passed", "skipped", "failed"
 	}
 }
-
-task fatJar(type: Jar) {
-	manifest {
-		attributes 'Main-Class': '${mainClassName}'
-	}
-	archivesBaseName = 'MOPS-bewerbung1'
-	from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
-	with jar
-}
