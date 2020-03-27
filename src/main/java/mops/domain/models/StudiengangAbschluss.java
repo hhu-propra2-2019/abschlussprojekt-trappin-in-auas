@@ -13,7 +13,7 @@ public class StudiengangAbschluss {
   @NotBlank
   private String studiengang;
 
-  
+
   private String abschluss;
 
   @NotBlank
