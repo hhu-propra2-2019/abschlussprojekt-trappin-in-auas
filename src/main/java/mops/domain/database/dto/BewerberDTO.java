@@ -3,10 +3,9 @@ package mops.domain.database.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.persistence.*;
 
 @Data
 @Entity
@@ -32,7 +31,7 @@ public class BewerberDTO {
   @JoinColumn(name = "prefs")
   private PraeferenzenDTO praeferenzen;
 
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
   @JoinColumn(name = "bewerber", referencedColumnName = "id")
   private List<VerteilungDTO> verteiltAn = new LinkedList<>();
 

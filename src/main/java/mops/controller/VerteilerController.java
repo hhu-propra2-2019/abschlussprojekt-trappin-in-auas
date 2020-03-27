@@ -118,9 +118,9 @@ public class VerteilerController {
 
   @Secured(ROLE_VERTEILER)
   @PostMapping("/verteilungentfernen")
-  public String verteilungEntfernen(Model m, String bewerber, String dozentMail) {
-    dozentPraeferenzService.deletePraeferenz(bewerber, dozentMail);
-    return "redirect:/bewerbung1/verteiler/uebersicht/verteilte";
+  public String verteilungEntfernen(Model m, String bewerber, String dozentKennung) {
+    bewerberService.verteilungEntfernen(bewerber, dozentKennung);
+    return "redirect:/bewerbung1/verteiler/verteilte";
   }
 
   @Secured(ROLE_VERTEILER)
