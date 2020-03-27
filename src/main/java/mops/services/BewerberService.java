@@ -35,6 +35,11 @@ public class BewerberService implements IBewerberService {
   @Override
   public void addBewerber(Bewerber b) {
     BewerberDTO bewerberDTO = mappingService.load(b);
+    BewerberDTO zuFindenderBewerber = bewerberRepository.findBewerberByKennung(b.getKennung());
+
+    if (zuFindenderBewerber != null) {
+      bewerberDTO.setId(zuFindenderBewerber.getId());
+    }
     bewerberRepository.save(bewerberDTO);
   }
 
@@ -105,6 +110,10 @@ public class BewerberService implements IBewerberService {
 
   public void removeBewerber(Bewerber bewerber) {
     bewerberRepository.delete(mappingService.load(bewerber));
+  }
+
+  public void removeAll() {
+    bewerberRepository.deleteAll();
   }
 
 }
