@@ -25,14 +25,14 @@ public class PDFController {
 
   private final transient PDFService pdfService;
 
-  private final transient BewerberService bewerberService;
 
-  public PDFController(PDFService pdfService, BewerberService bewerberService) {
+  public PDFController(PDFService pdfService) {
     this.pdfService = pdfService;
-    this.bewerberService = bewerberService;
   }
   /**
    * delete module. Login as "Boss" required.
+   * @param kennung to find Bewerber
+   * @param response
    * @return starts Download
    */
   @PostMapping(value = "/download/{kennung}" , produces = MediaType.APPLICATION_PDF_VALUE)
