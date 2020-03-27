@@ -62,10 +62,10 @@ public class ModelDTOCompare {
     assertEquals(karriere.getArbeitserfahrung(), karriereDTO.getArbeitserfahrung());
   }
 
-  public void compare(ImmatrikulationsStatus immartikulationsStatus,
-      ImmartikulationsStatusDTO immartikulationsStatusDTO) {
-    assertEquals(immartikulationsStatus.getFachrichtung(), immartikulationsStatusDTO.getFachrichtung());
-    assertEquals(immartikulationsStatus.isStatus(), immartikulationsStatusDTO.isStatus());
+  public void compare(ImmatrikulationsStatus immatrikulationsStatus,
+      ImmatrikulationsStatusDTO immatrikulationsStatusDTO) {
+    assertEquals(immatrikulationsStatus.getFachrichtung(), immatrikulationsStatusDTO.getFachrichtung());
+    assertEquals(immatrikulationsStatus.isStatus(), immatrikulationsStatusDTO.isStatus());
   }
 
   public void compare(StudiengangAbschluss fachAbschluss, StudiengangAbschlussDTO fachAbschlussDTO) {
@@ -90,5 +90,19 @@ public class ModelDTOCompare {
     assertEquals(adresse.getPLZ(), adresseDTO.getPLZ());
     assertEquals(adresse.getStrasse(), adresseDTO.getStrasse());
     assertEquals(adresse.getWohnOrt(), adresseDTO.getWohnort());
+  }
+
+  public void compare(ModulAuswahl modulAuswahl, ModulAuswahlDTO modulAuswahlDTO) {
+    compare(modulAuswahl.getModul(), modulAuswahlDTO.getModul());
+
+    assertEquals(modulAuswahl.getBeruf(), modulAuswahlDTO.getBeruf());
+    assertEquals(modulAuswahl.getNote(), modulAuswahlDTO.getNote());
+    assertEquals(modulAuswahl.getPrioritaet(), modulAuswahlDTO.getPrioritaet());
+  }
+
+  public void compare(DozentPraeferenz dPraeferenz, DozentPraeferenzDTO dPraeferenzDTO) {
+    assertEquals(dPraeferenz.getBewerberKennung(), dPraeferenzDTO.getBewerber());
+    assertEquals(dPraeferenz.getDozentKennung(), dPraeferenzDTO.getDozentMail());
+    assertEquals(dPraeferenz.getPraeferenz(), dPraeferenzDTO.getPraeferenz());
   }
 }

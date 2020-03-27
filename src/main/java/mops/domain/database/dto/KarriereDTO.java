@@ -1,6 +1,5 @@
 package mops.domain.database.dto;
 
-
 import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,22 +9,21 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 public class KarriereDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String arbeitserfahrung;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
+  private String arbeitserfahrung;
 
-    @Embedded
-    private ImmartikulationsStatusDTO immartikulationsStatus;
+  @Embedded
+  private ImmatrikulationsStatusDTO immartikulationsStatus;
 
-    @Embedded
-    private StudiengangAbschlussDTO fachAbschluss;
+  @Embedded
+  private StudiengangAbschlussDTO fachAbschluss;
 
-    public KarriereDTO(String arbeitserfahrung,
-        ImmartikulationsStatusDTO immartikulationsStatus,
-        StudiengangAbschlussDTO fachAbschluss) {
-        this.arbeitserfahrung = arbeitserfahrung;
-        this.immartikulationsStatus = immartikulationsStatus;
-        this.fachAbschluss = fachAbschluss;
-    }
+  public KarriereDTO(String arbeitserfahrung, ImmatrikulationsStatusDTO immartikulationsStatus,
+      StudiengangAbschlussDTO fachAbschluss) {
+    this.arbeitserfahrung = arbeitserfahrung;
+    this.immartikulationsStatus = immartikulationsStatus;
+    this.fachAbschluss = fachAbschluss;
+  }
 }
