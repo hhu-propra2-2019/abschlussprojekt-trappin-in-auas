@@ -1,8 +1,6 @@
 package mops.bewerbung1.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,6 +36,33 @@ public class ModelServiceTest {
     modelService = new ModelService();
     this.dtoGenerator = new DTOGenerator();
     this.modelDTOCompare = new ModelDTOCompare();
+  }
+
+  @Test
+  public void bewerberDTOListToBewerberList(){
+    List<BewerberDTO> bewerberDTOs = new LinkedList<>();
+    bewerberDTOs.add(dtoGenerator.generateBewerber());
+    bewerberDTOs.add(dtoGenerator.generateBewerber());
+    bewerberDTOs.add(dtoGenerator.generateBewerber());
+
+    List<Bewerber> bewerbers = modelService.loadBewerberList(bewerberDTOs);
+
+    for(int i = 0; i < bewerberDTOs.size(); i++){
+      modelDTOCompare.compare(bewerbers.get(i), bewerberDTOs.get(i));
+    }
+  }
+
+  @Test
+  public void bewerberDTOWithDozentPref(){
+    
+  }
+
+  @Test
+  public void nullbewerberdtoZuBewerber(){
+    BewerberDTO bewerberDTO = null;
+    Bewerber bewerber = modelService.load(bewerberDTO);
+
+    assertNull(bewerber);
   }
 
   @Test

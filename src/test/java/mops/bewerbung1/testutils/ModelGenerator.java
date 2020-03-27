@@ -168,9 +168,3 @@ public class ModelGenerator {
         new RandomListObject<String>().getRandomObject(kennungen), (int) Math.random() * 4);
   }
 }
-
-class RandomListObject<T> {
-  public T getRandomObject(List<T> list) {
-    return list.get((int) (Math.random() * list.size()));
-  }
-}

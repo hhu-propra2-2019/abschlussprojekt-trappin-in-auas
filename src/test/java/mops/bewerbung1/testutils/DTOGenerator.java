@@ -176,9 +176,3 @@ public class DTOGenerator {
         new RandomListObject<String>().getRandomObject(dozentMails), (int) Math.random() * 4);
   }
 }
-
-class RandomListObject<T> {
-  public T getRandomObject(List<T> list) {
-    return list.get((int) (Math.random() * list.size()));
-  }
-}
