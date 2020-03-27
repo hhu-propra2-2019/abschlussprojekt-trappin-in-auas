@@ -16,19 +16,19 @@ import org.springframework.ui.Model;
 public class VerteilerControllerOrchestrator {
 
   @Autowired
-  BewerberService bewerberService;
+  private transient BewerberService bewerberService;
 
   @Autowired
-  ModulService modulService;
+  private transient ModulService modulService;
 
   @Autowired
-  ZyklusDirigentService zyklusDirigentService;
+  private transient ZyklusDirigentService zyklusDirigentService;
 
   @Autowired
-  VerteilerService verteilerService;
+  private transient VerteilerService verteilerService;
 
   @Autowired
-  DozentPraeferenzService dozentPraeferenzService;
+  private transient DozentPraeferenzService dozentPraeferenzService;
 
   private void erstelleBasis(Model model){
     List<Bewerber> offeneBewerbungen = bewerberService.findAlleNichtVerteilteBewerber();
