@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import mops.domain.models.Bewerber;
+import mops.domain.models.Dozent;
 import mops.domain.models.DozentPraeferenz;
 import mops.domain.services.IDozentService;
 import org.springframework.stereotype.Service;

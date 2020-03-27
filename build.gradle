@@ -1,10 +1,10 @@
-plugins {
-	id 'org.springframework.boot' version '2.2.5.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-	id 'java'
-	id 'pmd'
-  id 'jacoco'
-	id "io.freefair.lombok" version "5.0.0-rc4"
+plugins { 
+    id 'org.springframework.boot' version '2.2.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id 'pmd'
+    id 'jacoco'
+    id "io.freefair.lombok" version "5.0.0-rc4"
 }
 
 
@@ -13,16 +13,16 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 
-	maven { url 'https://repo.spring.io/libs-snapshot' }
+    maven { url 'https://repo.spring.io/libs-snapshot' }
 
-	maven {
-		url="https://s3.cs.hhu.de/public/mops/"
-		metadataSources {
-			artifact()
-		}
-	}
+    maven {
+        url="https://s3.cs.hhu.de/public/mops/"
+        metadataSources {
+            artifact()
+        }
+    }
 }
 
 configurations {
@@ -38,49 +38,49 @@ configurations {
 }
 
 dependencies {
-	implementation 'mops:styleguide:2.2.0'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-integration'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.security:spring-security-test'
-	implementation 'org.keycloak:keycloak-spring-boot-starter:9.0.0'
-	implementation 'org.keycloak.bom:keycloak-adapter-bom:3.3.0.Final'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'mops:styleguide:2.2.0'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-integration'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-test'
+    implementation 'org.keycloak:keycloak-spring-boot-starter:9.0.0'
+    implementation 'org.keycloak.bom:keycloak-adapter-bom:3.3.0.Final'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.postgresql:postgresql'
-  
-	implementation 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
-	compileOnly 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.postgresql:postgresql'
+
+    implementation 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
+    compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
-	testImplementation 'org.springframework.integration:spring-integration-test'
-	testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.springframework.integration:spring-integration-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 
-	compile 'io.micrometer:micrometer-core:latest.integration'
-	compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.19'
-	runtime("com.h2database:h2:1.4.198")
+    compile 'io.micrometer:micrometer-core:latest.integration'
+    compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.19'
+    runtime("com.h2database:h2:1.4.198")
 
 
-	testImplementation 'com.tngtech.keycloakmock:mock:0.2.0'
-	implementation 'org.mockito:mockito-junit-jupiter:3.3.0'
+    testImplementation 'com.tngtech.keycloakmock:mock:0.2.0'
+    implementation 'org.mockito:mockito-junit-jupiter:3.3.0'
 
-	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
-	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
 
-	implementation 'com.c4-soft.springaddons:spring-security-test-keycloack-addons:1.2.0'
+    implementation 'com.c4-soft.springaddons:spring-security-test-keycloack-addons:1.2.0'
 
-	implementation 'com.h2database:h2:1.4.200'
+    implementation 'com.h2database:h2:1.4.200'
 }
 
 test {
-	useJUnitPlatform()
-	testLogging {
-		events "passed", "skipped", "failed"
-	}
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }

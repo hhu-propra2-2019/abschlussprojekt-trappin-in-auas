@@ -68,9 +68,10 @@ public class ZyklusDirigentService implements IZyklusDirigentService {
     if (repo.count() == 0) {
       ZyklusDirigentDTO zyklusDirigentDTO = new ZyklusDirigentDTO();
       repo.save(zyklusDirigentDTO);
-    } else {
-      System.out.println("Es existiert bereits ein Dirigent in der Datenbank!");
-      //throw new Exception("Es ist bereits ein Objekt in der Datenbank vorhanden!!!eins11!");
     }
+  }
+
+  public void entfernen() {
+    repo.deleteAll();
   }
 }

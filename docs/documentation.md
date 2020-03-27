@@ -1,13 +1,29 @@
-# Dokumentation nach arc24
+# Dokumentation nach arc42
 
 ## Einführung und Ziele
+Für jedes Semester werden in jeglichen Fächern Korrektoren und Tutoren gesucht. Die HHU hat den Bewerbungs- und Einstellungsprozess Jahre lang händisch mit Papier betrieben, wodurch ein nerviger Bearbeitungsprozess herschte. Aus vielen Ordnern und jede Menge Papierbögen, wird nun eine Datenbank mit digitalen Bewerbungen, dazu eine Webseite mit einem Online Formular, welches der Bewerber von überall ausfüllen kann und die physisch keinen Platz mehr einnimmt und einfach wieder aufzufinden ist.
+Das Team TrappinInAuas strebt ein praktisches und selbstverständliches Seitendesign an, welches durch seine Simplizität einen angenehmen und frustfreien Bewerbungsprozess ermöglicht. Dabei setzen wir auf ein gesundes Maß zwischen Ästhetik und Funktionalität, da jeder die Anwendung bedienen können soll, egal ob alt oder jung, egal ob am Handy oder am PC. Bei uns macht Bewerben Spaß!
 
+### Aufgabenstellung/ Funktionalität
 
-### Aufgabenstellung
-Für die Modulare Online Plattform für Studierende (MOPS) beschäftigt sich das Team TrappinInAuas mit dem Subsystem
-"Korrektorinnenberwerbung". Dort wird ein Formular bereitgestellt, wo sich Studenten als Korrektor für ein Fach oder mehrer Fächer bewerben können. 
-Der Dozent soll die Möglichkeit haben dem Bewerber eine Prioriät zu geben, bevor dann endgültig dem Studenten das Fach, indem Er oder Sie korrigieren wird, zugewiesen wird.
-
+#### Setup Ansicht
+- Kann Module erstellen, für die man sich bewerber kann
+- Kann dem Modul einen Dozentennamen zuteilen, dazu die jeweilige E-mail und den Namen des Moduls
+- Kann einzelne Module löschen oder alle auf einmal, welches praktisch zum Semesterbeginn ist
+#### Bewerber Ansicht
+- Kann während der Bewerbungsfrist das Bewerbungsformular ausfüllen
+- Kann nach dem Abschicken des Bewerbungsformulars das Formular einsehen und editieren
+- Kann sehen, ob zurzeit eine Bewerbungsphase läuft
+- Kann das Formular nur richtig ausfüllen, da anderweilig das Formular nicht erfolgreich abgeschickt werden kann (Fehlermeldungen)
+- Kriegt eine Bestätigung nach erfolgreichem Abschicken
+#### Dozent Ansicht
+- Kann alle Bewerbungen für sein(e) Modul(e) einsehen
+- Kann jeder Bewerbung eine Priorität geben
+- Kann bis zum Fristabauf seine gesetzten Prioritäten beliebig editieren
+#### Verteiler Ansicht
+- Kann die einzelnen Phasen des Bewerbungsprozesses setzen (Setup-, Bewerber-, Dozentphase)
+- Kann alle Bewerbungen + die festgelegten Prioritäten der Dozent sehen
+- Kann dem Bewerber ein Modul zuordnen, worin er korrigieren wird
 ### Qualitätsziele
 - einfach
 - übersichtlich
@@ -17,17 +33,13 @@ Der Dozent soll die Möglichkeit haben dem Bewerber eine Prioriät zu geben, bev
 - schneller Bewerbungs- und Zuteilungsprozess
 ### Stakeholder
 
-- Bewerber (Studenten und nicht-Studenten)
-- Dozenten (Stellenausschreiber)
-- verantwortliche Person zum zuordnen der Bewerbung
-- verantwortliche Person zum erstellen eines Moduls
 
-| Rolle      | Kontakt | Erwartungshaltung |
-|:-----------|-------------:| -----:|
-| Bewerber   |  |  |
-| Dozenten   |  |  |
-| Ersteller  |  |  |
-| Zuordner   |  |  | 
+| Rolle        | Erwartungshaltung |
+|:-------------|--------:|
+| SetUp Person |Möchte Module, die im Semester angeboten werden, eintragen.       |
+| Bewerber     |Würde sich gerne unkompliziert als Korrektor bewerben können.         |
+| Dozenten     |Will für eine ideale Auswahl Bewerbungen priorisieren können.         |
+| Verteiler    |Möchte eine gute Verteilung für alle Beteiligten erzeugen.        |
 
 ## Randbedingungen
 - Team aus 8 Personen
@@ -37,19 +49,18 @@ Der Dozent soll die Möglichkeit haben dem Bewerber eine Prioriät zu geben, bev
 - Einbettung von Key-Cloak
 - Spring Framework, JPA, Postgress, DBeaver, Docker und PDFBOX von Apache
 
-## Kontextabgrenzung
-
-
-### Fachlicher Kontext
-- fachliche Abgrenzung für die Persistenz der Daten (Informationen der Bewerber persistieren)
-
 ### Technischer Kontext
 
 Das System soll als Self-contained-System in eine Verwaltungsplattform 
-des Instituts für Informatik (MOPS) eingebunden sein. Zur vereinheitlichung
-gibt es einen vorgegebenen [Styleguide](https://mops.style) sowie HTML-Templates.
-
-
+des Instituts für Informatik (MOPS) eingebunden sein.
+#### KeyCloak
+Erlaubt es den Usern verschiedene Rolle zu geben, wodurch der Zugang zu einzelnen Features blockiert oder freigegeben wird.
+#### Datenbank
+Wir benutzen postgresql-Datenbank, weil die in der übung genutzte MySQL nicht schön handzuhaben war. Da war die Nutzung der postgresql-DB intuitiver.
+#### Docker
+Um die komplette Umgebung als Anwendung zu verpacken und diese leicht ausführen zu können, habe wir Docker genutzt.
+#### Bootstrap
+Bootstrap wurde als Designsprache für die optische Gestaltung der Seiten genutzt. Das Augenmerk lag dabei auf eine minimalistische, dennoch futuristische optische Ansicht.
 ### Lösungsstrategie
 - Entwerfen eines ER-Modells
 - Implementieren der Modellstruktur mit der Datenbank mithilfe des ER-Modells

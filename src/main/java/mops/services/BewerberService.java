@@ -1,16 +1,15 @@
 package mops.services;
 
+import mops.domain.database.dto.BewerberDTO;
+import mops.domain.database.dto.ModulAuswahlDTO;
+import mops.domain.models.*;
+import mops.domain.repositories.BewerberRepository;
+import mops.domain.services.IBewerberService;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import mops.domain.database.dto.*;
-import mops.domain.models.*;
-
-import org.springframework.stereotype.Service;
-
-import mops.domain.repositories.BewerberRepository;
-import mops.domain.services.IBewerberService;
 
 @Service
 public class BewerberService implements IBewerberService {
@@ -80,6 +79,12 @@ public class BewerberService implements IBewerberService {
     bewerberRepository.save(b);
   }
 
+  public void verteilungEntfernen(String kennung, String dozentKennung) {
+    BewerberDTO b = bewerberRepository.findBewerberByKennung(kennung);
+    b.getVerteiltAn().removeIf(x -> x.getDozentKennung().equals(dozentKennung));
+    bewerberRepository.save(b);
+  }
+
   public List<Bewerber> findAlleVerteilteBewerber() {
     return bewerberRepository.findAll().stream().map(x -> modelService.load(x))
         .filter(x -> x.getVerteiltAn() != null && x.getVerteiltAn().size() != 0).collect(Collectors.toList());
@@ -110,6 +115,10 @@ public class BewerberService implements IBewerberService {
 
   public void removeBewerber(Bewerber bewerber) {
     bewerberRepository.delete(mappingService.load(bewerber));
+  }
+
+  public void removeAll() {
+    bewerberRepository.deleteAll();
   }
 
 }
