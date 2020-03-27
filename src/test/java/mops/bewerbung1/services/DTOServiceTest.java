@@ -116,5 +116,25 @@ public class DTOServiceTest {
     modelDTOCompare.compare(b, bewerberDTO);
   }
 
+  @Test
+  public void bewerberZuBewerberDTOWithDozentPrefsAndVerteilung() throws Exception {
+    Bewerber b = modelGenerator.generateBewerber();
+
+    List<ModulAuswahl> modulAuswahl = new ArrayList<>();
+    modulAuswahl.add(modelGenerator.generateModulAuswahl());
+
+    b.getPraeferenzen().setModulAuswahl(modulAuswahl);
+    b.getPraeferenzen().setTutorenSchulungTeilnahme(TutorenSchulungTeilnahme.TEILNAHME);
+    b.setDozentPraeferenz(Arrays.asList(new DozentPraeferenz("bla", "bla", 2)));
+    b.setVerteiltAn(Arrays.asList(new Dozent("y", "asd")));
+    BewerberDTO bewerberDTO = dtoService.load(b);
+
+    assertNotNull(bewerberDTO.getPraeferenzen());
+    assertNotNull(bewerberDTO.getPersonalien());
+    assertNotNull(bewerberDTO.getKarriere());
+    
+    modelDTOCompare.compare(b, bewerberDTO);
+  }
+
 }
 

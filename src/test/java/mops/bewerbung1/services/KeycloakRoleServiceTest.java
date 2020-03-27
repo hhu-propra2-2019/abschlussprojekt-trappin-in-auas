@@ -49,4 +49,32 @@ public class KeycloakRoleServiceTest {
 
     assertEquals("/setup", keycloakRoleService.getHighestPrivilegeRedirect(tokenRoles));
   }
+
+  @Test
+  public void highestPrivilegeOnlyStudent(){
+    Set<String> tokenRoles = Stream.of("studentin").collect(Collectors.toSet());
+
+    assertEquals("/bewerber", keycloakRoleService.getHighestPrivilegeRedirect(tokenRoles));
+  }
+
+  @Test
+  public void highestPrivilegeOrga(){
+    Set<String> tokenRoles = Stream.of("student", "orga").collect(Collectors.toSet());
+
+    assertEquals("/dozent/uebersicht", keycloakRoleService.getHighestPrivilegeRedirect(tokenRoles));
+  }
+
+  @Test
+  public void highestPrivilegeVerteiler(){
+    Set<String> tokenRoles = Stream.of("studentin", "orga", "verteiler").collect(Collectors.toSet());
+
+    assertEquals("/verteiler/uebersicht", keycloakRoleService.getHighestPrivilegeRedirect(tokenRoles));
+  }
+
+  @Test
+  public void highestPrivilegeNoKnownPrivilege(){
+    Set<String> tokenRoles = Stream.of("weirdsht").collect(Collectors.toSet());
+
+    assertEquals("", keycloakRoleService.getHighestPrivilegeRedirect(tokenRoles));
+  }
 }
