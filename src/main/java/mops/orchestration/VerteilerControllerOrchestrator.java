@@ -77,7 +77,7 @@ public class VerteilerControllerOrchestrator {
   }
 
   public void verteilungenEntfernen(String bewerber, String dozentKennung) {
-    dozentPraeferenzService.deletePraeferenz(bewerber, dozentKennung);
+    bewerberService.verteilungEntfernen(bewerber, dozentKennung);
   }
 
   public void phaseSetzen(String phase) {
