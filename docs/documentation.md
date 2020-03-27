@@ -1,7 +1,7 @@
 # Dokumentation nach arc42
 
 ## Einführung und Ziele
-Für jedes Semester werden in jeglichen Fächern Korrektoren und Tutoren gesucht. Die HHU hat den Bewerbungs- und Einstellungsprozess Jahre lang händisch mit Papier betrieben, wodurch ein nerviger Bearbeitungsprozess herschte. Aus vielen Ordnern und jede Menge Papierbögen, wird nun eine Datenbank mit digitalen Bewerbungen, dazu eine Webseite mit einem Online Formular, welches der Bewerber von überall ausfüllen kann und die physisch keinen Platz mehr einnimmt und einfach wieder aufzufinden ist.
+Für jedes Semester werden in jeglichen Fächern Korrektoren und Tutoren gesucht. Die HHU hat den Bewerbungs- und Einstellungsprozess Jahre lang händisch mit Papier betrieben, wodurch ein nerviger Bearbeitungsprozess herschte. Aus vielen Ordnern und jede Menge Papierbögen, wird nun eine Datenbank mit digitalen Bewerbungen, dazu eine Webseite mit einem Online Formular, welches der Bewerber von überall ausfüllen kann und die physisch keinen Platz mehr einnimmt.
 Das Team TrappinInAuas strebt ein praktisches und selbstverständliches Seitendesign an, welches durch seine Simplizität einen angenehmen und frustfreien Bewerbungsprozess ermöglicht. Dabei setzen wir auf ein gesundes Maß zwischen Ästhetik und Funktionalität, da jeder die Anwendung bedienen können soll, egal ob alt oder jung, egal ob am Handy oder am PC. Bei uns macht Bewerben Spaß!
 
 ### Aufgabenstellung/ Funktionalität
@@ -19,10 +19,10 @@ Das Team TrappinInAuas strebt ein praktisches und selbstverständliches Seitende
 #### Dozent Ansicht
 - Kann alle Bewerbungen für sein(e) Modul(e) einsehen
 - Kann jeder Bewerbung eine Priorität geben
-- Kann bis zum Fristabauf seine gesetzten Prioritäten beliebig editieren
+- Kann bis zum Fristablauf seine gesetzten Prioritäten beliebig editieren
 #### Verteiler Ansicht
 - Kann die einzelnen Phasen des Bewerbungsprozesses setzen (Setup-, Bewerber-, Dozentphase)
-- Kann alle Bewerbungen + die festgelegten Prioritäten der Dozent sehen
+- Kann alle Bewerbungen + die festgelegten Prioritäten der Dozenten sehen
 - Kann dem Bewerber ein Modul zuordnen, worin er korrigieren wird
 ### Qualitätsziele
 - einfach
@@ -45,7 +45,7 @@ Das Team TrappinInAuas strebt ein praktisches und selbstverständliches Seitende
 - Team aus 8 Personen
 - 4 Wochen à 4 Stunden Arbeitszeit
 - Jeweils 2 Tage Urlaub
-- Beachtung des MOPS.STYLE Style-Sheet
+- Beachtung des MOPS.STYLE Style-Sheets
 - Einbettung von Key-Cloak
 - Spring Framework, JPA, Postgress, DBeaver, Docker und PDFBOX von Apache
 
@@ -54,9 +54,9 @@ Das Team TrappinInAuas strebt ein praktisches und selbstverständliches Seitende
 Das System soll als Self-contained-System in eine Verwaltungsplattform 
 des Instituts für Informatik (MOPS) eingebunden sein.
 #### KeyCloak
-Erlaubt es den Usern verschiedene Rolle zu geben, wodurch der Zugang zu einzelnen Features blockiert oder freigegeben wird.
+Erlaubt es den Usern verschiedene Rollen zu geben, wodurch der Zugang zu einzelnen Features blockiert oder freigegeben wird.
 #### Datenbank
-Wir benutzen postgresql-Datenbank, weil die in der übung genutzte MySQL nicht schön handzuhaben war. Da war die Nutzung der postgresql-DB intuitiver.
+Wir benutzen postgresql-Datenbank, weil die in der Übung genutzte MySQL nicht schön handzuhaben war. Da war die Nutzung der postgresql-DB intuitiver.
 #### Docker
 Um die komplette Umgebung als Anwendung zu verpacken und diese leicht ausführen zu können, habe wir Docker genutzt.
 #### Bootstrap
@@ -72,7 +72,7 @@ Bootstrap wurde als Designsprache für die optische Gestaltung der Seiten genutz
 ## Entwurfsentscheidungen
 
 
-- Schichtenarchitektur/ Zwibelarchitektur
+- Schichtenarchitektur/ Zwiebelarchitektur
 
 ## Qualitätsanforderungen 
 
