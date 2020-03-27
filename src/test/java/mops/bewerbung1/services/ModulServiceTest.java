@@ -109,17 +109,18 @@ public class ModulServiceTest {
     List<ModulDTO> pseudoDatenbank = new ArrayList<>();
     DTOGenerator gen = new DTOGenerator();
     ModulDTO modul1 = gen.generateModul();
-    modul1.setModulName("uniquemodul1");
+    String modulname = "uniquemodul3";
+    modul1.setModulName(modulname);
 
     Modul modulmodel1 = modelGenerator.generateModul();
-    modulmodel1.setModulName("uniquemodul1");
+    modulmodel1.setModulName(modulname);
 
     addModulDTOMock(pseudoDatenbank);
-    when(modulRepository.findModulByModulName("uniquemodul1")).thenReturn((modul1));
+    when(modulRepository.findModulByModulName(modulname)).thenReturn((modul1));
 
     modulService.addModul(modulmodel1);
     
-    Modul gefunden = modulService.findModulByModulName("uniquemodul1");
+    Modul gefunden = modulService.findModulByModulName(modulname);
 
     assertEquals(modulmodel1.getModulName(), gefunden.getModulName());
   }
