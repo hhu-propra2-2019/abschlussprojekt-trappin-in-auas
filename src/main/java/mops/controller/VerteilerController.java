@@ -111,14 +111,14 @@ public class VerteilerController {
 
   @Secured(ROLE_VERTEILER)
   @PostMapping("/verteile")
-  public String verteile(Model m, @RequestParam String bewerberKennung, @RequestParam String modulName) {
+  public String verteile(@RequestParam String bewerberKennung, @RequestParam String modulName) {
     bewerberService.verteile(bewerberKennung, modulService.findModulByModulName(modulName).getDozent());
     return "redirect:/bewerbung1/verteiler/uebersicht";
   }
 
   @Secured(ROLE_VERTEILER)
   @PostMapping("/verteilungentfernen")
-  public String verteilungEntfernen(Model m, String bewerber, String dozentMail) {
+  public String verteilungEntfernen(String bewerber, String dozentMail) {
     dozentPraeferenzService.deletePraeferenz(bewerber, dozentMail);
     return "redirect:/bewerbung1/verteiler/uebersicht/verteilte";
   }

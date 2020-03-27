@@ -27,7 +27,7 @@ public class DozentControllerOrchestrator {
   @Autowired
   private transient DozentPraeferenzService dozentPraeferenzService;
 
-  public void erstelleBasis(Model model, KeycloakAuthenticationToken token){
+  public void erstelleBasis(Model model, KeycloakAuthenticationToken token, boolean bearbeitete){
     List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
     List<Bewerber> bearbeitet = dozentService.getBewerbungenMitPraeferenz(meineBewerber, token.getName());
     List<Bewerber> nichtBearbeitet = dozentService.getBewerbungenOhnePraeferenz(meineBewerber, token.getName());
@@ -36,8 +36,14 @@ public class DozentControllerOrchestrator {
     model.addAttribute("bearbeitetCount", bearbeitet.size());
     model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
     model.addAttribute("me", token.getName());
-    model.addAttribute("bewerber", nichtBearbeitet);
+    if(bearbeitete) {
+      model.addAttribute("bewerber", bearbeitet);
+    }
+    else {
+      model.addAttribute("bewerber", nichtBearbeitet);
+    }
   }
+
 
   public void addAnzeigeModus(Model model,String anzeigeModus){
     model.addAttribute("anzeigeModus", anzeigeModus);
