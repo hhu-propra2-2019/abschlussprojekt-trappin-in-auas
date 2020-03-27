@@ -1,21 +1,18 @@
 package mops.controller;
 
 import mops.Bewerbung1Application;
+import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
-@ControllerAdvice
 class BewerbungErrorController implements ErrorController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(Bewerbung1Application.class);
@@ -27,7 +24,7 @@ class BewerbungErrorController implements ErrorController {
 
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
   @RequestMapping("/error")
-  public String error(HttpServletRequest request) {
+  public String error(KeycloakAuthenticationToken token, HttpServletRequest request) {
     Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
     String originalUri = (String) request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI);
     if (status != null) {
@@ -39,17 +36,14 @@ class BewerbungErrorController implements ErrorController {
       } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
         LOGGER.error("HTTP ERROR 500 for " + originalUri);
         return "error/500";
+      } else if (statusCode == HttpStatus.UNAUTHORIZED.value()) {
+        LOGGER.info("HTTP 401, redirecting to login");
+        return "redirect:/bewerbung1/";
       } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
         LOGGER.error("HTTP ERROR 403 for " + originalUri);
         return "error/403";
       }
     }
-    return "redirect:/bewerbung1";
-  }
-
-  @ExceptionHandler(Exception.class)
-  public void handleException(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-    req.setAttribute("originalUri", req.getRequestURI());
-    req.getRequestDispatcher("/error").forward(req, resp);
+    return "error/error";
   }
 }
