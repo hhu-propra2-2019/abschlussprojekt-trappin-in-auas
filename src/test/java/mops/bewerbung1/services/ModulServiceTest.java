@@ -4,17 +4,20 @@ package mops.bewerbung1.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import mops.bewerbung1.testutils.DTOGenerator;
 import mops.bewerbung1.testutils.ModelGenerator;
 import mops.domain.database.dto.ModulDTO;
+import mops.domain.models.Dozent;
 import mops.domain.models.Modul;
 import mops.domain.repositories.ModulRepository;
 import mops.services.DTOService;
@@ -66,9 +69,59 @@ public class ModulServiceTest {
     List<ModulDTO> pseudoDatenbank = new ArrayList<>();
 
     addModulDTOMock(pseudoDatenbank);
-
-    modulService.addModul(modelGenerator.generateModul());
+    Modul modul = modelGenerator.generateModul();
+    modulService.addModul(modul);
+    modulService.addModul(modul);
     assertEquals(1, pseudoDatenbank.size());
+  }
+
+  @Test
+  public void modulExistsTest(){
+    List<ModulDTO> pseudoDatenbank = new ArrayList<>();
+    DTOGenerator gen = new DTOGenerator();
+    ModulDTO modul1 = gen.generateModul();
+    modul1.setDozentMail("uniquemail1");
+    modul1.setModulName("uniquemodul1");
+    ModulDTO modul2 = gen.generateModul();
+    modul2.setDozentMail("uniquemail2");
+    modul2.setModulName("uniquemodul2");
+
+    Modul modulmodel1 = modelGenerator.generateModul();
+    Modul modulmodel2 = modelGenerator.generateModul();
+    modulmodel1.setModulName("uniquemodul1");
+    modulmodel1.setDozent(new Dozent("uniquemail1", "name"));
+    modulmodel1.setModulName("uniquemodul2");
+    modulmodel1.setDozent(new Dozent("uniquemail2", "name"));
+
+    addModulDTOMock(pseudoDatenbank);
+    when(modulRepository.findByModulNameAndDozentMail("uniquemodul1", "uniquemail1")).thenReturn(Arrays.asList(modul1));
+    when(modulRepository.findByModulNameAndDozentMail("uniquemodul2", "uniquemail2")).thenReturn(Arrays.asList(modul2));
+
+    modulService.addModul(modulmodel1);
+    
+    assertEquals(true, modulService.modulExists(modulmodel1));
+    assertEquals(false, modulService.modulExists(modulmodel2));
+    assertEquals(false, modulService.modulExists(null));
+  }
+
+  @Test
+  public void findModulByName(){
+    List<ModulDTO> pseudoDatenbank = new ArrayList<>();
+    DTOGenerator gen = new DTOGenerator();
+    ModulDTO modul1 = gen.generateModul();
+    modul1.setModulName("uniquemodul1");
+
+    Modul modulmodel1 = modelGenerator.generateModul();
+    modulmodel1.setModulName("uniquemodul1");
+
+    addModulDTOMock(pseudoDatenbank);
+    when(modulRepository.findModulByModulName("uniquemodul1")).thenReturn((modul1));
+
+    modulService.addModul(modulmodel1);
+    
+    Modul gefunden = modulService.findModulByModulName("uniquemodul1");
+
+    assertEquals(modulmodel1.getModulName(), gefunden.getModulName());
   }
 
   @Test
@@ -100,8 +153,19 @@ public class ModulServiceTest {
   }
 
   @Test
-  public void test(){
-    modulService.findAllModule();
+  public void testFindAll(){
+    List<ModulDTO> pseudoDatenbank = new ArrayList<>();
+    Modul testModul = modelGenerator.generateModul();
+    Modul testModul2 = modelGenerator.generateModul();
+    Modul testModul3 = modelGenerator.generateModul();
+    pseudoDatenbank.add(dtoService.load(testModul));
+    pseudoDatenbank.add(dtoService.load(testModul2));
+    pseudoDatenbank.add(dtoService.load(testModul3));
+
+    when(modulRepository.findAll()).thenReturn(pseudoDatenbank);
+
+    List<Modul> module = modulService.findAllModule();
+    assertEquals(3, module.size());
   }
 
   private void removeAllDTOMock(List<ModulDTO> pseudoDatenbank) {

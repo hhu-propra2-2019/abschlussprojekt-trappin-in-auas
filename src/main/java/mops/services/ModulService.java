@@ -22,6 +22,7 @@ public class ModulService implements IModulService {
 
   public ModulService(ModulRepository modulRepository, ModelService modelService, DTOService dtoService) {
     this.modulRepository = modulRepository;
+    this.modelService = modelService;
     this.dtoService = dtoService;
   }
 
@@ -82,6 +83,9 @@ public class ModulService implements IModulService {
    */
   @Override
   public boolean modulExists(Modul modul) {
+    if(modul == null){
+      return false;
+    }
     List<ModulDTO> module = modulRepository.findByModulNameAndDozentMail(modul.getModulName(),
         modul.getDozent().getDozentMail());
     if (module != null) {
