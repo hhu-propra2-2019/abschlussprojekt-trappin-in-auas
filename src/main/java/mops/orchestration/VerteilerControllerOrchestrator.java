@@ -76,17 +76,21 @@ public class VerteilerControllerOrchestrator {
     bewerberService.verteile(bewerberKennung, modulService.findModulByModulName(modulName).getDozent());
   }
 
-  public void verteilungenEntfernen(String bewerber, String dozentMail) {
-    dozentPraeferenzService.deletePraeferenz(bewerber, dozentMail);
+  public void verteilungenEntfernen(String bewerber, String dozentKennung) {
+    dozentPraeferenzService.deletePraeferenz(bewerber, dozentKennung);
   }
 
   public void phaseSetzen(String phase) {
-    if (phase.equals("bewerbung")) {
-      zyklusDirigentService.bewerbungsPhaseBeginnen();
-    } else if (phase.equals("dozent")) {
-      zyklusDirigentService.dozentBewertungsphaseBeginnen();
-    } else if (phase.equals("verteiler")) {
-      zyklusDirigentService.verteilungsPhaseBeginnen();
+    switch (phase) {
+      case "bewerbung":
+        zyklusDirigentService.bewerbungsPhaseBeginnen();
+        break;
+      case "dozent":
+        zyklusDirigentService.dozentBewertungsphaseBeginnen();
+        break;
+      case "verteiler":
+        zyklusDirigentService.verteilungsPhaseBeginnen();
+        break;
     }
   }
 }
