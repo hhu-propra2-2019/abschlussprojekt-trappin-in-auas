@@ -15,11 +15,15 @@ Aktuell wird man von der Webseite des Instituts auf eine Ilias-Umfrage weitergel
 - Verteilerfunktion für einen Organisator
 - Dozenten sehen Bewerber, die ihnen vorgeschlagen wurden
 
-##
+## Verwendung
 Das SCS kann mit dem folgenden Befehl gestartet werden:
 ```
 docker-compose up
 ```
+
+### Hinweis
+Das System kann mehrere Zustände (Zyklen) haben. Beim ersten Start ist es zustandslos.
+Module können jederzeit hinzugefügt werden. Zum starten des ersten Zyklus muss mit einem Benutzer mit der Verteilerrolle ein Zustand ausgewählt werden. Danach sind die jeweiligen Funktionen für die Nutzer(-gruppen) verfügbar: Bewerben -> Priorisieren -> Verteilen
 
 ## Projektdokumentation
 
