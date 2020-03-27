@@ -44,7 +44,7 @@ public class KeycloakRoleServiceTest {
   }
 
   @Test
-  public void highestPrivilege(){
+  public void highestPrivilegeAllPrivileges(){
     Set<String> tokenRoles = Stream.of("studentin", "orga", "verteiler", "setup").collect(Collectors.toSet());
 
     assertEquals("/setup", keycloakRoleService.getHighestPrivilegeRedirect(tokenRoles));

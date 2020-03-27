@@ -3,6 +3,7 @@ package mops.bewerbung1.services;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Locale;
@@ -54,7 +55,11 @@ public class ModelServiceTest {
 
   @Test
   public void bewerberDTOWithDozentPref(){
-    
+    BewerberDTO bewerberDTO = dtoGenerator.generateBewerber();
+    bewerberDTO.setDozentPraeferenz(Arrays.asList(new DozentPraeferenzDTO(bewerberDTO.getKennung(), "some mail", 2)));
+    Bewerber bewerber = modelService.load(bewerberDTO);
+
+    modelDTOCompare.compare(bewerber, bewerberDTO);
   }
 
   @Test
