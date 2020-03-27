@@ -99,6 +99,11 @@ public class ModulServiceTest {
     assertEquals(0, pseudoDatenbank.size());
   }
 
+  @Test
+  public void test(){
+    modulService.findAllModule();
+  }
+
   private void removeAllDTOMock(List<ModulDTO> pseudoDatenbank) {
     doAnswer(invocation -> {
       pseudoDatenbank.clear();
