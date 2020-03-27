@@ -44,7 +44,7 @@ class BewerbungErrorController implements ErrorController {
         return "error/403";
       }
     }
-    return "error/error";
+    return "redirect:/bewerbung1";
   }
 
   @ExceptionHandler(Exception.class)
