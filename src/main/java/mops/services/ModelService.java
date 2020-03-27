@@ -58,7 +58,7 @@ public class ModelService implements IModelService {
         fachAbschluss.getUni());
   }
 
-  public ImmatrikulationsStatus load(ImmartikulationsStatusDTO statusDTO) {
+  public ImmatrikulationsStatus load(ImmatrikulationsStatusDTO statusDTO) {
     return new ImmatrikulationsStatus(statusDTO.isStatus(), statusDTO.getFachrichtung());
   }
 
