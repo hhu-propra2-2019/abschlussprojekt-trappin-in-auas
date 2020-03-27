@@ -1,12 +1,13 @@
 package mops.services;
 
-import java.util.LinkedList;
-import java.util.List;
 import mops.domain.models.Modul;
 import mops.domain.models.ModuleMitVerteiltenAnzahl;
 import mops.domain.repositories.VerteilungRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class VerteilerService {
@@ -32,8 +33,4 @@ public class VerteilerService {
   public void removeAll() {
     verteilungRepo.deleteAll();
   }
-
-
-
-
 }

@@ -58,8 +58,8 @@ public class VerteilerController {
 
   @Secured(ROLE_VERTEILER)
   @PostMapping("/verteilungentfernen")
-  public String verteilungEntfernen(String bewerber, String dozentMail) {
-    verteilerControllerOrchestrator.verteilungenEntfernen(bewerber, dozentMail);
+  public String verteilungEntfernen(String bewerber, String dozentKennung) {
+    verteilerControllerOrchestrator.verteilungenEntfernen(bewerber, dozentKennung);
     return "redirect:/bewerbung1/verteiler/uebersicht/verteilte";
   }
 
