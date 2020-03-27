@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import mops.bewerbung1.testutils.ModelGenerator;
 import mops.domain.database.dto.ModulDTO;
+import mops.domain.models.Modul;
 import mops.domain.repositories.ModulRepository;
 import mops.services.DTOService;
 import mops.services.ModelService;
@@ -53,11 +54,11 @@ public class ModulServiceTest {
   }
 
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
-  private void removeBewerberDTOMock(List<ModulDTO> pseudoDatenbank) {
+  private void removeModulDTOMock(List<ModulDTO> pseudoDatenbank) {
     doAnswer(invocation -> {
-      pseudoDatenbank.remove((ModulDTO) invocation.getArguments()[0]);
+      pseudoDatenbank.removeIf(x -> x.getModulName().equals((String) invocation.getArguments()[0]));
       return null;
-    }).when(modulRepository).delete(any(ModulDTO.class));
+    }).when(modulRepository).deleteModulByName(any(String.class));
   }
 
   @Test
@@ -65,9 +66,43 @@ public class ModulServiceTest {
     List<ModulDTO> pseudoDatenbank = new ArrayList<>();
 
     addModulDTOMock(pseudoDatenbank);
-    removeBewerberDTOMock(pseudoDatenbank);
 
     modulService.addModul(modelGenerator.generateModul());
     assertEquals(1, pseudoDatenbank.size());
+  }
+
+  @Test
+  public void removeModulTest(){
+    List<ModulDTO> pseudoDatenbank = new ArrayList<>();
+    Modul testModul = modelGenerator.generateModul();
+    pseudoDatenbank.add(dtoService.load(testModul));
+
+    removeModulDTOMock(pseudoDatenbank);
+
+    modulService.deleteModulByName(testModul.getModulName());
+    assertEquals(0, pseudoDatenbank.size());
+  }
+
+  @Test
+  public void removeAllModulTest(){
+    List<ModulDTO> pseudoDatenbank = new ArrayList<>();
+    Modul testModul = modelGenerator.generateModul();
+    Modul testModul2 = modelGenerator.generateModul();
+    Modul testModul3 = modelGenerator.generateModul();
+    pseudoDatenbank.add(dtoService.load(testModul));
+    pseudoDatenbank.add(dtoService.load(testModul2));
+    pseudoDatenbank.add(dtoService.load(testModul3));
+
+    removeAllDTOMock(pseudoDatenbank);
+
+    modulService.deleteAll();
+    assertEquals(0, pseudoDatenbank.size());
+  }
+
+  private void removeAllDTOMock(List<ModulDTO> pseudoDatenbank) {
+    doAnswer(invocation -> {
+      pseudoDatenbank.clear();
+      return null;
+    }).when(modulRepository).deleteAll();
   }
 }
