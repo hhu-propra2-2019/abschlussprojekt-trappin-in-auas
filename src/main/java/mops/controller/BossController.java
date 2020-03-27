@@ -2,9 +2,8 @@ package mops.controller;
 
 import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_BOSS;
 
-import mops.services.DTOService;
+import mops.services.*;
 import mops.domain.models.Modul;
-import mops.services.ModulService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -21,6 +20,15 @@ public class BossController {
 
   @Autowired
   private transient ModulService modulService;
+
+  @Autowired
+  private transient BewerberService bewerberService;
+
+  @Autowired
+  private transient VerteilerService verteilerService;
+
+  @Autowired
+  private transient ZyklusDirigentService zyklusDirigentService;
 
   /**
    * Modul list for boss. Login as "Boss" required.
@@ -86,7 +94,10 @@ public class BossController {
   @Secured(ROLE_BOSS)
   @PostMapping("/deleteall")
   public String wipeAll(Model m, KeycloakAuthenticationToken token) {
+    verteilerService.removeAll();
+    bewerberService.removeAll();
     modulService.deleteAll();
+    zyklusDirigentService.entfernen();
     return "redirect:/bewerbung1/setup/";
   }
 }
