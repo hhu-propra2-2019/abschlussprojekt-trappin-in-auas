@@ -40,6 +40,7 @@ public class ModelServiceTest {
   }
 
   @Test
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis") //Random DU Anomaly
   public void bewerberDTOListToBewerberList(){
     List<BewerberDTO> bewerberDTOs = new LinkedList<>();
     bewerberDTOs.add(dtoGenerator.generateBewerber());
@@ -150,6 +151,7 @@ public class ModelServiceTest {
   }
 
   @Test
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis") //Random DU Anomaly
   public void loadModulListTest() {
     List<ModulDTO> modulDTOList = new LinkedList<ModulDTO>();
 

@@ -14,6 +14,10 @@ public class VerteilerService {
   @Autowired
   private transient VerteilungRepo verteilungRepo;
 
+  public VerteilerService(VerteilungRepo verteilungRepo){
+    this.verteilungRepo = verteilungRepo;
+  }
+
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
   public List<ModuleMitVerteiltenAnzahl> getListModulMitAnzahlVerteilten(List<Modul> listModul){
     List<ModuleMitVerteiltenAnzahl> moduleMitVerteiltenAnzahlList = new LinkedList<>();
