@@ -20,8 +20,9 @@ public class ModulService implements IModulService {
   @Autowired
   private transient DTOService dtoService;
 
-  public ModulService(ModulRepository modulRepository, ModelService modelService) {
+  public ModulService(ModulRepository modulRepository, ModelService modelService, DTOService dtoService) {
     this.modulRepository = modulRepository;
+    this.dtoService = dtoService;
   }
 
   /**
