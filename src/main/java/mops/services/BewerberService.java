@@ -107,4 +107,8 @@ public class BewerberService implements IBewerberService {
     bewerberRepository.delete(mappingService.load(bewerber));
   }
 
+  public void removeAll() {
+    bewerberRepository.deleteAll();
+  }
+
 }

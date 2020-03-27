@@ -73,4 +73,8 @@ public class ZyklusDirigentService implements IZyklusDirigentService {
       //throw new Exception("Es ist bereits ein Objekt in der Datenbank vorhanden!!!eins11!");
     }
   }
+
+  public void entfernen() {
+    repo.deleteAll();
+  }
 }

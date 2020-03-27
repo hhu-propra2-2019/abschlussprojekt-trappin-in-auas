@@ -46,7 +46,7 @@
 
     <div class="container pt-3">
 
-      <div class="col-12 shadow p-3 mb-4 bg-light rounded">
+      <div class="col-12 shadow p-3 mb-4 bg-light rounded" th:if="${modulListe.size() > 0}">
         <div class="card-columns">
           <div th:each="modul : ${modulListe}" class="card shadow p-0 mb-4 bg-light rounded">
             <div class="card-header font-weight-bold text-center">
@@ -63,7 +63,6 @@
               </div>
               </form>
             </div>
-
           </div>
         </div>
       </div>
@@ -94,7 +93,8 @@
       </div>
 
       <div class="col-12 shadow p-3 mb-4 bg-light rounded">
-        <a clasS="btn btn-danger" href="/bewerbung1/setup/confirmclear">Alle Module Löschen</a>
+        <div class="h3">Semester zurücksetzen</div>
+        <a clasS="btn btn-danger" href="/bewerbung1/setup/confirmclear">Zurücksetzen</a>
       </div>
 
     </div>

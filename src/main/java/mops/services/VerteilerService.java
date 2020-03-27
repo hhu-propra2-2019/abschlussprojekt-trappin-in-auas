@@ -29,6 +29,9 @@ public class VerteilerService {
     return new ModuleMitVerteiltenAnzahl(modul, anzahlVerteilte);
   }
 
+  public void removeAll() {
+    verteilungRepo.deleteAll();
+  }
 
 
 
