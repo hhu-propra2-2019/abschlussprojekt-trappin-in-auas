@@ -23,24 +23,21 @@ public class DozentController {
   @Secured({ ROLE_ORGA })
   @GetMapping("/uebersicht")
   public String verteilen(Model model, KeycloakAuthenticationToken token) {
-    dozentControllerOrchestrator.erstelleBasis(model, token, false);
-    dozentControllerOrchestrator.addAnzeigeModus(model, "uebersicht");
+    dozentControllerOrchestrator.uebersicht(model, token.getName());
     return "dozent/dozent";
   }
 
   @Secured({ ROLE_ORGA })
   @GetMapping("/unbearbeitete")
   public String offeneUebersicht(Model model, KeycloakAuthenticationToken token) {
-    dozentControllerOrchestrator.erstelleBasis(model, token, false);
-    dozentControllerOrchestrator.addAnzeigeModus(model, "offene");
+    dozentControllerOrchestrator.unbearbeitete(model, token.getName());
     return "dozent/dozent";
   }
 
   @Secured({ ROLE_ORGA })
   @GetMapping("/bearbeitete")
   public String zugewieseneUebersicht(Model model, KeycloakAuthenticationToken token) {
-    dozentControllerOrchestrator.erstelleBasis(model, token, true);
-    dozentControllerOrchestrator.addAnzeigeModus(model, "vorgemerkte");
+    dozentControllerOrchestrator.bearbeitete(model, token.getName());
     return "dozent/dozent";
   }
 

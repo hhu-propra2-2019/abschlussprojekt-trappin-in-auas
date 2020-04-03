@@ -7,7 +7,6 @@ import mops.services.BewerberService;
 import mops.services.DozentPraeferenzService;
 import mops.services.DozentService;
 import mops.services.ZyklusDirigentService;
-import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
@@ -27,35 +26,53 @@ public class DozentControllerOrchestrator {
   @Autowired
   private transient DozentPraeferenzService dozentPraeferenzService;
 
-  public void erstelleBasis(Model model, KeycloakAuthenticationToken token, boolean bearbeitete){
-    List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
-    List<Bewerber> bearbeitet = dozentService.getBewerbungenMitPraeferenz(meineBewerber, token.getName());
-    List<Bewerber> nichtBearbeitet = dozentService.getBewerbungenOhnePraeferenz(meineBewerber, token.getName());
+  public void uebersicht(Model model, String dozentMail) {
+    erstelleBasis(model, dozentMail, false);
+    addAnzeigeModus(model, "uebersicht");
+  }
 
-    model.addAttribute("dozentPhase", zyklusDirigentService.getDozentenPhase());
-    model.addAttribute("bearbeitetCount", bearbeitet.size());
-    model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
-    model.addAttribute("me", token.getName());
-    if(bearbeitete) {
-      model.addAttribute("bewerber", bearbeitet);
-    }
-    else {
-      model.addAttribute("bewerber", nichtBearbeitet);
-    }
+  public void unbearbeitete(Model model, String dozentMail) {
+    erstelleBasis(model, dozentMail, false);
+    addAnzeigeModus(model, "offene");
+  }
+
+  public void bearbeitete(Model model, String dozentMail) {
+    erstelleBasis(model, dozentMail, true);
+    addAnzeigeModus(model, "vorgemerkte");
   }
 
 
-  public void addAnzeigeModus(Model model,String anzeigeModus){
-    model.addAttribute("anzeigeModus", anzeigeModus);
-  }
-
-  public void detailAnsicht(Model model, String kennung){
+  public void detailAnsicht(Model model, String kennung) {
     Bewerber bewerber = bewerberService.findBewerberByKennung(kennung);
     model.addAttribute("bewerber", bewerber);
     model.addAttribute("phase", zyklusDirigentService.getDozentenPhase());
   }
 
-  public void addPreference(String dozentKennung, String bewerberKennung, int praeferenz){
-    dozentPraeferenzService.addPraeferenz(new DozentPraeferenz(dozentKennung, bewerberKennung, praeferenz));
+  public void addPreference(String dozentKennung, String bewerberKennung, int praeferenz) {
+    dozentPraeferenzService
+        .addPraeferenz(new DozentPraeferenz(dozentKennung, bewerberKennung, praeferenz));
   }
+
+  private void erstelleBasis(Model model, String dozentMail, boolean bearbeitete) {
+    List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(dozentMail);
+    List<Bewerber> bearbeitet = dozentService
+        .getBewerbungenMitPraeferenz(meineBewerber, dozentMail);
+    List<Bewerber> nichtBearbeitet = dozentService
+        .getBewerbungenOhnePraeferenz(meineBewerber, dozentMail);
+
+    model.addAttribute("dozentPhase", zyklusDirigentService.getDozentenPhase());
+    model.addAttribute("bearbeitetCount", bearbeitet.size());
+    model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
+    model.addAttribute("me", dozentMail);
+    if (bearbeitete) {
+      model.addAttribute("bewerber", bearbeitet);
+    } else {
+      model.addAttribute("bewerber", nichtBearbeitet);
+    }
+  }
+
+  private void addAnzeigeModus(Model model, String anzeigeModus) {
+    model.addAttribute("anzeigeModus", anzeigeModus);
+  }
+
 }

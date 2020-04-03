@@ -23,21 +23,21 @@ public class VerteilerController {
 
   @Secured(ROLE_VERTEILER)
   @GetMapping("/uebersicht")
-  public String verteilen(Model model, KeycloakAuthenticationToken token) {
+  public String verteilen(Model model) {
     verteilerControllerOrchestrator.uebersicht(model);
     return "verteiler/verteiler";
   }
 
   @Secured(ROLE_VERTEILER)
   @GetMapping("/verteilte")
-  public String showVerteilteBewerber(Model model, KeycloakAuthenticationToken token) {
+  public String showVerteilteBewerber(Model model) {
     verteilerControllerOrchestrator.verteilte(model);
     return "verteiler/verteiler";
   }
 
   @Secured(ROLE_VERTEILER)
   @GetMapping("/offene")
-  public String showOffeneBewerber(Model model, KeycloakAuthenticationToken token) {
+  public String showOffeneBewerber(Model model) {
     verteilerControllerOrchestrator.offene(model);
     return "verteiler/verteiler";
   }
@@ -60,7 +60,7 @@ public class VerteilerController {
   @PostMapping("/verteilungentfernen")
   public String verteilungEntfernen(String bewerber, String dozentKennung) {
     verteilerControllerOrchestrator.verteilungenEntfernen(bewerber, dozentKennung);
-    return "redirect:/bewerbung1/verteiler/uebersicht/verteilte";
+    return "redirect:/bewerbung1/verteiler/uebersicht";
   }
 
   @Secured(ROLE_VERTEILER)
