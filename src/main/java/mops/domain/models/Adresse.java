@@ -2,7 +2,6 @@ package mops.domain.models;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

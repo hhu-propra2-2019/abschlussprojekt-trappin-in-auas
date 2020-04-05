@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @NoArgsConstructor
 public class ImmatrikulationsStatusDTO {
-    private boolean status;
-    private String fachrichtung;
+  private boolean status;
+  private String fachrichtung;
 
-    public ImmatrikulationsStatusDTO(boolean status, String fachrichtung) {
-        this.status = status;
-        this.fachrichtung = fachrichtung;
-    }
+  public ImmatrikulationsStatusDTO(boolean status, String fachrichtung) {
+    this.status = status;
+    this.fachrichtung = fachrichtung;
+  }
 }

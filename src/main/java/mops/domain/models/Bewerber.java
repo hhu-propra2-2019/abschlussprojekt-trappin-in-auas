@@ -1,9 +1,7 @@
 package mops.domain.models;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

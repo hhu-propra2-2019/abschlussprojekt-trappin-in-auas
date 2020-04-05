@@ -6,7 +6,6 @@ import mops.domain.models.*;
 import mops.domain.repositories.BewerberRepository;
 import mops.domain.services.IBewerberService;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +17,8 @@ public class BewerberService implements IBewerberService {
   private transient DTOService mappingService;
   private transient ModelService modelService;
 
-  public BewerberService(BewerberRepository bewerberRepository, DTOService mappingService, ModelService modelService) {
+  public BewerberService(BewerberRepository bewerberRepository,
+      DTOService mappingService, ModelService modelService) {
     this.bewerberRepository = bewerberRepository;
     this.mappingService = mappingService;
     this.modelService = modelService;
@@ -44,8 +44,13 @@ public class BewerberService implements IBewerberService {
 
   public void addBewerber(Bewerber b, String kennung) {
     b.setKennung(kennung);
-    // because status checkbox is inverted
-    b.getKarriere().getImmatrikulationsStatus().setStatus(!b.getKarriere().getImmatrikulationsStatus().isStatus());
+    b.getKarriere()
+        .getImmatrikulationsStatus()
+        .setStatus(!b.getKarriere()
+            .getImmatrikulationsStatus()
+            .isStatus()
+        )
+    ;
     BewerberDTO bewerberDTO = mappingService.load(b);
     BewerberDTO zuFindenderBewerber = bewerberRepository.findBewerberByKennung(kennung);
 
@@ -87,7 +92,8 @@ public class BewerberService implements IBewerberService {
 
   public List<Bewerber> findAlleVerteilteBewerber() {
     return bewerberRepository.findAll().stream().map(x -> modelService.load(x))
-        .filter(x -> x.getVerteiltAn() != null && x.getVerteiltAn().size() != 0).collect(Collectors.toList());
+        .filter(x -> x.getVerteiltAn() != null && x.getVerteiltAn().size() != 0)
+        .collect(Collectors.toList());
   }
 
   public List<Bewerber> findBewerberFuerDozent(String dozentKennung) {
@@ -96,7 +102,8 @@ public class BewerberService implements IBewerberService {
         .map(x -> modelService.load(x)).collect(Collectors.toList());
   }
 
-  private boolean modulAuswahlContainsDozent(List<ModulAuswahlDTO> auswahlDTO, String dozentKennung) {
+  private boolean modulAuswahlContainsDozent(List<ModulAuswahlDTO> auswahlDTO,
+      String dozentKennung) {
     return auswahlDTO.stream().anyMatch(x -> x.getModul().getDozentMail().equals(dozentKennung));
   }
 

@@ -11,25 +11,25 @@ import mops.domain.models.Beruf;
 @Entity
 @NoArgsConstructor
 public class ModulAuswahlDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name="modul_auswahl_id")
-    private long id;
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    private ModulDTO modul;
-    
-    private int prioritaet;
-    private double note;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @Column(name="modul_auswahl_id")
+  private long id;
 
-    @Enumerated(EnumType.STRING)
-    private Beruf beruf;
+  @OneToOne(cascade = CascadeType.ALL)
+  private ModulDTO modul;
 
-    public ModulAuswahlDTO(ModulDTO modul, int prioritaet, double note, Beruf beruf) {
-        this.modul = modul;
-        this.prioritaet = prioritaet;
-        this.note = note;
-        this.beruf = beruf;
-    }
+  private int prioritaet;
+  private double note;
+
+  @Enumerated(EnumType.STRING)
+  private Beruf beruf;
+
+  public ModulAuswahlDTO(ModulDTO modul, int prioritaet, double note, Beruf beruf) {
+    this.modul = modul;
+    this.prioritaet = prioritaet;
+    this.note = note;
+    this.beruf = beruf;
+  }
 
 }

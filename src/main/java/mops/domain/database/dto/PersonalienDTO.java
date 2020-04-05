@@ -17,31 +17,31 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 public class PersonalienDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
 
-    @Embedded
-    private AdresseDTO adresse;
+  @Embedded
+  private AdresseDTO adresse;
 
-    private String name;
-    private String vorname;
+  private String name;
+  private String vorname;
 
-    @Temporal(TemporalType.DATE)
-    private Date geburtsdatum;
+  @Temporal(TemporalType.DATE)
+  private Date geburtsdatum;
 
-    private int alter;
-    private String geburtsort;
-    private String nationalitaet;
+  private int alter;
+  private String geburtsort;
+  private String nationalitaet;
 
-    public PersonalienDTO(AdresseDTO adresse, String name, String vorname,
-        Date geburtsdatum, int alter, String geburtsort, String nationalitaet) {
-        this.adresse = adresse;
-        this.name = name;
-        this.vorname = vorname;
-        this.geburtsdatum = geburtsdatum;
-        this.alter = alter;
-        this.geburtsort = geburtsort;
-        this.nationalitaet = nationalitaet;
-    }
+  public PersonalienDTO(AdresseDTO adresse, String name, String vorname,
+      Date geburtsdatum, int alter, String geburtsort, String nationalitaet) {
+    this.adresse = adresse;
+    this.name = name;
+    this.vorname = vorname;
+    this.geburtsdatum = geburtsdatum;
+    this.alter = alter;
+    this.geburtsort = geburtsort;
+    this.nationalitaet = nationalitaet;
+  }
 }

@@ -2,7 +2,6 @@ package mops.domain.database.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @Getter

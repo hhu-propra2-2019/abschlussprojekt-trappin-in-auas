@@ -5,14 +5,23 @@ import mops.domain.database.dto.*;
 import mops.domain.models.*;
 
 public interface IDTOService {
-    ModulDTO load(Modul modul);
-    ModulAuswahlDTO load(ModulAuswahl modulAuswahl);
-    AdresseDTO load(Adresse adresse);
-    ImmatrikulationsStatusDTO load(ImmatrikulationsStatus immatrikulationsStatus);
-    StudiengangAbschlussDTO load(StudiengangAbschluss studiengangAbschluss);
-    List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen);
-    KarriereDTO load(Karriere karriere);
-    PersonalienDTO load(Personalien personalien);
-    PraeferenzenDTO load(Praeferenzen praeferenzen);
-    BewerberDTO load(Bewerber bewerber);
+  ModulDTO load(Modul modul);
+
+  ModulAuswahlDTO load(ModulAuswahl modulAuswahl);
+
+  AdresseDTO load(Adresse adresse);
+
+  ImmatrikulationsStatusDTO load(ImmatrikulationsStatus immatrikulationsStatus);
+
+  StudiengangAbschlussDTO load(StudiengangAbschluss studiengangAbschluss);
+
+  List<ModulAuswahlDTO> loadList(Praeferenzen praeferenzen);
+
+  KarriereDTO load(Karriere karriere);
+
+  PersonalienDTO load(Personalien personalien);
+
+  PraeferenzenDTO load(Praeferenzen praeferenzen);
+
+  BewerberDTO load(Bewerber bewerber);
 }

@@ -1,17 +1,13 @@
 package mops.services;
 
 import java.io.IOException;
-import mops.domain.database.dto.BewerberDTO;
-import mops.domain.models.*;
 import mops.domain.services.IPDFService;
 import java.io.File;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import mops.domain.models.Bewerber;
 import mops.domain.models.EinstiegTyp;
 import mops.domain.models.ModulAuswahl;

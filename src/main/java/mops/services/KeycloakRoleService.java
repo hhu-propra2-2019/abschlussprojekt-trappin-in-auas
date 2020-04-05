@@ -3,7 +3,6 @@ package mops.services;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,7 +10,7 @@ public class KeycloakRoleService {
 
   private transient Map<String, String> roleRedirect;
 
-  public KeycloakRoleService(){
+  public KeycloakRoleService() {
     roleRedirect = new HashMap<>();
     roleRedirect.put("studentin", "/bewerber");
     roleRedirect.put("verteiler", "/verteiler/uebersicht");
@@ -19,21 +18,21 @@ public class KeycloakRoleService {
     roleRedirect.put("orga", "/dozent/uebersicht");
   }
 
-  public String getRedirect(String role){
+  public String getRedirect(String role) {
     return roleRedirect.get(role);
   }
 
   public String getHighestPrivilegeRedirect(Set<String> tokenRoles) {
-    if(tokenRoles.contains("setup")){
+    if (tokenRoles.contains("setup")) {
       return getRedirect("setup");
     }
-    if(tokenRoles.contains("verteiler")){
+    if (tokenRoles.contains("verteiler")) {
       return getRedirect("verteiler");
     }
-    if(tokenRoles.contains("orga")){
+    if (tokenRoles.contains("orga")) {
       return getRedirect("orga");
     }
-    if(tokenRoles.contains("studentin")){
+    if (tokenRoles.contains("studentin")) {
       return getRedirect("studentin");
     }
     return "";

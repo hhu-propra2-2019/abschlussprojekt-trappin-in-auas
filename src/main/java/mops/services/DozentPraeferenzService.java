@@ -30,10 +30,12 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
   public void addPraeferenz(DozentPraeferenz dozentPraeferenz) {
     if (zyklusDirigentService.getDozentenPhase()) {
       try {
-        Bewerber bewerber = bewerberService.findBewerberByKennung(dozentPraeferenz.getBewerberKennung());
+        Bewerber bewerber = bewerberService
+            .findBewerberByKennung(dozentPraeferenz.getBewerberKennung());
         
         Optional<DozentPraeferenz> existierndeBewertung = bewerber.getDozentPraeferenz().stream()
-            .filter(x -> x.getDozentKennung().equals(dozentPraeferenz.getDozentKennung())).findFirst();
+            .filter(x -> x.getDozentKennung()
+                .equals(dozentPraeferenz.getDozentKennung())).findFirst();
 
         if (existierndeBewertung.isEmpty()) {
           bewerber.getDozentPraeferenz().add(dozentPraeferenz);
@@ -88,7 +90,9 @@ public class DozentPraeferenzService implements IDozentPraeferenzService {
     List<DozentPraeferenz> matching;
     try {
       matching = bewerber.getDozentPraeferenz().stream()
-          .filter(d -> d.getBewerberKennung().equals(kennung) && d.getDozentKennung().equals(dozentKennung))
+          .filter(d -> d.getBewerberKennung()
+              .equals(kennung) && d.getDozentKennung()
+              .equals(dozentKennung))
           .collect(Collectors.toList());
     } catch (Exception e) {
       matching = Collections.emptyList();

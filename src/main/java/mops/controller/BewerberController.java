@@ -3,13 +3,10 @@ package mops.controller;
 import static mops.authentication.account.keycloak.KeycloakRoles.*;
 
 import java.util.stream.Collectors;
-
 import javax.validation.Valid;
-
 import mops.domain.models.*;
 import mops.services.BewerberService;
 import mops.services.ModulService;
-
 import mops.services.ZyklusDirigentService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +57,7 @@ public class BewerberController {
 
   @GetMapping("/ex")
   @Secured({ ROLE_STUDENT })
-  public String ex(Model model, KeycloakAuthenticationToken token){
+  public String ex(Model model, KeycloakAuthenticationToken token) {
     model.addAttribute("bewerber", bewerberService.initialiseEditBewerber(token.getName()));
     return "orga/dozent/bewerbungDetail";
   }
@@ -75,10 +72,17 @@ public class BewerberController {
 
   @PostMapping("/bewerbungabschicken")
   @Secured({ ROLE_STUDENT })
-  public String bewirbabschicken(Model model, @ModelAttribute @Valid Bewerber bewerber, BindingResult result, KeycloakAuthenticationToken token) {
-    if(result.hasErrors()){
-      System.out.println(result.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.toList()));
-      System.out.println(result.getAllErrors().stream().map(x -> x.getObjectName()).collect(Collectors.toList()));
+  public String bewirbabschicken(Model model, @ModelAttribute @Valid Bewerber bewerber,
+      BindingResult result, KeycloakAuthenticationToken token) {
+    if (result.hasErrors()) {
+      System.out.println(result.getAllErrors()
+          .stream()
+          .map(x -> x.getDefaultMessage())
+          .collect(Collectors.toList()));
+      System.out.println(result.getAllErrors()
+          .stream()
+          .map(x -> x.getObjectName())
+          .collect(Collectors.toList()));
       model.addAttribute("existingmodule", modulService.findAllModule());
       return "student/main_min";
     }
