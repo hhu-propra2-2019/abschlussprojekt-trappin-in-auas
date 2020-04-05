@@ -2,12 +2,7 @@ package mops.controller;
 
 import static mops.authentication.account.keycloak.KeycloakRoles.ROLE_ORGA;
 
-import java.util.List;
-
-import mops.domain.models.Bewerber;
-import mops.domain.models.DozentPraeferenz;
-import mops.services.*;
-
+import mops.orchestration.DozentControllerOrchestrator;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -21,89 +16,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/bewerbung1/dozent")
 public class DozentController {
-
   @Autowired
-  private transient BewerberService bewerberService;
+  private transient DozentControllerOrchestrator dozentControllerOrchestrator;
 
-  @Autowired
-  private transient DozentService dozentService;
-
-  @Autowired
-  private transient DozentPraeferenzService dozentPraeferenzService;
-
-  @Autowired
-  private transient ZyklusDirigentService zyklusDirigentService;
-
-  private static final String BEWERBER_ATTRIBUTE = "bewerber";
 
   @Secured({ ROLE_ORGA })
   @GetMapping("/uebersicht")
   public String verteilen(Model model, KeycloakAuthenticationToken token) {
-    List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
-    List<Bewerber> bearbeitet = dozentService.getBewerbungenMitPraeferenz(meineBewerber, token.getName());
-    List<Bewerber> nichtBearbeitet = dozentService.getBewerbungenOhnePraeferenz(meineBewerber, token.getName());
-
-    model.addAttribute("dozentPhase", zyklusDirigentService.getDozentenPhase());
-    System.out.println(zyklusDirigentService.getDozentenPhase());
-
-    model.addAttribute("bearbeitetCount", bearbeitet.size());
-    model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
-    model.addAttribute("me", token.getName());
-    model.addAttribute(BEWERBER_ATTRIBUTE, nichtBearbeitet);
-    model.addAttribute("anzeigeModus", "uebersicht");
+    dozentControllerOrchestrator.uebersicht(model, token.getName());
     return "dozent/dozent";
   }
 
   @Secured({ ROLE_ORGA })
   @GetMapping("/unbearbeitete")
   public String offeneUebersicht(Model model, KeycloakAuthenticationToken token) {
-    List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
-    List<Bewerber> bearbeitet = dozentService.getBewerbungenMitPraeferenz(meineBewerber, token.getName());
-    List<Bewerber> nichtBearbeitet = dozentService.getBewerbungenOhnePraeferenz(meineBewerber, token.getName());
-
-    model.addAttribute("bearbeitetCount", bearbeitet.size());
-    model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
-    model.addAttribute("me", token.getName());
-    model.addAttribute(BEWERBER_ATTRIBUTE, nichtBearbeitet);
-
-    model.addAttribute("dozentPhase", zyklusDirigentService.getDozentenPhase());
-
-    model.addAttribute("anzeigeModus", "offene");
+    dozentControllerOrchestrator.unbearbeitete(model, token.getName());
     return "dozent/dozent";
   }
 
   @Secured({ ROLE_ORGA })
   @GetMapping("/bearbeitete")
   public String zugewieseneUebersicht(Model model, KeycloakAuthenticationToken token) {
-    List<Bewerber> meineBewerber = bewerberService.findBewerberFuerDozent(token.getName());
-    List<Bewerber> bearbeitet = dozentService.getBewerbungenMitPraeferenz(meineBewerber, token.getName());
-    List<Bewerber> nichtBearbeitet = dozentService.getBewerbungenOhnePraeferenz(meineBewerber, token.getName());
-
-    model.addAttribute("bearbeitetCount", bearbeitet.size());
-    model.addAttribute("nichtBearbeitetCount", nichtBearbeitet.size());
-    model.addAttribute("me", token.getName());
-    model.addAttribute(BEWERBER_ATTRIBUTE, bearbeitet);
-
-    model.addAttribute("dozentPhase", zyklusDirigentService.getDozentenPhase());
-
-    model.addAttribute("anzeigeModus", "vorgemerkte");
+    dozentControllerOrchestrator.bearbeitete(model, token.getName());
     return "dozent/dozent";
   }
 
   @Secured({ ROLE_ORGA })
   @PostMapping("/addPreference")
-  public String addPreference(Model model, KeycloakAuthenticationToken token, int praeferenz, String dozentKennung,
-      String bewerberKennung) {
-    dozentPraeferenzService.addPraeferenz(new DozentPraeferenz(dozentKennung, bewerberKennung, praeferenz));
-    return "redirect:/bewerbung1/dozent/uebersicht";
+  public String addPreference(int praeferenz, String dozentKennung, String bewerberKennung) {
+    dozentControllerOrchestrator.addPreference(dozentKennung, bewerberKennung, praeferenz);
+    return "redirect:./uebersicht";
   }
 
   @Secured({ ROLE_ORGA })
   @GetMapping("/details/{kennung}")
-  public String detailAnsicht(Model model, KeycloakAuthenticationToken token, @PathVariable String kennung) {
-    Bewerber bewerber = bewerberService.findBewerberByKennung(kennung);
-    model.addAttribute(BEWERBER_ATTRIBUTE, bewerber);
-    model.addAttribute("phase", zyklusDirigentService.getDozentenPhase());
+  public String detailAnsicht(Model model, @PathVariable String kennung) {
+    dozentControllerOrchestrator.detailAnsicht(model, kennung);
     return "bewerbungsdetails/details";
   }
 }
